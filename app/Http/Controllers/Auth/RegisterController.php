@@ -30,17 +30,19 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected $redirectTo = RouteServiceProvider::HOME; // dashboard
 
     /**
-     * Create a new controller instance.
+     * Show the application registration form.
      *
-     * @return void
+     * @return \Illuminate\View\View
      */
-    public function __construct()
+    public function showRegistrationForm()
     {
-        if (Gate::denies('create-users')) {
-          //return abort(404);
+        if (Gate::allows(('create-users'))) {
+            return view('auth.register');
+        } else {
+            abort(404);
         }
     }
 
