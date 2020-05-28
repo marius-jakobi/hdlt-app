@@ -40,6 +40,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
     // Profile
     Route::get('/profile', 'UserController@profile')->name('profile');
-    // User List
+    // User list
     Route::get('/user/list', 'UserController@list')->name('user.list')->middleware('can:admin,App\User');
+    // User details
+    Route::get('/user/{id}', 'UserController@details')->name('user.details')->middleware('can:admin,App\User');
 });
