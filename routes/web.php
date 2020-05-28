@@ -39,5 +39,5 @@ Route::middleware('auth')->group(function () {
     // Dashboard
     Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
     // Profile
-    Route::get('/profile', 'ProfileController@show')->name('profile');
+    Route::get('/profile', 'UserController@profile')->name('profile');
 });
