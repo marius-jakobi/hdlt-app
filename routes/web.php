@@ -41,5 +41,5 @@ Route::middleware('auth')->group(function () {
     // Profile
     Route::get('/profile', 'UserController@profile')->name('profile');
     // User List
-    Route::get('/user/list', 'UserController@list')->name('user.list');
+    Route::get('/user/list', 'UserController@list')->name('user.list')->middleware('can:admin,App\User');
 });
