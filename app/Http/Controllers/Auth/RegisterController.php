@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Closure;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
-use Illuminate\Support\Facades\Gate;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -30,20 +32,20 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME; // dashboard
+    protected $redirectTo = RouteServiceProvider::HOME;
 
-    /**
-     * Show the application registration form.
-     *
-     * @return \Illuminate\View\View
-     */
-    public function showRegistrationForm()
+    public function __construct()
     {
-        if (Gate::allows(('create-users'))) {
-            return view('auth.register');
-        } else {
-            abort(404);
-        }
+        // Closure based middleware that prevents users from registration if they are not authenticated as a admin
+        $this->middleware(function (Request $request, Closure $next) {
+            if (Auth::user()->is_admin) {
+                // User is admin, go ahead
+                return $next($request);
+            } else {
+                // User is not a admin, return 404
+                abort(404);
+            }
+        });
     }
 
     /**
