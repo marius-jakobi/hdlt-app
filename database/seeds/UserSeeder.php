@@ -14,25 +14,9 @@ class UserSeeder extends Seeder
     public function run()
     {
         DB::table('users')->insert([
-          'name' => 'Marius Jakobi',
+          'name_first' => 'Marius',
+          'name_last' => 'Jakobi',
           'email' => 'm.jakobi@herbst-drucklufttechnik.de',
-          'password' => Hash::make('start'),
-          'email_verified_at' => now(),
-          'is_admin' => true,
-          'created_at' => now(),
-          'updated_at' => now(),
-        ]);
-        DB::table('users')->insert([
-          'name' => 'Marcel Hoffmann',
-          'email' => 'm.hoffmann@herbst-drucklufttechnik.de',
-          'password' => Hash::make('start'),
-          'email_verified_at' => now(),
-          'created_at' => now(),
-          'updated_at' => now(),
-        ]);
-        DB::table('users')->insert([
-          'name' => 'Andreas Hußlein',
-          'email' => 'a.husslein@herbst-drucklufttechnik.de',
           'password' => Hash::make('start'),
           'email_verified_at' => now(),
           'created_at' => now(),

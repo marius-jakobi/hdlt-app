@@ -11,7 +11,7 @@ class UserController extends Controller
     }
 
     public function list() {
-        return view('user.list', ['users' => \App\User::orderBy('name', 'asc')->get()]);
+        return view('user.list', ['users' => \App\User::orderBy('name_last', 'asc')->get()]);
     }
 
     public function details($id) {

@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name_first', 'name_last', 'email', 'password',
     ];
 
     /**
@@ -42,5 +42,23 @@ class User extends Authenticatable
      */
     public function roles() {
         return $this->belongsToMany('App\Role', 'users_roles');
+    }
+
+    /**
+     * Check if user has role
+     */
+    public function hasRole(string $roleName) {
+        foreach ($this->roles as $role) {
+            if ($role->name == $roleName) {
+                return true;
+            }
+        }
+    }
+
+    /**
+     * Return short name
+     */
+    public function shortName() {
+      return substr($this->name_first, 0, 1) . ". " . $this->name_last;
     }
 }

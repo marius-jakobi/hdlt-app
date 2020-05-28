@@ -15,9 +15,22 @@
                             <label for="name" class="col-md-4 col-form-label text-md-right">Name</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                                <input id="name_first" type="text" class="form-control @error('name_first') is-invalid @enderror" name="name_first" value="{{ old('name_first') }}" required autocomplete="name_first" autofocus>
 
-                                @error('name')
+                                @error('name_first')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="name" class="col-md-4 col-form-label text-md-right">Nachname</label>
+
+                            <div class="col-md-6">
+                                <input id="name_last" type="text" class="form-control @error('name_last') is-invalid @enderror" name="name_last" value="{{ old('name_last') }}" required autocomplete="name_last" autofocus>
+
+                                @error('name_last')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
