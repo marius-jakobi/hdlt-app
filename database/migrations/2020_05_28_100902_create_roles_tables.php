@@ -30,9 +30,11 @@ class CreateRolesTables extends Migration
         // Relationship user to role
         Schema::create('users_roles', function(Blueprint $table) {
             $table->foreignId('user_id')
+                ->constrained()
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
             $table->foreignId(('role_id'))
+                ->constrained()
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
             $table->unique(['user_id', 'role_id']);
@@ -40,10 +42,12 @@ class CreateRolesTables extends Migration
 
         // Relationship role to permission
         Schema::create('roles_permissions', function(Blueprint $table) {
-            $table->foreignId('role_id')    
+            $table->foreignId('role_id')
+                ->constrained()
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
             $table->foreignId('permission_id')
+                ->constrained()
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
             $table->unique(['role_id', 'permission_id']);
