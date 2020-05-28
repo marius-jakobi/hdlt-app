@@ -10,7 +10,7 @@ class UserPolicy
 {
     use HandlesAuthorization;
 
-    public function create(User $user) {
+    public function admin(User $user) {
         foreach ($user->roles as $role) {
             foreach ($role->permissions as $permission) {
                 if ($permission->name === 'create-users') {

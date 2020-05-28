@@ -40,17 +40,23 @@
                                 <a class="nav-link" href="{{ route('login') }}">Login</a>
                             </li>
                         @else
-                            @can('create', App\User::class)
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">Benutzer erstellen</a>
+                            @can('admin', App\User::class)
+                                <li class="nav-item dropdown">
+                                    <a id="navbarAdminDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                        Administration
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarAdminDropdown">
+                                        <a class="dropdown-item" href="{{ route('user.list') }}">Benutzerliste</a>
+                                        <a class="dropdown-item" href="{{ route('register') }}">Benutzer erstellen</a>
+                                    </div>
                                 </li>
                             @endcan
                             <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <a id="navbarUserDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarUserDropdown">
                                     <a class="dropdown-item" href="{{ route('dashboard') }}">Dashboard</a>
                                     <a class="dropdown-item" href="{{ route('profile') }}">Mein Profil</a>
                                     <div class="dropdown-divider"></div>

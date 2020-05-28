@@ -38,7 +38,7 @@ class RegisterController extends Controller
     {
         // Closure based middleware that prevents users from registration if they are not authenticated as a admin
         $this->middleware(function (Request $request, Closure $next) {
-            if (Auth::user()->can('create', User::class)) {
+            if (Auth::user()->can('admin', User::class)) {
                 // User is admin, go ahead
                 return $next($request);
             } else {

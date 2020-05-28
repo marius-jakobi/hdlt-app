@@ -40,4 +40,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
     // Profile
     Route::get('/profile', 'UserController@profile')->name('profile');
+    // User List
+    Route::get('/user/list', 'UserController@list')->name('user.list');
 });
