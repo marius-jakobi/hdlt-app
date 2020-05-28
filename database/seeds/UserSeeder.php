@@ -22,5 +22,21 @@ class UserSeeder extends Seeder
           'created_at' => now(),
           'updated_at' => now(),
         ]);
+        DB::table('users')->insert([
+          'name' => 'Marcel Hoffmann',
+          'email' => 'm.hoffmann@herbst-drucklufttechnik.de',
+          'password' => Hash::make('start'),
+          'email_verified_at' => now(),
+          'created_at' => now(),
+          'updated_at' => now(),
+        ]);
+        DB::table('users')->insert([
+          'name' => 'Andreas Hußlein',
+          'email' => 'a.husslein@herbst-drucklufttechnik.de',
+          'password' => Hash::make('start'),
+          'email_verified_at' => now(),
+          'created_at' => now(),
+          'updated_at' => now(),
+        ]);
     }
 }

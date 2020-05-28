@@ -15,6 +15,6 @@ class Permission extends Model
      * Role relationship
      */
     public function roles() {
-        return $this->belongsToMany('App\Role');
+        return $this->belongsToMany('App\Role', 'roles_permissions');
     }
 }

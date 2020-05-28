@@ -33,5 +33,11 @@ Route::post('/password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail
 Route::get('/password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
 Route::post('/password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
 Route::get('/password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
-// Dashboard
-Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+
+// Only accessable when authenticated
+Route::middleware('auth')->group(function () {
+    // Dashboard
+    Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+    // Profile
+    Route::get('/profile', 'ProfileController@show')->name('profile');
+});
