@@ -24,4 +24,15 @@ class Role extends Model
     public function users() {
         return $this->belongsToMany('App\User', 'users_roles');
     }
+
+    /**
+     * Check if role has permission
+     */
+    public function hasPermission(string $permissionName) {
+        foreach ($this->permissions() as $permission) {
+            if ($permission->name == $permissionName) {
+                return true;
+            }
+        }
+    }
 }

@@ -11,12 +11,6 @@ class UserPolicy
     use HandlesAuthorization;
 
     public function admin(User $user) {
-        foreach ($user->roles as $role) {
-            foreach ($role->permissions as $permission) {
-                if ($permission->name === 'create-users') {
-                    return true;
-                }
-            }
-        }
+        return $user->hasRole("administrator");
     }
 }

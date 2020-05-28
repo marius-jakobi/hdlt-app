@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
@@ -13,6 +14,12 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('dashboard');
+        $time = date('G');
+        $greeting = "Guten Morgen";
+
+        if ($time >= 12 && $time < 18) $greeting = "Guten Tag";
+        if ($time >= 18) $greeting = "Guten Abend";
+
+        return view('dashboard', ['greeting' => $greeting . ", " . Auth::user()->shortName()]);
     }
 }
