@@ -28,7 +28,7 @@ class AuthServiceProvider extends ServiceProvider
         // Gates
 
         Gate::define('create-users', function ($user) {
-          return $user->is_admin;
+            return $user->is_admin;
         });
     }
 }
