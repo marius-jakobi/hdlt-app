@@ -45,6 +45,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/user/list', 'UserController@list')->name('user.list')->middleware('can:admin,App\User');
     // User update
     Route::put('/user/{id}', 'UserController@update')->name('user.update')->middleware('can:admin,App\User');
+    // User delete
+    Route::delete('/user/{id}', 'UserController@delete')->name('user.delete')->middleware('can:admin,App\User');
     // User details
     Route::get('/user/{id}', 'UserController@details')->name('user.details')->middleware('can:admin,App\User');
     // Attach/detach role to/from user

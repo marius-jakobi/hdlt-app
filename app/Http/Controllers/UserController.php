@@ -55,4 +55,10 @@ class UserController extends Controller
         return redirect(route('user.details', ['id' => $id]))
             ->with('success', 'Der Benutzer wurde aktualisiert.');
     }
+
+    public function delete($id) {
+        User::findOrFail($id)->delete();
+
+        return redirect(route('user.list'))->with('success', 'Der Benutzer wurde dauerhaft gelöscht.');
+    }
 }
