@@ -10,23 +10,32 @@
         <div class="col-md-6 col-sm-12">
             <div class="form-group">
                 <label>Vorname</label>
-                <input type="text" name="name_first" class="form-control @error('name_first') is-invalid @enderror" value="{{ $user->name_first }}">
+                <input type="text" name="name_first" class="form-control @error('name_first', 'userUpdate') is-invalid @enderror" value="{{ $user->name_first }}">
             </div>
         </div>
         <div class="col-md-6 col-sm-12">
             <div class="form-group">
                 <label>Nachname</label>
-                <input type="text" name="name_last" class="form-control @error('name_last') is-invalid @enderror" value="{{ $user->name_last }}">
+                <input type="text" name="name_last" class="form-control @error('name_last', 'userUpdate') is-invalid @enderror" value="{{ $user->name_last }}">
             </div>
         </div>
     </div>
     <div class="form-group">
-        <label>E-Mail @if ($user->email_verified_at) (bestätigt am: {{ $user->email_verified_at }}) @endif</label>
-        <input type="text" name="email" class="form-control @error('email') is-invalid @enderror" value="{{ $user->email }}">
-        @if (!$user->email_verified_at)
-            <div class="alert bg-warning mt-2">Diese E-Mail-Adresse wurde noch nicht bestätigt!</div>
-        @endif
+        <label>
+            E-Mail
+            @if ($user->email_verified_at)
+            (bestätigt am: {{ $user->email_verified_at }})
+            @else
+            <span class="bg-warning p-1">noch nicht bestätigt</span>
+            @endif
+        </label>
+        <input type="text" name="email" class="form-control @error('email', 'userUpdate') is-invalid @enderror" value="{{ $user->email }}">
     </div>
+    @if ($errors->userUpdate->any())
+        @foreach ($errors->userUpdate->all() as $error)
+            <p class="text-danger">{{ $error }}</p>
+        @endforeach
+    @endif
     <button type="submit" class="btn btn-primary">Daten speichern</button>
 </form>
 <hr>

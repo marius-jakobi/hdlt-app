@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use App\Role;
 use App\User;
@@ -32,6 +33,17 @@ class UserController extends Controller
     }
 
     public function update(Request $request, $id) {
+        $validator = Validator::make($request->all(), [
+            'name_first' => 'required',
+            'name_last' => 'required',
+            'email' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return redirect(route('user.details', ['id' => $id]))
+                ->withErrors($validator, 'userUpdate');
+        }
+
         $user = User::findOrFail($id);
 
         $user->name_first = $request->input('name_first');
