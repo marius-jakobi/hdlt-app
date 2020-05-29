@@ -20,13 +20,18 @@
         @include('navbar')
 
         <main class="py-4">
-          <div class="container">
-            <div class="row">
-              <div class="col-12">
-                @yield('content')
-              </div>
+            <div class="container">
+                @if(session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+                @endif
+                <div class="row">
+                    <div class="col-12">
+                        @yield('content')
+                    </div>
+                </div>
             </div>
-          </div>
         </main>
     </div>
 </body>

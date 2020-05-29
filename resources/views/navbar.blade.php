@@ -27,8 +27,10 @@
                                 Administration
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarAdminDropdown">
-                                <a class="dropdown-item" href="{{ route('user.list') }}">Benutzerliste</a>
-                                <a class="dropdown-item" href="{{ route('register') }}">Benutzer erstellen</a>
+                                <a href="{{ route('user.list') }}" class="dropdown-item">Benutzerliste</a>
+                                <a href="{{ route('register') }}" class="dropdown-item" >Benutzer erstellen</a>
+                                <div class="dropdown-divider"></div>
+                                <a href="{{ route('role.create') }}" class="dropdown-item">Rolle erstellen</a>
                             </div>
                         </li>
                     @endcan

@@ -74,4 +74,38 @@ class RoleController extends Controller
 
         return redirect(route('user.details', ['id' => $id]));
     }
+
+    public function details($name) {
+        $role = Role::where('name', $name)->firstOrFail();
+
+        return view('role.details', ['role' => $role]);
+    }
+
+    public function create() {
+        return view('role.create');
+    }
+
+    public function store(Request $request) {
+        $rules = [
+            'name' => 'required|min:5|max:255|unique:App\Role',
+            'description' => 'required|max:255'
+        ];
+
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->fails()) {
+            return redirect(route('role.create'))
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $role = new Role([
+            'name' => $request->input('name'),
+            'description' => $request->input('description')
+        ]);
+
+        $role->save();
+
+        return redirect(route('dashboard'))->with('success', "Die Rolle '$role->name' wurde gespeichert.");
+    }
 }

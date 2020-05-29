@@ -45,7 +45,11 @@
     <tbody>
         @foreach($user->roles as $role)
         <tr>
-            <td>{{ $role->name }}</td>
+            <td>
+                <a href="{{ route('role.details', ['name' => $role->name]) }}">
+                    {{ $role->name }}
+                </a>
+            </td>
             <td>{{ $role->description }}</td>
             <td>
                 <ul>
