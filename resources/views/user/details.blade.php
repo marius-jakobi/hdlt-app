@@ -26,7 +26,7 @@
             @if ($user->email_verified_at)
             (bestätigt am: {{ $user->email_verified_at }})
             @else
-            <span class="bg-warning p-1">noch nicht bestätigt</span>
+            <span class="bg-warning p-1">nicht bestätigt</span>
             @endif
         </label>
         <input type="text" name="email" class="form-control @error('email', 'userUpdate') is-invalid @enderror" value="{{ $user->email }}">
