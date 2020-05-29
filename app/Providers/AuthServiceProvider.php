@@ -13,7 +13,8 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        \App\User::class => \App\Policies\UserPolicy::class
+        \App\User::class => \App\Policies\UserPolicy::class,
+        \App\Role::class => \App\Policies\RolePolicy::class
     ];
 
     /**
@@ -27,11 +28,7 @@ class AuthServiceProvider extends ServiceProvider
 
         // Allow everything for administrators
         Gate::before(function ($user) {
-            foreach ($user->roles as $role) {
-                if ($role->name === 'Administrator') {
-                    return true;
-                }
-            }
+            return ($user->hasRole('administrator'));
         });
     }
 }
