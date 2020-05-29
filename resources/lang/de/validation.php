@@ -151,6 +151,8 @@ return [
         'email'                 => 'E-Mail Adresse',
         'first_name'            => 'Vorname',
         'last_name'             => 'Nachname',
+        'name_first'            => 'Vorname',
+        'name_last'             => 'Nachname',
         'password'              => 'Passwort',
         'password_confirmation' => 'Passwort Bestätigung',
         'city'                  => 'Stadt',
