@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Role;
+use App\Permission;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -78,7 +79,15 @@ class RoleController extends Controller
     public function details($name) {
         $role = Role::where('name', $name)->firstOrFail();
 
-        return view('role.details', ['role' => $role]);
+        $availablePermissions = [];
+
+        foreach (Permission::all() as $permission) {
+            if (!$role->hasPermission($permission->name)) {
+                $availablePermissions[] = $permission;
+            }
+        }
+
+        return view('role.details', ['role' => $role, 'availablePermissions' => $availablePermissions]);
     }
 
     public function create() {
@@ -106,6 +115,19 @@ class RoleController extends Controller
 
         $role->save();
 
-        return redirect(route('dashboard'))->with('success', "Die Rolle '$role->name' wurde gespeichert.");
+        return redirect(route('role.list'))->with('success', "Die Rolle '$role->name' wurde gespeichert.");
+    }
+
+    public function list() {
+        return view('role.list', ['roles' => Role::all()]);
+    }
+
+    public function delete($id) {
+        $role = Role::findOrFail($id);
+
+        $role->delete();
+
+        return redirect(route('role.list'))
+            ->with('success', "Die Rolle wurde gelöscht.");
     }
 }

@@ -40,6 +40,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
     // Profile
     Route::get('/profile', 'UserController@profile')->name('profile');
+
     // User list
     Route::get('/user/list', 'UserController@list')->name('user.list')->middleware('can:admin,App\User');
     // User update
@@ -49,9 +50,17 @@ Route::middleware('auth')->group(function () {
     // Attach/detach role to/from user
     Route::post('/user/{id}/role', 'RoleController@attachRoleToUser')->name('role.attach')->middleware('can:admin,App\User');
     Route::delete('/user/{id}/role', 'RoleController@detachRoleFromUser')->name('role.detach')->middleware('can:admin,App\User');
+
+    // Role list
+    Route::get('/roles', 'RoleController@list')->name('role.list')->middleware('can:admin,App\Role');
     // Create role
     Route::get('/role/create', 'RoleController@create')->name('role.create')->middleware('can:admin,App\Role');
     Route::post('/role/create', 'RoleController@store')->name('role.store')->middleware('can:admin,App\Role');
+    // Attach/detach permission to/from role
+    Route::post('/role/{name}/permission', 'PermissionController@attachPermissionToRole')->name('permission.attach')->middleware('can:admin,App\Role');
+    Route::delete('/role/{name}/permission', 'PermissionController@detachPermissionFromRole')->name('permission.detach')->middleware('can:admin,App\Role');
+    // Delete role
+    Route::delete('/role/{id}', 'RoleController@delete')->name('role.delete')->middleware('can:admin,App\Role');
     // Show role details
     Route::get('/role/{name}', 'RoleController@details')->name('role.details')->middleware('can:admin,App\Role');
 });

@@ -30,6 +30,7 @@
                                 <a href="{{ route('user.list') }}" class="dropdown-item">Benutzerliste</a>
                                 <a href="{{ route('register') }}" class="dropdown-item" >Benutzer erstellen</a>
                                 <div class="dropdown-divider"></div>
+                                <a href="{{ route('role.list') }}" class="dropdown-item">Rollenliste</a>
                                 <a href="{{ route('role.create') }}" class="dropdown-item">Rolle erstellen</a>
                             </div>
                         </li>

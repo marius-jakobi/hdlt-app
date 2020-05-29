@@ -29,7 +29,7 @@ class UserController extends Controller
             }
         }
 
-        return view('user.details', ['user' => $user, 'availableRoles' => Role::all()]);
+        return view('user.details', ['user' => $user, 'availableRoles' => $availableRoles]);
     }
 
     public function update(Request $request, $id) {
