@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 use App\Role;
 use App\User;
 
@@ -28,5 +29,18 @@ class UserController extends Controller
         }
 
         return view('user.details', ['user' => $user, 'availableRoles' => Role::all()]);
+    }
+
+    public function update(Request $request, $id) {
+        $user = User::findOrFail($id);
+
+        $user->name_first = $request->input('name_first');
+        $user->name_last = $request->input('name_last');
+        $user->email = $request->input('email');
+
+        $user->save();
+
+        return redirect(route('user.details', ['id' => $id]))
+            ->with('success', 'Der Benutzer wurde aktualisiert.');
     }
 }

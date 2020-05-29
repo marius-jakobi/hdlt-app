@@ -1,14 +1,35 @@
 @extends('layouts.app')
 
 @section('content')
-<h1>Benutzerdetails</h1>
-<h2></h2>
-<p>UID: {{ $user->id }}</p>
-<p>Name: {{ $user->name_last }}, {{ $user->name_first }}</p>
-<p>E-Mail: <a href="mailto:{{ $user->email }}">{{ $user->email }}</a></p>
-<p>E-Mail bestätigt: {{ $user->email_verified_at }}</p>
-<p>erstellt: {{ $user->created_at }}</p>
-<p>geändert: {{ $user->updated_at }}</p>
+<h1>Benutzerdetails (ID: {{ $user->id }})</h1>
+<h2>Daten</h2>
+<form action="{{ route('user.update', ['id' => $user->id]) }}" method="post">
+    @method('put')
+    @csrf
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                <label>Vorname</label>
+                <input type="text" name="name_first" class="form-control @error('name_first') is-invalid @enderror" value="{{ $user->name_first }}">
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                <label>Nachname</label>
+                <input type="text" name="name_last" class="form-control @error('name_last') is-invalid @enderror" value="{{ $user->name_last }}">
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label>E-Mail @if ($user->email_verified_at) (bestätigt am: {{ $user->email_verified_at }}) @endif</label>
+        <input type="text" name="email" class="form-control @error('email') is-invalid @enderror" value="{{ $user->email }}">
+        @if (!$user->email_verified_at)
+            <div class="alert bg-warning mt-2">Diese E-Mail-Adresse wurde noch nicht bestätigt!</div>
+        @endif
+    </div>
+    <button type="submit" class="btn btn-primary">Daten speichern</button>
+</form>
+<hr>
 <h2>Rollen</h2>
 @if ($user->roles->count() == 0)
     <div class="alert alert-info">Der Benutzer hat keine Rollen.</div>
@@ -77,4 +98,7 @@
     </tbody>
 </table>
 @endif
+<hr>
+<p>Benutzer erstellt: {{ $user->created_at }}</p>
+<p>Benutzer geändert: {{ $user->updated_at }}</p>
 @endsection
