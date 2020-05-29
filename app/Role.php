@@ -29,7 +29,7 @@ class Role extends Model
      * Check if role has permission
      */
     public function hasPermission(string $permissionName) {
-        foreach ($this->permissions() as $permission) {
+        foreach ($this->permissions as $permission) {
             if ($permission->name == $permissionName) {
                 return true;
             }
