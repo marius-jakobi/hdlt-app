@@ -59,6 +59,7 @@ class UserController extends Controller
     public function delete($id) {
         User::findOrFail($id)->delete();
 
-        return redirect(route('user.list'))->with('success', 'Der Benutzer wurde dauerhaft gelöscht.');
+        return redirect(route('user.list'))
+            ->with('success', 'Der Benutzer wurde dauerhaft gelöscht.');
     }
 }

@@ -40,7 +40,8 @@ class RoleController extends Controller
         $user->roles()->attach($role);
         $user->save();
 
-        return redirect(route('user.details', ['id' => $id]));
+        return redirect(route('user.details', ['id' => $id]))
+            ->with('success', 'Die Rolle wurde dem Benutzer zugeordnet.');
     }
 
     public function detachRoleFromUser(Request $request, $id) {
@@ -73,7 +74,8 @@ class RoleController extends Controller
         $user->roles()->detach($role);
         $user->save();
 
-        return redirect(route('user.details', ['id' => $id]));
+        return redirect(route('user.details', ['id' => $id]))
+            ->with('success', 'Die Rolle des Benutzers wurde entfernt.');
     }
 
     public function details($name) {
@@ -115,7 +117,8 @@ class RoleController extends Controller
 
         $role->save();
 
-        return redirect(route('role.list'))->with('success', "Die Rolle '$role->name' wurde gespeichert.");
+        return redirect(route('role.list'))
+            ->with('success', "Die Rolle '$role->name' wurde gespeichert.");
     }
 
     public function list() {

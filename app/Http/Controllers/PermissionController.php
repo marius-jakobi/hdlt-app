@@ -41,7 +41,8 @@ class PermissionController extends Controller
         $role->permissions()->attach($permission);
         $role->save();
 
-        return redirect(route('role.details', ['name' => $role->name]));
+        return redirect(route('role.details', ['name' => $role->name]))
+            ->with('success', 'Das Recht wurde der Rolle zugeordnet.');
     }
 
     public function detachPermissionFromRole(Request $request, $name) {
@@ -75,6 +76,7 @@ class PermissionController extends Controller
         $role->permissions()->detach($permission);
         $role->save();
 
-        return redirect(route('role.details', ['name' => $name]));
+        return redirect(route('role.details', ['name' => $name]))
+        ->with('success', 'Das Recht wurde von der Rolle entfernt.');
     }
 }
