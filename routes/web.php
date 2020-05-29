@@ -44,4 +44,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/user/list', 'UserController@list')->name('user.list')->middleware('can:admin,App\User');
     // User details
     Route::get('/user/{id}', 'UserController@details')->name('user.details')->middleware('can:admin,App\User');
+    // Add role to user
+    Route::post('/user/{id}/role', 'RoleController@attachRoleToUser')->name('role.attach')->middleware('can:admin,App\User');
+    Route::delete('/user/{id}/role', 'RoleController@detachRoleFromUser')->name('role.detach')->middleware('can:admin,App\User');
 });
