@@ -10,10 +10,10 @@
         <a href="#roles" class="nav-link" id="roles-tab" data-toggle="tab">Rollen</a>
     </li>
     <li class="nav-item">
-        <a href="#timestamps" class="nav-link" id="timestamps-tab" data-toggle="tab">Zeitstempel</a>
+        <a href="#actions" class="nav-link" id="actions-tab" data-toggle="tab">Aktionen</a>
     </li>
     <li class="nav-item">
-        <a href="#actions" class="nav-link" id="actions-tab" data-toggle="tab">Aktionen</a>
+        <a href="#timestamps" class="nav-link" id="timestamps-tab" data-toggle="tab">Zeitstempel</a>
     </li>
 </ul>
 <div class="tab-content" id="nav-tabContent">
@@ -124,10 +124,6 @@
             </table>
         @endif
     </div>
-    <div class="tab-pane fade" id="timestamps">
-        <p>Benutzer erstellt: {{ $user->created_at }}</p>
-        <p>Benutzer geändert: {{ $user->updated_at }}</p>
-    </div>
     <div class="tab-pane fade" id="actions">
         <h2>Aktionen</h2>
         <h3>Benutzer löschen</h3>
@@ -137,6 +133,10 @@
             @method('delete')
             <button type="submit" class="btn btn-danger" onclick="return confirm('Soll dieser Benutzer wirklich dauerhaft gelöscht werden?');">Benutzer löschen</button>
         </form>
+    </div>
+    <div class="tab-pane fade" id="timestamps">
+        <p>Benutzer erstellt: {{ $user->created_at }}</p>
+        <p>Benutzer geändert: {{ $user->updated_at }}</p>
     </div>
 </div>
 @endsection
