@@ -2,9 +2,30 @@
 
 @section('content')
 <h1>Benutzerliste</h1>
-<ul>
-    @foreach($users as $user)
-        <li><a href="{{ route('user.details', ['id' => $user->id]) }}">{{ $user->name_last }}, {{ $user->name_first }}</a></li>
-    @endforeach
-</ul>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Vorname</th>
+            <th>E-Mail</th>
+            <th>erstellt</th>
+            <th>geändert</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach($users as $user)
+        <tr>
+            <td>{{ $user->name_first }}</td>
+            <td>{{ $user->name_last }}</td>
+            <td>{{ $user->email }}</td>
+            <td>{{ $user->created_at }}</td>
+            <td>{{ $user->updated_at }}</td>
+            <td>
+                <a href="{{ route('user.details', ['id' => $user->id]) }}">Details</a>
+            </td>
+        </tr>
+        @endforeach
+    </tbody>
+</table>
 @endsection
