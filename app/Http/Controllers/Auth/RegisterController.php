@@ -90,8 +90,8 @@ class RegisterController extends Controller
     {
         $this->validator($request->all())->validate();
 
-        $this->create($request->all());
+        $newUser = $this->create($request->all());
 
-        return redirect(route('dashboard'));
+        return redirect(route('user.details', ['id' => $newUser->id]));
     }
 }

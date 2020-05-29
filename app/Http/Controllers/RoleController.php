@@ -117,7 +117,7 @@ class RoleController extends Controller
 
         $role->save();
 
-        return redirect(route('role.list'))
+        return redirect(route('role.details', ['name' => $role->name]))
             ->with('success', "Die Rolle '$role->name' wurde gespeichert.");
     }
 
