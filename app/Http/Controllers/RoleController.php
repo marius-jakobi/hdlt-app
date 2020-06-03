@@ -7,6 +7,7 @@ use App\Role;
 use App\Permission;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class RoleController extends Controller
 {
@@ -132,5 +133,34 @@ class RoleController extends Controller
 
         return redirect(route('role.list'))
             ->with('success', "Die Rolle wurde gelöscht.");
+    }
+
+    public function update(Request $request, $name) {
+        $role = Role::where('name', $name)->firstOrFail();
+
+        $rules = [
+            'name' => [
+                'required',
+                'min:5',
+                'max:255',
+                Rule::unique('roles')->ignore($role)
+            ],
+            'description' => 'required|max:255'
+        ];
+
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->fails()) {
+            return redirect(route('role.details', ['name' => $name]))
+                ->withErrors($validator);
+        }
+
+        $role->name = $request->input('name');
+        $role->description = $request->input('description');
+
+        $role->save();
+
+        return redirect(route('role.details', ['name' => $role->name]))
+            ->with('success', "Die Rolle wurde aktualisiert.");
     }
 }

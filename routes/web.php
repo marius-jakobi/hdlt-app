@@ -61,6 +61,8 @@ Route::middleware('auth')->group(function () {
     // Attach/detach permission to/from role
     Route::post('/role/{name}/permission', 'PermissionController@attachPermissionToRole')->name('permission.attach')->middleware('can:admin,App\Role');
     Route::delete('/role/{name}/permission', 'PermissionController@detachPermissionFromRole')->name('permission.detach')->middleware('can:admin,App\Role');
+    // Update role
+    Route::put('/role/{name}', 'RoleController@update')->name('role.update')->middleware('can:admin,App\Role');
     // Delete role
     Route::delete('/role/{id}', 'RoleController@delete')->name('role.delete')->middleware('can:admin,App\Role');
     // Show role details

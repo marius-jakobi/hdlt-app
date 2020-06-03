@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<h1>Rollendetails (ID: {{ $role->id }})</h1>
+<h1>Rolle "{{ $role->name }}"</h1>
 <ul class="nav nav-tabs mb-3" id="nav-tab">
     <li class="nav-item">
         <a href="#data" class="nav-link active" id="data-tab" data-toggle="tab">Daten</a>
@@ -17,8 +17,26 @@
 <div class="tab-content" id="nav-tabContent">
     <div class="tab-pane fade show active" id="data">
         <h2>Daten</h2>
-        <p>Rollenname: {{ $role->name }}</p>
-        <p>Beschreibung: {{ $role->description }}</p>
+        <p>UID: {{ $role->id }}</p>
+        <form action="{{ route('role.update', ['name' => $role->name]) }}" method="post">
+            @method('put')
+            @csrf
+            <div class="form-group">
+                <label>Rollenname</label>
+                <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ $role->name }}"/>
+                @error('name')
+                    <p class="text-danger">{{ $message }}</p>
+                @enderror
+            </div>
+            <div class="form-group">
+                <label>Beschreibung</label>
+                <input type="text" name="description" class="form-control @error('description') is-invalid @enderror" value="{{ $role->description }}" />
+                @error('description')
+                    <p class="text-danger">{{ $message }}</p>
+                @enderror
+            </div>
+            <button type="submit" class="btn btn-primary">Speichern</button>
+        </form>
     </div>
     <div class="tab-pane fade" id="rights">
         <h2>Rechte</h2>
