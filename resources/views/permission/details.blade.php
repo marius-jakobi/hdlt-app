@@ -42,7 +42,7 @@
         <form action="{{ route('permission.delete', ['id' => $permission->id]) }}" method="post">
             @csrf
             @method('delete')
-            <button type="submit" class="btn btn-danger" onclick="return confirm('Soll diese Rolle wirklich dauerhaft gelöscht werden?');">Rolle löschen</button>
+            <button type="submit" class="btn btn-danger" onclick="return confirm('Soll dieses Recht wirklich dauerhaft gelöscht werden?');">Recht löschen</button>
         </form>
     </div>
 </div>
