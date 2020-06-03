@@ -13,7 +13,7 @@
     <li class="nav-item">
         <a href="#data" class="nav-link active" id="data-tab" data-toggle="tab">Daten</a>
     </li>
-    @if ($user->isAdmin())
+    @if (!$user->isAdmin())
         <li class="nav-item">
             <a href="#roles" class="nav-link" id="roles-tab" data-toggle="tab">Rollen</a>
         </li>
@@ -72,7 +72,7 @@
             </form>
         @endif
     </div>
-    @if ($user->isAdmin())
+    @if (!$user->isAdmin())
     <div class="tab-pane fade" id="roles">
         <h2>Rollen</h2>
         @if (count($availableRoles) > 0)
