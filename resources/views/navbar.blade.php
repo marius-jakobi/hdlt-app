@@ -21,7 +21,7 @@
                         <a class="nav-link" href="{{ route('login') }}">Login</a>
                     </li>
                 @else
-                    @can('admin', App\User::class)
+                    @if(Auth::user()->isAdmin())
                         <li class="nav-item dropdown">
                             <a id="navbarAdminDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 Administration
@@ -38,10 +38,10 @@
                                 <a href="{{ route('permission.create') }}" class="dropdown-item">Recht erstellen</a>
                             </div>
                         </li>
-                    @endcan
+                    @endif
                     <li class="nav-item dropdown">
                         <a id="navbarUserDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            {{ Auth::user()->shortName() }} <span class="caret"></span>
+                            {{ Auth::user()->isAdmin() ? "Administrator" : Auth::user()->shortName() }} <span class="caret"></span>
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarUserDropdown">

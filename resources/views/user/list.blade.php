@@ -14,11 +14,15 @@
     </thead>
     <tbody>
         @foreach($users as $user)
-        <tr>
-            <td>
-                <a href="{{ route('user.details', ['id' => $user->id]) }}">{{ $user->name_last }}</a>
+        <tr class=" @if($user->isAdmin()) table-primary @endif">
+            @if($user->isAdmin())
+            <td colspan="2">
+                <a href="{{ route('user.details', ['id' => $user->id]) }}">Administrator</a>
             </td>
-            <td>{{ $user->name_first }}</td>
+            @else
+                <td><a href="{{ route('user.details', ['id' => $user->id]) }}">{{ $user->name_last }}</a></td>
+                <td>{{ $user->name_first }}</td>
+            @endif
             <td>{{ $user->email }}</td>
             <td>{{ $user->created_at }}</td>
             <td>{{ $user->updated_at }}</td>

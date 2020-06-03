@@ -14,10 +14,10 @@ class UserSeeder extends Seeder
     public function run()
     {
         DB::table('users')->insert([
-          'name_first' => 'Marius',
-          'name_last' => 'Jakobi',
-          'email' => 'm.jakobi@herbst-drucklufttechnik.de',
-          'password' => Hash::make('start'),
+          'name_first' => 'Super',
+          'name_last' => 'Administrator',
+          'email' => 'administrator@' . env('APP_HOST'),
+          'password' => Hash::make(env('DB_PASSWORD')),
           'email_verified_at' => now(),
           'created_at' => now(),
           'updated_at' => now(),

@@ -18,7 +18,7 @@ class RolesPermissionsSeeder extends Seeder
 
         $permission = Permission::create(['name' => 'create-users', 'description' => 'Die Rolle kann neue Benutzer erstellen']);
 
-        User::findOrFail(1)->roles()->attach($role);
+        User::where('email', User::administratorEmail())->firstOrFail()->roles()->attach($role);
         $role->permissions()->attach($permission);
     }
 }

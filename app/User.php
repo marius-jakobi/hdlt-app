@@ -61,4 +61,12 @@ class User extends Authenticatable
     public function shortName() {
       return substr($this->name_first, 0, 1) . ". " . $this->name_last;
     }
+
+    public function isAdmin() {
+        return $this->email == User::administratorEmail();
+    }
+
+    public static function administratorEmail() {
+        return "administrator@" . env('APP_HOST');
+    }
 }
