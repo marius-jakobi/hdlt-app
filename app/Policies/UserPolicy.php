@@ -11,6 +11,6 @@ class UserPolicy
     use HandlesAuthorization;
 
     public function admin(User $user) {
-        return $user->hasRole("administrator");
+        return $user->hasRole(\App\Role::administratorRoleName());
     }
 }

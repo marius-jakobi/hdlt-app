@@ -35,4 +35,8 @@ class Role extends Model
             }
         }
     }
+
+    public static function administratorRoleName() {
+        return "Administrator";
+    }
 }
