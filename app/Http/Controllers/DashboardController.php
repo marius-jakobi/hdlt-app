@@ -16,10 +16,11 @@ class DashboardController extends Controller
     {
         $time = date('G');
         $greeting = "Guten Morgen";
+        $user = Auth::user();
 
         if ($time >= 12 && $time < 18) $greeting = "Guten Tag";
         if ($time >= 18) $greeting = "Guten Abend";
 
-        return view('dashboard', ['greeting' => $greeting . ", " . Auth::user()->shortName()]);
+        return view('dashboard', ['greeting' => $greeting . ', ' . ($user->isAdmin() ? "Administrator!" : $user->shortName())]);
     }
 }
