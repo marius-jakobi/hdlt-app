@@ -12,6 +12,13 @@ use App\Permission;
 class PermissionController extends Controller
 {
     public function attachPermissionToRole(Request $request, string $name) {
+        $role = Role::firstWhere('name', $name);
+
+        if ($role->isAdmin()) {
+            return redirect(route('role.details', ['name' => $role->name]))
+                ->with('error', "Die Rechte der Administratorrolle können nicht geändert werden.");
+        }
+
         // Validation rules
         $rules = [
             'permission_id' => 'required|exists:App\Permission,id'
@@ -24,8 +31,6 @@ class PermissionController extends Controller
         ];
         
         $validator = Validator::make($request->all(), $rules, $messages);
-
-        $role = Role::where('name', $name)->first();
 
         if ($validator->fails()) {
             return redirect(route('role.details', ['name' => $role->name]))
@@ -47,6 +52,13 @@ class PermissionController extends Controller
     }
 
     public function detachPermissionFromRole(Request $request, $name) {
+        $role = Role::firstWhere('name', $name);
+
+        if ($role->isAdmin()) {
+            return redirect(route('role.details', ['name' => $role->name]))
+                ->with('error', "Die Rechte der Administratorrolle können nicht geändert werden.");
+        }
+
         // Validation rules
         $rules = [
             'permission_id' => 'required|exists:App\Permission,id'
@@ -59,8 +71,6 @@ class PermissionController extends Controller
         ];
         
         $validator = Validator::make($request->all(), $rules, $messages);
-
-        $role = Role::firstWhere('name', $name);
 
         if ($validator->fails()) {
             return redirect(route('role.details', ['name' => $name]))

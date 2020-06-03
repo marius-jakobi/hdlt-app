@@ -92,8 +92,7 @@ class RoleController extends Controller
 
         return view('role.details', [
             'role' => $role,
-            'availablePermissions' => $availablePermissions,
-            'isAdminRole' => $role->name == Role::administratorRoleName()
+            'availablePermissions' => $availablePermissions
         ]);
     }
 
@@ -133,6 +132,11 @@ class RoleController extends Controller
     public function delete($id) {
         $role = Role::findOrFail($id);
 
+        if ($role->name == Role::administratorRoleName()) {
+            return redirect(route('role.details', ['name' => $role->name]))
+                ->with('error', 'Die Administratorrolle kann nicht gelöscht werden.');
+        }
+
         $role->delete();
 
         return redirect(route('role.list'))
@@ -141,6 +145,11 @@ class RoleController extends Controller
 
     public function update(Request $request, $name) {
         $role = Role::where('name', $name)->firstOrFail();
+
+        if ($role->isAdmin()) {
+            return redirect(route('role.details', ['name' => $name]))
+                ->with('error', 'Die Administratorrolle kann nicht geändert werden.');
+        }
 
         $rules = [
             'name' => [

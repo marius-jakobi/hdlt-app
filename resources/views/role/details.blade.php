@@ -3,7 +3,7 @@
 @section('content')
 <h1>Rolle "{{ $role->name }}"</h1>
 
-@if ($isAdminRole)
+@if ($role->isAdmin())
     <div class="alert alert-info">Dies ist die Administrator Rolle. Sie kann weder geändert noch gelöscht werden.</div>
 @endif
 
@@ -14,7 +14,7 @@
     <li class="nav-item">
         <a href="#rights" class="nav-link" id="rights-tab" data-toggle="tab">Rechte</a>
     </li>
-    @if (!$isAdminRole)
+    @if (!$role->isAdmin())
         <li class="nav-item">
             <a href="#actions" class="nav-link" id="actions-tab" data-toggle="tab">Aktionen</a>
         </li>
@@ -25,7 +25,7 @@
     <div class="tab-pane fade show active" id="data">
         <h2>Daten</h2>
         <p>UID: {{ $role->id }}</p>
-        @if ($isAdminRole)
+        @if ($role->isAdmin())
             <p>Name: {{ $role->name }}</p>
             <p>Beschreibung: {{ $role->description }}</p>
         @else
@@ -78,7 +78,7 @@
                     <tr>
                         <th>Name</th>
                         <th>Beschreibung</th>
-                        @if(!$isAdminRole)
+                        @if(!$role->isAdmin())
                             <th></th>
                         @endif
                     </tr>
@@ -90,7 +90,7 @@
                             <a href="{{ route('permission.details', ['name' => $permission->name]) }}">{{ $permission->name }}</a>
                         </td>
                         <td>{{ $permission->description }}</td>
-                        @if(!$isAdminRole)
+                        @if(!$role->isAdmin())
                             <td>
                                 <form action="{{ route('permission.detach', ['name' => $role->name]) }}" method="post">
                                     @method('delete')
@@ -111,7 +111,7 @@
             </table>
         @endif
     </div>
-    @if ($isAdminRole)
+    @if (!$role->isAdmin())
         <div class="tab-pane fade" id="actions">
             <h2>Aktionen</h2>
             <h3>Rolle löschen</h3>
