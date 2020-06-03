@@ -8,7 +8,6 @@
             <th>Name</th>
             <th>Beschreibung</th>
             <th>Rechte</th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -24,13 +23,6 @@
                     <li>{{ $permission->description }} ({{ $permission->name }})</li>
                 @endforeach
                 </ul>
-            </td>
-            <td>
-                <form action="{{ route('role.delete', ['id' => $role->id]) }}" method="post">
-                    @csrf
-                    @method('delete')
-                    <button type="submit" class="btn btn-danger" onclick="return confirm('Rolle wirklich löschen?');">Rolle löschen</button>
-                </form>
             </td>
         </tr>
     @endforeach
