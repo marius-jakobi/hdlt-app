@@ -2,6 +2,11 @@
 
 @section('content')
 <h1>Rolle "{{ $role->name }}"</h1>
+
+@if ($isAdminRole)
+    <div class="alert alert-info">Dies ist die Administrator Rolle. Sie kann weder geändert noch gelöscht werden.</div>
+@endif
+
 <ul class="nav nav-tabs mb-3" id="nav-tab">
     <li class="nav-item">
         <a href="#data" class="nav-link active" id="data-tab" data-toggle="tab">Daten</a>
@@ -9,34 +14,41 @@
     <li class="nav-item">
         <a href="#rights" class="nav-link" id="rights-tab" data-toggle="tab">Rechte</a>
     </li>
-    <li class="nav-item">
-        <a href="#actions" class="nav-link" id="actions-tab" data-toggle="tab">Aktionen</a>
-    </li>
+    @if (!$isAdminRole)
+        <li class="nav-item">
+            <a href="#actions" class="nav-link" id="actions-tab" data-toggle="tab">Aktionen</a>
+        </li>
+    @endif
 </ul>
 
 <div class="tab-content" id="nav-tabContent">
     <div class="tab-pane fade show active" id="data">
         <h2>Daten</h2>
         <p>UID: {{ $role->id }}</p>
-        <form action="{{ route('role.update', ['name' => $role->name]) }}" method="post">
-            @method('put')
-            @csrf
-            <div class="form-group">
-                <label>Name</label>
-                <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ $role->name }}"/>
-                @error('name')
-                    <p class="text-danger">{{ $message }}</p>
-                @enderror
-            </div>
-            <div class="form-group">
-                <label>Beschreibung</label>
-                <input type="text" name="description" class="form-control @error('description') is-invalid @enderror" value="{{ $role->description }}" />
-                @error('description')
-                    <p class="text-danger">{{ $message }}</p>
-                @enderror
-            </div>
-            <button type="submit" class="btn btn-primary">Speichern</button>
-        </form>
+        @if ($isAdminRole)
+            <p>Name: {{ $role->name }}</p>
+            <p>Beschreibung: {{ $role->description }}</p>
+        @else
+            <form action="{{ route('role.update', ['name' => $role->name]) }}" method="post">
+                @method('put')
+                @csrf
+                <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ $role->name }}"/>
+                    @error('name')
+                        <p class="text-danger">{{ $message }}</p>
+                    @enderror
+                </div>
+                <div class="form-group">
+                    <label>Beschreibung</label>
+                    <input type="text" name="description" class="form-control @error('description') is-invalid @enderror" value="{{ $role->description }}" />
+                    @error('description')
+                        <p class="text-danger">{{ $message }}</p>
+                    @enderror
+                </div>
+                <button type="submit" class="btn btn-primary">Speichern</button>
+            </form>
+        @endif
     </div>
     <div class="tab-pane fade" id="rights">
         <h2>Rechte</h2>
@@ -66,7 +78,9 @@
                     <tr>
                         <th>Name</th>
                         <th>Beschreibung</th>
-                        <th></th>
+                        @if(!$isAdminRole)
+                            <th></th>
+                        @endif
                     </tr>
                 </thead>
                 <tbody>
@@ -76,34 +90,38 @@
                             <a href="{{ route('permission.details', ['name' => $permission->name]) }}">{{ $permission->name }}</a>
                         </td>
                         <td>{{ $permission->description }}</td>
-                        <td>
-                            <form action="{{ route('permission.detach', ['name' => $role->name]) }}" method="post">
-                                @method('delete')
-                                @csrf
-                                <input type="hidden" name="permission_id" value="{{ $permission->id }}">
-                                <button type="submit" class="btn btn-danger" onclick="return confirm('Recht wirklich entfernen?');">Recht entfernen</button>
-                            </form>
-                            @if ($errors->detachPermission->any())
-                                @foreach($errors->detachPermission->all() as $error)
-                                    <p class="text-danger">{{ $error }}</p>
-                                @endforeach
-                            @endif
-                        </td>
+                        @if(!$isAdminRole)
+                            <td>
+                                <form action="{{ route('permission.detach', ['name' => $role->name]) }}" method="post">
+                                    @method('delete')
+                                    @csrf
+                                    <input type="hidden" name="permission_id" value="{{ $permission->id }}">
+                                    <button type="submit" class="btn btn-danger" onclick="return confirm('Recht wirklich entfernen?');">Recht entfernen</button>
+                                </form>
+                                @if ($errors->detachPermission->any())
+                                    @foreach($errors->detachPermission->all() as $error)
+                                        <p class="text-danger">{{ $error }}</p>
+                                    @endforeach
+                                @endif
+                            </td>
+                        @endif
                     </tr>
                     @endforeach
                 </tbody>
             </table>
         @endif
     </div>
-    <div class="tab-pane fade" id="actions">
-        <h2>Aktionen</h2>
-        <h3>Rolle löschen</h3>
-        <p>Mit dieser Aktion wird die Rolle dauerhaft und unwiderruflich gelöscht.</p>
-        <form action="{{ route('role.delete', ['id' => $role->id]) }}" method="post">
-            @csrf
-            @method('delete')
-            <button type="submit" class="btn btn-danger" onclick="return confirm('Soll diese Rolle wirklich dauerhaft gelöscht werden?');">Rolle löschen</button>
-        </form>
-    </div>
+    @if ($isAdminRole)
+        <div class="tab-pane fade" id="actions">
+            <h2>Aktionen</h2>
+            <h3>Rolle löschen</h3>
+            <p>Mit dieser Aktion wird die Rolle dauerhaft und unwiderruflich gelöscht.</p>
+            <form action="{{ route('role.delete', ['id' => $role->id]) }}" method="post">
+                @csrf
+                @method('delete')
+                <button type="submit" class="btn btn-danger" onclick="return confirm('Soll diese Rolle wirklich dauerhaft gelöscht werden?');">Rolle löschen</button>
+            </form>
+        </div>
+    @endif
 </div>
 @endsection

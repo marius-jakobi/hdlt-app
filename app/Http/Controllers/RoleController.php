@@ -90,7 +90,11 @@ class RoleController extends Controller
             }
         }
 
-        return view('role.details', ['role' => $role, 'availablePermissions' => $availablePermissions]);
+        return view('role.details', [
+            'role' => $role,
+            'availablePermissions' => $availablePermissions,
+            'isAdminRole' => $role->name == Role::administratorRoleName()
+        ]);
     }
 
     public function create() {
