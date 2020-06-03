@@ -7,7 +7,7 @@
         <tr>
             <th>Name</th>
             <th>Beschreibung</th>
-            <th></th>
+            <th>Rollen</th>
         </tr>
     </thead>
     <tbody>
@@ -18,11 +18,7 @@
             </td>
             <td>{{ $permission->description }}</td>
             <td>
-                {{-- <form action="{{ route('permission.delete', ['id' => $permission->id]) }}" method="post">
-                    @csrf
-                    @method('delete')
-                    <button type="submit" class="btn btn-danger" onclick="return confirm('Recht wirklich löschen?');">Recht löschen</button>
-                </form> --}}
+                {{ $permission->roles->count() }}
             </td>
         </tr>
     @endforeach

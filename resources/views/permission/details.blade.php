@@ -7,6 +7,9 @@
         <a href="#data" class="nav-link active" id="data-tab" data-toggle="tab">Daten</a>
     </li>
     <li class="nav-item">
+        <a href="#roles" class="nav-link" id="role-tab" data-toggle="tab">Rollen</a>
+    </li>
+    <li class="nav-item">
         <a href="#actions" class="nav-link" id="actions-tab" data-toggle="tab">Aktionen</a>
     </li>
 </ul>
@@ -34,6 +37,17 @@
             </div>
             <button type="submit" class="btn btn-primary">Speichern</button>
         </form>
+    </div>
+    <div class="tab-pane fade" id="roles">
+        <h2>Rollen</h2>
+        <p>Dieses Recht ist folgenden Rollen zugeordnet:</p>
+        <ul>
+            @foreach($permission->roles as $role)
+                <li>
+                    <a href="{{ route('role.details', ['name' => $role->name]) }}">{{ $role->name }}</a>
+                </li>
+            @endforeach
+        </ul>
     </div>
     <div class="tab-pane fade" id="actions">
         <h2>Aktionen</h2>
