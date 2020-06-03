@@ -70,4 +70,10 @@ Route::middleware('auth')->group(function () {
 
     // Permission list
     Route::get('/permissions', 'PermissionController@list')->name('permission.list')->middleware('can:admin,App\Permission');
+    // Permission update
+    Route::put('/permissions/{id}', 'PermissionController@update')->name('permission.update')->middleware('can:admin,App\Permission');
+    // Permission details
+    Route::get('/permissions/{name}', 'PermissionController@details')->name('permission.details')->middleware('can:admin,App\Permission');
+    // Permission delete
+    Route::delete('/permissions/{id}', 'PermissionController@delete')->name('permission.delete')->middleware('can:admin,App\Permission');
 });

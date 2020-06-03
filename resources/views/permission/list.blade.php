@@ -14,8 +14,7 @@
     @foreach($permissions as $permission)
         <tr>
             <td>
-                {{-- <a href="{{ route('permission.details', ['name' => $permission->name]) }}">{{ $permission->name }}</a> --}}
-                {{ $permission->name }}
+                <a href="{{ route('permission.details', ['name' => $permission->name]) }}">{{ $permission->name }}</a>
             </td>
             <td>{{ $permission->description }}</td>
             <td>

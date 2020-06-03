@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
 
 use App\Role;
@@ -82,5 +83,47 @@ class PermissionController extends Controller
 
     public function list() {
         return view('permission.list', ['permissions' => Permission::all()]);
+    }
+
+    public function details($name) {
+        $permission = Permission::where('name', $name)->firstOrFail();
+
+        return view('permission.details', ['permission' => $permission]);
+    }
+
+    public function delete($id) {
+        $permission = Permission::findOrFail($id);
+        $permission->delete();
+        return redirect(route('permission.list'))
+            ->with('success', "Das Recht '$permission->name' wurde erfolgreich gelöscht.");
+    }
+
+    public function update(Request $request, $id) {
+        $permission = Permission::findOrFail($id);
+
+        $rules = [
+            'name' => [
+                'required',
+                'min:5',
+                'max:255',
+                Rule::unique('permissions')->ignore($permission)
+            ],
+            'description' => 'required|max:255'
+        ];
+
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->fails()) {
+            return redirect(route('permission.details', ['name' => $permission->name]))
+                ->withErrors($validator);
+        }
+
+        $permission->name = $request->input('name');
+        $permission->description = $request->input('description');
+
+        $permission->save();
+
+        return redirect(route('permission.details', ['name' => $permission->name]))
+            ->with('success', "Das Recht wurde aktualisiert.");
     }
 }
