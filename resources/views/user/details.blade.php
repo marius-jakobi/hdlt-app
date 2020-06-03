@@ -13,9 +13,11 @@
     <li class="nav-item">
         <a href="#data" class="nav-link active" id="data-tab" data-toggle="tab">Daten</a>
     </li>
-    <li class="nav-item">
-        <a href="#roles" class="nav-link" id="roles-tab" data-toggle="tab">Rollen</a>
-    </li>
+    @if ($user->isAdmin())
+        <li class="nav-item">
+            <a href="#roles" class="nav-link" id="roles-tab" data-toggle="tab">Rollen</a>
+        </li>
+    @endif
     @if (!$user->isAdmin())
         <li class="nav-item">
             <a href="#actions" class="nav-link" id="actions-tab" data-toggle="tab">Aktionen</a>
@@ -70,6 +72,7 @@
             </form>
         @endif
     </div>
+    @if ($user->isAdmin())
     <div class="tab-pane fade" id="roles">
         <h2>Rollen</h2>
         @if (count($availableRoles) > 0)
@@ -139,6 +142,7 @@
             </table>
         @endif
     </div>
+    @endif
     @if (!$user->isAdmin())
         <div class="tab-pane fade" id="actions">
             <h2>Aktionen</h2>

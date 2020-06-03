@@ -33,6 +33,13 @@ class UserController extends Controller
     }
 
     public function update(Request $request, $id) {
+        $user = User::findOrFail($id);
+
+        if ($user->isAdmin()) {
+            return redirect(route('user.details', ['id' => $id]))
+                ->with('error', 'Der Administrator kann nicht verändert werden.');
+        }
+
         $validator = Validator::make($request->all(), [
             'name_first' => 'required',
             'name_last' => 'required',
@@ -43,8 +50,6 @@ class UserController extends Controller
             return redirect(route('user.details', ['id' => $id]))
                 ->withErrors($validator, 'userUpdate');
         }
-
-        $user = User::findOrFail($id);
 
         $user->name_first = $request->input('name_first');
         $user->name_last = $request->input('name_last');
@@ -57,7 +62,14 @@ class UserController extends Controller
     }
 
     public function delete($id) {
-        User::findOrFail($id)->delete();
+        $user = User::findOrFail($id);
+
+        if ($user->isAdmin()) {
+            return redirect(route('user.details', ['id' => $id]))
+                ->with('error', "Der Administrator kann nicht gelöscht werden.");
+        }
+        
+        $user->delete();
 
         return redirect(route('user.list'))
             ->with('success', 'Der Benutzer wurde dauerhaft gelöscht.');

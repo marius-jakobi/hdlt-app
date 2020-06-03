@@ -31,6 +31,12 @@ class RoleController extends Controller
         }
 
         $user = User::findOrFail($id);
+
+        if ($user->isAdmin()) {
+            return redirect(route('user.details', ['id' => $id]))
+                ->with('error', 'Die Rollen des Administrators können nicht geändert werden.');
+        }
+
         $role = Role::find($request->input('role_id'));
 
         if ($user->hasRole($role->name)) {
@@ -65,6 +71,12 @@ class RoleController extends Controller
         }
 
         $user = User::findOrFail($id);
+
+        if ($user->isAdmin()) {
+            return redirect(route('user.details', ['id' => $id]))
+                ->with('error', 'Die Rollen des Administrators können nicht geändert werden.');
+        }
+        
         $role = Role::find($request->input('role_id'));
 
         if (!$user->hasRole($role->name)) {
