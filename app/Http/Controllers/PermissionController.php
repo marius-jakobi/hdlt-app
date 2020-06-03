@@ -153,6 +153,10 @@ class PermissionController extends Controller
 
         $permission->save();
 
+        $adminRole = Role::where('name', Role::administratorRoleName())->firstOrFail();
+        $adminRole->permissions()->attach($permission);
+        $adminRole->save();
+
         return redirect(route('permission.details', ['name' => $permission->name]))
             ->with('success', "Das Recht '$permission->name' wurde gespeichert.");
     }
