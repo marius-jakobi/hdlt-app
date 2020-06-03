@@ -14,11 +14,6 @@ class PermissionController extends Controller
     public function attachPermissionToRole(Request $request, string $name) {
         $role = Role::firstWhere('name', $name);
 
-        if ($role->isAdmin()) {
-            return redirect(route('role.details', ['name' => $role->name]))
-                ->with('error', "Die Rechte der Administratorrolle können nicht geändert werden.");
-        }
-
         // Validation rules
         $rules = [
             'permission_id' => 'required|exists:App\Permission,id'
@@ -35,6 +30,11 @@ class PermissionController extends Controller
         if ($validator->fails()) {
             return redirect(route('role.details', ['name' => $role->name]))
                 ->withErrors($validator, 'attachPermission');
+        }
+
+        if ($role->isAdmin()) {
+            return redirect(route('role.details', ['name' => $role->name]))
+                ->with('error', "Die Rechte der Administratorrolle können nicht geändert werden.");
         }
 
         $permission = Permission::find($request->input('permission_id'));
@@ -54,11 +54,6 @@ class PermissionController extends Controller
     public function detachPermissionFromRole(Request $request, $name) {
         $role = Role::firstWhere('name', $name);
 
-        if ($role->isAdmin()) {
-            return redirect(route('role.details', ['name' => $role->name]))
-                ->with('error', "Die Rechte der Administratorrolle können nicht geändert werden.");
-        }
-
         // Validation rules
         $rules = [
             'permission_id' => 'required|exists:App\Permission,id'
@@ -75,6 +70,11 @@ class PermissionController extends Controller
         if ($validator->fails()) {
             return redirect(route('role.details', ['name' => $name]))
                 ->withErrors($validator, 'detachPermission');
+        }
+
+        if ($role->isAdmin()) {
+            return redirect(route('role.details', ['name' => $role->name]))
+                ->with('error', "Die Rechte der Administratorrolle können nicht geändert werden.");
         }
 
         $permission = Permission::find($request->input('permission_id'));
