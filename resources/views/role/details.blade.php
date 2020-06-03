@@ -22,7 +22,7 @@
             @method('put')
             @csrf
             <div class="form-group">
-                <label>Rollenname</label>
+                <label>Name</label>
                 <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ $role->name }}"/>
                 @error('name')
                     <p class="text-danger">{{ $message }}</p>
@@ -72,7 +72,9 @@
                 <tbody>
                     @foreach($role->permissions as $permission)
                     <tr>
-                        <td>{{ $permission->name }}</td>
+                        <td>
+                            <a href="{{ route('permission.details', ['name' => $permission->name]) }}">{{ $permission->name }}</a>
+                        </td>
                         <td>{{ $permission->description }}</td>
                         <td>
                             <form action="{{ route('permission.detach', ['name' => $role->name]) }}" method="post">
