@@ -3,6 +3,7 @@
 use Illuminate\Database\Seeder;
 use App\Role;
 use App\Permission;
+use App\User;
 
 class RolesPermissionsSeeder extends Seeder
 {
@@ -13,8 +14,11 @@ class RolesPermissionsSeeder extends Seeder
      */
     public function run()
     {
-        $admins = Role::create(['name' => 'administrator', 'description' => 'Administratoren']);
+        $role = Role::create(['name' => 'administrator', 'description' => 'Administratoren']);
 
-        $createUsers = Permission::create(['name' => 'create-users', 'description' => 'Die Rolle kann neue Benutzer erstellen']);
+        $permission = Permission::create(['name' => 'create-users', 'description' => 'Die Rolle kann neue Benutzer erstellen']);
+
+        User::findOrFail(1)->roles()->attach($role);
+        $role->permissions()->attach($permission);
     }
 }
