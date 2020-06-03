@@ -39,4 +39,8 @@ class Role extends Model
     public static function administratorRoleName() {
         return "Administrator";
     }
+
+    public function isAdmin() {
+        return $this->name === $this->administratorRoleName();
+    }
 }

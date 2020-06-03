@@ -18,11 +18,19 @@
             </td>
             <td>{{ $role->description }}</td>
             <td>
-                <ul>
-                @foreach($role->permissions as $permission)
-                    <li>{{ $permission->description }} ({{ $permission->name }})</li>
-                @endforeach
-                </ul>
+                @if ($role->isAdmin())
+                    <p class="text-info font-italic">Diese Rolle hat <strong>alle</strong> Rechte.</p>
+                @else
+                    @if ($role->permissions->count() == 0)
+                        <p class="text-info font-italic">Diese Rolle hat <strong>keine </strong> Rechte.</p>
+                    @else
+                        <ul>
+                            @foreach($role->permissions as $permission)
+                                <li>{{ $permission->description }} ({{ $permission->name }})</li>
+                            @endforeach
+                        </ul>
+                    @endif
+                @endif
             </td>
         </tr>
     @endforeach
