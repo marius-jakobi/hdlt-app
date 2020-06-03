@@ -13,10 +13,15 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
+        $email = 'administrator@' . env('APP_HOST'); // administrator@localhost
+        print("---------------------\n");
+        print_r("Admin email: $email\n");
+        print("---------------------\n");
+
         DB::table('users')->insert([
           'name_first' => 'Super',
           'name_last' => 'Administrator',
-          'email' => 'administrator@' . env('APP_HOST'),
+          'email' => $email,
           'password' => Hash::make(env('DB_PASSWORD')),
           'email_verified_at' => now(),
           'created_at' => now(),
