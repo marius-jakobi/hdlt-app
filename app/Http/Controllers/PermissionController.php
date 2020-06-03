@@ -79,4 +79,8 @@ class PermissionController extends Controller
         return redirect(route('role.details', ['name' => $name]))
         ->with('success', 'Das Recht wurde von der Rolle entfernt.');
     }
+
+    public function list() {
+        return view('permission.list', ['permissions' => Permission::all()]);
+    }
 }

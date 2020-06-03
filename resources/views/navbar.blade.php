@@ -32,6 +32,8 @@
                                 <div class="dropdown-divider"></div>
                                 <a href="{{ route('role.list') }}" class="dropdown-item">Rollenliste</a>
                                 <a href="{{ route('role.create') }}" class="dropdown-item">Rolle erstellen</a>
+                                <div class="dropdown-divider"></div>
+                                <a href="{{ route('permission.list') }}" class="dropdown-item">Rechteliste</a>
                             </div>
                         </li>
                     @endcan

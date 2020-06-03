@@ -67,4 +67,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/role/{id}', 'RoleController@delete')->name('role.delete')->middleware('can:admin,App\Role');
     // Show role details
     Route::get('/role/{name}', 'RoleController@details')->name('role.details')->middleware('can:admin,App\Role');
+
+    // Permission list
+    Route::get('/permissions', 'PermissionController@list')->name('permission.list')->middleware('can:admin,App\Permission');
 });
