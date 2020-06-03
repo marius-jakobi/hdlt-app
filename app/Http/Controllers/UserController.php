@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use App\Role;
@@ -73,5 +74,33 @@ class UserController extends Controller
 
         return redirect(route('user.list'))
             ->with('success', 'Der Benutzer wurde dauerhaft gelöscht.');
+    }
+
+    public function updatePassword(Request $request) {
+        $rules = [
+            'new_password' => 'required|min:8|max:128|same:new_password_confirmation',
+        ];
+
+        $validator = Validator::make($request->input(), $rules);
+
+        if ($validator->fails()) {
+            return redirect(route('profile'))
+                ->withErrors($validator);
+        }
+
+        $user = User::findOrFail(Auth::user()->id);
+
+        if (!Hash::check($request->input('password'), $user->password)) {
+            // Password is incorrect
+            return redirect(route('profile'))
+                ->with('error', 'Das angegebene Passwort ist nicht korrekt.');
+        }
+
+        $user->password = Hash::make($request->input('password'));
+
+        $user->save();
+
+        return redirect(route('profile'))
+            ->with('success', "Das Passwort wurde erfolgreich geändert.");
     }
 }
