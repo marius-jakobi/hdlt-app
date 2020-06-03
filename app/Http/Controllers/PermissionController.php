@@ -106,6 +106,7 @@ class PermissionController extends Controller
                 'required',
                 'min:5',
                 'max:255',
+                'alpha_dash',
                 Rule::unique('permissions')->ignore($permission)
             ],
             'description' => 'required|max:255'
@@ -125,5 +126,34 @@ class PermissionController extends Controller
 
         return redirect(route('permission.details', ['name' => $permission->name]))
             ->with('success', "Das Recht wurde aktualisiert.");
+    }
+
+    public function create() {
+        return view('permission.create');
+    }
+
+    public function store(Request $request) {
+        $rules = [
+            'name' => 'required|min:5|max:255|alpha_dash|unique:App\Permission,name',
+            'description' => 'required|max:255'
+        ];
+
+        $validator = Validator::make($request->input(), $rules);
+
+        if ($validator->fails()) {
+            return redirect(route('permission.create'))
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $permission = new Permission([
+            'name' => $request->input('name'),
+            'description' => $request->input('description')
+        ]);
+
+        $permission->save();
+
+        return redirect(route('permission.details', ['name' => $permission->name]))
+            ->with('success', "Das Recht '$permission->name' wurde gespeichert.");
     }
 }
