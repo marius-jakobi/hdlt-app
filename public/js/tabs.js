@@ -105,7 +105,9 @@ if (url.match("#")) {
   } // Open tab
 
 
-  element.tab("show");
+  element.tab("show"); // Scroll to top
+
+  window.scrollTo(0, 0);
 } // change location when tab changes
 
 
