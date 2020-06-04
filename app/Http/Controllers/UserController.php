@@ -84,7 +84,7 @@ class UserController extends Controller
         $validator = Validator::make($request->input(), $rules);
 
         if ($validator->fails()) {
-            return redirect(route('profile'))
+            return redirect(route('profile') . "#change-password")
                 ->withErrors($validator);
         }
 
