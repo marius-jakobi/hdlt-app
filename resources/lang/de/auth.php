@@ -12,6 +12,6 @@ return [
     |
     */
 
-    'failed'   => 'Diese Kombination aus Zugangsdaten wurde nicht in unserer Datenbank gefunden.',
+    'failed'   => 'Die Zugangsdaten sind nicht korrekt.',
     'throttle' => 'Zu viele Loginversuche. Versuchen Sie es bitte in :seconds Sekunden nochmal.',
 ];
