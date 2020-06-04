@@ -81,7 +81,14 @@ class UserController extends Controller
             'new_password' => 'required|min:8|max:128|same:new_password_confirmation',
         ];
 
-        $validator = Validator::make($request->input(), $rules);
+        $messages = [
+            'new_password.required' => 'Ein Passwort wird benötigt',
+            'new_password.min' => 'Das Passwort muss mindestens 8 Zeichen enthalten',
+            'new_password.max' => 'Das Passwort darf maximal 128 Zeichen enthalten',
+            'new_password.same' => 'Die Passwörter stimmen nicht überein'
+        ];
+
+        $validator = Validator::make($request->input(), $rules, $messages, ['new_password' => 'Passwort']);
 
         if ($validator->fails()) {
             return redirect(route('profile') . "#change-password")
