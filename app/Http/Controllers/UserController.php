@@ -90,13 +90,13 @@ class UserController extends Controller
 
         $user = User::findOrFail(Auth::user()->id);
 
-        if (!Hash::check($request->input('password'), $user->password)) {
+        if (!Hash::check($request->input('current_password'), $user->password)) {
             // Password is incorrect
             return redirect(route('profile'))
                 ->with('error', 'Das angegebene Passwort ist nicht korrekt.');
         }
 
-        $user->password = Hash::make($request->input('password'));
+        $user->password = Hash::make($request->input('new_password'));
 
         $user->save();
 
