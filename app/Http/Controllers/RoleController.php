@@ -6,12 +6,17 @@ use App\User;
 use App\Role;
 use App\Permission;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
 class RoleController extends Controller
 {
     public function attachRoleToUser(Request $request, string $id) {
+        $role = Role::findOrFail($request->input('role_id'));
+
+        $this->authorize('update', $role);
+
         $back = route('user.details', ['id' => $id]) . "#roles";
 
         // Validation rules
@@ -39,8 +44,6 @@ class RoleController extends Controller
                 ->with('error', 'Die Rollen des Administrators können nicht geändert werden.');
         }
 
-        $role = Role::find($request->input('role_id'));
-
         if ($user->hasRole($role->name)) {
             return redirect($back)
                 ->withErrors(["Der Benutzer hat die Rolle '$role->name' bereits."]);
@@ -54,6 +57,10 @@ class RoleController extends Controller
     }
 
     public function detachRoleFromUser(Request $request, $id) {
+        $role = Role::findOrFail($request->input('role_id'));
+
+        $this->authorize('update', $role);
+
         $back = route('user.details', ['id' => $id]) . "#roles";
 
         // Validation rules
@@ -80,8 +87,6 @@ class RoleController extends Controller
             return redirect($back)
                 ->with('error', 'Die Rollen des Administrators können nicht geändert werden.');
         }
-        
-        $role = Role::find($request->input('role_id'));
 
         if (!$user->hasRole($role->name)) {
             return redirect($back)
@@ -161,6 +166,8 @@ class RoleController extends Controller
 
     public function update(Request $request, $name) {
         $role = Role::where('name', $name)->firstOrFail();
+
+        $this->authorize('update', $role);
 
         if ($role->isAdmin()) {
             return redirect(route('role.details', ['name' => $name]))

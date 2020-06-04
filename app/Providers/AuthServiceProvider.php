@@ -28,9 +28,11 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        // Allow everything for administrators
+        // Bypass authorization for admins
         Gate::before(function (User $user) {
-            return $user->isAdmin();
+            if ($user->isAdmin()) {
+                return true;
+            }
         });
     }
 }

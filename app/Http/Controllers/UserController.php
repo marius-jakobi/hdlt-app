@@ -21,6 +21,8 @@ class UserController extends Controller
 
     public function details($id) {
         $user = User::findOrFail($id);
+
+        $this->authorize('view', $user);
         
         $availableRoles = [];
 
@@ -35,6 +37,8 @@ class UserController extends Controller
 
     public function update(Request $request, $id) {
         $user = User::findOrFail($id);
+
+        $this->authorize('update', $user);
 
         if ($user->isAdmin()) {
             return redirect(route('user.details', ['id' => $id]))
@@ -64,6 +68,8 @@ class UserController extends Controller
 
     public function delete($id) {
         $user = User::findOrFail($id);
+
+        $this->authorize('update', $user);
 
         if ($user->isAdmin()) {
             return redirect(route('user.details', ['id' => $id]))

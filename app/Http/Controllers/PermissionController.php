@@ -115,6 +115,8 @@ class PermissionController extends Controller
     public function update(Request $request, $id) {
         $permission = Permission::findOrFail($id);
 
+        $this->authorize('update', $permission);
+
         $rules = [
             'name' => [
                 'required',
