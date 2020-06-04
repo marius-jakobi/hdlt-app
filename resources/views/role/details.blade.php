@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('scripts')
+<script src="{{ asset('js/tabs.js') }}" defer></script>
+@endsection
+
 @section('content')
 <h1>Rolle "{{ $role->name }}"</h1>
 

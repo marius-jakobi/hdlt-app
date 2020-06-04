@@ -12,6 +12,8 @@ use App\Permission;
 class PermissionController extends Controller
 {
     public function attachPermissionToRole(Request $request, string $name) {
+        $back = route('role.details', ['name' => $name]) . "#rights";
+
         $role = Role::firstWhere('name', $name);
 
         // Validation rules
@@ -28,30 +30,32 @@ class PermissionController extends Controller
         $validator = Validator::make($request->all(), $rules, $messages);
 
         if ($validator->fails()) {
-            return redirect(route('role.details', ['name' => $role->name]))
+            return redirect($back)
                 ->withErrors($validator, 'attachPermission');
         }
 
         if ($role->isAdmin()) {
-            return redirect(route('role.details', ['name' => $role->name]))
+            return redirect($back)
                 ->with('error', "Die Rechte der Administratorrolle können nicht geändert werden.");
         }
 
         $permission = Permission::find($request->input('permission_id'));
 
         if ($role->hasPermission($permission->name)) {
-            return redirect(route('role.details', ['name' => $role->name]))
+            return redirect($back)
                 ->withErrors(["Die Rolle '$role->name' verfügt bereits über das Recht '$permission->name'."]);
         }
 
         $role->permissions()->attach($permission);
         $role->save();
 
-        return redirect(route('role.details', ['name' => $role->name]))
+        return redirect($back)
             ->with('success', 'Das Recht wurde der Rolle zugeordnet.');
     }
 
     public function detachPermissionFromRole(Request $request, $name) {
+        $back = route('role.details', ['name' => $name]) . "#rights";
+
         $role = Role::firstWhere('name', $name);
 
         // Validation rules
@@ -73,7 +77,7 @@ class PermissionController extends Controller
         }
 
         if ($role->isAdmin()) {
-            return redirect(route('role.details', ['name' => $role->name]))
+            return redirect($back)
                 ->with('error', "Die Rechte der Administratorrolle können nicht geändert werden.");
         }
 
@@ -87,7 +91,7 @@ class PermissionController extends Controller
         $role->permissions()->detach($permission);
         $role->save();
 
-        return redirect(route('role.details', ['name' => $name]))
+        return redirect($back)
         ->with('success', 'Das Recht wurde von der Rolle entfernt.');
     }
 

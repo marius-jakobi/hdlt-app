@@ -12,6 +12,8 @@ use Illuminate\Validation\Rule;
 class RoleController extends Controller
 {
     public function attachRoleToUser(Request $request, string $id) {
+        $back = route('user.details', ['id' => $id]) . "#roles";
+
         // Validation rules
         $rules = [
             'role_id' => 'required|exists:App\Role,id'
@@ -26,32 +28,34 @@ class RoleController extends Controller
         $validator = Validator::make($request->all(), $rules, $messages);
 
         if ($validator->fails()) {
-            return redirect(route('user.details', ['id' => $id]))
+            return redirect($back)
                 ->withErrors($validator, 'attachRole');
         }
 
         $user = User::findOrFail($id);
 
         if ($user->isAdmin()) {
-            return redirect(route('user.details', ['id' => $id]))
+            return redirect($back)
                 ->with('error', 'Die Rollen des Administrators können nicht geändert werden.');
         }
 
         $role = Role::find($request->input('role_id'));
 
         if ($user->hasRole($role->name)) {
-            return redirect(route('user.details', ['id' => $id]))
+            return redirect($back)
                 ->withErrors(["Der Benutzer hat die Rolle '$role->name' bereits."]);
         }
 
         $user->roles()->attach($role);
         $user->save();
 
-        return redirect(route('user.details', ['id' => $id]))
+        return redirect($back)
             ->with('success', 'Die Rolle wurde dem Benutzer zugeordnet.');
     }
 
     public function detachRoleFromUser(Request $request, $id) {
+        $back = route('user.details', ['id' => $id]) . "#roles";
+
         // Validation rules
         $rules = [
             'role_id' => 'required|exists:App\Role,id'
@@ -66,28 +70,28 @@ class RoleController extends Controller
         $validator = Validator::make($request->all(), $rules, $messages);
 
         if ($validator->fails()) {
-            return redirect(route('user.details', ['id' => $id]))
+            return redirect($back)
                 ->withErrors($validator, 'detachRole');
         }
 
         $user = User::findOrFail($id);
 
         if ($user->isAdmin()) {
-            return redirect(route('user.details', ['id' => $id]))
+            return redirect($back)
                 ->with('error', 'Die Rollen des Administrators können nicht geändert werden.');
         }
         
         $role = Role::find($request->input('role_id'));
 
         if (!$user->hasRole($role->name)) {
-            return redirect(route('user.details', ['id' => $id]))
+            return redirect($back)
                 ->withErrors(["Der Benutzer hat die Rolle '$role->name' nicht."]);
         }
 
         $user->roles()->detach($role);
         $user->save();
 
-        return redirect(route('user.details', ['id' => $id]))
+        return redirect($back)
             ->with('success', 'Die Rolle des Benutzers wurde entfernt.');
     }
 
