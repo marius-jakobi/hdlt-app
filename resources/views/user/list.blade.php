@@ -2,6 +2,7 @@
 
 @section('content')
 <h1>Benutzerliste</h1>
+<p><a href="{{ route('register') }}" class="btn btn-primary">Benutzer registrieren</a></p>
 <table class="table">
     <thead>
         <tr>

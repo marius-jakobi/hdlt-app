@@ -2,6 +2,7 @@
 
 @section('content')
 <h1>Rechte</h1>
+<p><a href="{{ route('permission.create') }}" class="btn btn-primary">Recht erstellen</a></p>
 <table class="table">
     <thead>
         <tr>
