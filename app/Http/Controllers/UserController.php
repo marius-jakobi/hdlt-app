@@ -92,7 +92,7 @@ class UserController extends Controller
 
         if (!Hash::check($request->input('current_password'), $user->password)) {
             // Password is incorrect
-            return redirect(route('profile'))
+            return redirect(route('profile') . "#change-password")
                 ->with('error', 'Das angegebene Passwort ist nicht korrekt.');
         }
 
