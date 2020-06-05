@@ -14,11 +14,9 @@ class RolesPermissionsSeeder extends Seeder
      */
     public function run()
     {
+        // Create admin role
         $role = Role::create(['name' => Role::administratorRoleName(), 'description' => 'Administratoren']);
-
-        $permission = Permission::create(['name' => 'create-users', 'description' => 'Die Rolle kann neue Benutzer erstellen']);
-
+        // Attach admin role to admin user
         User::where('email', User::administratorEmail())->firstOrFail()->roles()->attach($role);
-        $role->permissions()->attach($permission);
     }
 }
