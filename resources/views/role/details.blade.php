@@ -97,16 +97,18 @@
                         @if(!$role->isAdmin())
                             <td>
                                 <form action="{{ route('permission.detach', ['name' => $role->name]) }}" method="post">
-                                    @method('delete')
-                                    @csrf
-                                    <input type="hidden" name="permission_id" value="{{ $permission->id }}">
-                                    <button type="submit" class="btn btn-danger" onclick="return confirm('Recht wirklich entfernen?');">Recht entfernen</button>
+                                    <div class="text-right">
+                                        @method('delete')
+                                        @csrf
+                                        <input type="hidden" name="permission_id" value="{{ $permission->id }}">
+                                        <button type="submit" class="btn btn-danger" onclick="return confirm('Recht wirklich entfernen?');">Recht entfernen</button>
+                                        @if ($errors->detachPermission->any())
+                                            @foreach($errors->detachPermission->all() as $error)
+                                                <p class="text-danger">{{ $error }}</p>
+                                            @endforeach
+                                        @endif
+                                    </div>
                                 </form>
-                                @if ($errors->detachPermission->any())
-                                    @foreach($errors->detachPermission->all() as $error)
-                                        <p class="text-danger">{{ $error }}</p>
-                                    @endforeach
-                                @endif
                             </td>
                         @endif
                     </tr>

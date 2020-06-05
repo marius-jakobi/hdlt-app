@@ -127,18 +127,21 @@
                             </ul>
                         </td>
                         <td>
-                            <form action="{{ route('role.detach', ['id' => $user->id] ) }}" method="post" class="form-inline">
-                                @method('delete')
-                                @csrf
-                                
-                                <input type="hidden" name="role_id" value="{{ $role->id }}" />
-                                <button type="submit" class="btn btn-danger" onclick="return confirm('Rolle wirklich entfernen?');">Rolle entfernen</button>
+                            <form action="{{ route('role.detach', ['id' => $user->id] ) }}" method="post">
+                                <div class="text-right">
+                                    @method('delete')
+                                    @csrf
+                                    
+                                    <input type="hidden" name="role_id" value="{{ $role->id }}" />
+                                    <button type="submit" class="btn btn-danger" onclick="return confirm('Rolle wirklich entfernen?');">Rolle entfernen</button>
+                                    
+                                    @if ($errors->detachRole->any())
+                                        @foreach ($errors->detachRole->all() as $error)
+                                            <p class="text-danger">{{ $error }}</p>
+                                        @endforeach
+                                    @endif
+                                </div>
                             </form>
-                            @if ($errors->detachRole->any())
-                                @foreach ($errors->detachRole->all() as $error)
-                                    <p class="text-danger">{{ $error }}</p>
-                                @endforeach
-                            @endif
                         </td>
                     </tr>
                     @endforeach
