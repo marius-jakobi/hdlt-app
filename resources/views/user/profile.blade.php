@@ -12,6 +12,9 @@
         <a href="#data" class="nav-link active" id="data-tab" data-toggle="tab">Daten</a>
     </li>
     <li class="nav-item">
+        <a href="#roles" class="nav-link" id="roles-tab" data-toggle="tab">Rollen</a>
+    </li>
+    <li class="nav-item">
         <a href="#change-password" class="nav-link" id="change-password-tab" data-toggle="tab">Passwort ändern</a>
     </li>
 </ul>
@@ -21,6 +24,14 @@
         <h2>Meine Daten</h2>
         <p>Name: {{ $user->isAdmin() ? "Administrator" : "$user->name_first, $user->name_last" }}</p>
         <p>E-Mail: {{ $user->email }}</p>
+    </div>
+    <div class="tab-pane fade show" id="roles">
+        <h2>Meine Rollen</h2>
+        <ul>
+            @foreach ($user->roles as $role)
+                <li>{{ $role->name }}</li>
+            @endforeach
+        </ul>
     </div>
     <div class="tab-pane fade show" id="change-password">
         <h2>Passwort ändern</h2>
