@@ -13,6 +13,8 @@ class UserController extends Controller
 {
     /**
      * Show the profile of the current user
+     * 
+     * @return View
      */
     public function profile() {
         return view('user.profile', ['user' => Auth::user()]);
@@ -20,6 +22,8 @@ class UserController extends Controller
 
     /**
      * Show a list with all users
+     * 
+     * @return View
      */
     public function list() {
         return view('user.list', ['users' => User::orderBy('name_last', 'asc')->get()]);
@@ -29,6 +33,7 @@ class UserController extends Controller
      * Show details of a user
      * 
      * @param int $id ID of the user
+     * @return View
      */
     public function details(int $id) {
         $user = User::findOrFail($id);
@@ -51,6 +56,7 @@ class UserController extends Controller
      * 
      * @param Request $request
      * @param int $id ID of the user
+     * @return RedirectResponse
      */
     public function update(Request $request, int $id) {
         $user = User::findOrFail($id);
@@ -87,6 +93,7 @@ class UserController extends Controller
      * Delete a user from database
      * 
      * @param int $id ID of the user
+     * @return RedirectResponse
      */
     public function delete(int $id) {
         $user = User::findOrFail($id);
@@ -108,6 +115,7 @@ class UserController extends Controller
      * Update the password of a user
      * 
      * @param Request $request
+     * @return RedirectResponse
      */
     public function updatePassword(Request $request) {
         $rules = [

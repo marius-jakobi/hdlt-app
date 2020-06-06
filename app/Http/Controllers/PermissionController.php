@@ -16,6 +16,7 @@ class PermissionController extends Controller
      * 
      * @param Request $request
      * @param string $name Name of the role
+     * @return RedirectResponse
      */
     public function attachPermissionToRole(Request $request, string $name) {
         $back = route('role.details', ['name' => $name]) . "#rights";
@@ -64,6 +65,7 @@ class PermissionController extends Controller
      * 
      * @param Request $request
      * @param string $name Name of the role
+     * @return RedirectResponse
      */
     public function detachPermissionFromRole(Request $request, string $name) {
         $back = route('role.details', ['name' => $name]) . "#rights";
@@ -109,6 +111,8 @@ class PermissionController extends Controller
 
     /**
      * Show a list of all permissions
+     * 
+     * @return View
      */
     public function list() {
         return view('permission.list', ['permissions' => Permission::all()]);
@@ -118,6 +122,7 @@ class PermissionController extends Controller
      * Show details of a permission
      * 
      * @param string $name Name of the permission
+     * @return View
      */
     public function details(string $name) {
         $permission = Permission::where('name', $name)->firstOrFail();
@@ -129,6 +134,7 @@ class PermissionController extends Controller
      * Delete a permission
      * 
      * @param int $id - ID of the permission
+     * @return RedirectResponse
      */
     public function delete(int $id) {
         $permission = Permission::findOrFail($id);
@@ -142,6 +148,7 @@ class PermissionController extends Controller
      * 
      * @param Request $request
      * @param int $id ID of the permission
+     * @return RedirectResponse
      */
     public function update(Request $request, int $id) {
         $permission = Permission::findOrFail($id);
@@ -177,6 +184,8 @@ class PermissionController extends Controller
 
     /**
      * Show form to create a permission
+     * 
+     * @return View
      */
     public function create() {
         return view('permission.create');
@@ -186,6 +195,7 @@ class PermissionController extends Controller
      * Store permission in database
      * 
      * @param Request $request
+     * @return RedirectResponse
      */
     public function store(Request $request) {
         $rules = [

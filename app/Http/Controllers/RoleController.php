@@ -17,6 +17,7 @@ class RoleController extends Controller
      * 
      * @param Request $request
      * @param int $id ID of the user
+     * @return RedirectResponse
      */
     public function attachRoleToUser(Request $request, int $id) {
         $role = Role::findOrFail($request->input('role_id'));
@@ -67,6 +68,7 @@ class RoleController extends Controller
      * 
      * @param Request $request
      * @param int $id ID of the user
+     * @return RedirectResponse
      */
     public function detachRoleFromUser(Request $request, int $id) {
         $role = Role::findOrFail($request->input('role_id'));
@@ -116,6 +118,7 @@ class RoleController extends Controller
      * Show details of a role
      * 
      * @param string $name Name of the role
+     * @return View
      */
     public function details(string $name) {
         $role = Role::where('name', $name)->firstOrFail();
@@ -136,6 +139,8 @@ class RoleController extends Controller
 
     /**
      * Show form for role creation
+     * 
+     * @return RedirectResponse
      */
     public function create() {
         return view('role.create');
@@ -145,6 +150,7 @@ class RoleController extends Controller
      * Save a new role
      * 
      * @param Request $request
+     * @return RedirectResponse
      */
     public function store(Request $request) {
         $rules = [
@@ -173,6 +179,8 @@ class RoleController extends Controller
 
     /**
      * Show a list of all roles
+     * 
+     * @return View
      */
     public function list() {
         return view('role.list', ['roles' => Role::all()]);
@@ -182,6 +190,7 @@ class RoleController extends Controller
      * Delete a role from the database
      * 
      * @param int $id ID of the role
+     * @return RedirectResponse
      */
     public function delete(int $id) {
         $role = Role::findOrFail($id);
@@ -202,6 +211,7 @@ class RoleController extends Controller
      * 
      * @param Request $request
      * @param string $name Name of the role
+     * @return RedirectResponse
      */
     public function update(Request $request, string $name) {
         $role = Role::where('name', $name)->firstOrFail();
