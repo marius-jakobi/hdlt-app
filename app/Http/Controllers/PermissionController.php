@@ -11,6 +11,12 @@ use App\Permission;
 
 class PermissionController extends Controller
 {
+    /**
+     * Attach a permission to a role
+     * 
+     * @param Request $request
+     * @param string $name - Name of the role
+     */
     public function attachPermissionToRole(Request $request, string $name) {
         $back = route('role.details', ['name' => $name]) . "#rights";
 
@@ -53,6 +59,12 @@ class PermissionController extends Controller
             ->with('success', 'Das Recht wurde der Rolle zugeordnet.');
     }
 
+    /**
+     * Detach a permission from a role
+     * 
+     * @param Request $request
+     * @param string $name - Name of the role
+     */
     public function detachPermissionFromRole(Request $request, $name) {
         $back = route('role.details', ['name' => $name]) . "#rights";
 
@@ -95,24 +107,43 @@ class PermissionController extends Controller
         ->with('success', 'Das Recht wurde von der Rolle entfernt.');
     }
 
+    /**
+     * Show a list of all permissions
+     */
     public function list() {
         return view('permission.list', ['permissions' => Permission::all()]);
     }
 
-    public function details($name) {
+    /**
+     * Show details of a permission
+     * 
+     * @param string $name - Name of the permission
+     */
+    public function details(string $name) {
         $permission = Permission::where('name', $name)->firstOrFail();
 
         return view('permission.details', ['permission' => $permission]);
     }
 
-    public function delete($id) {
+    /**
+     * Delete a permission
+     * 
+     * @param int $id - ID of the permission
+     */
+    public function delete(int $id) {
         $permission = Permission::findOrFail($id);
         $permission->delete();
         return redirect(route('permission.list'))
             ->with('success', "Das Recht '$permission->name' wurde erfolgreich gelöscht.");
     }
 
-    public function update(Request $request, $id) {
+    /**
+     * Update a permission
+     * 
+     * @param Request $request
+     * @param int $id - ID of the permission
+     */
+    public function update(Request $request, int $id) {
         $permission = Permission::findOrFail($id);
 
         $this->authorize('update', $permission);
@@ -144,10 +175,18 @@ class PermissionController extends Controller
             ->with('success', "Das Recht wurde aktualisiert.");
     }
 
+    /**
+     * Show form to create a permission
+     */
     public function create() {
         return view('permission.create');
     }
 
+    /**
+     * Store permission in database
+     * 
+     * @param Request $request
+     */
     public function store(Request $request) {
         $rules = [
             'name' => 'required|min:5|max:255|alpha_dash|unique:App\Permission,name',

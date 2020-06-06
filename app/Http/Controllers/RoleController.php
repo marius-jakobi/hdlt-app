@@ -12,6 +12,12 @@ use Illuminate\Validation\Rule;
 
 class RoleController extends Controller
 {
+    /**
+     * Attach role to user
+     * 
+     * @param Request $request
+     * @param string $id - ID of the user
+     */
     public function attachRoleToUser(Request $request, string $id) {
         $role = Role::findOrFail($request->input('role_id'));
 
@@ -56,6 +62,12 @@ class RoleController extends Controller
             ->with('success', 'Die Rolle wurde dem Benutzer zugeordnet.');
     }
 
+    /**
+     * Detach a role from a user
+     * 
+     * @param Request $request
+     * @param string $id - ID of the user
+     */
     public function detachRoleFromUser(Request $request, $id) {
         $role = Role::findOrFail($request->input('role_id'));
 
@@ -100,7 +112,12 @@ class RoleController extends Controller
             ->with('success', 'Die Rolle des Benutzers wurde entfernt.');
     }
 
-    public function details($name) {
+    /**
+     * Show details of a role
+     * 
+     * @param string $name - Name of the role
+     */
+    public function details(string $name) {
         $role = Role::where('name', $name)->firstOrFail();
 
         $availablePermissions = [];
@@ -117,13 +134,21 @@ class RoleController extends Controller
         ]);
     }
 
+    /**
+     * Show form for role creation
+     */
     public function create() {
         return view('role.create');
     }
 
+    /**
+     * Save a new role
+     * 
+     * @param Request $request
+     */
     public function store(Request $request) {
         $rules = [
-            'name' => 'required|min:5|max:255|unique:App\Role',
+            'name' => 'required|min:5|max:255|alpha_dash|unique:App\Role',
             'description' => 'required|max:255'
         ];
 
@@ -146,11 +171,19 @@ class RoleController extends Controller
             ->with('success', "Die Rolle '$role->name' wurde gespeichert.");
     }
 
+    /**
+     * Show a list of all roles
+     */
     public function list() {
         return view('role.list', ['roles' => Role::all()]);
     }
 
-    public function delete($id) {
+    /**
+     * Delete a role from the database
+     * 
+     * @param int $id - ID of the role
+     */
+    public function delete(int $id) {
         $role = Role::findOrFail($id);
 
         if ($role->name == Role::administratorRoleName()) {
@@ -164,6 +197,12 @@ class RoleController extends Controller
             ->with('success', "Die Rolle wurde gelöscht.");
     }
 
+    /**
+     * Update a role
+     * 
+     * @param Request $request
+     * @param string $name - Name of the role
+     */
     public function update(Request $request, $name) {
         $role = Role::where('name', $name)->firstOrFail();
 
@@ -179,6 +218,7 @@ class RoleController extends Controller
                 'required',
                 'min:5',
                 'max:255',
+                'alpha_dash',
                 Rule::unique('roles')->ignore($role)
             ],
             'description' => 'required|max:255'
