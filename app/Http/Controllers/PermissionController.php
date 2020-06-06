@@ -15,7 +15,7 @@ class PermissionController extends Controller
      * Attach a permission to a role
      * 
      * @param Request $request
-     * @param string $name - Name of the role
+     * @param string $name Name of the role
      */
     public function attachPermissionToRole(Request $request, string $name) {
         $back = route('role.details', ['name' => $name]) . "#rights";
@@ -63,9 +63,9 @@ class PermissionController extends Controller
      * Detach a permission from a role
      * 
      * @param Request $request
-     * @param string $name - Name of the role
+     * @param string $name Name of the role
      */
-    public function detachPermissionFromRole(Request $request, $name) {
+    public function detachPermissionFromRole(Request $request, string $name) {
         $back = route('role.details', ['name' => $name]) . "#rights";
 
         $role = Role::firstWhere('name', $name);
@@ -117,7 +117,7 @@ class PermissionController extends Controller
     /**
      * Show details of a permission
      * 
-     * @param string $name - Name of the permission
+     * @param string $name Name of the permission
      */
     public function details(string $name) {
         $permission = Permission::where('name', $name)->firstOrFail();
@@ -141,7 +141,7 @@ class PermissionController extends Controller
      * Update a permission
      * 
      * @param Request $request
-     * @param int $id - ID of the permission
+     * @param int $id ID of the permission
      */
     public function update(Request $request, int $id) {
         $permission = Permission::findOrFail($id);

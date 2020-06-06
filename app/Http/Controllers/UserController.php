@@ -11,15 +11,26 @@ use App\User;
 
 class UserController extends Controller
 {
+    /**
+     * Show the profile of the current user
+     */
     public function profile() {
         return view('user.profile', ['user' => Auth::user()]);
     }
 
+    /**
+     * Show a list with all users
+     */
     public function list() {
         return view('user.list', ['users' => User::orderBy('name_last', 'asc')->get()]);
     }
 
-    public function details($id) {
+    /**
+     * Show details of a user
+     * 
+     * @param int $id ID of the user
+     */
+    public function details(int $id) {
         $user = User::findOrFail($id);
 
         $this->authorize('view', $user);
@@ -35,7 +46,13 @@ class UserController extends Controller
         return view('user.details', ['user' => $user, 'availableRoles' => $availableRoles]);
     }
 
-    public function update(Request $request, $id) {
+    /**
+     * Update a user
+     * 
+     * @param Request $request
+     * @param int $id ID of the user
+     */
+    public function update(Request $request, int $id) {
         $user = User::findOrFail($id);
 
         $this->authorize('update', $user);
@@ -66,7 +83,12 @@ class UserController extends Controller
             ->with('success', 'Der Benutzer wurde aktualisiert.');
     }
 
-    public function delete($id) {
+    /**
+     * Delete a user from database
+     * 
+     * @param int $id ID of the user
+     */
+    public function delete(int $id) {
         $user = User::findOrFail($id);
 
         $this->authorize('update', $user);
@@ -82,6 +104,11 @@ class UserController extends Controller
             ->with('success', 'Der Benutzer wurde dauerhaft gelöscht.');
     }
 
+    /**
+     * Update the password of a user
+     * 
+     * @param Request $request
+     */
     public function updatePassword(Request $request) {
         $rules = [
             'new_password' => 'required|min:8|max:128|same:new_password_confirmation',

@@ -16,9 +16,9 @@ class RoleController extends Controller
      * Attach role to user
      * 
      * @param Request $request
-     * @param string $id - ID of the user
+     * @param int $id ID of the user
      */
-    public function attachRoleToUser(Request $request, string $id) {
+    public function attachRoleToUser(Request $request, int $id) {
         $role = Role::findOrFail($request->input('role_id'));
 
         $this->authorize('update', $role);
@@ -66,9 +66,9 @@ class RoleController extends Controller
      * Detach a role from a user
      * 
      * @param Request $request
-     * @param string $id - ID of the user
+     * @param int $id ID of the user
      */
-    public function detachRoleFromUser(Request $request, $id) {
+    public function detachRoleFromUser(Request $request, int $id) {
         $role = Role::findOrFail($request->input('role_id'));
 
         $this->authorize('update', $role);
@@ -115,7 +115,7 @@ class RoleController extends Controller
     /**
      * Show details of a role
      * 
-     * @param string $name - Name of the role
+     * @param string $name Name of the role
      */
     public function details(string $name) {
         $role = Role::where('name', $name)->firstOrFail();
@@ -181,7 +181,7 @@ class RoleController extends Controller
     /**
      * Delete a role from the database
      * 
-     * @param int $id - ID of the role
+     * @param int $id ID of the role
      */
     public function delete(int $id) {
         $role = Role::findOrFail($id);
@@ -201,9 +201,9 @@ class RoleController extends Controller
      * Update a role
      * 
      * @param Request $request
-     * @param string $name - Name of the role
+     * @param string $name Name of the role
      */
-    public function update(Request $request, $name) {
+    public function update(Request $request, string $name) {
         $role = Role::where('name', $name)->firstOrFail();
 
         $this->authorize('update', $role);
