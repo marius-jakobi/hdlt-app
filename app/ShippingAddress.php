@@ -14,4 +14,11 @@ class ShippingAddress extends Model
     public function customer() {
         return $this->belongsTo('App\Customer');
     }
+
+    /**
+     * Relationships to components
+     */
+    public function compressors() {
+        return $this->hasMany('App\Compressor', 'shipping_address_id', 'id');
+    }
 }
