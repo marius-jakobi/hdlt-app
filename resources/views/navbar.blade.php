@@ -23,10 +23,20 @@
                 @else
                     @if(Auth::user()->isAdmin())
                         <li class="nav-item dropdown">
-                            <a id="navbarAdminDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            <a id="navbarCustomerDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" v-pre>
+                                Kunden
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <a href="{{ route('customer.list') }}" class="dropdown-item">Liste</a>
+                            </div>
+                        </li>
+                    @endif
+                    @if(Auth::user()->isAdmin())
+                        <li class="nav-item dropdown">
+                            <a id="navbarAdminDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" v-pre>
                                 Administration
                             </a>
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarAdminDropdown">
+                            <div class="dropdown-menu dropdown-menu-right">
                                 <h6 class="dropdown-header"><strong>Benutzer</strong></h6>
                                 <a href="{{ route('user.list') }}" class="dropdown-item">Benutzerliste</a>
                                 <a href="{{ route('register') }}" class="dropdown-item" >Benutzer erstellen</a>

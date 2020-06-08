@@ -83,5 +83,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('/permissions/{id}', 'PermissionController@delete')->name('permission.delete')->middleware('can:delete,App\Permission');
 
     // Customer routes
-    Route::get('/customer/{id}', 'CustomerController@details')->name('customer.details')->middleware('can:view,App\Customer');
+    Route::get('/customers', 'CustomerController@list')->name('customer.list')->middleware('can:list,App\Customer');
+    Route::get('/customer/{customerId}/addresses/shipping/create', 'ShippingAddressController@create')->name('customer.addresses.shipping.create');
+    Route::post('/customer/{customerId}/addresses/shipping/create', 'ShippingAddressController@store')->name('customer.addresses.shipping.store');
+    Route::get('/customer/{customerId}/addresses/shipping/{addressId}', 'ShippingAddressController@details')->name('customer.addresses.shipping.details');
+    Route::put('/customer/{customerId}/addresses/shipping/{addressId}', 'ShippingAddressController@update')->name('customer.addresses.shipping.update');
+    Route::get('/customer/{customerId}', 'CustomerController@details')->name('customer.details')->middleware('can:view,App\Customer');
 });

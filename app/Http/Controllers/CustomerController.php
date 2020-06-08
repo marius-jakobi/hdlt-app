@@ -15,4 +15,13 @@ class CustomerController extends Controller
     public function details($id) {
         return view('customer.details', ['customer' => Customer::findOrFail($id)]);
     }
+
+    /**
+     * List all customers
+     * 
+     * @return View
+     */
+    public function list() {
+        return view('customer.list', ['customers' => Customer::paginate(20)]);
+    }
 }

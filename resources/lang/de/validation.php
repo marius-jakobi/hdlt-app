@@ -177,5 +177,7 @@ return [
         'time'                  => 'Uhrzeit',
         'available'             => 'verfügbar',
         'size'                  => 'Größe',
+        'street'                => 'Straße',
+        'zip'                   => 'PLZ'
     ],
 ];
