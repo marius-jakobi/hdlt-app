@@ -7,6 +7,7 @@
         <tr>
             <th>ID</th>
             <th>Name</th>
+            <th>Lieferadressen</th>
         </tr>
     </thead>
     <tbody>
@@ -18,6 +19,7 @@
                         {{ $customer->description }}
                     </a>
                 </td>
+                <td>{{ $customer->shippingAddresses->count() }}</td>
             </tr>
         @endforeach
     </tbody>
