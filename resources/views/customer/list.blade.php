@@ -2,6 +2,7 @@
 
 @section('content')
 <h1>Kundenliste</h1>
+@if ($customers->count() > 0)
 <table class="table">
     <thead>
         <tr>
@@ -25,4 +26,7 @@
     </tbody>
 </table>
 {{ $customers->links() }}
+@else
+<div class="alert alert-info">Keine Kunden vorhanden</div>
+@endif
 @endsection
