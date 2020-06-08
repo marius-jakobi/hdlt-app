@@ -2,9 +2,7 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
-
-class Compressor extends Model
+class Compressor extends StationComponent
 {
     /**
      * Types
@@ -15,20 +13,6 @@ class Compressor extends Model
         'rotation' => 'Rotationskompressor',
         'scroll' => 'Scroll-Kompressor'
     ];
-
-    /**
-     * Brand relationship
-     */
-    public function brand() {
-        return $this->belongsTo('App\Brand', 'brand_id', 'id');
-    }
-
-    /**
-     * Shipping address relationship
-     */
-    public function shippingAddress() {
-        return $this->belongsTo('App\ShippingAddress', 'shipping_address_id', 'id');
-    }
 
     /**
      * Helper for getting type
