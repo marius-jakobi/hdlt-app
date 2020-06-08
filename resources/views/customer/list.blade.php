@@ -7,6 +7,7 @@
     <thead>
         <tr>
             <th>ID</th>
+            <th>Debitor</th>
             <th>Name</th>
             <th>Lieferadressen</th>
         </tr>
@@ -15,6 +16,7 @@
         @foreach ($customers as $customer)
             <tr>
                 <td>{{ $customer->id }}</td>
+                <td>{{ $customer->cust_id }}</td>
                 <td>
                     <a href="{{ route('customer.details', ['customerId' => $customer->id]) }}">
                         {{ $customer->description }}
