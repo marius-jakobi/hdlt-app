@@ -11,7 +11,7 @@
         @csrf
         <div class="form-group">
             <label>Name</label>
-            <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ $shippingAddress->name }}">
+            <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ $shippingAddress->name }}" autofocus>
         </div>
         <div class="form-group">
             <label>Straße</label>
