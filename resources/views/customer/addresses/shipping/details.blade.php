@@ -46,4 +46,35 @@
     <p>erstellt: {{ $shippingAddress->created_at }}</p>
     <p>geändert: {{ $shippingAddress->updated_at }}</p>
 @endcan
+
+<h2>Anlagen</h2>
+<h3>Kompressoren</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Hersteller</th>
+            <th>Modell</th>
+            <th>S/N</th>
+            <th>Druck</th>
+            <th>Leistung</th>
+            <th>Baujahr</th>
+            <th>Typ</th>
+            <th>nächste Wartung</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach ($shippingAddress->compressors as $compressor)
+        <tr>
+            <td>{{ $compressor->brand->name }}</td>
+            <td>{{ $compressor->model }}</td>
+            <td>{{ $compressor->serial }}</td>
+            <td>{{ $compressor->pressure }}</td>
+            <td>{{ $compressor->power }}</td>
+            <td>{{ $compressor->year }}</td>
+            <td>{{ $compressor->getType() }}</td>
+            <td>{{ $compressor->next_service }}</td>
+        </tr>
+        @endforeach
+    </tbody>
+</table>
 @endsection
