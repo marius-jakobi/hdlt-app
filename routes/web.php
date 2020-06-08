@@ -81,4 +81,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/permissions/{name}', 'PermissionController@details')->name('permission.details')->middleware('can:view,App\Permission');
     // Permission delete
     Route::delete('/permissions/{id}', 'PermissionController@delete')->name('permission.delete')->middleware('can:delete,App\Permission');
+
+    // Customer routes
+    Route::get('/customer/{id}', 'CustomerController@details')->name('customer.details')->middleware('can:view,App\Customer');
 });
