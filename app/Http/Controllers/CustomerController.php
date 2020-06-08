@@ -22,6 +22,8 @@ class CustomerController extends Controller
      * @return View
      */
     public function list() {
-        return view('customer.list', ['customers' => Customer::paginate(20)]);
+        $customers = Customer::orderBy('cust_id', 'asc')->paginate(20);
+
+        return view('customer.list', ['customers' => $customers]);
     }
 }
