@@ -77,4 +77,31 @@
         @endforeach
     </tbody>
 </table>
+<h3>Behälter</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Hersteller</th>
+            <th>Volumen</th>
+            <th>S/N</th>
+            <th>Druck</th>
+            <th>Baujahr</th>
+            <th>Typ</th>
+            <th>nächste Prüfung</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach ($shippingAddress->receivers as $receiver)
+        <tr>
+            <td>{{ $receiver->brand->name }}</td>
+            <td>{{ $receiver->volume }}</td>
+            <td>{{ $receiver->serial }}</td>
+            <td>{{ $receiver->pressure }}</td>
+            <td>{{ $receiver->year }}</td>
+            <td>{{ $receiver->getType() }}</td>
+            <td>{{ $receiver->next_service }}</td>
+        </tr>
+        @endforeach
+    </tbody>
+</table>
 @endsection
