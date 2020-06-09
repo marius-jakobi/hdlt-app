@@ -24,4 +24,25 @@ class ShippingAddress extends Model
     public function receivers() {
         return $this->hasMany('App\Receiver', 'shipping_address_id', 'id');
     }
+    public function ref_dryers() {
+        return $this->hasMany('App\RefDryer', 'shipping_address_id', 'id');
+    }
+    public function filters() {
+        return $this->hasMany('App\Filter', 'shipping_address_id', 'id');
+    }
+    public function ad_dryers() {
+        return $this->hasMany('App\AdDryer', 'shipping_address_id', 'id');
+    }
+    public function adsorbers() {
+        return $this->hasMany('App\Adsorber', 'shipping_address_id', 'id');
+    }
+    public function separators() {
+        return $this->hasMany('App\Separator', 'shipping_address_id', 'id');
+    }
+    public function sensors() {
+        return $this->hasMany('App\Sensor', 'shipping_address_id', 'id');
+    }
+    public function controllers() {
+        return $this->hasMany('App\Controller', 'shipping_address_id', 'id');
+    }
 }
