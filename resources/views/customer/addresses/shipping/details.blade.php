@@ -50,7 +50,7 @@
 <h2>Anlagen</h2>
 <h3>Kompressoren</h3>
 @can('create', App\StationComponent::class)
-    <a href="#">Kompressor hinzufügen</a>
+    <a href="{{ route('component.create', ['customerId' => $shippingAddress->customer->id, 'addressId' => $shippingAddress->id, 'type' => 'compressor']) }}">Kompressor hinzufügen</a>
 @endcan
 @if ($shippingAddress->compressors->count() > 0)
 <table class="table">
@@ -81,6 +81,9 @@
 <div class="alert alert-info">Es sind keine Kompressoren angelegt.</div>
 @endif
 <h3>Behälter</h3>
+@can('create', App\StationComponent::class)
+    <a href="{{ route('component.create', ['customerId' => $shippingAddress->customer->id, 'addressId' => $shippingAddress->id, 'type' => 'receiver']) }}">Behälter hinzufügen</a>
+@endcan
 @if ($shippingAddress->receivers->count() > 0)
 <table class="table">
     <thead>
@@ -111,6 +114,9 @@
 <div class="alert alert-info">Es sind keine Behälter angelegt.</div>
 @endif
 <h3>Kältetrockner</h3>
+@can('create', App\StationComponent::class)
+    <a href="{{ route('component.create', ['customerId' => $shippingAddress->customer->id, 'addressId' => $shippingAddress->id, 'type' => 'ref_dryer']) }}">Kältetrockner hinzufügen</a>
+@endcan
 @if ($shippingAddress->ref_dryers->count() > 0)
 <table class="table">
     <thead>
@@ -140,6 +146,9 @@
 <div class="alert alert-info">Es sind keine Kältetrockner angelegt.</div>
 @endif
 <h3>Filter</h3>
+@can('create', App\StationComponent::class)
+    <a href="{{ route('component.create', ['customerId' => $shippingAddress->customer->id, 'addressId' => $shippingAddress->id, 'type' => 'filter']) }}">Filter hinzufügen</a>
+@endcan
 @if ($shippingAddress->filters->count() > 0)
 <table class="table">
     <thead>
@@ -165,6 +174,9 @@
 <div class="alert alert-info">Es sind keine Filter angelegt.</div>
 @endif
 <h3>Adsorptionstrockner</h3>
+@can('create', App\StationComponent::class)
+    <a href="{{ route('component.create', ['customerId' => $shippingAddress->customer->id, 'addressId' => $shippingAddress->id, 'type' => 'ad_dryer']) }}">Adsorptionstrockner hinzufügen</a>
+@endcan
 @if ($shippingAddress->ad_dryers->count() > 0)
 <table class="table">
     <thead>
@@ -192,6 +204,9 @@
 <div class="alert alert-info">Es sind keine Adsorptionstrockner angelegt.</div>
 @endif
 <h3>Öldampfadsorber</h3>
+@can('create', App\StationComponent::class)
+    <a href="{{ route('component.create', ['customerId' => $shippingAddress->customer->id, 'addressId' => $shippingAddress->id, 'type' => 'adsorber']) }}">Öldampfadsorber hinzufügen</a>
+@endcan
 @if ($shippingAddress->adsorbers->count() > 0)
 <table class="table">
     <thead>
@@ -219,6 +234,9 @@
 <div class="alert alert-info">Es sind keine Öldampfadsorber angelegt.</div>
 @endif
 <h3>Öl-Wasser-Trenner</h3>
+@can('create', App\StationComponent::class)
+    <a href="{{ route('component.create', ['customerId' => $shippingAddress->customer->id, 'addressId' => $shippingAddress->id, 'type' => 'separator']) }}">Öl-Wasser-Trenner hinzufügen</a>
+@endcan
 @if ($shippingAddress->separators->count() > 0)
 <table class="table">
     <thead>
@@ -242,6 +260,9 @@
 <div class="alert alert-info">Es sind keine Öl-Wasser-Trenner angelegt.</div>
 @endif
 <h3>Stationssensoren</h3>
+@can('create', App\StationComponent::class)
+    <a href="{{ route('component.create', ['customerId' => $shippingAddress->customer->id, 'addressId' => $shippingAddress->id, 'type' => 'sensor']) }}">Sensor hinzufügen</a>
+@endcan
 @if ($shippingAddress->sensors->count() > 0)
 <table class="table">
     <thead>
@@ -267,6 +288,9 @@
 <div class="alert alert-info">Es sind keine Stationssensoren angelegt.</div>
 @endif
 <h3>Übergeordnete Steuerungen</h3>
+@can('create', App\StationComponent::class)
+    <a href="{{ route('component.create', ['customerId' => $shippingAddress->customer->id, 'addressId' => $shippingAddress->id, 'type' => 'controller']) }}">Steuerung hinzufügen</a>
+@endcan
 @if ($shippingAddress->controllers->count() > 0)
 <table class="table">
     <thead>
