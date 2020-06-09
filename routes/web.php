@@ -89,4 +89,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/customer/{customerId}/addresses/shipping/{addressId}', 'ShippingAddressController@details')->name('customer.addresses.shipping.details');
     Route::put('/customer/{customerId}/addresses/shipping/{addressId}', 'ShippingAddressController@update')->name('customer.addresses.shipping.update');
     Route::get('/customer/{customerId}', 'CustomerController@details')->name('customer.details')->middleware('can:view,App\Customer');
+
+    // Component routes
+    Route::get('/customer/{customerId}/addresses/shipping/{addressId}/{type}/add', 'ComponentController@create')->name('component.create');
 });
