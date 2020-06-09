@@ -104,4 +104,27 @@
         @endforeach
     </tbody>
 </table>
+<h3>Kältetrockner</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Hersteller</th>
+            <th>S/N</th>
+            <th>Baujahr</th>
+            <th>Kältemittel</th>
+            <th>nächste Prüfung</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach ($shippingAddress->ref_dryers as $ref_dryer)
+        <tr>
+            <td>{{ $ref_dryer->brand->name }}</td>
+            <td>{{ $ref_dryer->serial }}</td>
+            <td>{{ $ref_dryer->year }}</td>
+            <td>{{ $ref_dryer->getRefrigerant() }}</td>
+            <td>{{ $ref_dryer->next_service }}</td>
+        </tr>
+        @endforeach
+    </tbody>
+</table>
 @endsection
