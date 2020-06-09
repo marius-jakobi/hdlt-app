@@ -11,7 +11,7 @@ class ShippingAddressPolicy
     use HandlesAuthorization;
 
     public function view(User $user, ShippingAddress $shippingAddress) {
-        return true;
+        return false;
     }
 
     public function update(User $user, ShippingAddress $shippingAddress) {

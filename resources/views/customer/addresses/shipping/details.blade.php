@@ -46,9 +46,12 @@
     <p>erstellt: {{ $shippingAddress->created_at }}</p>
     <p>geändert: {{ $shippingAddress->updated_at }}</p>
 @endcan
-
+<hr>
 <h2>Anlagen</h2>
 <h3>Kompressoren</h3>
+@can('create', App\StationComponent::class)
+    <a href="#">Kompressor hinzufügen</a>
+@endcan
 @if ($shippingAddress->compressors->count() > 0)
 <table class="table">
     <thead>
