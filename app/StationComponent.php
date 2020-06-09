@@ -6,6 +6,22 @@ use Illuminate\Database\Eloquent\Model;
 
 class StationComponent extends Model
 {
+    private static $types = [
+        'compressor' => 'Kompressor',
+        'receiver' => 'Behälter',
+        'ref_dryer' => 'Kältetrockner',
+        'filter' => 'Filter',
+        'ad_dryer' => 'Adsorptionstrockner',
+        'adsorber' => 'Öldampfadsorber',
+        'separator' => 'Öl-Wasser-Trenner',
+        'sensor' => 'Sensor',
+        'controller' => 'Steuerung'
+    ];
+
+    public static function types() {
+        return self::$types;
+    }
+
     /**
      * Brand relationship
      */
