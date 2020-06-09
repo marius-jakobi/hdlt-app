@@ -23,9 +23,8 @@ class CreateFiltersTable extends Migration
                 ->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
+            $table->string('model')->nullable();
             $table->string('element')->nullable();
-            $table->decimal('volume', 6, 2, true)->nullable();
-            $table->string('serial')->nullable();
             $table->boolean('is_active')->default(true);
             $table->date('next_service');
             $table->string('memo');

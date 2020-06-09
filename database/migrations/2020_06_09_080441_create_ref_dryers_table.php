@@ -27,7 +27,7 @@ class CreateRefDryersTable extends Migration
             $table->string('serial');
             $table->year('year')->nullable();
             $table->enum('ref_type', ['R134a', 'R404A', 'R407C', 'R410A', 'R452a', 'R22'])->nullable();
-            $table->decimal('ref_amount', 6, 2, true);
+            $table->decimal('ref_amount', 6, 2, true)->nullable();
             $table->boolean('is_active')->default(true);
             $table->date('next_service');
             $table->string('memo');
