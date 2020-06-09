@@ -55,6 +55,14 @@ class User extends Authenticatable
         }
     }
 
+    public function hasPermission(string $name) {
+        foreach ($this->roles as $role) {
+            if ($role->hasPermission($name)) {
+                return true;
+            }
+        }
+    }
+
     /**
      * Return short name
      */
