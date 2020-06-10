@@ -92,4 +92,5 @@ Route::middleware('auth')->group(function () {
 
     // Component routes
     Route::get('/customer/{customerId}/addresses/shipping/{addressId}/{type}/add', 'ComponentController@create')->name('component.create');
+    Route::post('/customer/{customerId}/addresses/shipping/{addressId}/{type}/add', 'ComponentController@store')->name('component.store');
 });

@@ -178,6 +178,12 @@ return [
         'available'             => 'verfügbar',
         'size'                  => 'Größe',
         'street'                => 'Straße',
-        'zip'                   => 'PLZ'
+        'zip'                   => 'PLZ',
+        'model'                 => 'Modell',
+        'serial'                => 'Seriennummer',
+        'pressure'              => 'Druck',
+        'brand_id'              => 'Hersteller',
+        'ref_type'              => 'Kältemitteltyp',
+        'ref_amount'              => 'Kältemittelmenge'
     ],
 ];
