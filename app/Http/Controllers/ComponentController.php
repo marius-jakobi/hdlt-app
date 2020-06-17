@@ -92,12 +92,21 @@ class ComponentController extends Controller
     public function update(Request $request, int $customerId, int $addressId, string $type, int $componentId) {
         $this->authorize('update', StationComponent::class);
 
+        $validator = Validator::make($request->all(), StationComponent::getValidationRules($type));
+
+        if ($validator->fails()) {
+            return redirect(route('component.details', ['customerId' => $customerId, 'addressId' => $addressId, 'type' => $type, 'componentId' => $componentId]))
+                ->withErrors($validator);
+        }
+
         $component = $this->getComponent($type, $componentId);
 
+        // Sanitize input for usage with component
         $data = $request->input();
         unset($data['_token']);
         unset($data['_method']);
 
+        // Assign values to component
         foreach($data as $key => $value) {
             $component[$key] = $value;
         }
