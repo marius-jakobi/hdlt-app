@@ -10,11 +10,21 @@ class ShippingAddressPolicy
 {
     use HandlesAuthorization;
 
-    public function view(User $user, ShippingAddress $shippingAddress) {
-        return false;
+    public function view(User $user) {
+        if ($user->hasPermission('view-shipping-address')) {
+            return true;
+        }
     }
 
-    public function update(User $user, ShippingAddress $shippingAddress) {
-        return false;
+    public function create(User $user) {
+        if ($user->hasPermission('create-shipping-address')) {
+            return true;
+        }
+    }
+
+    public function update(User $user) {
+        if ($user->hasPermission('update-shipping-address')) {
+            return true;
+        }
     }
 }

@@ -2,7 +2,9 @@
 
 @section('content')
 <h1>Details {{ $component->types()[$type] ?? 'Anlagenkomponente' }}</h1>
-<a href="{{ route('customer.addresses.shipping.details', ['customerId' => $component->shippingAddress->customer->id, 'addressId' => $component->shippingAddress->id]) }}">Zur Betriebsstelle</a>
+<p>
+    <a href="{{ route('customer.addresses.shipping.details', ['customerId' => $component->shippingAddress->customer->id, 'addressId' => $component->shippingAddress->id]) }}">Zur Betriebsstelle</a>
+</p>
 @can('update', App\StationComponent::class)
 <form action="{{ route('component.update', ['customerId' => $component->shippingAddress->customer->id, 'addressId' => $component->shippingAddress->id, 'type' => $type, 'componentId' => $component->id]) }}" method="post">
     @method('put')
@@ -124,7 +126,23 @@
 </form>
 @endcan
 @cannot('update', App\StationComponent::class)
-{{ $component }}
+<p>Hersteller: {{ $component->brand->name }}</p>
+<p>Typ: {{ ($type === "receiver") ? ($component->volume . " Liter") : $component->model }}</p>
+@if ($type === "filter")
+<p>Element: {{ $component->element }}</p>
+@endif
+<p>S/N: {{ $component->serial }}</p>
+<p>Baujahr: {{ $component->year }}</p>
+<p>Druck: {{ $component->pressure ? $component->pressure . " bar" : "" }}</p>
+@if ($type === "ref_dryer")
+<p>Kältemittel: {{ $component->ref_amount ? $component->ref_amount . " kg" : "" }} {{ $component->ref_type }}</p>
+@endif
+<p>erstellt: {{ $component->created_at }}</p>
+<p>erstellt: {{ $component->updated_at }}</p>
+@if ($component->memo)
+<p>Memo:</p>
+<textarea readonly class="form-control" rows="5">{{ $component->memo }}</textarea>
+@endif
 @endcannot
 
 @endsection

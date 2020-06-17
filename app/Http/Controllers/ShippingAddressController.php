@@ -73,7 +73,7 @@ class ShippingAddressController extends Controller
     public function create($customerId) {
         $customer = Customer::findOrFail($customerId);
 
-        $this->authorize('update', $customer);
+        $this->authorize('create', ShippingAddress::class);
         
         return view ('customer.addresses.shipping.create', ['customer' => $customer]);
     }
@@ -89,7 +89,7 @@ class ShippingAddressController extends Controller
 
         $customer = Customer::findOrFail($customerId);
 
-        $this->authorize('update', $customer);
+        $this->authorize('create', ShippingAddress::class);
 
         $validator = Validator::make($request->all(), [
             'name' => 'required',
