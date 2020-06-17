@@ -36,7 +36,7 @@ class ComponentController extends Controller
             'type' => $type,
             'caption' => StationComponent::types()[$type],
             'brands' => Brand::orderBy('name')->get(),
-            'refTypes' => RefDryer::getRefTypes()
+            'refTypes' => RefDryer::getRefTypeNames()
         ]);
     }
 

@@ -89,8 +89,11 @@
                     <label>Kältemittel (Sorte)</label>
                     <select name="ref_type" class="form-control  @error('ref_type') is-invalid @enderror" value="{{ $component->ref_type }}">
                         <option value=""></option>
-                        @foreach($refTypes as $refType)
-                            <option value="{{ $refType }}" @if ($component->ref_type == $refType) selected @endif>{{ $refType }}</option>
+                        @foreach($refTypes as $key => $value)
+                            <option value="{{ $key }}" class=" @if($value['forbidden'] === true) text-danger @endif " @if ($component->ref_type == $key) selected @endif>
+                                {{ $key }}
+                                (GWP: {{ $value['gwp'] }})
+                            </option>
                         @endforeach
                     </select>
                 </div>
@@ -111,6 +114,14 @@
                 @error('ref_amount')
                     <p class="text-danger">{{ $message }}</p>
                 @enderror
+            </div>
+            @if ($component->hasForbiddenRefType())
+            <div class="col-12">
+                <div class="alert alert-warning">Dieses Kältemittel ist nicht mehr zulässig!</div>
+            </div>
+            @endif
+            <div class="col-12">
+                <div class=" @if($component->getCO2Equivalent() > 5) alert alert-warning @endif">Das CO²-Äquivalent für diesen Kältetrockner beträgt {{ $component->getCO2Equivalent() }} Tonnen.</div>
             </div>
         </div>
     @endif

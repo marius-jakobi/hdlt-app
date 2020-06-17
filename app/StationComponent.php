@@ -121,7 +121,7 @@ class StationComponent extends Model
         if ($type === 'ref_dryer') {
             $validationRules['ref_type'] = [
                 'required',
-                Rule::in(RefDryer::getRefTypes())
+                Rule::in(RefDryer::getRefTypeNames())
             ];
             $validationRules['ref_amount'] = 'required|numeric|min:0|max:100';
         }
