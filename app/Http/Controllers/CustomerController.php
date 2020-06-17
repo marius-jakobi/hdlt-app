@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Customer;
-use Illuminate\Http\Request;
 
 class CustomerController extends Controller
 {
@@ -22,6 +21,8 @@ class CustomerController extends Controller
      * @return View
      */
     public function list() {
+        $this->authorize('list', Customer::class);
+
         $customers = Customer::orderBy('cust_id', 'asc')->paginate(20);
 
         return view('customer.list', ['customers' => $customers]);
