@@ -81,6 +81,23 @@
         @error('pressure')
             <p class="text-danger">{{ $message }}</p>
         @enderror
+        <div class="form-group">
+            <label>Typ</label>
+            <select name="type" class="form-control @error('type') is-invalid @enderror">
+                @if ($type === 'compressor')
+                    @foreach(App\Compressor::getTypes() as $key => $value)
+                    <option value="{{ $key }}">{{ $value }}</option>
+                    @endforeach
+                @else
+                    @foreach(App\Receiver::getTypes() as $key => $value)
+                    <option value="{{ $key }}">{{ $value }}</option>
+                    @endforeach
+                @endif
+            </select>
+        </div>
+        @error('type')
+            <p class="text-danger">{{ $message }}</p>
+        @endif
     @endif
     @if ($type == 'ref_dryer')
         <div class="row">

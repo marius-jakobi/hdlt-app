@@ -7,7 +7,7 @@ class Receiver extends StationComponent
     /**
      * Types
      */
-    private $types = [
+    protected static $types = [
         'standing' => 'stehend',
         'lying' => 'liegend'
     ];
@@ -16,6 +16,10 @@ class Receiver extends StationComponent
      * Helper for getting type
      */
     public function getType() {
-        return $this->types[$this->type];
+        return static::$types[$this->type];
+    }
+
+    public static function getTypes() {
+        return static::$types;
     }
 }

@@ -184,6 +184,7 @@ return [
         'pressure'              => 'Druck',
         'brand_id'              => 'Hersteller',
         'ref_type'              => 'Kältemitteltyp',
-        'ref_amount'              => 'Kältemittelmenge'
+        'ref_amount'            => 'Kältemittelmenge',
+        'type'                  => 'Typ',
     ],
 ];

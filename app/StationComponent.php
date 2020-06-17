@@ -17,6 +17,7 @@ class StationComponent extends Model
         'element',
         'serial',
         'year',
+        'type',
         'pressure',
         'ref_type',
         'ref_amount',
@@ -111,6 +112,7 @@ class StationComponent extends Model
             
             if ($type === 'compressor' || $type === 'receiver') {
                 $validationRules['pressure'] = 'required|numeric|min:0|max:1000';
+                $validationRules['type'] = 'required';
             }
         }
 

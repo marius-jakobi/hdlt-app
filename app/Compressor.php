@@ -7,7 +7,7 @@ class Compressor extends StationComponent
     /**
      * Types
      */
-    private $types = [
+    protected static $types = [
         'screw' => 'Schraubenkompressor',
         'piston' => 'Kolbenkompressor',
         'rotation' => 'Rotationskompressor',
@@ -18,6 +18,10 @@ class Compressor extends StationComponent
      * Helper for getting type
      */
     public function getType() {
-        return $this->types[$this->type];
+        return static::$types[$this->type];
+    }
+
+    public static function getTypes() {
+        return static::$types;
     }
 }
