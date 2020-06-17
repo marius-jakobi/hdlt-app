@@ -2,7 +2,7 @@
 
 @section('content')
 <h1>Lieferadresse hinzufügen</h1>
-<p>Kunde: {{ $customer->description }}</p>
+<p>Kunde: <a href="{{ route('customer.details', ['customerId' => $customer->id]) }}">{{ $customer->description }}</a></p>
 <form method="post">
     @csrf
     <div class="form-group">

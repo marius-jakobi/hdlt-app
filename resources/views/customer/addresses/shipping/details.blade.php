@@ -3,7 +3,7 @@
 @section('content')
 <h1>Lieferadresse</h1>
 <p>
-    <a href="{{ route('customer.details', ['customerId' => $shippingAddress->customer->id]) }}">Zurück zum Kunden</a>
+    Kunde: <a href="{{ route('customer.details', ['customerId' => $shippingAddress->customer->id]) }}">{{ $shippingAddress->customer->description }}</a>
 </p>
 @can('update', App\ShippingAddress::class)
     <form method="post">
