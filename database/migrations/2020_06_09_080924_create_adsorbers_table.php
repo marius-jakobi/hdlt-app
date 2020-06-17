@@ -30,7 +30,7 @@ class CreateAdsorbersTable extends Migration
             $table->year('year')->nullable();
             $table->boolean('is_active')->default(true);
             $table->date('next_service');
-            $table->string('memo');
+            $table->text('memo');
             $table->timestamps();
         });
     }

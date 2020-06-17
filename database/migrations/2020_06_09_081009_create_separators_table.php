@@ -26,7 +26,7 @@ class CreateSeparatorsTable extends Migration
             $table->smallInteger('model');
             $table->boolean('is_active')->default(true);
             $table->date('next_service');
-            $table->string('memo');
+            $table->text('memo');
             $table->timestamps();
         });
     }

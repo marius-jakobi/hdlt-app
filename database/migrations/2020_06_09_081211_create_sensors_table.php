@@ -27,7 +27,7 @@ class CreateSensorsTable extends Migration
             $table->string('serial');
             $table->year('year')->nullable();
             $table->boolean('is_active')->default(true);
-            $table->string('memo');
+            $table->text('memo');
             $table->timestamps();
         });
     }

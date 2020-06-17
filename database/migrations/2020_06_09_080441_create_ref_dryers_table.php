@@ -30,7 +30,7 @@ class CreateRefDryersTable extends Migration
             $table->decimal('ref_amount', 6, 2, true)->nullable();
             $table->boolean('is_active')->default(true);
             $table->date('next_service');
-            $table->string('memo');
+            $table->text('memo');
             $table->timestamps();
         });
     }

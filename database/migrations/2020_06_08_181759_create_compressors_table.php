@@ -32,7 +32,7 @@ class CreateCompressorsTable extends Migration
             $table->boolean('is_oilfree')->default(false);
             $table->boolean('is_active')->default(true);
             $table->date('next_service');
-            $table->string('memo');
+            $table->text('memo');
             $table->timestamps();
         });
     }
