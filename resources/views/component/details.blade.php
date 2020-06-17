@@ -142,6 +142,13 @@
             </div>
         </div>
     @endif
+    <div class="form-group">
+        <label>Nächster Service</label>
+        <input type="date" name="next_service" class="form-control @error('next_service') is-invalid @enderror" value="{{ $component->next_service }}">
+    </div>
+    @error('next_service')
+        <p class="text-danger">{{ $message }}</p>
+    @enderror
     @if ($type == 'compressor')
         <div class="form-check">
             <input type="checkbox" name="is_oilfree" class="form-check-input" id="is_oilfree_checkbox" value="1" @if($component->is_oilfree == '1') checked @endif>
@@ -155,7 +162,7 @@
 @endcan
 @cannot('update', App\StationComponent::class)
 <p>Hersteller: {{ $component->brand->name }}</p>
-<p>Typ: {{ ($type === "receiver") ? ($component->volume . " Liter") : $component->model }}</p>
+<p>{{ ($type === "receiver") ? "Volumen: $component->volume Liter" : "Modell: $component->model" }}</p>
 @if ($type === "filter")
 <p>Element: {{ $component->element }}</p>
 @endif
@@ -165,6 +172,8 @@
 @if ($type === "ref_dryer")
 <p>Kältemittel: {{ $component->ref_amount ? $component->ref_amount . " kg" : "" }} {{ $component->ref_type }}</p>
 @endif
+<p>Typ: {{ $component->type }}</p>
+<p>Nächster Service: {{ $component->next_service }}</p>
 <p>erstellt: {{ $component->created_at }}</p>
 <p>erstellt: {{ $component->updated_at }}</p>
 @if ($component->memo)

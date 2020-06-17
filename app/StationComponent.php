@@ -128,6 +128,10 @@ class StationComponent extends Model
             $validationRules['ref_amount'] = 'required|numeric|min:0|max:100';
         }
 
+        if (in_array($type, ['compressor', 'filter', 'ad_dryer', 'adsorber', 'separator'])) {
+            $validationRules['next_service'] = 'required|date';
+        }
+
         return $validationRules;
     }
 }

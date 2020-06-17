@@ -7,7 +7,7 @@
         {{ "$shippingAddress->name, $shippingAddress->street, $shippingAddress->zip $shippingAddress->city" }}
     </a>
 </p>
-<form action="{{ route('component.store', ['customerId' => $shippingAddress->customer->id, 'addressId' => $shippingAddress->id, 'type' => $type]) }}" method="post">
+<form novalidate action="{{ route('component.store', ['customerId' => $shippingAddress->customer->id, 'addressId' => $shippingAddress->id, 'type' => $type]) }}" method="post">
     @csrf
     <div class="form-group">
         <label>Hersteller</label>
@@ -130,6 +130,15 @@
                 @enderror
             </div>
         </div>
+    @endif
+    @if (in_array($type, ['compressor', 'filter', 'ad_dryer', 'adsorber', 'separator']))
+        <div class="form-group">
+            <label>Nächster Service</label>
+            <input type="date" name="next_service" class="form-control @error('next_service') is-invalid @enderror" value="{{ old('next_service') }}">
+        </div>
+        @error('next_service')
+            <p class="text-danger">{{ $message }}</p>
+        @enderror
     @endif
     @if ($type == 'compressor')
         <div class="form-check">
