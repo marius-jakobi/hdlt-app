@@ -39,7 +39,7 @@
             @method('put')
             @csrf
             <div class="form-group">
-                <label>Aktelles Passwort</label>
+                <label>Aktuelles Passwort</label>
                 <input type="password" name="current_password" class="form-control @error('current_password') is-invalid @enderror">
                 @error('current_password')
                     <p class="text-danger">{{ $message }}</p>
