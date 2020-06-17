@@ -22,7 +22,7 @@
 <div class="tab-content" id="nav-tabContent">
     <div class="tab-pane fade show active" id="data">
         <h2>Meine Daten</h2>
-        <p>Name: {{ $user->isAdmin() ? "Administrator" : "$user->name_first, $user->name_last" }}</p>
+        <p>Name: {{ $user->isAdmin() ? "Administrator" : "$user->name_first $user->name_last" }}</p>
         <p>E-Mail: {{ $user->email }}</p>
     </div>
     <div class="tab-pane fade show" id="roles">
