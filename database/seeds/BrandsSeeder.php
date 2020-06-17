@@ -16,7 +16,8 @@ class BrandsSeeder extends Seeder
             'Alup',
             'CompAir',
             'FST',
-            'pneumatech'
+            'pneumatech',
+            'Renner'
         ];
 
         foreach ($brands as $brand) {
