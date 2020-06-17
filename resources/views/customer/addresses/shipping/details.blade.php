@@ -151,7 +151,7 @@
             <td>{{ $ref_dryer->model }}</td>
             <td>{{ $ref_dryer->serial }}</td>
             <td>{{ $ref_dryer->year }}</td>
-            <td>{{ $ref_dryer->getRefrigerant() }}</td>
+            <td>{{ $ref_dryer->ref_amount ? $ref_dryer->ref_amount . " kg" : "" }} {{ $ref_dryer->ref_type }}</td>
             <td>{{ $ref_dryer->next_service }}</td>
             @can('view', App\StationComponent::class)
             <td><a href="{{ route('component.details', ['customerId' => $shippingAddress->customer->id, 'addressId' => $shippingAddress->id, 'type' => 'ref_dryer', 'componentId' => $ref_dryer->id]) }}">Details</a></td>
