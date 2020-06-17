@@ -9,6 +9,6 @@ use Illuminate\Support\Str;
 $factory->define(Customer::class, function (Faker $faker) {
     return [
         'description' => $faker->company,
-        'cust_id' => Str::random(6)
+        'cust_id' => 'D' . rand(30000, 39999)
     ];
 });
