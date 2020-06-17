@@ -6,4 +6,13 @@
         <h1>{{ $greeting }}</h1>
     </div>
 </div>
+<div class="row">
+    <div class="col-12">
+        <form action="{{ route('search.result') }}" method="post" class="form-inline">
+            @csrf
+            <input type="text" name="q" class="form-control" placeholder="Suche">
+            <button type="submit" class="btn btn-primary ml-2">Suchen</button>
+        </form>
+    </div>
+</div>
 @endsection

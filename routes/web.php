@@ -95,4 +95,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/customer/{customerId}/addresses/shipping/{addressId}/{type}/add', 'ComponentController@store')->name('component.store');
     Route::get('/customer/{customerId}/addresses/shipping/{addressId}/{type}/{componentId}', 'ComponentController@details')->name('component.details');
     Route::put('/customer/{customerId}/addresses/shipping/{addressId}/{type}/{componentId}', 'ComponentController@update')->name('component.update');
+
+    // Search routes
+    Route::post('/search', 'SearchController@showResult')->name('search.result');
 });
