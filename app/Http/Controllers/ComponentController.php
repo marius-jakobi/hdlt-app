@@ -36,7 +36,7 @@ class ComponentController extends Controller
             'type' => $type,
             'caption' => StationComponent::types()[$type],
             'brands' => Brand::orderBy('name')->get(),
-            'refTypes' => ['R134a','R404A','R407C','R410A','R452a','R22']
+            'refTypes' => RefDryer::getRefTypes()
         ]);
     }
 
@@ -72,6 +72,42 @@ class ComponentController extends Controller
             ->with('success', 'Die Komponente wurde angelegt');
     }
 
+    public function details(int $customerId, int $addressId, string $type, int $componentId) {
+        if (!StationComponent::isValidType($type)) {
+            return abort(404);
+        }
+
+        $this->authorize('view', StationComponent::class);
+        
+        $component = $this->getComponent($type, $componentId);
+
+        return view('component.details', [
+            'component' => $component,
+            'type' => $type,
+            'brands' => Brand::all(),
+            'refTypes' => RefDryer::getRefTypes()
+        ]);
+    }
+
+    public function update(Request $request, int $customerId, int $addressId, string $type, int $componentId) {
+        $this->authorize('update', StationComponent::class);
+
+        $component = $this->getComponent($type, $componentId);
+
+        $data = $request->input();
+        unset($data['_token']);
+        unset($data['_method']);
+
+        foreach($data as $key => $value) {
+            $component[$key] = $value;
+        }
+
+        $component->save();
+
+        return redirect(route('component.details', ['customerId' => $customerId, 'addressId' => $addressId, 'type' => $type, 'componentId' => $componentId]))
+            ->with('success', 'Die Komponente wurde aktualisiert');
+    }
+
     private function createComponent(string $type, array $input) {
         unset($input['_token']);
         
@@ -102,6 +138,40 @@ class ComponentController extends Controller
             break;
             case "controller":
                 $component = new \App\Controller($input);
+            break;
+        }
+
+        return $component;
+    }
+
+    private function getComponent(string $type, int $id) {
+        switch ($type) {
+            case "compressor":
+                $component = Compressor::findOrFail($id);
+            break;
+            case "receiver":
+                $component = Receiver::findOrFail($id);
+            break;
+            case "filter":
+                $component = Filter::findOrFail($id);
+            break;
+            case "ref_dryer":
+                $component = RefDryer::findOrFail($id);
+            break;
+            case "ad_dryer":
+                $component = AdDryer::findOrFail($id);
+            break;
+            case "adsorber":
+                $component = Adsorber::findOrFail($id);
+            break;
+            case "separator":
+                $component = Separator::findOrFail($id);
+            break;
+            case "sensor":
+                $component = Sensor::findOrFail($id);
+            break;
+            case "controller":
+                $component = \App\Controller::findOrFail($id);
             break;
         }
 

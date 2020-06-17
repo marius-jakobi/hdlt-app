@@ -62,6 +62,7 @@
             <th>Baujahr</th>
             <th>Typ</th>
             <th>nächste Wartung</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -73,6 +74,7 @@
             <td>{{ $compressor->year }}</td>
             <td>{{ $compressor->getType() }}</td>
             <td>{{ $compressor->next_service }}</td>
+            <td><a href="{{ route('component.details', ['customerId' => $shippingAddress->customer->id, 'addressId' => $shippingAddress->id, 'type' => 'compressor', 'componentId' => $compressor->id]) }}">Details</a></td>
         </tr>
         @endforeach
     </tbody>
@@ -95,6 +97,7 @@
             <th>Baujahr</th>
             <th>Typ</th>
             <th>nächste Prüfung</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -107,6 +110,7 @@
             <td>{{ $receiver->year }}</td>
             <td>{{ $receiver->getType() }}</td>
             <td>{{ $receiver->next_service }}</td>
+            <td><a href="{{ route('component.details', ['customerId' => $shippingAddress->customer->id, 'addressId' => $shippingAddress->id, 'type' => 'receiver', 'componentId' => $receiver->id]) }}">Details</a></td>
         </tr>
         @endforeach
     </tbody>
@@ -127,6 +131,7 @@
             <th>Baujahr</th>
             <th>Kältemittel</th>
             <th>nächste Prüfung</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -138,6 +143,7 @@
             <td>{{ $ref_dryer->year }}</td>
             <td>{{ $ref_dryer->getRefrigerant() }}</td>
             <td>{{ $ref_dryer->next_service }}</td>
+            <td><a href="{{ route('component.details', ['customerId' => $shippingAddress->customer->id, 'addressId' => $shippingAddress->id, 'type' => 'ref_dryer', 'componentId' => $ref_dryer->id]) }}">Details</a></td>
         </tr>
         @endforeach
     </tbody>
@@ -157,6 +163,7 @@
             <th>Filtertasse</th>
             <th>Filterelement</th>
             <th>nächste Prüfung</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -166,6 +173,7 @@
             <td>{{ $filter->model }}</td>
             <td>{{ $filter->element }}</td>
             <td>{{ $filter->next_service }}</td>
+            <td><a href="{{ route('component.details', ['customerId' => $shippingAddress->customer->id, 'addressId' => $shippingAddress->id, 'type' => 'filter', 'componentId' => $filter->id]) }}">Details</a></td>
         </tr>
         @endforeach
     </tbody>
@@ -186,6 +194,7 @@
             <th>S/N</th>
             <th>Baujahr</th>
             <th>nächste Prüfung</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -196,6 +205,7 @@
             <td>{{ $ad_dryer->serial }}</td>
             <td>{{ $ad_dryer->year }}</td>
             <td>{{ $ad_dryer->next_service }}</td>
+            <td><a href="{{ route('component.details', ['customerId' => $shippingAddress->customer->id, 'addressId' => $shippingAddress->id, 'type' => 'ad_dryer', 'componentId' => $ad_dryer->id]) }}">Details</a></td>
         </tr>
         @endforeach
     </tbody>
@@ -216,6 +226,7 @@
             <th>S/N</th>
             <th>Baujahr</th>
             <th>nächste Prüfung</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -226,6 +237,7 @@
             <td>{{ $adsorber->serial }}</td>
             <td>{{ $adsorber->year }}</td>
             <td>{{ $adsorber->next_service }}</td>
+            <td><a href="{{ route('component.details', ['customerId' => $shippingAddress->customer->id, 'addressId' => $shippingAddress->id, 'type' => 'adsorber', 'componentId' => $adsorber->id]) }}">Details</a></td>
         </tr>
         @endforeach
     </tbody>
@@ -244,6 +256,7 @@
             <th>Hersteller</th>
             <th>Modell</th>
             <th>nächste Prüfung</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -252,6 +265,7 @@
             <td>{{ $separator->brand->name }}</td>
             <td>{{ $separator->model }}</td>
             <td>{{ $separator->next_service }}</td>
+            <td><a href="{{ route('component.details', ['customerId' => $shippingAddress->customer->id, 'addressId' => $shippingAddress->id, 'type' => 'separator', 'componentId' => $separator->id]) }}">Details</a></td>
         </tr>
         @endforeach
     </tbody>
@@ -271,6 +285,7 @@
             <th>Modell</th>
             <th>S/N</th>
             <th>Baujahr</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -280,6 +295,7 @@
             <td>{{ $sensor->model }}</td>
             <td>{{ $sensor->serial }}</td>
             <td>{{ $sensor->year }}</td>
+            <td><a href="{{ route('component.details', ['customerId' => $shippingAddress->customer->id, 'addressId' => $shippingAddress->id, 'type' => 'sensor', 'componentId' => $sensor->id]) }}">Details</a></td>
         </tr>
         @endforeach
     </tbody>
@@ -299,6 +315,7 @@
             <th>Modell</th>
             <th>S/N</th>
             <th>Baujahr</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -308,6 +325,7 @@
             <td>{{ $controller->model }}</td>
             <td>{{ $controller->serial }}</td>
             <td>{{ $controller->year }}</td>
+            <td><a href="{{ route('component.details', ['customerId' => $shippingAddress->customer->id, 'addressId' => $shippingAddress->id, 'type' => 'controller', 'componentId' => $controller->id]) }}">Details</a></td>
         </tr>
         @endforeach
     </tbody>
