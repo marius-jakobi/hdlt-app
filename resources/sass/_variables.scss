@@ -1,7 +1,10 @@
+$enable-rounded: false;
+
 $theme-colors: (
     primary: red,
     success: #27b514,
-    info: #0096e0
+    info: #0096e0,
+    warning: #ffe940
 );
 
 .bg-success {
@@ -9,5 +12,9 @@ $theme-colors: (
 }
 
 .bg-info {
+    color: white;
+}
+
+.bg-danger {
     color: white;
 }
