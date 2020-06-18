@@ -3,7 +3,7 @@
 @section('content')
 <h1>Details {{ $component->types()[$type] ?? 'Anlagenkomponente' }}</h1>
 <p>
-    <a href="{{ route('customer.addresses.shipping.details', ['customerId' => $component->shippingAddress->customer->id, 'addressId' => $component->shippingAddress->id]) }}">Zur Betriebsstelle</a>
+    Betriebsstelle: <a href="{{ route('customer.addresses.shipping.details', ['customerId' => $component->shippingAddress->customer->id, 'addressId' => $component->shippingAddress->id]) }}">{{ $component->shippingAddress->name }}</a>
 </p>
 @can('update', App\StationComponent::class)
 <form action="{{ route('component.update', ['customerId' => $component->shippingAddress->customer->id, 'addressId' => $component->shippingAddress->id, 'type' => $type, 'componentId' => $component->id]) }}" method="post">

@@ -1,16 +1,13 @@
-// Body
-$background: #353535;
-
-$body-bg: lighten(
-    $color: $background,
-    $amount: 8
-);
-$body-color: var(--white);
-
 $theme-colors: (
-    primary: red
+    primary: red,
+    success: #27b514,
+    info: #0096e0
 );
 
-.navbar-dark {
-    background-color: $background;
+.bg-success {
+    color: white;
+}
+
+.bg-info {
+    color: white;
 }

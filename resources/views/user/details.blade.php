@@ -158,7 +158,7 @@
             <form action="{{ route('user.delete', ['id' => $user->id]) }}" method="post">
                 @csrf
                 @method('delete')
-                <button type="submit" class="btn btn-danger" onclick="return confirm('Soll dieser Benutzer wirklich dauerhaft gelöscht werden?');">Benutzer löschen</button>
+                <button type="submit" class="btn btn-primary" onclick="return confirm('Soll dieser Benutzer wirklich dauerhaft gelöscht werden?');">Benutzer löschen</button>
             </form>
         </div>
     @endif
