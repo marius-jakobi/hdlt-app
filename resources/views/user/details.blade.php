@@ -8,7 +8,7 @@
 <h1>Benutzer "{{ $user->isAdmin() ? "Administrator" : "$user->name_last , $user->name_first" }}"</h1>
 
 @if ($user->isAdmin())
-    <div class="alert alert-info">
+    <div class="alert bg-info">
         Dieser Benutzer ist der Administrator der Anwendung. Er kann weder verändert noch gelöscht werden.
     </div>
 @endif
@@ -95,11 +95,11 @@
                 @endforeach
             @endif
         @else
-            <div class="alert alert-info">Diesem Benutzer können keine weiteren Rollen zugeordnet werden.</div>
+            <div class="alert bg-info">Diesem Benutzer können keine weiteren Rollen zugeordnet werden.</div>
         @endif
 
         @if ($user->roles->count() == 0)
-            <div class="alert alert-info mt-3">Der Benutzer hat keine Rollen.</div>
+            <div class="alert bg-info mt-3">Der Benutzer hat keine Rollen.</div>
         @else
             <table class="table mt-3">
                 <thead>

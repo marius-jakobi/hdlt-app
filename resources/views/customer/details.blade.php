@@ -27,7 +27,7 @@
         </tbody>
     </table>
 @else
-    <div class="alert alert-info">Keine Rechnungsadresse vorhanden</div>
+    <div class="alert bg-info">Keine Rechnungsadresse vorhanden</div>
 @endif
 
 <h2>Lieferadressen</h2>
@@ -60,6 +60,6 @@
         </tbody>
     </table>
 @else
-    <div class="alert alert-info">Keine Lieferadressen vorhanden</div>
+    <div class="alert bg-info">Keine Lieferadressen vorhanden</div>
 @endif
 @endsection

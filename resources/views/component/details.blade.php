@@ -134,11 +134,11 @@
             </div>
             @if ($component->hasForbiddenRefType())
             <div class="col-12">
-                <div class="alert alert-warning">Dieses Kältemittel ist nicht mehr zulässig!</div>
+                <div class="alert bg-warning">Dieses Kältemittel ist nicht mehr zulässig!</div>
             </div>
             @endif
             <div class="col-12">
-                <div class=" @if($component->getCO2Equivalent() > 5) alert alert-warning @endif">Das CO²-Äquivalent für diesen Kältetrockner beträgt {{ $component->getCO2Equivalent() }} Tonnen.</div>
+                <div class=" @if($component->getCO2Equivalent() > 5) alert bg-warning @endif">Das CO²-Äquivalent für diesen Kältetrockner beträgt {{ $component->getCO2Equivalent() }} Tonnen.</div>
             </div>
         </div>
     @endif

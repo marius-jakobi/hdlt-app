@@ -29,6 +29,6 @@
 </table>
 {{ $customers->links() }}
 @else
-<div class="alert alert-info">Keine Kunden vorhanden</div>
+<div class="alert bg-info">Keine Kunden vorhanden</div>
 @endif
 @endsection

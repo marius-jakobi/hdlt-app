@@ -8,7 +8,7 @@
 <h1>Rolle "{{ $role->name }}"</h1>
 
 @if ($role->isAdmin())
-    <div class="alert alert-info">Dies ist die Administrator Rolle. Sie kann weder geändert noch gelöscht werden.</div>
+    <div class="alert bg-info">Dies ist die Administrator Rolle. Sie kann weder geändert noch gelöscht werden.</div>
 @endif
 
 <ul class="nav nav-tabs mb-3" id="nav-tab">
@@ -72,10 +72,10 @@
                 @endforeach
             @endif
         @else
-            <div class="alert alert-info">Dieser Rolle können keine weiteren Rechte zugeordnet werden.</div>
+            <div class="alert bg-info">Dieser Rolle können keine weiteren Rechte zugeordnet werden.</div>
         @endif
         @if ($role->permissions->count() == 0)
-            <div class="alert alert-info mt-3">Diese Rolle verfügt über keine Rechte.</div>
+            <div class="alert bg-info mt-3">Diese Rolle verfügt über keine Rechte.</div>
         @else
             <table class="table mt-3">
                 <thead>

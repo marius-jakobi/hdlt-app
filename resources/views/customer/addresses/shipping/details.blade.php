@@ -84,7 +84,7 @@
     </tbody>
 </table>
 @else
-<div class="alert alert-info">Es sind keine Kompressoren angelegt.</div>
+<div class="alert bg-info">Es sind keine Kompressoren angelegt.</div>
 @endif
 <h3>Behälter</h3>
 @can('create', App\StationComponent::class)
@@ -123,7 +123,7 @@
         @endforeach
     </tbody>
 </table>@else
-<div class="alert alert-info">Es sind keine Behälter angelegt.</div>
+<div class="alert bg-info">Es sind keine Behälter angelegt.</div>
 @endif
 <h3>Kältetrockner</h3>
 @can('create', App\StationComponent::class)
@@ -161,7 +161,7 @@
     </tbody>
 </table>
 @else
-<div class="alert alert-info">Es sind keine Kältetrockner angelegt.</div>
+<div class="alert bg-info">Es sind keine Kältetrockner angelegt.</div>
 @endif
 <h3>Filter</h3>
 @can('create', App\StationComponent::class)
@@ -195,7 +195,7 @@
     </tbody>
 </table>
 @else
-<div class="alert alert-info">Es sind keine Filter angelegt.</div>
+<div class="alert bg-info">Es sind keine Filter angelegt.</div>
 @endif
 <h3>Adsorptionstrockner</h3>
 @can('create', App\StationComponent::class)
@@ -231,7 +231,7 @@
     </tbody>
 </table>
 @else
-<div class="alert alert-info">Es sind keine Adsorptionstrockner angelegt.</div>
+<div class="alert bg-info">Es sind keine Adsorptionstrockner angelegt.</div>
 @endif
 <h3>Öldampfadsorber</h3>
 @can('create', App\StationComponent::class)
@@ -267,7 +267,7 @@
     </tbody>
 </table>
 @else
-<div class="alert alert-info">Es sind keine Öldampfadsorber angelegt.</div>
+<div class="alert bg-info">Es sind keine Öldampfadsorber angelegt.</div>
 @endif
 <h3>Öl-Wasser-Trenner</h3>
 @can('create', App\StationComponent::class)
@@ -299,7 +299,7 @@
     </tbody>
 </table>
 @else
-<div class="alert alert-info">Es sind keine Öl-Wasser-Trenner angelegt.</div>
+<div class="alert bg-info">Es sind keine Öl-Wasser-Trenner angelegt.</div>
 @endif
 <h3>Stationssensoren</h3>
 @can('create', App\StationComponent::class)
@@ -333,7 +333,7 @@
     </tbody>
 </table>
 @else
-<div class="alert alert-info">Es sind keine Stationssensoren angelegt.</div>
+<div class="alert bg-info">Es sind keine Stationssensoren angelegt.</div>
 @endif
 <h3>Übergeordnete Steuerungen</h3>
 @can('create', App\StationComponent::class)
@@ -367,6 +367,6 @@
     </tbody>
 </table>
 @else
-<div class="alert alert-info">Es sind keine übergeordneten Steuerungen angelegt.</div>
+<div class="alert bg-info">Es sind keine übergeordneten Steuerungen angelegt.</div>
 @endif
 @endsection
