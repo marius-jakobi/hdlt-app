@@ -134,11 +134,11 @@
             </div>
             @if ($component->hasForbiddenRefType())
             <div class="col-12">
-                <div class="alert bg-warning">Dieses Kältemittel ist nicht mehr zulässig!</div>
+                <div class="alert bg-danger">Dieses Kältemittel ist nicht mehr zulässig!</div>
             </div>
             @endif
             <div class="col-12">
-                <div class=" @if($component->getCO2Equivalent() > 5) alert bg-warning @endif">Das CO²-Äquivalent für diesen Kältetrockner beträgt {{ $component->getCO2Equivalent() }} Tonnen.</div>
+                <div class="alert @if($component->getCO2Equivalent() > 5)bg-warning @else bg-info @endif">Das CO²-Äquivalent für diesen Kältetrockner beträgt {{ $component->getCO2Equivalent() }} Tonnen.</div>
             </div>
         </div>
     @endif
@@ -161,25 +161,35 @@
 </form>
 @endcan
 @cannot('update', App\StationComponent::class)
-<p>Hersteller: {{ $component->brand->name }}</p>
-<p>{{ ($type === "receiver") ? "Volumen: $component->volume Liter" : "Modell: $component->model" }}</p>
-@if ($type === "filter")
-<p>Element: {{ $component->element }}</p>
-@endif
-<p>S/N: {{ $component->serial }}</p>
-<p>Baujahr: {{ $component->year }}</p>
-<p>Druck: {{ $component->pressure ? $component->pressure . " bar" : "" }}</p>
-@if ($type === "ref_dryer")
-<p>Kältemittel: {{ $component->ref_amount ? $component->ref_amount . " kg" : "" }} {{ $component->ref_type }}</p>
-@endif
-<p>Typ: {{ $component->type }}</p>
-<p>Nächster Service: {{ $component->next_service }}</p>
-<p>erstellt: {{ $component->created_at }}</p>
-<p>erstellt: {{ $component->updated_at }}</p>
-@if ($component->memo)
-<p>Memo:</p>
-<textarea readonly class="form-control" rows="5">{{ $component->memo }}</textarea>
-@endif
+    <p>Hersteller: {{ $component->brand->name }}</p>
+    <p>{{ ($type === "receiver") ? "Volumen: $component->volume Liter" : "Modell: $component->model" }}</p>
+    @if ($type === "filter")
+        <p>Element: {{ $component->element }}</p>
+    @endif
+    <p>S/N: {{ $component->serial }}</p>
+    <p>Baujahr: {{ $component->year }}</p>
+    @if ($component->pressure)
+        <p>Druck: {{ $component->pressure ? $component->pressure . " bar" : "" }}</p>
+    @endif
+    @if ($type === "ref_dryer")
+        <p>Kältemittel: {{ $component->ref_amount ? $component->ref_amount . " kg" : "" }} {{ $component->ref_type }}</p>
+        @if ($component->hasForbiddenRefType())
+            <div class="alert bg-danger">Dieses Kältemittel ist nicht mehr zulässig!</div>
+        @endif
+        <div class=" @if($component->getCO2Equivalent() > 5) alert bg-warning @endif">Das CO²-Äquivalent für diesen Kältetrockner beträgt {{ $component->getCO2Equivalent() }} Tonnen.</div>
+    @endif
+    @if ($component->type)
+        <p>Typ: {{ $component->type }}</p>
+    @endif
+    @if ($component->type)
+        <p>Nächster Service: {{ $component->next_service }}</p>
+    @endif
+    <p>erstellt: {{ $component->created_at }}</p>
+    <p>erstellt: {{ $component->updated_at }}</p>
+    @if ($component->memo)
+    <p>Memo:</p>
+    <textarea readonly class="form-control" rows="5">{{ $component->memo }}</textarea>
+    @endif
 @endcannot
 
 @endsection
