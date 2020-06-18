@@ -125,7 +125,7 @@
             <form action="{{ route('role.delete', ['id' => $role->id]) }}" method="post">
                 @csrf
                 @method('delete')
-                <button type="submit" class="btn btn-danger" onclick="return confirm('Soll diese Rolle wirklich dauerhaft gelöscht werden?');">Rolle löschen</button>
+                <button type="submit" class="btn btn-primary" onclick="return confirm('Soll diese Rolle wirklich dauerhaft gelöscht werden?');">Rolle löschen</button>
             </form>
         </div>
     @endif
