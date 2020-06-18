@@ -13,30 +13,37 @@
             <label>Name</label>
             <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ $shippingAddress->name }}" autofocus>
         </div>
+        @error('name')
+        <p class="text-danger">{{ $message }}</p>
+        @enderror
         <div class="form-group">
             <label>Straße</label>
             <input type="text" name="street" class="form-control @error('street') is-invalid @enderror" value="{{ $shippingAddress->street }}">
         </div>
+        @error('street')
+        <p class="text-danger">{{ $message }}</p>
+        @enderror
         <div class="row">
             <div class="col-sm-12 col-md-4">
                 <div class="form-group">
                     <label>PLZ</label>
                     <input type="text" name="zip" class="form-control @error('zip') is-invalid @enderror" value="{{ $shippingAddress->zip }}">
                 </div>
+                @error('zip')
+                <p class="text-danger">{{ $message }}</p>
+                @enderror
             </div>
             <div class="col-sm-12 col-md-8">
                 <div class="form-group">
                     <label>Ort</label>
                     <input type="text" name="city" class="form-control @error('city') is-invalid @enderror" value="{{ $shippingAddress->city }}">
                 </div>
+                @error('city')
+                <p class="text-danger">{{ $message }}</p>
+                @enderror
             </div>
         </div>
         <button type="submit" class="btn btn-primary">Speichern</button>
-        @if ($errors->any())
-            @foreach($errors->all() as $error)
-                <p class="text-danger">{{ $error }}</p>
-            @endforeach
-        @endif
     </form>
 @endcan
 @cannot('update', App\ShippingAddress::class)
