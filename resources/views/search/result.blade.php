@@ -20,6 +20,7 @@
         <tr>
             <th>Debitor</th>
             <th>Name</th>
+            <th>Betriebsstellen</th>
         </tr>
     </thead>
     <tbody>
@@ -36,6 +37,7 @@
                 {{ $customer->description }}
                 @endcannot
             </td>
+            <td>{{ $customer->shippingAddresses->count() }}</td>
         </tr>
         @endforeach
     </tbody>
