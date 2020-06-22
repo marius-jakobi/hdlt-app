@@ -35,7 +35,7 @@ class AuthServiceProvider extends ServiceProvider
 
         // Bypass authorization for admins
         Gate::before(function (User $user) {
-            if ($user->isAdmin()) {
+            if ($user->hasAdminRole()) {
                 return true;
             }
         });

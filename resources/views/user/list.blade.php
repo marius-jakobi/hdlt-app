@@ -15,7 +15,7 @@
     </thead>
     <tbody>
         @foreach($users as $user)
-        <tr class=" @if($user->isAdmin()) table-primary @endif">
+        <tr class=" @if($user->hasAdminRole()) table-primary @endif">
             @if($user->isAdmin())
             <td colspan="2">
                 <a href="{{ route('user.details', ['id' => $user->id]) }}">Administrator</a>

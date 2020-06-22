@@ -25,7 +25,7 @@
                         <a class="nav-link" href="{{ route('login') }}">Login</a>
                     </li>
                 @else
-                    @if(Auth::user()->isAdmin())
+                    @if(Auth::user()->hasAdminRole())
                         <li class="nav-item dropdown">
                             <a id="navbarCustomerDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" v-pre>
                                 Kunden
@@ -35,7 +35,7 @@
                             </div>
                         </li>
                     @endif
-                    @if(Auth::user()->isAdmin())
+                    @if(Auth::user()->hasAdminRole())
                         <li class="nav-item dropdown">
                             <a id="navbarAdminDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" v-pre>
                                 Administration
