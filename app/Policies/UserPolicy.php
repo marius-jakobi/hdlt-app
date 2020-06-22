@@ -13,6 +13,10 @@ class UserPolicy
         // A user can only view his own profile
         return $user->id === $model->id;
     }
+
+    public function details(User $user, User $model) {
+        return false;
+    }
     
     public function list(User $user) {
         // No user can list users
@@ -36,5 +40,9 @@ class UserPolicy
 
     public function changePassword(User $user, User $model) {
         return ($user->id === $model->id) && $user->hasPermission('change-password');
+    }
+
+    public function viewSearchResults(User $user) {
+        return $user->hasPermission('view-search-results');
     }
 }

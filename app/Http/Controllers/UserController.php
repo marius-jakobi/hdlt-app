@@ -38,7 +38,7 @@ class UserController extends Controller
     public function details(int $id) {
         $user = User::findOrFail($id);
 
-        $this->authorize('view', $user);
+        $this->authorize('details', $user);
         
         $availableRoles = [];
 

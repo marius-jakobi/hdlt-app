@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 class SearchController extends Controller
 {
     public function showResult(Request $request) {
+        $this->authorize('view-search-results', \App\User::class);
+
         $query = $request->input('q');
 
         $customers = Customer::where('cust_id', 'like', "%$query%")
