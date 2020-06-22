@@ -14,9 +14,11 @@
     <li class="nav-item">
         <a href="#roles" class="nav-link" id="roles-tab" data-toggle="tab">Rollen</a>
     </li>
-    <li class="nav-item">
-        <a href="#change-password" class="nav-link" id="change-password-tab" data-toggle="tab">Passwort ändern</a>
-    </li>
+    @can('change-password', $user)
+        <li class="nav-item">
+            <a href="#change-password" class="nav-link" id="change-password-tab" data-toggle="tab">Passwort ändern</a>
+        </li>
+    @endcan
 </ul>
 
 <div class="tab-content" id="nav-tabContent">
@@ -33,6 +35,7 @@
             @endforeach
         </ul>
     </div>
+    @can('change-password', $user)
     <div class="tab-pane fade show" id="change-password">
         <h2>Passwort ändern</h2>
         <form action="{{ route('user.password.update') }}" method="post">
@@ -59,5 +62,6 @@
             <button type="submit" class="btn btn-primary">Passwort ändern</button>
         </form>
     </div>
+    @endcan
 </div>
 @endsection

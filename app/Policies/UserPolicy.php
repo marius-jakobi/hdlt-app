@@ -33,4 +33,8 @@ class UserPolicy
         // No one can create users
         return false;
     }
+
+    public function changePassword(User $user, User $model) {
+        return ($user->id === $model->id) && $user->hasPermission('change-password');
+    }
 }
