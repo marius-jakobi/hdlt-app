@@ -128,7 +128,7 @@ class ShippingAddressController extends Controller
         foreach ($request->all() as $key => $value) {
             print("$key => $value\n");
         }
-        $path = $request->file('file')->store('shipping-address-files');
+        $path = $request->file('file')->store('files/shipping-address');
 
         $file = new ShippingAddressUploadFile([
             'name' => $request->input('name'),
