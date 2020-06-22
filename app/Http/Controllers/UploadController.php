@@ -25,7 +25,8 @@ class UploadController extends Controller
 
         $messages = [
             'name.required' => 'Geben Sie eine Bezeichnung für die Datei ein',
-            'file.required' => 'Wählen Sie eine Datei aus'
+            'file.required' => 'Wählen Sie eine Datei aus',
+            'file.mimetypes' => 'Die Datei muss eine Bilddatei sein',
         ];
 
         $validator = Validator::make($request->all(), $rules, $messages);

@@ -186,6 +186,7 @@ return [
         'ref_type'              => 'Kältemitteltyp',
         'ref_amount'            => 'Kältemittelmenge',
         'type'                  => 'Typ',
-        'next_service'          => 'Nächster Service'
+        'next_service'          => 'Nächster Service',
+        'file'                  => 'Datei'
     ],
 ];
