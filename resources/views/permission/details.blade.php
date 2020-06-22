@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('scripts')
+<script src="{{ asset('js/tabs.js') }}" defer></script>
+@endsection
+
 @section('content')
 <h1>Recht "{{ $permission->name }}"</h1>
 <ul class="nav nav-tabs mb-3" id="nav-tab">
