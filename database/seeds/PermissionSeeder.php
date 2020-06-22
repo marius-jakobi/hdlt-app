@@ -14,6 +14,7 @@ class PermissionSeeder extends Seeder
     public function run()
     {
         $roles = [];
+        $permissions = [];
 
         foreach (['Innendienst', 'Außendienst', 'Techniker'] as $role) {
             $newRole = new Role([
@@ -36,6 +37,8 @@ class PermissionSeeder extends Seeder
                     'description' => "Role can $method $entity"
                 ]);
 
+                $permissions[] = $permission;
+
                 $permission->save();
 
                 if ($method === 'view') {
@@ -44,6 +47,12 @@ class PermissionSeeder extends Seeder
                     }
                 }
             }
+        }
+
+        $administrator = Role::where('name', Role::administratorRoleName())->first();
+
+        foreach ($permissions as $permission) {
+            $administrator->permissions()->attach($permission);
         }
     }
 }
