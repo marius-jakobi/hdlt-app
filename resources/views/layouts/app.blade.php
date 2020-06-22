@@ -28,8 +28,11 @@
                     </div>
                 @endif
                 @if(session('success'))
-                    <div class="alert bg-success">
+                    <div class="alert bg-success alert-dismissable fade show">
                         {{ session('success') }}
+                        <button class="close" data-dismiss="alert">
+                            &times;
+                        </button>
                     </div>
                 @endif
                 <div class="row">
