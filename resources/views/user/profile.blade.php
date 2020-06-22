@@ -29,11 +29,15 @@
     </div>
     <div class="tab-pane fade show" id="roles">
         <h2>Meine Rollen</h2>
-        <ul>
-            @foreach ($user->roles as $role)
-                <li>{{ $role->name }}</li>
-            @endforeach
-        </ul>
+        @if ($user->roles->count() == 0)
+            <div class="alert bg-warning">Sie sind keinen Rollen zugeordnet und verfügen somit über keine Rechte.</div>
+        @else
+            <ul>
+                @foreach ($user->roles as $role)
+                    <li>{{ $role->name }}</li>
+                @endforeach
+            </ul>
+        @endif
     </div>
     @can('change-password', $user)
     <div class="tab-pane fade show" id="change-password">

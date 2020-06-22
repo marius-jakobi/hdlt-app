@@ -120,11 +120,15 @@
                         </td>
                         <td>{{ $role->description }}</td>
                         <td>
-                            <ul>
-                            @foreach($role->permissions as $permission)
-                                <li>{{ $permission->name }}</li>
-                            @endforeach
-                            </ul>
+                            @if ($role->isAdmin())
+                                <div class="alert bg-info">Diese Rolle hat <strong>alle</strong> Rechte</div>
+                            @else
+                                <ul>
+                                @foreach($role->permissions as $permission)
+                                    <li>{{ $permission->name }}</li>
+                                @endforeach
+                                </ul>
+                            @endif
                         </td>
                         <td>
                             <form action="{{ route('role.detach', ['id' => $user->id] ) }}" method="post">
