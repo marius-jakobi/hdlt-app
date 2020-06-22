@@ -417,11 +417,11 @@
                     <div class="form-group">
                         <input type="file" name="file" class=" @error('file', 'files') text-danger @enderror ">
                     </div>
-                    @error('file', 'files')
-                        <p class="text-danger">{{ $message }}
-                    @enderror
                     <button type="submit" class="btn btn-primary">Hochladen</button>
                 </form>
+                @error('file', 'files')
+                    <p class="text-danger">{{ $message }}
+                @enderror
             @endcan
             <div class="mt-3">
                 @if ($shippingAddress->uploadedFiles->count() == 0)
