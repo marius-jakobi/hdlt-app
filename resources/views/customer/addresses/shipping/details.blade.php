@@ -409,11 +409,17 @@
                     @csrf
                     <div class="form-group">
                         <label>Beschreibung</label>
-                        <input type="text" name="name" class="form-control" maxlength="255">
+                        <input type="text" name="name" class="form-control @error('name', 'files') is-invalid @enderror" minlength="6" maxlength="255">
                     </div>
+                    @error('name', 'files')
+                        <p class="text-danger">{{ $message }}
+                    @enderror
                     <div class="form-group">
-                        <input type="file" name="file">
+                        <input type="file" name="file" class=" @error('file', 'files') text-danger @enderror ">
                     </div>
+                    @error('file', 'files')
+                        <p class="text-danger">{{ $message }}
+                    @enderror
                     <button type="submit" class="btn btn-primary">Hochladen</button>
                 </form>
             @endcan
