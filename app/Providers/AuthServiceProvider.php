@@ -20,7 +20,8 @@ class AuthServiceProvider extends ServiceProvider
         \App\Customer::class => \App\Policies\CustomerPolicy::class,
         \App\BillingAddress::class => \App\Policies\BillingAddressPolicy::class,
         \App\ShippingAddress::class => \App\Policies\ShippingAddressPolicy::class,
-        \App\StationComponent::class => \App\Policies\StationComponentPolicy::class
+        \App\StationComponent::class => \App\Policies\StationComponentPolicy::class,
+        \App\UploadedFile::class => \App\Policies\UploadPolicy::class
     ];
 
     /**

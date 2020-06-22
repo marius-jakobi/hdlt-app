@@ -16,9 +16,11 @@
     <li class="nav-item">
         <a href="#components" class="nav-link" id="component-tab" data-toggle="tab">Anlagen</a>
     </li>
-    <li class="nav-item">
-        <a href="#files" class="nav-link" id="file-tab" data-toggle="tab">Dateien</a>
-    </li>
+    @can('view-shipping-address-uploads', App\UploadedFile::class)
+        <li class="nav-item">
+            <a href="#files" class="nav-link" id="file-tab" data-toggle="tab">Dateien</a>
+        </li>
+    @endcan
 </ul>
 
 <div class="tab-content" id="nav-tabContent">
@@ -399,36 +401,39 @@
         @endif
     </div>
     {{-- Files tab --}}
-    <div class="tab-pane fade" id="files">
-        <h2>Dateien</h2>
-        <form action="{{ route('customer.addresses.shipping.details.upload', ['customerId' => $shippingAddress->customer->id, 'addressId' => $shippingAddress->id]) }}" method="POST" enctype="multipart/form-data">
-            @csrf
-            <h3>Hochladen</h3>
-            <div class="form-group">
-                <label>Beschreibung</label>
-                <input type="text" name="name" class="form-control" maxlength="255">
-            </div>
-            <div class="form-group">
-                <input type="file" name="file">
-            </div>
-            <button type="submit" class="btn btn-primary">Hochladen</button>
-        </form>
-        <div class="mt-3">
-            @if ($shippingAddress->uploadedFiles->count() == 0)
-                <div class="alert bg-info">Es sind keine Dateien hinterlegt.</div>
-            @else
-                <div class="row">
-                    @foreach($shippingAddress->uploadedFiles as $file)
-                    <div class="col-md-4 col-sm-12">
-                        <a href="{{ asset($file->path) }}" target="_blank">
-                            <img src="{{ asset($file->path) }}" alt="{{ $file->path }}" class="img-fluid">
-                        </a>
-                        {{ $file->name }}
+    @can('view-shipping-address-uploads', App\UploadedFile::class)
+        <div class="tab-pane fade" id="files">
+            <h2>Dateien</h2>
+            @can('upload-shipping-address-file', App\UploadedFile::class)
+                <form action="{{ route('customer.addresses.shipping.details.upload', ['customerId' => $shippingAddress->customer->id, 'addressId' => $shippingAddress->id]) }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="form-group">
+                        <label>Beschreibung</label>
+                        <input type="text" name="name" class="form-control" maxlength="255">
                     </div>
-                    @endforeach
-                </div>
-            @endif
+                    <div class="form-group">
+                        <input type="file" name="file">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Hochladen</button>
+                </form>
+            @endcan
+            <div class="mt-3">
+                @if ($shippingAddress->uploadedFiles->count() == 0)
+                    <div class="alert bg-info">Es sind keine Dateien hinterlegt.</div>
+                @else
+                    <div class="row">
+                        @foreach($shippingAddress->uploadedFiles as $file)
+                        <div class="col-md-4 col-sm-12">
+                            <a href="{{ asset($file->path) }}" target="_blank">
+                                <img src="{{ asset($file->path) }}" alt="{{ $file->path }}" class="img-fluid">
+                            </a>
+                            {{ $file->name }}
+                        </div>
+                        @endforeach
+                    </div>
+                @endif
+            </div>
         </div>
-    </div>
+    @endcan
 </div>
 @endsection
