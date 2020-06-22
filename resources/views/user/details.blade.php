@@ -17,7 +17,7 @@
     <li class="nav-item">
         <a href="#data" class="nav-link active" id="data-tab" data-toggle="tab">Daten</a>
     </li>
-    @if (!$user->isAdmin())
+    @if (!$user->hasAdminRole())
         <li class="nav-item">
             <a href="#roles" class="nav-link" id="roles-tab" data-toggle="tab">Rollen</a>
         </li>
@@ -76,7 +76,7 @@
             </form>
         @endif
     </div>
-    @if (!$user->isAdmin())
+    @if (!$user->hasAdminRole())
     <div class="tab-pane fade" id="roles">
         <h2>Rollen</h2>
         @if (count($availableRoles) > 0)
@@ -125,7 +125,7 @@
                             @else
                                 <ul>
                                 @foreach($role->permissions as $permission)
-                                    <li>{{ $permission->name }}</li>
+                                    <li>{{ $permission->description }}</li>
                                 @endforeach
                                 </ul>
                             @endif
