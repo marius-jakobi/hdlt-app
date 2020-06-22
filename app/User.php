@@ -71,7 +71,7 @@ class User extends Authenticatable
     }
 
     public function isAdmin() {
-        return $this->email == User::administratorEmail();
+        return $this->hasRole(Role::administratorRoleName());
     }
 
     public static function administratorEmail() {
