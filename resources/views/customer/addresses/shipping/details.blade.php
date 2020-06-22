@@ -405,7 +405,7 @@
         <div class="tab-pane fade" id="files">
             <h2>Dateien</h2>
             @can('upload-shipping-address-file', App\UploadedFile::class)
-                <form action="{{ route('customer.addresses.shipping.details.upload', ['customerId' => $shippingAddress->customer->id, 'addressId' => $shippingAddress->id]) }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('upload.file.shipping-address', ['customerId' => $shippingAddress->customer->id, 'addressId' => $shippingAddress->id]) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
                         <label>Beschreibung</label>

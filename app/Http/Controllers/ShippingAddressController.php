@@ -119,29 +119,4 @@ class ShippingAddressController extends Controller
         return redirect(route('customer.details', ['customerId' => $customerId]))
             ->with('success', 'Die Lieferadresse wurde angelegt');
     }
-
-    /**
-     * Upload a image
-     */
-    public function uploadFile(Request $request, int $customerId, int $addressId) {
-        print("<pre>");
-        foreach ($request->all() as $key => $value) {
-            print("$key => $value\n");
-        }
-        $path = $request->file('file')->store('files/shipping-address');
-
-        $file = new ShippingAddressUploadFile([
-            'name' => $request->input('name'),
-            'path' => $path
-        ]);
-
-        $file->shippingAddress()->associate(ShippingAddress::findOrFail($addressId));
-        $file->save();
-
-        return redirect(route('customer.addresses.shipping.details', [
-            'customerId' => $customerId,
-            'addressId' => $addressId
-        ]). '#files')
-        ->with('success', 'Die Datei wurde erfolgreich hochgeladen.');
-    }
 }
