@@ -16,6 +16,13 @@ class ShippingAddress extends Model
     }
 
     /**
+     * Relationship to upload files
+     */
+    public function uploadedFiles() {
+        return $this->hasMany('App\ShippingAddressUploadFile');
+    }
+
+    /**
      * Relationships to components
      */
     public function compressors() {

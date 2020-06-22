@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Customer;
 use App\ShippingAddress;
+use App\ShippingAddressUploadFile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -117,5 +118,30 @@ class ShippingAddressController extends Controller
 
         return redirect(route('customer.details', ['customerId' => $customerId]))
             ->with('success', 'Die Lieferadresse wurde angelegt');
+    }
+
+    /**
+     * Upload a image
+     */
+    public function uploadFile(Request $request, int $customerId, int $addressId) {
+        print("<pre>");
+        foreach ($request->all() as $key => $value) {
+            print("$key => $value\n");
+        }
+        $path = $request->file('file')->store('shipping-address-files');
+
+        $file = new ShippingAddressUploadFile([
+            'name' => $request->input('name'),
+            'path' => $path
+        ]);
+
+        $file->shippingAddress()->associate(ShippingAddress::findOrFail($addressId));
+        $file->save();
+
+        return redirect(route('customer.addresses.shipping.details', [
+            'customerId' => $customerId,
+            'addressId' => $addressId
+        ]). '#files')
+        ->with('success', 'Die Datei wurde erfolgreich hochgeladen.');
     }
 }
