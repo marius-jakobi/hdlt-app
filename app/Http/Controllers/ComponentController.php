@@ -68,7 +68,7 @@ class ComponentController extends Controller
         $component->shippingAddress()->associate(ShippingAddress::find($addressId));
         $component->save();
 
-        return redirect(route('customer.addresses.shipping.details', ['customerId' => $customerId, 'addressId' => $addressId]))
+        return redirect(route('customer.addresses.shipping.details', ['customerId' => $customerId, 'addressId' => $addressId]) . '#components')
             ->with('success', 'Die Komponente wurde angelegt');
     }
 
