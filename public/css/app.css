@@ -1,21 +1,5 @@
 @charset "UTF-8";
 
-body {
-  background-color: #fff;
-}
-
-.bg-success {
-  color: white;
-}
-
-.bg-info {
-  color: white;
-}
-
-.bg-danger {
-  color: white;
-}
-
 /*!
  * Bootstrap v4.5.0 (https://getbootstrap.com/)
  * Copyright 2011-2020 The Bootstrap Authors
@@ -10942,5 +10926,23 @@ a.text-dark:focus {
     color: inherit;
     border-color: #dee2e6;
   }
+}
+
+body {
+  background-color: #fff;
+}
+
+.bg-success,
+.bg-info,
+.bg-danger {
+  color: white;
+}
+
+.main-content {
+  min-height: 80vh;
+}
+
+.footer {
+  color: white;
 }
 

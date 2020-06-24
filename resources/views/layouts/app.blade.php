@@ -20,7 +20,7 @@
     <div id="app">
         @include('navbar')
 
-        <main class="py-4">
+        <main class="main-content">
             <div class="container">
                 @if(session('error'))
                     <div class="alert bg-danger">
@@ -42,6 +42,7 @@
                 </div>
             </div>
         </main>
+        @include('footer')
     </div>
 </body>
 </html>

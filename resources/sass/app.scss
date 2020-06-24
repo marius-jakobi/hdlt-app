@@ -6,3 +6,21 @@
 
 // Bootstrap
 @import "~bootstrap/scss/bootstrap";
+
+body {
+    background-color: #fff;
+}
+
+.bg-success,
+.bg-info,
+.bg-danger {
+    color: white;
+}
+
+.main-content {
+    min-height: 80vh;
+}
+
+.footer {
+    color: white;
+}
