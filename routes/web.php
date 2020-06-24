@@ -26,13 +26,13 @@ Route::post('/register', 'Auth\RegisterController@register');
 // Logout
 Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
 // Password confirmation
-Route::get('/password/confirm', 'Auth\ConfirmPasswordController@showConfirmForm')->name('password.confirm');
-Route::post('/password/confirm', 'Auth\ConfirmPasswordController@confirm');
+// Route::get('/password/confirm', 'Auth\ConfirmPasswordController@showConfirmForm')->name('password.confirm');
+// Route::post('/password/confirm', 'Auth\ConfirmPasswordController@confirm');
 // Forgot password
-Route::post('/password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
-Route::get('/password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
-Route::post('/password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
-Route::get('/password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+// Route::post('/password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+// Route::get('/password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+// Route::post('/password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
+// Route::get('/password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
 // Update user password
 Route::put('/password/update', 'UserController@updatePassword')->name('user.password.update');
 
