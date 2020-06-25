@@ -22,4 +22,8 @@ class Receiver extends StationComponent
     public static function getTypes() {
         return static::$types;
     }
+
+    public function uploadedFiles() {
+        return $this->hasMany(get_class($this) . 'UploadFile', 'component_id');
+    }
 }

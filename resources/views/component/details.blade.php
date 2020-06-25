@@ -7,13 +7,19 @@
 @section('content')
 <h1>Details {{ $component->types()[$type] ?? 'Anlagenkomponente' }}</h1>
 <p>
-    Betriebsstelle: <a href="{{ route('customer.addresses.shipping.details', ['customerId' => $component->shippingAddress->customer->id, 'addressId' => $component->shippingAddress->id]) }}">{{ $component->shippingAddress->name }}</a>
+    Betriebsstelle:
+    <a href="{{ route('customer.addresses.shipping.details', ['customerId' => $component->shippingAddress->customer->id, 'addressId' => $component->shippingAddress->id]) }}#components">{{ $component->shippingAddress->name }}</a>
 </p>
 
 <ul class="nav nav-tabs" id="nav-tab">
     <li class="nav-item">
         <a href="#data" class="nav-link active" id="base-data-tab" data-toggle="tab">Daten</a>
     </li>
+    @can('view-uploads', App\UploadFile::class)
+        <li class="nav-item">
+            <a href="#files" class="nav-link" id="files-tab" data-toggle="tab">Dateien</a>
+        </li>
+    @endcan
 </ul>
 
 <div class="tab-content" id="nav-tabContent">
@@ -205,5 +211,42 @@
                 <textarea readonly class="form-control" rows="5">{{ $component->memo }}</textarea>
                 @endif
             @endcannot
+    </div>
+    <div class="tab-pane fade show" id="files">
+        @can('upload-files', App\UploadFile::class)
+            <form action="{{ route('upload.file.component', ['customerId' => $component->shippingAddress->customer->id, 'addressId' => $component->shippingAddress->id, 'type' => $type, 'componentId' => $component->id]) }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <div class="form-group">
+                    <label>Beschreibung</label>
+                    <input type="text" name="name" class="form-control @error('name', 'files') is-invalid @enderror" minlength="6" maxlength="255" value="{{ old('name') }}">
+                </div>
+                @error('name', 'files')
+                    <p class="text-danger">{{ $message }}
+                @enderror
+                <div class="form-group">
+                    <input type="file" name="file" class=" @error('file', 'files') text-danger @enderror ">
+                </div>
+                @error('file', 'files')
+                    <p class="text-danger">{{ $message }}
+                @enderror
+                <button type="submit" class="btn btn-primary">Hochladen</button>
+            </form>
+        @endcan
+        <div class="mt-3">
+            @if ($component->uploadedFiles->count() == 0)
+                <div class="alert bg-info">Es sind keine Dateien hinterlegt.</div>
+            @else
+                <div class="row">
+                    @foreach($component->uploadedFiles as $file)
+                    <div class="col-md-4 col-sm-12">
+                        <a href="{{ asset($file->path) }}" target="_blank">
+                            <img src="{{ asset($file->path) }}" alt="{{ $file->path }}" class="img-fluid">
+                        </a>
+                        {{ $file->name }}
+                    </div>
+                    @endforeach
+                </div>
+            @endif
+        </div>
     </div>
 @endsection

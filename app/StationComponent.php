@@ -71,13 +71,29 @@ class StationComponent extends Model
         'controller' => 'Steuerung'
     ];
 
+    protected static $componentClasses = [
+        'compressor' => 'Compressor',
+        'receiver' => 'Receiver',
+        'ref_dryer' => 'RefDryer',
+        'filter' => 'Filter',
+        'ad_dryer' => 'AdDryer',
+        'adsorber' => 'Adsorber',
+        'separator' => 'Separator',
+        'sensor' => 'Sensor',
+        'controller' => 'Controller'
+    ];
+
     /**
      * Getter for types
      * 
      * @return array
      */
     public static function types() {
-        return self::$componentTypes;
+        return static::$componentTypes;
+    }
+
+    public static function getComponentClassname($type) {
+        return static::$componentClasses[$type];
     }
 
     /**

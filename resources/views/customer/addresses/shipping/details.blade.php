@@ -16,7 +16,7 @@
     <li class="nav-item">
         <a href="#components" class="nav-link" id="component-tab" data-toggle="tab">Anlagen</a>
     </li>
-    @can('view-shipping-address-uploads', App\UploadFile::class)
+    @can('view-uploads', App\UploadFile::class)
         <li class="nav-item">
             <a href="#files" class="nav-link" id="file-tab" data-toggle="tab">Dateien</a>
         </li>
@@ -401,9 +401,9 @@
         @endif
     </div>
     {{-- Files tab --}}
-    @can('view-shipping-address-uploads', App\UploadFile::class)
+    @can('view-uploads', App\UploadFile::class)
         <div class="tab-pane fade" id="files">
-            @can('upload-shipping-address-file', App\UploadFile::class)
+            @can('upload-files', App\UploadFile::class)
                 <form action="{{ route('upload.file.shipping-address', ['customerId' => $shippingAddress->customer->id, 'addressId' => $shippingAddress->id]) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">

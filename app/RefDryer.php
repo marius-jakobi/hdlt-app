@@ -61,4 +61,8 @@ class RefDryer extends StationComponent
 
         return $refTypeNames;
     }
+
+    public function uploadedFiles() {
+        return $this->hasMany(get_class($this) . 'UploadFile', 'component_id');
+    }
 }
