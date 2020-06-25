@@ -104,10 +104,13 @@
             <div class="col-md-6 col-sm-12">
                 <div class="form-group">
                     <label>Kältemittel (Sorte)</label>
-                    <select name="ref_type" class="form-control  @error('ref_type') is-invalid @enderror" value="{{ old('ref_type') }}">
+                    <select name="ref_type" class="form-control  @error('ref_type') is-invalid @enderror">
                         <option value=""></option>
-                        @foreach($refTypes as $refType)
-                            <option value="{{ $refType }}" @if (old('ref_type') == $refType) selected @endif>{{ $refType }}</option>
+                        @foreach($refTypes as $key => $value)
+                            <option value="{{ $key }}" class=" @if($value['forbidden'] === true) text-danger @endif " @if (old('ref_type') === $key) selected @endif>
+                                {{ $key }}
+                                (GWP: {{ $value['gwp'] }})
+                            </option>
                         @endforeach
                     </select>
                 </div>
