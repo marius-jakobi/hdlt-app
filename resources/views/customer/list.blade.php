@@ -10,6 +10,9 @@
             <th>Debitor</th>
             <th>Name</th>
             <th>Lieferadressen</th>
+            @can('delete', App\Customer::class)
+                <th></th>
+            @endcan
         </tr>
     </thead>
     <tbody>
@@ -23,6 +26,15 @@
                     </a>
                 </td>
                 <td>{{ $customer->shippingAddresses->count() }}</td>
+                @can('delete', App\Customer::class)
+                    <td>
+                        <form action="{{ route('customer.delete', ['customerId' => $customer->id]) }}" method="post">
+                            @method('delete')
+                            @csrf
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('Kunden wirklich mit allen Adressen löschen?');">Löschen</button>
+                        </form>
+                    </td>
+                @endcan
             </tr>
         @endforeach
     </tbody>

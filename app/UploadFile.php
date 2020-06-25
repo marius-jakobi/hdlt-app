@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class UploadedFile extends Model
+class UploadFile extends Model
 {
     protected $fillable = ['name', 'path'];
 }

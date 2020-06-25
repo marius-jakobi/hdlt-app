@@ -10,14 +10,14 @@ class CustomerPolicy
     use HandlesAuthorization;
 
     public function view(User $user) {
-        if ($user->hasPermission('view-customer')) {
-            return true;
-        }
+        return $user->hasPermission('view-customer');
     }
 
     public function update(User $user) {
-        if ($user->hasPermission('update-customer')) {
-            return true;
-        }
+        return $user->hasPermission('update-customer');
+    }
+
+    public function create(User $user) {
+        return $user->hasPermission('create-customer');
     }
 }

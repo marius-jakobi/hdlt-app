@@ -84,12 +84,15 @@ Route::middleware('auth')->group(function () {
 
     // Customer routes
     Route::get('/customers', 'CustomerController@list')->name('customer.list')->middleware('can:list,App\Customer');
+    Route::get('/customer/create', 'CustomerController@create')->name('customer.create');
+    Route::post('/customer/create', 'CustomerController@store')->name('customer.store');
     Route::get('/customer/{customerId}/addresses/shipping/create', 'ShippingAddressController@create')->name('customer.addresses.shipping.create');
     Route::post('/customer/{customerId}/addresses/shipping/create', 'ShippingAddressController@store')->name('customer.addresses.shipping.store');
     Route::post('/customer/{customerId}/addresses/shipping/{addressId}/upload', 'UploadController@uploadShippingAddressFile')->name('upload.file.shipping-address');
     Route::get('/customer/{customerId}/addresses/shipping/{addressId}', 'ShippingAddressController@details')->name('customer.addresses.shipping.details');
     Route::put('/customer/{customerId}/addresses/shipping/{addressId}', 'ShippingAddressController@update')->name('customer.addresses.shipping.update');
     Route::get('/customer/{customerId}', 'CustomerController@details')->name('customer.details')->middleware('can:view,App\Customer');
+    Route::delete('/customer/{customerId}', 'CustomerController@delete')->name('customer.delete');
 
     // Component routes
     Route::get('/customer/{customerId}/addresses/shipping/{addressId}/{type}/add', 'ComponentController@create')->name('component.create');

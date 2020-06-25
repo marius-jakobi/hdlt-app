@@ -19,23 +19,22 @@
 <body>
     <div id="app">
         @include('navbar')
-
         <main class="main-content">
             <div class="container">
                 @if(session('error'))
-                    <div class="alert bg-danger">
+                    <div class="alert bg-danger mt-3">
                         {{ session('error') }}
                     </div>
                 @endif
                 @if(session('success'))
-                    <div class="alert bg-success alert-dismissable fade show">
+                    <div class="alert bg-success mt-3 alert-dismissable fade show">
                         {{ session('success') }}
                         <button class="close" data-dismiss="alert">
                             &times;
                         </button>
                     </div>
                 @endif
-                <div class="row">
+                <div class="row mt-3">
                     <div class="col-12">
                         @yield('content')
                     </div>

@@ -187,6 +187,7 @@ return [
         'ref_amount'            => 'Kältemittelmenge',
         'type'                  => 'Typ',
         'next_service'          => 'Nächster Service',
-        'file'                  => 'Datei'
+        'file'                  => 'Datei',
+        'cust_id'               => 'Debitor'
     ],
 ];

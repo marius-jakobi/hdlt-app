@@ -32,6 +32,7 @@
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
                                 <a href="{{ route('customer.list') }}" class="dropdown-item">Liste</a>
+                                <a href="{{ route('customer.create') }}" class="dropdown-item">Erstellen</a>
                             </div>
                         </li>
                     @endif

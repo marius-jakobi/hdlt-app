@@ -16,7 +16,7 @@
     <li class="nav-item">
         <a href="#components" class="nav-link" id="component-tab" data-toggle="tab">Anlagen</a>
     </li>
-    @can('view-shipping-address-uploads', App\UploadedFile::class)
+    @can('view-shipping-address-uploads', App\UploadFile::class)
         <li class="nav-item">
             <a href="#files" class="nav-link" id="file-tab" data-toggle="tab">Dateien</a>
         </li>
@@ -401,10 +401,9 @@
         @endif
     </div>
     {{-- Files tab --}}
-    @can('view-shipping-address-uploads', App\UploadedFile::class)
+    @can('view-shipping-address-uploads', App\UploadFile::class)
         <div class="tab-pane fade" id="files">
-            <h2>Dateien</h2>
-            @can('upload-shipping-address-file', App\UploadedFile::class)
+            @can('upload-shipping-address-file', App\UploadFile::class)
                 <form action="{{ route('upload.file.shipping-address', ['customerId' => $shippingAddress->customer->id, 'addressId' => $shippingAddress->id]) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
@@ -417,11 +416,11 @@
                     <div class="form-group">
                         <input type="file" name="file" class=" @error('file', 'files') text-danger @enderror ">
                     </div>
+                    @error('file', 'files')
+                        <p class="text-danger">{{ $message }}
+                    @enderror
                     <button type="submit" class="btn btn-primary">Hochladen</button>
                 </form>
-                @error('file', 'files')
-                    <p class="text-danger">{{ $message }}
-                @enderror
             @endcan
             <div class="mt-3">
                 @if ($shippingAddress->uploadedFiles->count() == 0)

@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Customer extends Model
 {
+    protected $fillable = ['cust_id', 'description'];
+    
     public function billingAddress() {
         return $this->hasOne('App\BillingAddress');
     }

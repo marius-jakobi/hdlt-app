@@ -42,6 +42,13 @@ class StationComponent extends Model
     }
 
     /**
+     * Upload file relationship
+     */
+    public function uploadedFiles() {
+        return $this->hasMany('App\ComponentUploadFile');
+    }
+
+    /**
      * Type cast
      */
     protected $casts = [
@@ -67,7 +74,7 @@ class StationComponent extends Model
     /**
      * Getter for types
      * 
-     * @return string
+     * @return array
      */
     public static function types() {
         return self::$componentTypes;
