@@ -42,13 +42,6 @@ class StationComponent extends Model
     }
 
     /**
-     * Upload file relationship
-     */
-    public function uploadedFiles() {
-        return $this->hasMany('App\ComponentUploadFile');
-    }
-
-    /**
      * Type cast
      */
     protected $casts = [
