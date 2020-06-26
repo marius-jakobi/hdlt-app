@@ -212,6 +212,7 @@
                 @endif
             @endcannot
     </div>
+    {{-- File tab --}}
     <div class="tab-pane fade show" id="files">
         @can('upload-files', App\Models\UploadFile::class)
             <form action="{{ route('upload.file.component', ['customerId' => $component->shippingAddress->customer->id, 'addressId' => $component->shippingAddress->id, 'type' => $type, 'componentId' => $component->id]) }}" method="POST" enctype="multipart/form-data">
@@ -223,13 +224,14 @@
                 @error('name', 'files')
                     <p class="text-danger">{{ $message }}
                 @enderror
-                <div class="form-group">
-                    <input type="file" name="file" class=" @error('file', 'files') text-danger @enderror ">
+                <div class="custom-file">
+                    <input type="file" name="file" class="custom-file-input @error('file', 'files') text-danger @enderror ">
+                    <label class="custom-file-label">Datei auswählen</label>
                 </div>
                 @error('file', 'files')
-                    <p class="text-danger">{{ $message }}
+                    <p class="text-danger">{{ $message }}</p>
                 @enderror
-                <button type="submit" class="btn btn-primary">Hochladen</button>
+                <button type="submit" class="btn btn-primary mt-3">Hochladen</button>
             </form>
         @endcan
         <div class="mt-3">

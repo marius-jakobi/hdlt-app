@@ -413,11 +413,12 @@
                     @error('name', 'files')
                         <p class="text-danger">{{ $message }}
                     @enderror
-                    <div class="form-group">
-                        <input type="file" name="file" class=" @error('file', 'files') text-danger @enderror ">
+                    <div class="custom-file">
+                        <input type="file" name="file" class="custom-file-input @error('file', 'files') text-danger @enderror ">
+                        <label class="custom-file-label">Datei auswählen</label>
                     </div>
                     @error('file', 'files')
-                        <p class="text-danger">{{ $message }}
+                        <p class="text-danger">{{ $message }}</p>
                     @enderror
                     <button type="submit" class="btn btn-primary">Hochladen</button>
                 </form>
