@@ -6,8 +6,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
-use App\Role;
-use App\User;
+use App\Models\Role;
+use App\Models\User;
 
 class UserController extends Controller
 {

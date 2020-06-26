@@ -15,7 +15,7 @@
     <li class="nav-item">
         <a href="#data" class="nav-link active" id="base-data-tab" data-toggle="tab">Daten</a>
     </li>
-    @can('view-uploads', App\UploadFile::class)
+    @can('view-uploads', App\Models\UploadFile::class)
         <li class="nav-item">
             <a href="#files" class="nav-link" id="files-tab" data-toggle="tab">Dateien</a>
         </li>
@@ -25,7 +25,7 @@
 <div class="tab-content" id="nav-tabContent">
     {{-- Base data tab --}}
     <div class="tab-pane fade show active" id="data">
-        @can('update', App\StationComponent::class)
+        @can('update', App\Models\StationComponent::class)
             <form action="{{ route('component.update', ['customerId' => $component->shippingAddress->customer->id, 'addressId' => $component->shippingAddress->id, 'type' => $type, 'componentId' => $component->id]) }}" method="post">
                 @method('put')
                 @csrf
@@ -105,11 +105,11 @@
                         <label>Typ</label>
                         <select name="type" class="form-control @error('type') is-invalid @enderror">
                             @if ($type === 'compressor')
-                                @foreach(App\Compressor::getTypes() as $key => $value)
+                                @foreach(App\Models\Compressor::getTypes() as $key => $value)
                                 <option value="{{ $key }}" @if($component->type === $key) selected @endif>{{ $value }}</option>
                                 @endforeach
                             @else
-                                @foreach(App\Receiver::getTypes() as $key => $value)
+                                @foreach(App\Models\Receiver::getTypes() as $key => $value)
                                 <option value="{{ $key }}" @if($component->type === $key) selected @endif>{{ $value }}</option>
                                 @endforeach
                             @endif
@@ -180,7 +180,7 @@
                 </div>
             </form>
             @endcan
-            @cannot('update', App\StationComponent::class)
+            @cannot('update', App\Models\StationComponent::class)
                 <p>Hersteller: {{ $component->brand->name }}</p>
                 <p>{{ ($type === "receiver") ? "Volumen: $component->volume Liter" : "Modell: $component->model" }}</p>
                 @if ($type === "filter")
@@ -213,7 +213,7 @@
             @endcannot
     </div>
     <div class="tab-pane fade show" id="files">
-        @can('upload-files', App\UploadFile::class)
+        @can('upload-files', App\Models\UploadFile::class)
             <form action="{{ route('upload.file.component', ['customerId' => $component->shippingAddress->customer->id, 'addressId' => $component->shippingAddress->id, 'type' => $type, 'componentId' => $component->id]) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">

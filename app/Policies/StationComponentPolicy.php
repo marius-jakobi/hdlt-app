@@ -2,8 +2,8 @@
 
 namespace App\Policies;
 
-use App\StationComponent;
-use App\User;
+use App\Models\StationComponent;
+use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class StationComponentPolicy

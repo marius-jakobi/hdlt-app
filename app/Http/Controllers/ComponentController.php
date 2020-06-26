@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\AdDryer;
-use App\Adsorber;
-use App\ShippingAddress;
-use App\StationComponent;
-use App\Brand;
-use App\Compressor;
-use App\Filter;
-use App\Receiver;
-use App\RefDryer;
-use App\Sensor;
-use App\Separator;
+use App\Models\AdDryer;
+use App\Models\Adsorber;
+use App\Models\ShippingAddress;
+use App\Models\StationComponent;
+use App\Models\Brand;
+use App\Models\Compressor;
+use App\Models\Filter;
+use App\Models\Receiver;
+use App\Models\RefDryer;
+use App\Models\Sensor;
+use App\Models\Separator;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 
@@ -146,7 +146,7 @@ class ComponentController extends Controller
                 $component = new Sensor($input);
             break;
             case "controller":
-                $component = new \App\Controller($input);
+                $component = new \App\Models\Controller($input);
             break;
         }
 
@@ -180,7 +180,7 @@ class ComponentController extends Controller
                 $component = Sensor::findOrFail($id);
             break;
             case "controller":
-                $component = \App\Controller::findOrFail($id);
+                $component = \App\Models\Controller::findOrFail($id);
             break;
         }
 

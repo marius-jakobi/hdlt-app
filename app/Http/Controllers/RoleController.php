@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
-use App\Role;
-use App\Permission;
+use App\Models\User;
+use App\Models\Role;
+use App\Models\Permission;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -28,7 +28,7 @@ class RoleController extends Controller
 
         // Validation rules
         $rules = [
-            'role_id' => 'required|exists:App\Role,id'
+            'role_id' => 'required|exists:App\Models\Role,id'
         ];
 
         // Validation messages
@@ -79,7 +79,7 @@ class RoleController extends Controller
 
         // Validation rules
         $rules = [
-            'role_id' => 'required|exists:App\Role,id'
+            'role_id' => 'required|exists:App\Models\Role,id'
         ];
 
         // Validation messages
@@ -154,7 +154,7 @@ class RoleController extends Controller
      */
     public function store(Request $request) {
         $rules = [
-            'name' => 'required|min:5|max:255|alpha_dash|unique:App\Role',
+            'name' => 'required|min:5|max:255|alpha_dash|unique:App\Models\Role',
             'description' => 'required|max:255'
         ];
 

@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Customer;
-use App\ShippingAddress;
-use App\StationComponent;
+use App\Models\Customer;
+use App\Models\ShippingAddress;
+use App\Models\StationComponent;
 use Illuminate\Http\Request;
 
 class SearchController extends Controller
 {
     public function showResult(Request $request) {
-        $this->authorize('view-search-results', \App\User::class);
+        $this->authorize('view-search-results', \App\Models\User::class);
 
         $query = $request->input('q');
 

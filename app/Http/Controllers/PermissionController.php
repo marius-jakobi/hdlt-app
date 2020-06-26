@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
 
-use App\Role;
-use App\Permission;
+use App\Models\Role;
+use App\Models\Permission;
 
 class PermissionController extends Controller
 {
@@ -25,7 +25,7 @@ class PermissionController extends Controller
 
         // Validation rules
         $rules = [
-            'permission_id' => 'required|exists:App\Permission,id'
+            'permission_id' => 'required|exists:App\Models\Permission,id'
         ];
 
         // Validation messages
@@ -74,7 +74,7 @@ class PermissionController extends Controller
 
         // Validation rules
         $rules = [
-            'permission_id' => 'required|exists:App\Permission,id'
+            'permission_id' => 'required|exists:App\Models\Permission,id'
         ];
 
         // Validation messages
@@ -199,7 +199,7 @@ class PermissionController extends Controller
      */
     public function store(Request $request) {
         $rules = [
-            'name' => 'required|min:5|max:255|alpha_dash|unique:App\Permission,name',
+            'name' => 'required|min:5|max:255|alpha_dash|unique:App\Models\Permission,name',
             'description' => 'required|max:255'
         ];
 

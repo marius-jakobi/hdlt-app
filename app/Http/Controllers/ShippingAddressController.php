@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Customer;
-use App\ShippingAddress;
-use App\ShippingAddressUploadFile;
+use App\Models\Customer;
+use App\Models\ShippingAddress;
+use App\Models\ShippingAddressUploadFile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 

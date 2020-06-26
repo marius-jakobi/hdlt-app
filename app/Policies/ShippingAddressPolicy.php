@@ -2,8 +2,8 @@
 
 namespace App\Policies;
 
-use App\ShippingAddress;
-use App\User;
+use App\Models\ShippingAddress;
+use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class ShippingAddressPolicy

@@ -2,8 +2,8 @@
 
 namespace App\Policies;
 
-use App\User;
-use App\Permission;
+use App\Models\User;
+use App\Models\Permission;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class PermissionPolicy

@@ -28,12 +28,12 @@
         <tr>
             <td>{{ $customer->cust_id }}</td>
             <td>
-                @can('view', App\Customer::class)
+                @can('view', App\Models\Customer::class)
                 <a href="{{ route('customer.details', ['customerId' => $customer->id]) }}">
                     {{ $customer->description }}
                 </a>
                 @endcan
-                @cannot('view', App\Customer::class)
+                @cannot('view', App\Models\Customer::class)
                 {{ $customer->description }}
                 @endcannot
             </td>
@@ -57,12 +57,12 @@
         @foreach($shippingAddresses as $shippingAddress)
         <tr>
             <td>
-                @can('view', App\ShippingAddress::class)
+                @can('view', App\Models\ShippingAddress::class)
                 <a href="{{ route('customer.addresses.shipping.details', ['customerId' => $shippingAddress->customer->id, 'addressId' => $shippingAddress->id]) }}">
                     {{ $shippingAddress->name }}
                 </a>
                 @endcan
-                @cannot('view', App\ShippingAddress::class)
+                @cannot('view', App\Models\ShippingAddress::class)
                 {{ $shippingAddress->name }}
                 @endcannot
             </td>
@@ -70,13 +70,13 @@
             <td>{{ $shippingAddress->zip }}</td>
             <td>{{ $shippingAddress->city }}</td>
             <td>
-                @can('view', App\Customer::class)
+                @can('view', App\Models\Customer::class)
                 <a href="{{ route('customer.details', ['customerId' => $shippingAddress->customer->id]) }}">
                     {{ $shippingAddress->customer->description }}
                 </a>
                 @endcan
 
-                @cannot('view', App\Customer::class)
+                @cannot('view', App\Models\Customer::class)
                 {{ $shippingAddress->customer->description }}
                 @endcannot
             </td>

@@ -85,11 +85,11 @@
             <label>Typ</label>
             <select name="type" class="form-control @error('type') is-invalid @enderror">
                 @if ($type === 'compressor')
-                    @foreach(App\Compressor::getTypes() as $key => $value)
+                    @foreach(App\Models\Compressor::getTypes() as $key => $value)
                     <option value="{{ $key }}">{{ $value }}</option>
                     @endforeach
                 @else
-                    @foreach(App\Receiver::getTypes() as $key => $value)
+                    @foreach(App\Models\Receiver::getTypes() as $key => $value)
                     <option value="{{ $key }}">{{ $value }}</option>
                     @endforeach
                 @endif

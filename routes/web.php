@@ -44,7 +44,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', 'UserController@profile')->name('profile');
 
     // User list
-    Route::get('/user/list', 'UserController@list')->name('user.list')->middleware('can:list,App\User');
+    Route::get('/user/list', 'UserController@list')->name('user.list')->middleware('can:list,App\Models\User');
     // User update
     Route::put('/user/{id}', 'UserController@update')->name('user.update');
     // User delete
@@ -56,34 +56,34 @@ Route::middleware('auth')->group(function () {
     Route::delete('/user/{id}/role', 'RoleController@detachRoleFromUser')->name('role.detach');
 
     // Role list
-    Route::get('/roles', 'RoleController@list')->name('role.list')->middleware('can:list,App\Role');
+    Route::get('/roles', 'RoleController@list')->name('role.list')->middleware('can:list,App\Models\Role');
     // Create role
-    Route::get('/role/create', 'RoleController@create')->name('role.create')->middleware('can:create,App\Role');
-    Route::post('/role/create', 'RoleController@store')->name('role.store')->middleware('can:create,App\Role');
+    Route::get('/role/create', 'RoleController@create')->name('role.create')->middleware('can:create,App\Models\Role');
+    Route::post('/role/create', 'RoleController@store')->name('role.store')->middleware('can:create,App\Models\Role');
     // Attach/detach permission to/from role
     Route::post('/role/{name}/permission', 'PermissionController@attachPermissionToRole')->name('permission.attach');
     Route::delete('/role/{name}/permission', 'PermissionController@detachPermissionFromRole')->name('permission.detach');
     // Update role
     Route::put('/role/{name}', 'RoleController@update')->name('role.update');
     // Delete role
-    Route::delete('/role/{id}', 'RoleController@delete')->name('role.delete')->middleware('can:delete,App\Role');
+    Route::delete('/role/{id}', 'RoleController@delete')->name('role.delete')->middleware('can:delete,App\Models\Role');
     // Show role details
-    Route::get('/role/{name}', 'RoleController@details')->name('role.details')->middleware('can:view,App\Role');
+    Route::get('/role/{name}', 'RoleController@details')->name('role.details')->middleware('can:view,App\Models\Role');
 
     // Permission list
-    Route::get('/permissions', 'PermissionController@list')->name('permission.list')->middleware('can:list,App\Permission');
+    Route::get('/permissions', 'PermissionController@list')->name('permission.list')->middleware('can:list,App\Models\Permission');
     // Permission create
-    Route::get('/permissions/create', 'PermissionController@create')->name('permission.create')->middleware('can:create,App\Permission');
-    Route::post('/permissions/create', 'PermissionController@store')->name('permission.store')->middleware('can:create,App\Permission');
+    Route::get('/permissions/create', 'PermissionController@create')->name('permission.create')->middleware('can:create,App\Models\Permission');
+    Route::post('/permissions/create', 'PermissionController@store')->name('permission.store')->middleware('can:create,App\Models\Permission');
     // Permission update
     Route::put('/permissions/{id}', 'PermissionController@update')->name('permission.update');
     // Permission details
-    Route::get('/permissions/{name}', 'PermissionController@details')->name('permission.details')->middleware('can:view,App\Permission');
+    Route::get('/permissions/{name}', 'PermissionController@details')->name('permission.details')->middleware('can:view,App\Models\Permission');
     // Permission delete
-    Route::delete('/permissions/{id}', 'PermissionController@delete')->name('permission.delete')->middleware('can:delete,App\Permission');
+    Route::delete('/permissions/{id}', 'PermissionController@delete')->name('permission.delete')->middleware('can:delete,App\Models\Permission');
 
     // Customer routes
-    Route::get('/customers', 'CustomerController@list')->name('customer.list')->middleware('can:list,App\Customer');
+    Route::get('/customers', 'CustomerController@list')->name('customer.list')->middleware('can:list,App\Models\Customer');
     Route::get('/customer/create', 'CustomerController@create')->name('customer.create');
     Route::post('/customer/create', 'CustomerController@store')->name('customer.store');
     Route::get('/customer/{customerId}/addresses/shipping/create', 'ShippingAddressController@create')->name('customer.addresses.shipping.create');
@@ -91,7 +91,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/customer/{customerId}/addresses/shipping/{addressId}/upload', 'UploadController@uploadShippingAddressFile')->name('upload.file.shipping-address');
     Route::get('/customer/{customerId}/addresses/shipping/{addressId}', 'ShippingAddressController@details')->name('customer.addresses.shipping.details');
     Route::put('/customer/{customerId}/addresses/shipping/{addressId}', 'ShippingAddressController@update')->name('customer.addresses.shipping.update');
-    Route::get('/customer/{customerId}', 'CustomerController@details')->name('customer.details')->middleware('can:view,App\Customer');
+    Route::get('/customer/{customerId}', 'CustomerController@details')->name('customer.details')->middleware('can:view,App\Models\Customer');
     Route::delete('/customer/{customerId}', 'CustomerController@delete')->name('customer.delete');
 
     // Component routes

@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\BillingAddress;
-use App\Customer;
+use App\Models\BillingAddress;
+use App\Models\Customer;
+use App\Models\ShippingAddress;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -46,7 +47,7 @@ class CustomerController extends Controller
             'name' => 'required|max:255',
             'street' => 'required|max:255',
             'zip' => 'required|min:5|max:5',
-            'city' => 'required|max:5'
+            'city' => 'required|max:255'
         ];
 
         $messages = [
@@ -67,6 +68,9 @@ class CustomerController extends Controller
         $billingAddress = new BillingAddress($request->except('cust_id', 'description'));
         $billingAddress->customer()->associate($customer);
         $billingAddress->save();
+        $shippingAddress = new ShippingAddress($request->except('cust_id', 'description'));
+        $shippingAddress->customer()->associate($customer);
+        $shippingAddress->save();
 
         return redirect(route('customer.details', ['customerId' => $customer->id]));
     }

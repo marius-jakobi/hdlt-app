@@ -31,7 +31,7 @@
 @endif
 
 <h2>Lieferadressen</h2>
-@can('create', App\ShippingAddress::class)
+@can('create', App\Models\ShippingAddress::class)
 <p><a href="{{ route('customer.addresses.shipping.create', ['customerId' => $customer->id]) }}">Lieferadresse hinzufügen</a></p>
 @endcan
 @if ($customer->shippingAddresses->count() > 0)

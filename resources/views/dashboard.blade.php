@@ -6,7 +6,7 @@
         <h1>{{ $greeting }}</h1>
     </div>
 </div>
-@can('view-search-results', App\User::class)
+@can('view-search-results', App\Models\User::class)
     <div class="row">
         <div class="col-12">
             <form action="{{ route('search.result') }}" method="post" class="form-inline">

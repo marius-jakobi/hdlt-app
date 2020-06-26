@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -9,10 +9,10 @@ class Customer extends Model
     protected $fillable = ['cust_id', 'description'];
     
     public function billingAddress() {
-        return $this->hasOne('App\BillingAddress');
+        return $this->hasOne('App\Models\BillingAddress');
     }
 
     public function shippingAddresses() {
-        return $this->hasMany('App\ShippingAddress', 'customer_id', 'id');
+        return $this->hasMany('App\Models\ShippingAddress', 'customer_id', 'id');
     }
 }

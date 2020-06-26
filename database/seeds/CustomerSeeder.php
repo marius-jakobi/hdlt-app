@@ -1,6 +1,6 @@
 <?php
 
-use App\Customer;
+use App\Models\Customer;
 use Illuminate\Database\Seeder;
 
 class CustomerSeeder extends Seeder
@@ -12,9 +12,9 @@ class CustomerSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Customer::class, 50)->create()->each(function (Customer $customer) {
-            $customer->billingAddress()->save(factory(App\BillingAddress::class)->make());
-            $customer->shippingAddresses()->save(factory(App\ShippingAddress::class)->make());
+        factory(App\Models\Customer::class, 50)->create()->each(function (Customer $customer) {
+            $customer->billingAddress()->save(factory(App\Models\BillingAddress::class)->make());
+            $customer->shippingAddresses()->save(factory(App\Models\ShippingAddress::class)->make());
         });
     }
 }

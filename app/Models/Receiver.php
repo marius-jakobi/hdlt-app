@@ -1,17 +1,15 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
-class Compressor extends StationComponent
+class Receiver extends StationComponent
 {
     /**
      * Types
      */
     protected static $types = [
-        'screw' => 'Schraubenkompressor',
-        'piston' => 'Kolbenkompressor',
-        'rotation' => 'Rotationskompressor',
-        'scroll' => 'Scroll-Kompressor'
+        'standing' => 'stehend',
+        'lying' => 'liegend'
     ];
 
     /**
