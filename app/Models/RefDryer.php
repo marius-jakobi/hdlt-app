@@ -50,7 +50,7 @@ class RefDryer extends StationComponent
 
         $refType = $this->getRefTypes()[$this->ref_type];
 
-        return $refType['gwp'] * $this->ref_amount / 1000;
+        return str_replace('.', ',', round($refType['gwp'] * $this->ref_amount / 1000, 3));
     }
 
     public static function getRefTypeNames() {
