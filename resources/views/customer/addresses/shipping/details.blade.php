@@ -420,7 +420,7 @@
                     @error('file', 'files')
                         <p class="text-danger">{{ $message }}</p>
                     @enderror
-                    <button type="submit" class="btn btn-primary">Hochladen</button>
+                    <button type="submit" class="btn btn-primary mt-3">Hochladen</button>
                 </form>
             @endcan
             <div class="mt-3">
@@ -430,8 +430,8 @@
                     <div class="row">
                         @foreach($shippingAddress->uploadedFiles as $file)
                         <div class="col-md-4 col-sm-12">
-                            <a href="{{ asset($file->path) }}" target="_blank">
-                                <img src="{{ asset($file->path) }}" alt="{{ $file->path }}" class="img-fluid">
+                            <a href="{{ asset($file->imagePath()) }}" target="_blank">
+                                <img src="{{ asset($file->thumbnailPath()) }}" class="img-fluid">
                             </a>
                             {{ $file->name }}
                         </div>

@@ -241,8 +241,8 @@
                 <div class="row">
                     @foreach($component->uploadedFiles as $file)
                     <div class="col-md-4 col-sm-12">
-                        <a href="{{ asset($file->path) }}" target="_blank">
-                            <img src="{{ asset($file->path) }}" alt="{{ $file->path }}" class="img-fluid">
+                        <a href="{{ asset($file->imagePath()) }}" target="_blank">
+                            <img src="{{ asset($file->thumbnailPath()) }}" class="img-fluid">
                         </a>
                         {{ $file->name }}
                     </div>
