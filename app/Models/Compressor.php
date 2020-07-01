@@ -18,7 +18,11 @@ class Compressor extends StationComponent
      * Helper for getting type
      */
     public function getType() {
-        return static::$types[$this->type];
+        if (array_key_exists($this->type, static::$types)) {
+            return static::$types[$this->type];
+        } else {
+            return 'Kompressor';
+        }
     }
 
     public static function getTypes() {

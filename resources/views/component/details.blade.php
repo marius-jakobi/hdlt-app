@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-<h1>Details {{ $component->types()[$type] ?? 'Anlagenkomponente' }}</h1>
+<h1>Details {{ $component->getType() }}</h1>
 <p>
     Betriebsstelle:
     <a href="{{ route('customer.addresses.shipping.details', ['customerId' => $component->shippingAddress->customer->id, 'addressId' => $component->shippingAddress->id]) }}#components">{{ $component->shippingAddress->name }}</a>
