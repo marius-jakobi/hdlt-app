@@ -219,20 +219,7 @@
                 <x-upload-form action="{{ route('upload.file.component', ['customerId' => $component->shippingAddress->customer->id, 'addressId' => $component->shippingAddress->id, 'type' => $type, 'componentId' => $component->id]) }}" />
             @endcan
             <div class="mt-3">
-                @if ($component->uploadedFiles->count() == 0)
-                    <div class="alert bg-info">Es sind keine Dateien hinterlegt.</div>
-                @else
-                    <div class="row">
-                        @foreach($component->uploadedFiles as $file)
-                        <div class="col-md-4 col-sm-12">
-                            <a href="{{ asset($file->imagePath()) }}" target="_blank">
-                                <img src="{{ asset($file->thumbnailPath()) }}" class="img-fluid">
-                            </a>
-                            {{ $file->name }}
-                        </div>
-                        @endforeach
-                    </div>
-                @endif
+                <x-upload-list :files="$component->uploadedFiles" />
             </div>
         </div>
     @endcan
