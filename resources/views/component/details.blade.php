@@ -213,42 +213,27 @@
             @endcannot
     </div>
     {{-- File tab --}}
-    <div class="tab-pane fade show" id="files">
-        @can('upload-files', App\Models\UploadFile::class)
-            <form action="{{ route('upload.file.component', ['customerId' => $component->shippingAddress->customer->id, 'addressId' => $component->shippingAddress->id, 'type' => $type, 'componentId' => $component->id]) }}" method="POST" enctype="multipart/form-data">
-                @csrf
-                <div class="form-group">
-                    <label>Beschreibung</label>
-                    <input type="text" name="name" class="form-control @error('name', 'files') is-invalid @enderror" minlength="3" maxlength="255">
-                    <small class="form-text text-muted">Diese Beschreibung wird allen Bildern zugeordnet, die in einem Vorgang hochgeladen werden.</small>
-                </div>
-                @error('name', 'files')
-                    <p class="text-danger">{{ $message }}
-                @enderror
-                <div class="form-group">
-                    <input type="file" name="files[]" class=" btn btn-secondary @error('file', 'files') text-danger @enderror " multiple>
-                </div>
-                @error('file', 'files')
-                    <p class="text-danger">{{ $message }}</p>
-                @enderror
-                <button type="submit" class="btn btn-primary mt-3">Hochladen</button>
-            </form>
-        @endcan
-        <div class="mt-3">
-            @if ($component->uploadedFiles->count() == 0)
-                <div class="alert bg-info">Es sind keine Dateien hinterlegt.</div>
-            @else
-                <div class="row">
-                    @foreach($component->uploadedFiles as $file)
-                    <div class="col-md-4 col-sm-12">
-                        <a href="{{ asset($file->imagePath()) }}" target="_blank">
-                            <img src="{{ asset($file->thumbnailPath()) }}" class="img-fluid">
-                        </a>
-                        {{ $file->name }}
+    @can('view-uploads', App\Models\UploadFile::class)
+        <div class="tab-pane fade show" id="files">
+            @can('upload-files', App\Models\UploadFile::class)
+                <x-upload-form action="{{ route('upload.file.component', ['customerId' => $component->shippingAddress->customer->id, 'addressId' => $component->shippingAddress->id, 'type' => $type, 'componentId' => $component->id]) }}" />
+            @endcan
+            <div class="mt-3">
+                @if ($component->uploadedFiles->count() == 0)
+                    <div class="alert bg-info">Es sind keine Dateien hinterlegt.</div>
+                @else
+                    <div class="row">
+                        @foreach($component->uploadedFiles as $file)
+                        <div class="col-md-4 col-sm-12">
+                            <a href="{{ asset($file->imagePath()) }}" target="_blank">
+                                <img src="{{ asset($file->thumbnailPath()) }}" class="img-fluid">
+                            </a>
+                            {{ $file->name }}
+                        </div>
+                        @endforeach
                     </div>
-                    @endforeach
-                </div>
-            @endif
+                @endif
+            </div>
         </div>
-    </div>
+    @endcan
 @endsection

@@ -404,24 +404,7 @@
     @can('view-uploads', App\Models\UploadFile::class)
         <div class="tab-pane fade" id="files">
             @can('upload-files', App\Models\UploadFile::class)
-                <form action="{{ route('upload.file.shipping-address', ['customerId' => $shippingAddress->customer->id, 'addressId' => $shippingAddress->id]) }}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    <div class="form-group">
-                        <label>Beschreibung</label>
-                        <input type="text" name="name" class="form-control @error('name', 'files') is-invalid @enderror" minlength="3" maxlength="255">
-                        <small class="form-text text-muted">Diese Beschreibung wird allen Bildern zugeordnet, die in einem Vorgang hochgeladen werden.</small>
-                    </div>
-                    @error('name', 'files')
-                        <p class="text-danger">{{ $message }}
-                    @enderror
-                    <div class="form-group">
-                        <input type="file" name="files[]" class=" btn btn-secondary @error('file', 'files') text-danger @enderror " multiple>
-                    </div>
-                    @error('file', 'files')
-                        <p class="text-danger">{{ $message }}</p>
-                    @enderror
-                    <button type="submit" class="btn btn-primary mt-3">Hochladen</button>
-                </form>
+                <x-upload-form action="{{ route('upload.file.shipping-address', ['customerId' => $shippingAddress->customer->id, 'addressId' => $shippingAddress->id]) }}"/>
             @endcan
             <div class="mt-3">
                 @if ($shippingAddress->uploadedFiles->count() == 0)
