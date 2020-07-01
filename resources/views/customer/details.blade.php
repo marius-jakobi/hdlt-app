@@ -42,6 +42,7 @@
                 <th>Name</th>
                 <th>Straße / Postfach</th>
                 <th>PLZ / Ort</th>
+                <th>Anlagen</th>
             </tr>
         </thead>
         <tbody>
@@ -55,6 +56,7 @@
                     </td>
                     <td>{{ $shippingAddress->street }}</td>
                     <td>{{ $shippingAddress->zip . " " . $shippingAddress->city}}</td>
+                    <td>{{ $shippingAddress->countComponents() }}</td>
                 </tr>
             @endforeach
         </tbody>
