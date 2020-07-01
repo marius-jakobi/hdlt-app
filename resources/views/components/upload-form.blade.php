@@ -9,7 +9,7 @@
         <p class="text-danger">{{ $message }}
     @enderror
     <div class="form-group">
-        <input type="file" name="files[]" class=" btn btn-secondary @error('files', 'files') text-danger @enderror " multiple>
+        <input type="file" name="files[]" class="w-100 btn btn-secondary @error('files', 'files') text-danger @enderror " multiple>
     </div>
     @error('files', 'files')
         <p class="text-danger">{{ $message }}</p>
