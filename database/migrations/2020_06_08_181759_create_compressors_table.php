@@ -28,7 +28,7 @@ class CreateCompressorsTable extends Migration
             $table->decimal('pressure', 6, 2, true)->nullable();
             $table->decimal('power', 6, 2, true)->nullable();
             $table->year('year')->nullable();
-            $table->enum('type', ['screw', 'piston', 'rotation', 'scroll']);
+            $table->enum('type', ['screw', 'piston', 'rotation', 'scroll'])->nullable();
             $table->boolean('is_oilfree')->default(false);
             $table->boolean('is_active')->default(true);
             $table->date('next_service');
