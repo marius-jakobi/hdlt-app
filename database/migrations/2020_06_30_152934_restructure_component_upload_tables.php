@@ -38,7 +38,7 @@ class RestructureComponentUploadTables extends Migration
     public function down()
     {
         foreach ($this->types as $type) {
-            Schema::table($type . 'upload_files', function (Blueprint $table) use(&$type) {
+            Schema::table($type . '_upload_files', function (Blueprint $table) use(&$type) {
                 $table->renameColumn('fileId', 'path');
                 $table->dropColumn('extension');
             });
