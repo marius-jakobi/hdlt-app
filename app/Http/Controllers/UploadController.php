@@ -14,14 +14,14 @@ use Intervention\Image\Facades\Image;
 class UploadController extends Controller
 {
     protected $rules = [
-        'name' => 'required|min:6|max:255',
-        'file' => 'required|file|mimetypes:image/png,image/jpeg'
+        'name' => 'required|min:4|max:255',
+        'files.*' => 'required|file|mimes:png,jpeg'
     ];
 
     protected $messages = [
-        'name.required' => 'Geben Sie eine Bezeichnung für die Datei ein',
-        'file.required' => 'Wählen Sie eine Datei aus',
-        'file.mimetypes' => 'Die Datei muss eine Bilddatei (PNG oder JPEG) sein',
+        'name.required' => 'Geben Sie eine Beschreibung für die Dateien ein',
+        'files.required' => 'Bilddateien auswählen',
+        'files.mimetypes' => 'Die Dateien müssen Bilddateien (PNG oder JPEG) sein',
     ];
 
     private function storeFile(string $type, UploadedFile $file) {
@@ -29,11 +29,10 @@ class UploadController extends Controller
             throw new \Exception("\$type must be 'shipping-address' or 'component'. '$type' given");
         }
 
-        $mimeType = explode('/', getimagesize($file)['mime']);
-        $fileType = end($mimeType);
-        $uuid = Str::uuid();
-        $fileName = "files/$type/$uuid.$fileType";
-        $thumbnailFilename = "files/$type/thumbnail/$uuid.$fileType";
+        $extension = strtolower($file->getClientOriginalExtension());
+        $fileId = Str::uuid();
+        $fileName = "files/$type/$fileId.$extension";
+        $thumbnailFilename = "files/$type/thumbnail/$fileId.$extension";
 
         Image::make($file)->resize(1500, 1500, function ($constraint) {
             $constraint->aspectRatio();
@@ -45,8 +44,8 @@ class UploadController extends Controller
         })->save($thumbnailFilename);
 
         return [
-            'fileId' => $uuid,
-            'extension' => $fileType
+            'fileId' => $fileId,
+            'extension' => $extension
         ];
     }
 
@@ -66,25 +65,26 @@ class UploadController extends Controller
                 ->withErrors($validator, 'files');
         }
 
-        $img = $this->storeFile('shipping-address', $request->file('file'));
+        $files = $request->file('files');
 
-        $file = new ShippingAddressUploadFile([
-            'name' => $request->input('name'),
-            'fileId' => $img['fileId'],
-            'extension' => $img['extension']
-        ]);
+        foreach ($files as $file) {
+            $img = $this->storeFile('shipping-address', $file);
+    
+            $uploadFile = new ShippingAddressUploadFile([
+                'name' => $request->input('name'),
+                'fileId' => $img['fileId'],
+                'extension' => $img['extension']
+            ]);
 
-        $file->shippingAddress()->associate(ShippingAddress::findOrFail($addressId));
-        $file->save();
+            $uploadFile->shippingAddress()->associate(ShippingAddress::findOrFail($addressId));
+            $uploadFile->save();
+        }
 
         return redirect($back)
             ->with('success', 'Die Datei wurde erfolgreich hochgeladen.');
     }
 
     public function uploadComponentFile(Request $request, int $customerId, int $addressId, string $type, int $componentId) {
-        $componentClass = '\App\\Models\\' . StationComponent::getComponentClassname($type);
-        $uploadClass = $componentClass . 'UploadFile';
-
         $back = route('component.details', [
             'customerId' => $customerId,
             'addressId' => $addressId,
@@ -101,16 +101,24 @@ class UploadController extends Controller
                 ->withErrors($validator, 'files');
         }
 
-        $img = $this->storeFile('component', $request->file('file'));
+        $componentClass = '\App\\Models\\' . StationComponent::getComponentClassname($type);
+        $uploadClass = $componentClass . 'UploadFile';
 
-        $file = new $uploadClass([
-            'name' => $request->input('name'),
-            'fileId' => $img['fileId'],
-            'extension' => $img['extension']
-        ]);
+        $files = $request->file('files');
 
-        $file->component()->associate($componentClass::find($componentId));
-        $file->save();
+        foreach ($files as $file) {    
+            $img = $this->storeFile('component', $file);
+    
+            $uploadFile = new $uploadClass([
+                'name' => $request->input('name'),
+                'fileId' => $img['fileId'],
+                'extension' => $img['extension']
+            ]);
+    
+            $uploadFile->component()->associate($componentClass::find($componentId));
+            $uploadFile->save();
+        }
+
 
         return redirect($back)
             ->with('success', 'Die Datei wurde erfolgreich hochgeladen.');

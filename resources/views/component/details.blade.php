@@ -219,14 +219,14 @@
                 @csrf
                 <div class="form-group">
                     <label>Beschreibung</label>
-                    <input type="text" name="name" class="form-control @error('name', 'files') is-invalid @enderror" minlength="6" maxlength="255" value="{{ old('name') }}">
+                    <input type="text" name="name" class="form-control @error('name', 'files') is-invalid @enderror" minlength="3" maxlength="255">
+                    <small class="form-text text-muted">Diese Beschreibung wird allen Bildern zugeordnet, die in einem Vorgang hochgeladen werden.</small>
                 </div>
                 @error('name', 'files')
                     <p class="text-danger">{{ $message }}
                 @enderror
-                <div class="custom-file">
-                    <input type="file" name="file" class="custom-file-input @error('file', 'files') text-danger @enderror ">
-                    <label class="custom-file-label">Datei auswählen</label>
+                <div class="form-group">
+                    <input type="file" name="files[]" class=" btn btn-secondary @error('file', 'files') text-danger @enderror " multiple>
                 </div>
                 @error('file', 'files')
                     <p class="text-danger">{{ $message }}</p>
