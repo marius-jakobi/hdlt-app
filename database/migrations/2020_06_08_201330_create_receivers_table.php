@@ -27,7 +27,7 @@ class CreateReceiversTable extends Migration
             $table->string('serial');
             $table->decimal('pressure', 6, 2, true)->nullable();
             $table->year('year')->nullable();
-            $table->enum('type', ['standing', 'lying']);
+            $table->enum('type', ['standing', 'lying'])->nullbable();
             $table->boolean('is_active')->default(true);
             $table->date('next_service');
             $table->text('memo');
