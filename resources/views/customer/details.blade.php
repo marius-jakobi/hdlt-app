@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-<h1>Kunde "{{ $customer->cust_id }}"</h1>
-<p>Name: {{ $customer->description }}</p>
+<h1>{{ $customer->description }}</h1>
+<p>Debitor: {{ $customer->cust_id }}</p>
 <p>erstellt: {{ $customer->created_at }}</p>
 <p>geändert: {{ $customer->updated_at}}</p>
 

@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-<h1>Benutzer "{{ $user->isAdmin() ? "Administrator" : "$user->name_last , $user->name_first" }}"</h1>
+<h1>{{ $user->isAdmin() ? "Administrator" : "$user->name_last, $user->name_first" }}</h1>
 
 @if ($user->isAdmin())
     <div class="alert bg-info">
