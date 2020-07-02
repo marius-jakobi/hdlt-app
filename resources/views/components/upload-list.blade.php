@@ -3,7 +3,7 @@
 @else
     <div class="row">
         @foreach($files as $file)
-        <div class="col-md-4 col-sm-12">
+        <div class="col-md-4 col-sm-12 mt-sm-2">
             <a href="{{ asset($file->imagePath()) }}" target="_blank">
                 <img src="{{ asset($file->thumbnailPath()) }}" class="img-fluid">
             </a>
