@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
-@section('scripts')
+@push('scripts')
 <script src="{{ asset('js/tabs.js') }}" defer></script>
-@endsection
+@endpush
 
 @section('content')
 <h1>{{ $shippingAddress->name }}</h1>

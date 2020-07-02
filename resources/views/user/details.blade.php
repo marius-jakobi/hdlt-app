@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
-@section('scripts')
+@push('scripts')
 <script src="{{ asset('js/tabs.js') }}" defer></script>
-@endsection
+@endpush
 
 @section('content')
 <h1>{{ $user->isAdmin() ? "Administrator" : "$user->name_last, $user->name_first" }}</h1>
