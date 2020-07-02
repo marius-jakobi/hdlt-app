@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-<h1>Lieferadresse</h1>
+<h1>{{ $shippingAddress->name }}</h1>
 <p>
     Kunde: <a href="{{ route('customer.details', ['customerId' => $shippingAddress->customer->id]) }}">{{ $shippingAddress->customer->description }}</a>
 </p>
