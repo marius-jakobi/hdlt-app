@@ -34,7 +34,7 @@ class UploadController extends Controller
         $fileName = "files/$type/$fileId.$extension";
         $thumbnailFilename = "files/$type/thumbnail/$fileId.$extension";
 
-        Image::make($file)->resize(1500, 1500, function ($constraint) {
+        Image::make($file)->resize(1000, 1000, function ($constraint) {
             $constraint->aspectRatio();
             $constraint->upsize();
         })->save($fileName);
