@@ -15,6 +15,7 @@ class UploadController extends Controller
 {
     protected $rules = [
         'name' => 'required|min:4|max:255',
+        'files' => 'required|array|min:1',
         'files.*' => 'required|file|mimes:png,jpeg'
     ];
 
@@ -62,6 +63,7 @@ class UploadController extends Controller
 
         if ($validator->fails()) {
             return redirect($back)
+                ->withInput()
                 ->withErrors($validator, 'files');
         }
 
