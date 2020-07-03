@@ -10,6 +10,7 @@
             <th>Debitor</th>
             <th>Name</th>
             <th>Lieferadressen</th>
+            <th>Verkaufsvorgänge</th>
             @can('delete', App\Models\Customer::class)
                 <th></th>
             @endcan
@@ -26,6 +27,7 @@
                     </a>
                 </td>
                 <td>{{ $customer->shippingAddresses->count() }}</td>
+                <td>{{ $customer->salesProcesses->count() }}</td>
                 @can('delete', App\Models\Customer::class)
                     <td>
                         <form action="{{ route('customer.delete', ['customerId' => $customer->id]) }}" method="post">
