@@ -103,4 +103,7 @@ Route::middleware('auth')->group(function () {
 
     // Search routes
     Route::post('/search', 'SearchController@showResult')->name('search.result');
+
+    // Process routes
+    Route::get('process/{process_number}', 'SalesProcessController@details')->name('process.sales.details');
 });

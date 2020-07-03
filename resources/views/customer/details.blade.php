@@ -66,33 +66,40 @@
 @endif
 
 <h2>Verkaufsvorgänge</h2>
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Vorgangsnummer</th>
-            <th>erstellt</th>
-            <th>Auftragsbestätigungen</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach($customer->salesProcesses as $salesProcess)
+@if ($customer->salesProcesses->count() > 0)
+    <table class="table">
+        <thead>
             <tr>
-                <td>{{ $salesProcess->id }}</td>
-                <td>{{ $salesProcess->process_number }}</td>
-                <td>{{ $salesProcess->created_at }}</td>
-                <td>
-                    <ul>
-                        @foreach($salesProcess->orderconfirmations as $orderConfirmation)
-                            <li>
-                                {{ $orderConfirmation->document_number }}
-                            </li>
-                        @endforeach
-                    </ul>
-                </td>
+                <th>ID</th>
+                <th>Vorgangsnummer</th>
+                <th>erstellt</th>
+                <th>Auftragsbestätigungen</th>
             </tr>
-        @endforeach
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach($customer->salesProcesses as $salesProcess)
+                <tr>
+                    <td>{{ $salesProcess->id }}</td>
+                    <td>
+                        <a href="{{ route('process.sales.details', ['process_number' => $salesProcess->process_number]) }}">
+                            {{ $salesProcess->process_number }}
+                        </a>
+                    </td>
+                    <td>{{ $salesProcess->created_at }}</td>
+                    <td>
+                        <ul>
+                            @foreach($salesProcess->orderconfirmations as $orderConfirmation)
+                                <li>
+                                    {{ $orderConfirmation->document_number }}
+                                </li>
+                            @endforeach
+                        </ul>
+                    </td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
+@else
+    <div class="alert bg-info">Keine Verkaufsvorgänge vorhanden</div>
+@endif
 @endsection
