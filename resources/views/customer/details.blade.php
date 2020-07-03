@@ -81,7 +81,7 @@
                 <tr>
                     <td>{{ $salesProcess->id }}</td>
                     <td>
-                        <a href="{{ route('process.sales.details', ['process_number' => $salesProcess->process_number]) }}">
+                        <a href="{{ route('process.sales.details', ['processNumber' => $salesProcess->process_number]) }}">
                             {{ $salesProcess->process_number }}
                         </a>
                     </td>

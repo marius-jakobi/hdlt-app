@@ -7,9 +7,9 @@ use Illuminate\Http\Request;
 
 class SalesProcessController extends Controller
 {
-    public function details(int $process_number) {
+    public function details(int $processNumber) {
         return view('processes.sales.details', [
-            'process' => ProcessSales::where('process_number', $process_number)->firstOrFail()
+            'process' => ProcessSales::where('process_number', $processNumber)->firstOrFail()
             ]);
     }
 }
