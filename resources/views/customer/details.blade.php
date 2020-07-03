@@ -73,6 +73,7 @@
             <th>ID</th>
             <th>Vorgangsnummer</th>
             <th>erstellt</th>
+            <th>Auftragsbestätigungen</th>
         </tr>
     </thead>
     <tbody>
@@ -80,7 +81,16 @@
             <tr>
                 <td>{{ $salesProcess->id }}</td>
                 <td>{{ $salesProcess->process_number }}</td>
-                <td>{{ $shippingAddress->created_at}}</td>
+                <td>{{ $salesProcess->created_at }}</td>
+                <td>
+                    <ul>
+                        @foreach($salesProcess->orderconfirmations as $orderConfirmation)
+                            <li>
+                                {{ $orderConfirmation->document_number }}
+                            </li>
+                        @endforeach
+                    </ul>
+                </td>
             </tr>
         @endforeach
     </tbody>
