@@ -14,4 +14,18 @@
             {{ $orderConfirmation->salesProcess->process_number }}
         </a>
     </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>erstellt</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($orderConfirmation->serviceReports as $report)
+                <td>{{ $report->id }}</td>
+                <td>{{ $report->created_at }}</td>
+            @endforeach
+        </tbody>
+    </table>
 @endsection
