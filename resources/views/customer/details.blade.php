@@ -64,4 +64,25 @@
 @else
     <div class="alert bg-info">Keine Lieferadressen vorhanden</div>
 @endif
+
+<h2>Verkaufsvorgänge</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Vorgangsnummer</th>
+            <th>erstellt</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach($customer->salesProcesses as $salesProcess)
+            <tr>
+                <td>{{ $salesProcess->id }}</td>
+                <td>{{ $salesProcess->process_number }}</td>
+                <td>{{ $shippingAddress->created_at}}</td>
+            </tr>
+        @endforeach
+    </tbody>
+</table>
 @endsection

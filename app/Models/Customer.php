@@ -24,4 +24,8 @@ class Customer extends Model
     public function salesAgent() {
         return $this->hasOne(SalesAgent::class, 'payterms_id', 'id');
     }
+
+    public function salesProcesses() {
+        return $this->hasMany(ProcessSales::class, 'customer_id', 'id');
+    }
 }
