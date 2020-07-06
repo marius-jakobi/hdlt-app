@@ -105,6 +105,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/search', 'SearchController@showResult')->name('search.result');
 
     // Process routes
-    Route::get('process/{processNumber}', 'SalesProcessController@details')->name('process.sales.details');
-    Route::get('process/{processNumber}/order-confirmation/{documentNumber}', 'OrderConfirmationController@details')->name('process.sales.order-confirmation.details');
+    Route::get('sales/process/{processNumber}', 'SalesProcessController@details')->name('process.sales.details');
+    Route::get('sales/order-confirmation/{documentNumber}', 'OrderConfirmationController@details')->name('process.sales.order-confirmation.details');
+    Route::get('sales/service-report/{reportId}', 'ServiceReportController@details')->name('process.sales.service-report.details');
 });

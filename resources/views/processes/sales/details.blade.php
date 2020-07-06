@@ -13,6 +13,7 @@
         <thead>
             <tr>
                 <th>Belegnummer</th>
+                <th>Service-Berichte</th>
                 <th>erstellt</th>
             </tr>
         </thead>
@@ -20,10 +21,11 @@
             @foreach($process->orderConfirmations as $orderConfirmation)
                 <tr>
                     <td>
-                        <a href="{{ route('process.sales.order-confirmation.details', ['processNumber' => $process->process_number, 'documentNumber' => $orderConfirmation->document_number]) }}">
+                        <a href="{{ route('process.sales.order-confirmation.details', ['documentNumber' => $orderConfirmation->document_number]) }}">
                             {{ $orderConfirmation->document_number }}
                         </a>
                     </td>
+                    <td>{{ $orderConfirmation->serviceReports->count() }}</td>
                     <td>{{ $orderConfirmation->created_at }}</td>
                 </tr>
             @endforeach

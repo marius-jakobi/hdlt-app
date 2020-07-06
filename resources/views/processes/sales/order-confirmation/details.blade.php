@@ -14,6 +14,8 @@
             {{ $orderConfirmation->salesProcess->process_number }}
         </a>
     </p>
+    <h2>Service-Berichte</h2>
+    @if ($orderConfirmation->serviceReports->count() > 0)
     <table class="table">
         <thead>
             <tr>
@@ -23,9 +25,18 @@
         </thead>
         <tbody>
             @foreach($orderConfirmation->serviceReports as $report)
-                <td>{{ $report->id }}</td>
-                <td>{{ $report->created_at }}</td>
+                <tr>
+                    <td>
+                        <a href="{{ route('process.sales.service-report.details', ['reportId' => $report->id]) }}">
+                        {{ $report->getId() }}
+                        </a>
+                    </td>
+                    <td>{{ $report->created_at }}</td>
+                </tr>
             @endforeach
         </tbody>
     </table>
+    @else
+    <div class="alert bg-info">Für diese Auftragsbestätigung existieren keine Service-Berichte.</div>
+    @endif
 @endsection

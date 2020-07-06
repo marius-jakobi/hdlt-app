@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class OrderConfirmationController extends Controller
 {
-    public function details(int $processNumber, string $documentNumber) {
+    public function details(string $documentNumber) {
         return view('processes.sales.order-confirmation.details', [
             'orderConfirmation' => OrderConfirmation::where('document_number', $documentNumber)->firstOrFail()
             ]);
