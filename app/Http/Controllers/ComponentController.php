@@ -84,6 +84,7 @@ class ComponentController extends Controller
         return view('component.details', [
             'component' => $component,
             'type' => $type,
+            'caption' => StationComponent::types()[$type],
             'brands' => Brand::all(),
             'refTypes' => RefDryer::getRefTypes()
         ]);

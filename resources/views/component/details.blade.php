@@ -5,7 +5,7 @@
 @endpush
 
 @section('content')
-<h1>Details {{ $component->getType() }}</h1>
+<h1>{{ $caption }}</h1>
 <p>
     Betriebsstelle:
     <a href="{{ route('customer.addresses.shipping.details', ['customerId' => $component->shippingAddress->customer->id, 'addressId' => $component->shippingAddress->id]) }}#components">{{ $component->shippingAddress->name }}</a>
