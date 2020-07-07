@@ -86,7 +86,7 @@ class StationComponent extends Model
     }
 
     public static function getComponentClassname($type) {
-        return static::$componentClasses[$type];
+        return '\App\\Models\\' . static::$componentClasses[$type];
     }
 
     /**

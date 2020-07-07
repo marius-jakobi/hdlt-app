@@ -103,7 +103,7 @@ class UploadController extends Controller
                 ->withErrors($validator, 'files');
         }
 
-        $componentClass = '\App\\Models\\' . StationComponent::getComponentClassname($type);
+        $componentClass = StationComponent::getComponentClassname($type);
         $uploadClass = $componentClass . 'UploadFile';
 
         $files = $request->file('files');
