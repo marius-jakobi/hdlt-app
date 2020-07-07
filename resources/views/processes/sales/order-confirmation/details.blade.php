@@ -19,8 +19,7 @@
     <table class="table">
         <thead>
             <tr>
-                <th>ID</th>
-                <th>erstellt</th>
+                <th>Bericht</th>
             </tr>
         </thead>
         <tbody>
@@ -28,10 +27,9 @@
                 <tr>
                     <td>
                         <a href="{{ route('process.sales.service-report.details', ['reportId' => $report->id]) }}">
-                        {{ $report->getId() }}
+                            Bericht vom {{ $report->getLocalDate() }}
                         </a>
                     </td>
-                    <td>{{ $report->created_at }}</td>
                 </tr>
             @endforeach
         </tbody>

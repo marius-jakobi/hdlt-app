@@ -8,7 +8,7 @@ class ServiceReport extends AbstractUuidModel
         return $this->belongsTo(OrderConfirmation::class, 'order_confirmation_id', 'id');
     }
 
-    public function getId() {
-        return substr($this->id, 0, 8);
+    public function getLocalDate() {
+        return \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $this->created_at)->format('d.m.Y');
     }
 }
