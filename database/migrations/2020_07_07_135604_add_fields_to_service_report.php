@@ -15,7 +15,7 @@ class AddFieldsToServiceReport extends Migration
     {
         Schema::table('service_reports', function (Blueprint $table) {
             $table->string('intent', 128)->after('order_confirmation_id');
-            $table->text('text')->after('intent');
+            $table->text('text')->nullable()->after('intent');
         });
     }
 
