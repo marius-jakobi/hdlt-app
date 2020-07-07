@@ -6,5 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class UploadFile extends Model
 {
-    protected $fillable = ['name', 'path'];
+    protected $fillable = [
+        'fileId', 'extension', 'name'
+    ];
 }

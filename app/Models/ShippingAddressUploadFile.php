@@ -3,11 +3,7 @@
 namespace App\Models;
 
 class ShippingAddressUploadFile extends UploadFile
-{
-    protected $fillable = [
-        'fileId', 'extension', 'name'
-    ];
-
+{   
     public function imagePath() {
         return "files/shipping-address/$this->fileId.$this->extension";
     }

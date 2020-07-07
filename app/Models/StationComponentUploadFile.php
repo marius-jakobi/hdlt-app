@@ -4,10 +4,6 @@ namespace App\Models;
 
 class StationComponentUploadFile extends UploadFile
 {
-    protected $fillable = [
-        'fileId', 'extension', 'name'
-    ];
-
     public function imagePath() {
         return "files/component/$this->fileId.$this->extension";
     }
