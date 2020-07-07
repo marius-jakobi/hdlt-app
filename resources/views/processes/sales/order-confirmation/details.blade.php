@@ -20,6 +20,8 @@
         <thead>
             <tr>
                 <th>Bericht</th>
+                <th>Einsatzzweck</th>
+                <th>Text</th>
             </tr>
         </thead>
         <tbody>
@@ -30,6 +32,8 @@
                             Bericht vom {{ $report->getLocalDate() }}
                         </a>
                     </td>
+                    <td>{{ $report->intent }}</td>
+                    <td>{{ $report->text }}</td>
                 </tr>
             @endforeach
         </tbody>
