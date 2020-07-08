@@ -14,9 +14,11 @@
     <li class="nav-item">
         <a href="#addresses" class="nav-link active" id="addresses-tab" data-toggle="tab">Adressen</a>
     </li>
+    @can('view-sales-processes', App\Models\ProcessSales::class)
     <li class="nav-item">
         <a href="#processes" class="nav-link" id="processes-tab" data-toggle="tab">Vorgänge</a>
     </li>
+    @endcan
 </ul>
 
 <div class="tab-content" id="nav-tabContent">
@@ -82,6 +84,7 @@
         @endif
     </div>
     {{-- Processes tab --}}
+    @can('view-sales-processes', App\Models\ProcessSales::class)
     <div class="tab-pane fade show" id="processes">
         <h2>Verkaufsvorgänge</h2>
         @if ($customer->salesProcesses->count() > 0)
@@ -123,5 +126,6 @@
             <div class="alert bg-info">Keine Verkaufsvorgänge vorhanden</div>
         @endif
     </div>
+    @endcan
 </div>
 @endsection
