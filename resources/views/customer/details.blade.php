@@ -91,7 +91,6 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th>ID</th>
                         <th>Vorgangsnummer</th>
                         <th>erstellt</th>
                         <th>Auftragsbestätigungen</th>
@@ -100,7 +99,6 @@
                 <tbody>
                     @foreach($customer->salesProcesses as $salesProcess)
                         <tr>
-                            <td>{{ $salesProcess->id }}</td>
                             <td>
                                 <a href="{{ route('process.sales.details', ['processNumber' => $salesProcess->process_number]) }}">
                                     {{ $salesProcess->process_number }}
