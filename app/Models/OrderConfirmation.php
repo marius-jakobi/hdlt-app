@@ -9,7 +9,7 @@ class OrderConfirmation extends Model
     protected $fillable = ['document_number'];
     
     public function salesProcess() {
-        return $this->belongsTo(ProcessSales::class, 'sales_process_id', 'id');
+        return $this->belongsTo(SalesProcess::class, 'sales_process_id', 'id');
     }
 
     public function serviceReports() {

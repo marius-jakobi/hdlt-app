@@ -26,6 +26,6 @@ class Customer extends Model
     }
 
     public function salesProcesses() {
-        return $this->hasMany(ProcessSales::class, 'customer_id', 'id');
+        return $this->hasMany(SalesProcess::class, 'customer_id', 'id');
     }
 }
