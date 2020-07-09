@@ -20,6 +20,4 @@
     </p>
     <p>Einsatzzweck: {{ $report->intent }}</p>
     <p>Text: {{ $report->text }}</p>
-
-    {{ $report->shippingAddress }}
 @endsection
