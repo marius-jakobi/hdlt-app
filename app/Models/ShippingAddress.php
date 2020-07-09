@@ -16,6 +16,13 @@ class ShippingAddress extends Model
     }
 
     /**
+     * Relationship to service reports
+     */
+    public function serviceReports() {
+        return $this->hasMany(ServiceReport::class, 'shipping_address_id', 'id');
+    }
+
+    /**
      * Relationship to upload files
      */
     public function uploadedFiles() {
