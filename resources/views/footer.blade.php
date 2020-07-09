@@ -1,4 +1,4 @@
-<footer class="footer mt-3">
+<footer class="footer mt-3 d-print-none">
     <div class="bg-secondary p-3">
         <div class="container">
             <div class="row">
