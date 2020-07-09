@@ -18,6 +18,12 @@
             {{ $report->shippingAddress->city }}
         </a>
     </p>
+    <p>
+        Verkaufsvorgang:
+        <a href="{{ route('process.sales.details', ['processNumber' => $report->salesProcess->process_number]) }}">
+            {{ $report->salesProcess->process_number }}
+        </a>
+    </p>
     <p>Einsatzzweck: {{ $report->intent }}</p>
     <p>Text: {{ $report->text }}</p>
 @endsection

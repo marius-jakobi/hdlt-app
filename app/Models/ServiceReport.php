@@ -12,6 +12,10 @@ class ServiceReport extends AbstractUuidModel
         return $this->belongsTo(ShippingAddress::class, 'shipping_address_id', 'id');
     }
 
+    public function salesProcess() {
+        return $this->orderConfirmation->salesProcess();
+    }
+
     public function getLocalDate() {
         return \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $this->created_at)->format('d.m.Y');
     }
