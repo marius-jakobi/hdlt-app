@@ -16,28 +16,7 @@
     </p>
     <h2>Service-Berichte</h2>
     @if ($orderConfirmation->serviceReports->count() > 0)
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Bericht</th>
-                <th>Einsatzzweck</th>
-                <th>Text</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($orderConfirmation->serviceReports as $report)
-                <tr>
-                    <td>
-                        <a href="{{ route('process.sales.service-report.details', ['reportId' => $report->id]) }}">
-                            Bericht vom {{ $report->getLocalDate() }}
-                        </a>
-                    </td>
-                    <td>{{ $report->intent }}</td>
-                    <td>{{ $report->text }}</td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
+        <x-service-report-list :reports="$orderConfirmation->serviceReports" />
     @else
     <div class="alert bg-info">Für diese Auftragsbestätigung existieren keine Service-Berichte.</div>
     @endif

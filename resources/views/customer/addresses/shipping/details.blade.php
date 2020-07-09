@@ -10,12 +10,21 @@
     Kunde: <a href="{{ route('customer.details', ['customerId' => $shippingAddress->customer->id]) }}">{{ $shippingAddress->customer->description }}</a>
 </p>
 <ul class="nav nav-tabs" id="nav-tab">
+    {{-- base data tab --}}
     <li class="nav-item">
         <a href="#base-data" class="nav-link active" id="base-data-tab" data-toggle="tab">Stammdaten</a>
     </li>
+    {{-- components tab --}}
     <li class="nav-item">
         <a href="#components" class="nav-link" id="component-tab" data-toggle="tab">Anlagen</a>
     </li>
+    {{-- service reports tab --}}
+    @can('view-service-reports', App\Models\ServiceReport::class)
+        <li class="nav-item">
+            <a href="#service-reports" class="nav-link" id="service-reports-tab" data-toggle="tab">Service-Berichte</a>
+        </li>
+    @endcan
+    {{-- uploads tab --}}
     @can('view-uploads', App\Models\UploadFile::class)
         <li class="nav-item">
             <a href="#files" class="nav-link" id="file-tab" data-toggle="tab">Dateien</a>
@@ -400,6 +409,12 @@
         <div class="alert bg-info">Es sind keine übergeordneten Steuerungen angelegt.</div>
         @endif
     </div>
+    {{-- service reports tab --}}
+    @can('view-service-reports', App\Models\ServiceReport::class)
+        <div class="tab-pane fade" id="service-reports">
+            <x-service-report-list :reports="$shippingAddress->serviceReports" />
+        </div>
+    @endcan
     {{-- Files tab --}}
     @can('view-uploads', App\Models\UploadFile::class)
         <div class="tab-pane fade" id="files">
