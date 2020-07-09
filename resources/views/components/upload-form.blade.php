@@ -1,4 +1,4 @@
-<form action="{{ $action }}" method="POST" enctype="multipart/form-data" novalidate>
+<form action="{{ $action }}" method="POST" enctype="multipart/form-data">
     @csrf
     <div class="form-group">
         <label>Beschreibung</label>
