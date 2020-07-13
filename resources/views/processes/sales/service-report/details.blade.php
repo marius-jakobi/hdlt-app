@@ -33,6 +33,7 @@
     <p>Text: {{ $report->text }}</p>
     <h2>Service-Techniker</h2>
     <p>Gesamtarbeitszeit: {{ $report->getTotalWorktime() }} h</p>
+    @if ($report->technicians->count() > 0)
     <table class="table">
         <thead>
             <tr>
@@ -51,4 +52,7 @@
             @endforeach
         </tbody>
     </table>
+    @else
+    <div class="alert bg-info">Es sind keine Techniker mit diesem Service-Bericht verknüpft.</div>
+    @endif
 @endsection
