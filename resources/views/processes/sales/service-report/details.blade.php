@@ -23,6 +23,11 @@
         <a href="{{ route('process.sales.details', ['processNumber' => $report->salesProcess->process_number]) }}">
             {{ $report->salesProcess->process_number }}
         </a>
+        /
+        Auftragsbestätigung:
+        <a href="{{ route('process.sales.order-confirmation.details', ['documentNumber' => $report->orderConfirmation->document_number]) }}">
+            {{ $report->orderConfirmation->document_number }}
+        </a>
     </p>
     <p>Einsatzzweck: {{ $report->intent }}</p>
     <p>Text: {{ $report->text }}</p>
