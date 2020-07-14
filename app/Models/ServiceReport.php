@@ -12,6 +12,10 @@ class ServiceReport extends AbstractUuidModel
         return $this->belongsTo(ShippingAddress::class, 'shipping_address_id', 'id');
     }
 
+    public function billingAddress() {
+        return $this->salesProcess->customer->billingAddress();
+    }
+
     public function salesProcess() {
         return $this->orderConfirmation->salesProcess();
     }
