@@ -10946,3 +10946,13 @@ body {
   color: white;
 }
 
+.footer-link {
+  color: white;
+  text-decoration: underline;
+}
+
+.footer-link:hover {
+  color: white;
+  text-decoration: none;
+}
+

@@ -8,8 +8,8 @@
                     </p>
                 </div>
                 <div class="col-sm-12 col-md-6 text-md-right">
-                    <p>Impressum</p>
-                    <p>Datenschutz</p>
+                    <p><a href="{{ route('legal.imprint') }}" class="footer-link">Impressum</a></p>
+                    <p><a href="{{ route('legal.data-protection') }}" class="footer-link">Datenschutz</a></p>
                 </div>
             </div>
         </div>

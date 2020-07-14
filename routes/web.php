@@ -17,6 +17,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/legal/imprint', function() {
+    return view('static.imprint');
+})->name('legal.imprint');
+Route::get('/legal/data-protection', function() {
+    return view('static.data-protection');
+})->name('legal.data-protection');
+
 // Login
 Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('/login', 'Auth\LoginController@login');
