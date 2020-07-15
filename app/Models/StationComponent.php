@@ -50,6 +50,13 @@ class StationComponent extends Model
     ];
 
     /**
+     * Dates
+     */
+    protected $dates = [
+        'next_service'
+    ];
+
+    /**
      * valid component types
      */
     protected static $componentTypes = [
@@ -75,6 +82,10 @@ class StationComponent extends Model
         'sensor' => 'Sensor',
         'controller' => 'Controller'
     ];
+
+    public function getNextServiceAttribute($value) {
+        return \Carbon\Carbon::createFromDate($value)->format('m/Y');
+    }
 
     /**
      * Getter for types
