@@ -68,7 +68,6 @@
             </tr>
         </tbody>
     </table>
-    <h2>Anlagen</h2>
     <table class="table table-bordered table-sm">
         <thead>
             <tr>
