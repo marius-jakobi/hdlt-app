@@ -61,7 +61,7 @@
                         {{ $report->orderConfirmation->document_number }}
                     </a>
                 </td>
-                <td class="bg-warning"><strong>{ %ORDER-123% }</strong></td>
+                <td>{{ $report->orderConfirmation->po_number }}</td>
                 <td>{{ $report->getLocalDate() }}</td>
             </tr>
         </tbody>
