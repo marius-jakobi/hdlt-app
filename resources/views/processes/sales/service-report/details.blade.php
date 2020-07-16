@@ -4,6 +4,8 @@
     <h1>Service-Bericht</h1>
     <p>Bericht-ID: {{ $report->id }}</p>
     <p class="d-none d-print-block">Druckdatum: {{ date('Y-m-d') }}</p>
+
+    {{-- Addresses --}}
     <table class="table table-bordered table-sm">
         <thead>
             <tr>
@@ -40,6 +42,8 @@
             </tr>
         </tbody>
     </table>
+
+    {{-- Report data --}}
     <table class="table table-bordered table-sm">
         <thead>
             <tr>
@@ -68,6 +72,8 @@
             </tr>
         </tbody>
     </table>
+
+    {{-- Components --}}
     <table class="table table-bordered table-sm">
         <thead>
             <tr>
@@ -214,6 +220,7 @@
     <h5>Erläuterung</h5>
     <p>{{ $report->text }}</p>
     <h5>Service-Techniker</h5>
+    {{-- Technicians --}}
     @if ($report->technicians->count() > 0)
     <table class="table table-bordered table-sm">
         <thead>
@@ -241,5 +248,6 @@
     @else
     <div class="alert bg-info">Es sind keine Techniker mit diesem Service-Bericht verknüpft.</div>
     @endif
+    {{-- Print button --}}
     <button onclick="window.print()" class="btn btn-secondary d-print-none">Drucken</button>
 @endsection
