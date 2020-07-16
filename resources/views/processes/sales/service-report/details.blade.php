@@ -3,6 +3,7 @@
 @section('content')
     <h1>Service-Bericht</h1>
     <p>Bericht-ID: {{ $report->id }}</p>
+    <p class="d-none d-print-block">Druckdatum: {{ date('Y-m-d') }}</p>
     <table class="table table-bordered table-sm">
         <thead>
             <tr>
