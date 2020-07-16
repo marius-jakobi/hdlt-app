@@ -2,6 +2,7 @@
 
 @section('content')
     <h1>Service-Bericht</h1>
+    <p>Bericht-ID: {{ $report->id }}</p>
     <table class="table table-bordered table-sm">
         <thead>
             <tr>
