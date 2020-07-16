@@ -242,5 +242,5 @@
     @else
     <div class="alert bg-info">Es sind keine Techniker mit diesem Service-Bericht verknüpft.</div>
     @endif
-    <p>Bericht-ID: {{ $report->id }}</p>
+    <button onclick="window.print()" class="btn btn-secondary d-print-none">Drucken</button>
 @endsection
