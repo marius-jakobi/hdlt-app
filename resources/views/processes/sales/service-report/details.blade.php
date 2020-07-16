@@ -222,31 +222,31 @@
     <h5>Service-Techniker</h5>
     {{-- Technicians --}}
     @if ($report->technicians->count() > 0)
-    <table class="table table-bordered table-sm">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Vorname</th>
-                <th>Arbeitszeit</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($report->technicians as $technician)
-            <tr>
-                <td>{{ $technician->name_last }}</td>
-                <td>{{ $technician->name_first }}</td>
-                <td>{{ $technician->pivot->work_time }} h</td>
-            </tr>
-            @endforeach
-            <tr>
-                <td colspan="3">
-                    <div class="text-right">Gesamtarbeitszeit: {{ $report->getTotalWorktime() }} h</div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+        <table class="table table-bordered table-sm">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Vorname</th>
+                    <th>Arbeitszeit</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($report->technicians as $technician)
+                <tr>
+                    <td>{{ $technician->name_last }}</td>
+                    <td>{{ $technician->name_first }}</td>
+                    <td>{{ $technician->pivot->work_time }} h</td>
+                </tr>
+                @endforeach
+                <tr>
+                    <td colspan="3">
+                        <div class="text-right">Gesamtarbeitszeit: {{ $report->getTotalWorktime() }} h</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     @else
-    <div class="alert bg-info">Es sind keine Techniker mit diesem Service-Bericht verknüpft.</div>
+        <div class="alert bg-info">Es sind keine Techniker mit diesem Service-Bericht verknüpft.</div>
     @endif
     {{-- Print button --}}
     <button onclick="window.print()" class="btn btn-secondary d-print-none">Drucken</button>
