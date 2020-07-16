@@ -67,216 +67,146 @@
         </tbody>
     </table>
     <h2>Anlagen</h2>
-    {{-- adsorbers --}}
-    @if ($report->adsorbers()->count() > 0)
-        <table class="table table-bordered table-sm">
-            <tr>
-                <th colspan="5">Adsorber</th>
-            </tr>
+    <table class="table table-bordered table-sm">
+        <thead>
             <tr>
                 <th>Hersteller</th>
                 <th>Typ</th>
                 <th>S/N</th>
                 <th>Umfang</th>
                 <th>nächster Service</th>
-            </tr>
-            @foreach($report->adsorbers() as $adsorber)
-                <tr>
-                    <td>{{ $adsorber->brand }}</td>
-                    <td>{{ $adsorber->model }}</td>
-                    <td>{{ $adsorber->serial }}</td>
-                    <td>{{ $adsorber->scope }}</td>
-                    <td>{{ $adsorber->next_service }}</td>
-                </tr>
-            @endforeach
-        </table>
-    @endif
-    {{-- ad dryers --}}
-    @if ($report->adDryers()->count() > 0)
-        <table class="table table-bordered table-sm">
-            <tr>
-                <th colspan="5">Adsorptionstrockner</th>
-            </tr>
-            <tr>
-                <th>Hersteller</th>
-                <th>Typ</th>
-                <th>S/N</th>
-                <th>Umfang</th>
-                <th>nächster Service</th>
-            </tr>
-            @foreach($report->adDryers() as $ad_dryer)
-                <tr>
-                    <td>{{ $ad_dryer->brand }}</td>
-                    <td>{{ $ad_dryer->model }}</td>
-                    <td>{{ $ad_dryer->serial }}</td>
-                    <td>{{ $ad_dryer->scope }}</td>
-                    <td>{{ $ad_dryer->next_service }}</td>
-                </tr>
-            @endforeach
-        </table>
-    @endif
-    {{-- controllers --}}
-    @if ($report->controllers()->count() > 0)
-        <table class="table table-bordered table-sm">
-            <tr>
-                <th colspan="4">Steuerungen</th>
-            </tr>
-            <tr>
-                <th>Hersteller</th>
-                <th>Typ</th>
-                <th>S/N</th>
-                <th>Umfang</th>
-            </tr>
-            @foreach($report->controllers() as $controller)
-                <tr>
-                    <td>{{ $controller->brand }}</td>
-                    <td>{{ $controller->model }}</td>
-                    <td>{{ $controller->serial }}</td>
-                    <td>{{ $controller->scope }}</td>
-                </tr>
-            @endforeach
-        </table>
-    @endif
-    {{-- compressors --}}
-    @if ($report->compressors()->count() > 0)
-        <table class="table table-bordered table-sm">
-            <tr>
-                <th colspan="7">Kompressoren</th>
-            </tr>
-            <tr>
-                <th>Hersteller</th>
-                <th>Typ</th>
-                <th>S/N</th>
-                <th>Umfang</th>
                 <th>Betriebsstunden</th>
                 <th>Laststunden</th>
-                <th>nächster Service</th>
             </tr>
-            @foreach($report->compressors() as $compressor)
-                <tr>
-                    <td>{{ $compressor->brand }}</td>
-                    <td>{{ $compressor->model }}</td>
-                    <td>{{ $compressor->serial }}</td>
-                    <td>{{ $compressor->scope }}</td>
-                    <td>{{ $compressor->hours_running }}</td>
-                    <td>{{ $compressor->hours_loaded }}</td>
-                    <td>{{ $compressor->next_service }}</td>
-                </tr>
-            @endforeach
-        </table>
-    @endif
-    {{-- filters --}}
-    @if ($report->filters()->count() > 0)
-        <table class="table table-bordered table-sm">
-            <tr>
-                <th colspan="4">Filter</th>
-            </tr>
-            <tr>
-                <th>Hersteller</th>
-                <th>Typ</th>
-                <th>Element</th>
-                <th>nächster Service</th>
-            </tr>
-            @foreach($report->filters() as $filter)
-                <tr>
-                    <td>{{ $filter->brand }}</td>
-                    <td>{{ $filter->model }}</td>
-                    <td>{{ $filter->element }}</td>
-                    <td>{{ $filter->scope }}</td>
-                </tr>
-            @endforeach
-        </table>
-    @endif
-    {{-- receivers --}}
-    @if ($report->receivers()->count() > 0)
-        <table class="table table-bordered table-sm">
-            <tr>
-                <th colspan="4">Behälter</th>
-            </tr>
-            <tr>
-                <th>Hersteller</th>
-                <th>Inhalt</th>
-                <th>S/N</th>
-                <th>Umfang</th>
-            </tr>
-            @foreach($report->receivers() as $receiver)
-                <tr>
-                    <td>{{ $receiver->brand }}</td>
-                    <td>{{ $receiver->volume }} Liter</td>
-                    <td>{{ $receiver->serial }}</td>
-                    <td>{{ $receiver->scope }}</td>
-                </tr>
-            @endforeach
-        </table>
-    @endif
-    {{-- ref dryers --}}
-    @if ($report->refDryers()->count() > 0)
-        <table class="table table-bordered table-sm">
-            <tr>
-                <th colspan="5">Kältetrockner</th>
-            </tr>
-            <tr>
-                <th>Hersteller</th>
-                <th>Typ</th>
-                <th>S/N</th>
-                <th>Umfang</th>
-                <th>nächster Service</th>
-            </tr>
-            @foreach($report->refDryers() as $refDryer)
-                <tr>
-                    <td>{{ $refDryer->brand }}</td>
-                    <td>{{ $refDryer->model }}</td>
-                    <td>{{ $refDryer->serial }}</td>
-                    <td>{{ $refDryer->scope }}</td>
-                    <td>{{ $refDryer->next_service }}</td>
-                </tr>
-            @endforeach
-        </table>
-    @endif
-    {{-- sensors --}}
-    @if ($report->sensors()->count() > 0)
-        <table class="table table-bordered table-sm">
-            <tr>
-                <th colspan="4">Sensoren</th>
-            </tr>
-            <tr>
-                <th>Hersteller</th>
-                <th>Typ</th>
-                <th>S/N</th>
-                <th>Umfang</th>
-            </tr>
-            @foreach($report->sensors() as $sensor)
-                <tr>
-                    <td>{{ $sensor->brand }}</td>
-                    <td>{{ $sensor->model }}</td>
-                    <td>{{ $sensor->serial }}</td>
-                    <td>{{ $sensor->scope }}</td>
-                </tr>
-            @endforeach
-        </table>
-    @endif
-    {{-- separators --}}
-    @if ($report->separators()->count() > 0)
-        <table class="table table-bordered table-sm">
-            <tr>
-                <th colspan="4">Öl-Wasser-Trenner</th>
-            </tr>
-            <tr>
-                <th>Hersteller</th>
-                <th>Typ</th>
-                <th>Umfang</th>
-                <th>nächster Service</th>
-            </tr>
-            @foreach($report->separators() as $separator)
-                <tr>
-                    <td>{{ $separator->brand }}</td>
-                    <td>{{ $separator->model }}</td>
-                    <td>{{ $separator->scope }}</td>
-                    <td>{{ $separator->next_service }}</td>
-                </tr>
-            @endforeach
-        </table>
-    @endif
+        </thead>
+        <tbody>
+            {{-- adsorbers --}}
+            @if ($report->adsorbers()->count() > 0)
+                @foreach($report->adsorbers() as $adsorber)
+                    <tr>
+                        <td>{{ $adsorber->brand }}</td>
+                        <td>{{ $adsorber->model }}</td>
+                        <td>{{ $adsorber->serial }}</td>
+                        <td>{{ $adsorber->scope }}</td>
+                        <td>{{ $adsorber->next_service }}</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                @endforeach
+            @endif
+            {{-- ad dryers --}}
+            @if ($report->adDryers()->count() > 0)
+                @foreach($report->adDryers() as $ad_dryer)
+                    <tr>
+                        <td>{{ $ad_dryer->brand }}</td>
+                        <td>{{ $ad_dryer->model }}</td>
+                        <td>{{ $ad_dryer->serial }}</td>
+                        <td>{{ $ad_dryer->scope }}</td>
+                        <td>{{ $ad_dryer->next_service }}</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                @endforeach
+            @endif
+            {{-- controllers --}}
+            @if ($report->controllers()->count() > 0)
+                @foreach($report->controllers() as $controller)
+                    <tr>
+                        <td>{{ $controller->brand }}</td>
+                        <td>{{ $controller->model }}</td>
+                        <td>{{ $controller->serial }}</td>
+                        <td>{{ $controller->scope }}</td>
+                        <td></td>
+                    </tr>
+                @endforeach
+            @endif
+            {{-- compressors --}}
+            @if ($report->compressors()->count() > 0)
+                @foreach($report->compressors() as $compressor)
+                    <tr>
+                        <td>{{ $compressor->brand }}</td>
+                        <td>{{ $compressor->model }}</td>
+                        <td>{{ $compressor->serial }}</td>
+                        <td>{{ $compressor->scope }}</td>
+                        <td>{{ $compressor->next_service }}</td>
+                        <td>{{ $compressor->hours_running }} h</td>
+                        <td>{{ $compressor->hours_loaded }} h</td>
+                    </tr>
+                @endforeach
+            @endif
+            {{-- filters --}}
+            @if ($report->filters()->count() > 0)
+                @foreach($report->filters() as $filter)
+                    <tr>
+                        <td>{{ $filter->brand }}</td>
+                        <td>{{ $filter->model }}</td>
+                        <td>{{ $filter->element }}</td>
+                        <td>{{ $filter->scope }}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                @endforeach
+            @endif
+            {{-- receivers --}}
+            @if ($report->receivers()->count() > 0)
+            
+                @foreach($report->receivers() as $receiver)
+                    <tr>
+                        <td>{{ $receiver->brand }}</td>
+                        <td>{{ $receiver->volume }} Liter</td>
+                        <td>{{ $receiver->serial }}</td>
+                        <td>{{ $receiver->scope }}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                @endforeach
+            @endif
+            {{-- ref dryers --}}
+            @if ($report->refDryers()->count() > 0)
+                @foreach($report->refDryers() as $refDryer)
+                    <tr>
+                        <td>{{ $refDryer->brand }}</td>
+                        <td>{{ $refDryer->model }}</td>
+                        <td>{{ $refDryer->serial }}</td>
+                        <td>{{ $refDryer->scope }}</td>
+                        <td>{{ $refDryer->next_service }}</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                @endforeach
+            @endif
+            {{-- sensors --}}
+            @if ($report->sensors()->count() > 0)
+                @foreach($report->sensors() as $sensor)
+                    <tr>
+                        <td>{{ $sensor->brand }}</td>
+                        <td>{{ $sensor->model }}</td>
+                        <td>{{ $sensor->serial }}</td>
+                        <td>{{ $sensor->scope }}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                @endforeach
+            @endif
+            {{-- separators --}}
+            @if ($report->separators()->count() > 0)
+                @foreach($report->separators() as $separator)
+                    <tr>
+                        <td>{{ $separator->brand }}</td>
+                        <td>{{ $separator->model }}</td>
+                        <td>{{ $separator->scope }}</td>
+                        <td>{{ $separator->next_service }}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                @endforeach
+            @endif
+        </tbody>
+    </table>
 
     <h5>Einsatzzweck</h5>
     <p>{{ $report->intent }}</p>
