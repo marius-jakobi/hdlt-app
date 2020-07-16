@@ -89,6 +89,7 @@
         <tbody>
             {{-- adsorbers --}}
             @if ($report->adsorbers()->count() > 0)
+                <tr><th colspan="7" class="text-center">Adsorber</th></tr>
                 @foreach($report->adsorbers() as $adsorber)
                     <tr>
                         <td>{{ $adsorber->brand }}</td>
@@ -103,6 +104,7 @@
             @endif
             {{-- ad dryers --}}
             @if ($report->adDryers()->count() > 0)
+                <tr><th colspan="7" class="text-center">Adsorptionstrockner</th></tr>
                 @foreach($report->adDryers() as $ad_dryer)
                     <tr>
                         <td>{{ $ad_dryer->brand }}</td>
@@ -117,6 +119,7 @@
             @endif
             {{-- controllers --}}
             @if ($report->controllers()->count() > 0)
+                <tr><th colspan="7" class="text-center">Steuerungen</th></tr>
                 @foreach($report->controllers() as $controller)
                     <tr>
                         <td>{{ $controller->brand }}</td>
@@ -129,6 +132,7 @@
             @endif
             {{-- compressors --}}
             @if ($report->compressors()->count() > 0)
+                <tr><th colspan="7" class="text-center">Kompressoren</th></tr>
                 @foreach($report->compressors() as $compressor)
                     <tr>
                         <td>{{ $compressor->brand }}</td>
@@ -143,6 +147,7 @@
             @endif
             {{-- filters --}}
             @if ($report->filters()->count() > 0)
+                <tr><th colspan="7" class="text-center">Filter</th></tr>
                 @foreach($report->filters() as $filter)
                     <tr>
                         <td>{{ $filter->brand }}</td>
@@ -157,7 +162,7 @@
             @endif
             {{-- receivers --}}
             @if ($report->receivers()->count() > 0)
-            
+                <tr><th colspan="7" class="text-center">Behälter</th></tr>
                 @foreach($report->receivers() as $receiver)
                     <tr>
                         <td>{{ $receiver->brand }}</td>
@@ -172,6 +177,7 @@
             @endif
             {{-- ref dryers --}}
             @if ($report->refDryers()->count() > 0)
+                <tr><th colspan="7" class="text-center">Kältetrockner</th></tr>
                 @foreach($report->refDryers() as $refDryer)
                     <tr>
                         <td>{{ $refDryer->brand }}</td>
@@ -186,6 +192,7 @@
             @endif
             {{-- sensors --}}
             @if ($report->sensors()->count() > 0)
+                <tr><th colspan="7" class="text-center">Sensoren</th></tr>
                 @foreach($report->sensors() as $sensor)
                     <tr>
                         <td>{{ $sensor->brand }}</td>
@@ -200,6 +207,7 @@
             @endif
             {{-- separators --}}
             @if ($report->separators()->count() > 0)
+                <tr><th colspan="7" class="text-center">Öl-Wasser-Trenner</th></tr>
                 @foreach($report->separators() as $separator)
                     <tr>
                         <td>{{ $separator->brand }}</td>
