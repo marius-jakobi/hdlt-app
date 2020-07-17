@@ -2,7 +2,7 @@
 
 @section('content')
     <h1>Verkaufsvorgang anlegen</h1>
-    <p>Kunde: <a href="#">{{ $customer->description }}</a></p>
+    <p>Kunde: <a href="{{ route('customer.details', ['customerId' => $customer->id]) }}">{{ $customer->description }}</a></p>
     <form action="" method="post" novalidate>
         @csrf
         <div class="form-group">
