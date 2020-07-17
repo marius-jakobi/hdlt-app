@@ -7,11 +7,11 @@
         {{ "$shippingAddress->name, $shippingAddress->street, $shippingAddress->zip $shippingAddress->city" }}
     </a>
 </p>
-<form novalidate action="{{ route('component.store', ['customerId' => $shippingAddress->customer->id, 'addressId' => $shippingAddress->id, 'type' => $type]) }}" method="post">
+<form action="{{ route('component.store', ['customerId' => $shippingAddress->customer->id, 'addressId' => $shippingAddress->id, 'type' => $type]) }}" method="post">
     @csrf
     <div class="form-group">
         <label>Hersteller</label>
-        <select name="brand_id" class="form-control @error('brand_id') is-invalid @enderror" autofocus>
+        <select name="brand_id" class="form-control @error('brand_id') is-invalid @enderror" required autofocus>
             <option></option>
             @foreach($brands as $brand)
                 <option value="{{ $brand->id }}" @if(old('brand_id') == $brand->id)) selected @endif>{{ $brand->name }}</option>
@@ -25,7 +25,7 @@
         <div class="form-group">
             <label>Volumen</label>
             <div class="input-group">
-                <input type="number" name="volume" class="form-control  @error('volume') is-invalid @enderror" value="{{ old('volume') }}" min="0" step="1">
+                <input type="number" name="volume" class="form-control  @error('volume') is-invalid @enderror" value="{{ old('volume') }}" min="0" max="100000" step="1" required />
                 <div class="input-group-append">
                     <span class="input-group-text">Liter</span>
                 </div>
@@ -37,7 +37,7 @@
     @else
         <div class="form-group">
             <label>{{ $type == 'filter' ? 'Filtertasse' : 'Modell'}}</label>
-            <input type="text" name="model" class="form-control  @error('model') is-invalid @enderror" value="{{ old('model') }}">
+            <input type="text" name="model" class="form-control  @error('model') is-invalid @enderror" value="{{ old('model') }}" required>
         </div>
         @error('model')
             <p class="text-danger">{{ $message }}</p>
@@ -46,7 +46,7 @@
     @if ($type == 'filter')
         <div class="form-group">
             <label>Filterelement</label>
-            <input type="text" name="element" class="form-control  @error('element') is-invalid @enderror" value="{{ old('element') }}">
+            <input type="text" name="element" class="form-control  @error('element') is-invalid @enderror" value="{{ old('element') }}" />
         </div>
         @error('element')
             <p class="text-danger">{{ $message }}</p>
@@ -55,14 +55,14 @@
     @if ($type != 'filter' && $type != 'separator')
         <div class="form-group">
             <label>Seriennummer</label>
-            <input type="text" name="serial" class="form-control  @error('serial') is-invalid @enderror" value="{{ old('serial') }}">
+            <input type="text" name="serial" class="form-control  @error('serial') is-invalid @enderror" value="{{ old('serial') }}" required />
         </div>
         @error('serial')
             <p class="text-danger">{{ $message }}</p>
         @enderror
         <div class="form-group">
             <label>Baujahr</label>
-            <input type="number" name="year" class="form-control  @error('year') is-invalid @enderror" value="{{ old('year') }}" min="1900" max="3000">
+            <input type="number" name="year" class="form-control  @error('year') is-invalid @enderror" value="{{ old('year') }}" min="1900" max="2100" required />
         </div>
         @error('year')
             <p class="text-danger">{{ $message }}</p>
@@ -72,7 +72,7 @@
         <div class="form-group">
             <label>Maximaldruck</label>
             <div class="input-group">
-                <input type="number" name="pressure" class="form-control  @error('pressure') is-invalid @enderror" value="{{ old('pressure') }}" min="0" max="1000" step="0.01">
+                <input type="number" name="pressure" class="form-control  @error('pressure') is-invalid @enderror" value="{{ old('pressure') }}" min="0" max="500" step="0.01">
                 <div class="input-group-append">
                     <span class="input-group-text">bar</span>
                 </div>
@@ -104,7 +104,7 @@
             <div class="col-md-6 col-sm-12">
                 <div class="form-group">
                     <label>Kältemittel (Sorte)</label>
-                    <select name="ref_type" class="form-control  @error('ref_type') is-invalid @enderror">
+                    <select name="ref_type" class="form-control  @error('ref_type') is-invalid @enderror" required>
                         <option value=""></option>
                         @foreach($refTypes as $key => $value)
                             <option value="{{ $key }}" class=" @if($value['forbidden'] === true) text-danger @endif " @if (old('ref_type') === $key) selected @endif>
@@ -122,7 +122,7 @@
                 <div class="form-group">
                     <label>Kältemittel (Menge)</label>
                     <div class="input-group">
-                        <input type="number" name="ref_amount" class="form-control  @error('ref_amount') is-invalid @enderror" value="{{ old('ref_amount') }}" min="0" max="100" step="0.01">
+                        <input type="number" name="ref_amount" class="form-control  @error('ref_amount') is-invalid @enderror" value="{{ old('ref_amount') }}" min="0" max="100" step="0.01" required />
                         <div class="input-group-append">
                             <span class="input-group-text">Kilogramm</span>
                         </div>
