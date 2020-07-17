@@ -15,7 +15,7 @@
     <li class="nav-item">
         <a href="#data" class="nav-link active" id="base-data-tab" data-toggle="tab">Daten</a>
     </li>
-    @can('view-uploads', App\Models\UploadFile::class)
+    @can('view', App\Models\UploadFile::class)
         <li class="nav-item">
             <a href="#files" class="nav-link" id="files-tab" data-toggle="tab">Dateien</a>
         </li>
@@ -213,9 +213,9 @@
             @endcannot
     </div>
     {{-- File tab --}}
-    @can('view-uploads', App\Models\UploadFile::class)
+    @can('view', App\Models\UploadFile::class)
         <div class="tab-pane fade show" id="files">
-            @can('upload-files', App\Models\UploadFile::class)
+            @can('upload', App\Models\UploadFile::class)
                 <x-upload-form action="{{ route('upload.file.component', ['customerId' => $component->shippingAddress->customer->id, 'addressId' => $component->shippingAddress->id, 'type' => $type, 'componentId' => $component->id]) }}" />
             @endcan
             <div class="mt-3">

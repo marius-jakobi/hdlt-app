@@ -9,11 +9,11 @@ class UploadPolicy
 {
     use HandlesAuthorization;
 
-    public function uploadFiles(User $user) {
+    public function upload(User $user) {
         return $user->hasPermission('upload-files');
     }
 
-    public function viewUploads(User $user) {
+    public function view(User $user) {
         return $user->hasPermission('view-uploads');
     }
 }
