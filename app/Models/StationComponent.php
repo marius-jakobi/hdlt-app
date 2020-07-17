@@ -84,7 +84,7 @@ class StationComponent extends Model
     ];
 
     public function getNextServiceAttribute($value) {
-        return \Carbon\Carbon::createFromDate($value)->format('m/Y');
+        return \Carbon\Carbon::createFromDate($value)->format('Y-m');
     }
 
     /**
@@ -153,10 +153,6 @@ class StationComponent extends Model
                 Rule::in(RefDryer::getRefTypeNames())
             ];
             $validationRules['ref_amount'] = 'required|numeric|min:0|max:100';
-        }
-
-        if (in_array($type, ['compressor', 'filter', 'ad_dryer', 'adsorber', 'separator'])) {
-            $validationRules['next_service'] = 'required|date';
         }
 
         return $validationRules;

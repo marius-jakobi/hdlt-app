@@ -164,7 +164,7 @@
                 @endif
                 <div class="form-group">
                     <label>Nächster Service</label>
-                    <input type="date" name="next_service" class="form-control @error('next_service') is-invalid @enderror" value="{{ $component->next_service }}">
+                    <input type="month" name="next_service" class="form-control @error('next_service') is-invalid @enderror" value="{{ $component->next_service }}">
                 </div>
                 @error('next_service')
                     <p class="text-danger">{{ $message }}</p>

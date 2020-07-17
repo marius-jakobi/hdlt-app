@@ -72,7 +72,7 @@
         <div class="form-group">
             <label>Maximaldruck</label>
             <div class="input-group">
-                <input type="number" name="pressure" class="form-control  @error('pressure') is-invalid @enderror" value="{{ old('pressure') }}" min="0" max="500" step="0.01">
+                <input type="number" name="pressure" class="form-control  @error('pressure') is-invalid @enderror" value="{{ old('pressure') }}" min="0" max="500" step="0.01" required />
                 <div class="input-group-append">
                     <span class="input-group-text">bar</span>
                 </div>
@@ -137,7 +137,7 @@
     @if (in_array($type, ['compressor', 'filter', 'ad_dryer', 'adsorber', 'separator']))
         <div class="form-group">
             <label>Nächster Service</label>
-            <input type="date" name="next_service" class="form-control @error('next_service') is-invalid @enderror" value="{{ old('next_service') }}">
+            <input type="month" name="next_service" class="form-control @error('next_service') is-invalid @enderror" value="{{ old('next_service') }}">
         </div>
         @error('next_service')
             <p class="text-danger">{{ $message }}</p>
