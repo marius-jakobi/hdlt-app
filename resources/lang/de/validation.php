@@ -189,6 +189,8 @@ return [
         'next_service'          => 'Nächster Service',
         'file'                  => 'Datei',
         'cust_id'               => 'Debitor',
-        'process_number'        => 'Vorgangsnummer'
+        'process_number'        => 'Vorgangsnummer',
+        'document_number'       => 'Belegnummer',
+        'po_number'             => 'Bestellnummer'
     ],
 ];

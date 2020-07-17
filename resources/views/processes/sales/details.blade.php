@@ -9,6 +9,9 @@
         </a>
     </p>
     <h2>Auftragsbestätigungen</h2>
+    @can('create-order-confirmation', App\Models\OrderConfirmation::class)
+        <a href="{{ route('process.sales.order-confirmation.create', ['processNumber' => $process->process_number]) }}">Auftragsbestätigung erstellen</a>
+    @endcan
     <table class="table">
         <thead>
             <tr>

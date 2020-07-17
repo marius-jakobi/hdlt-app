@@ -14,6 +14,7 @@
             {{ $orderConfirmation->salesProcess->process_number }}
         </a>
     </p>
+    <p>Bestellnummer (Kunde): {{ $orderConfirmation->po_number }}</p>
     <h2>Service-Berichte</h2>
     @if ($orderConfirmation->serviceReports->count() > 0)
         <x-service-report-list :reports="$orderConfirmation->serviceReports" />
