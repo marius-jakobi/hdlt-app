@@ -115,7 +115,7 @@ class PermissionController extends Controller
      * @return View
      */
     public function list() {
-        return view('permission.list', ['permissions' => Permission::all()]);
+        return view('permission.list', ['permissions' => Permission::orderBy('name', 'asc')->get()]);
     }
 
     /**
