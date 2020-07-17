@@ -41,10 +41,12 @@ class SalesProcessController extends Controller
                 ->with('error', 'Dieser Kunde existiert nicht.');
         }
 
-        DB::table('process_sales')->insert([
+        $salesProcess = new SalesProcess([
             'process_number' => $request->input('process_number'),
             'customer_id' => $customer->id
         ]);
+        
+        $salesProcess->save();
 
         return redirect(route('process.sales.details', ['processNumber' => $request->input('process_number')]))
             ->with('success', 'Der Vorgang wurde angelegt.');
