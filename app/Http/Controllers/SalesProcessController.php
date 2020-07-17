@@ -23,7 +23,7 @@ class SalesProcessController extends Controller
 
     public function store(Request $request, string $custId) {
         $rules = [
-            'process_number' => 'required|size:6'
+            'process_number' => 'required|size:6|unique:process_sales'
         ];
 
         $validator = Validator::make($request->input(), $rules);
