@@ -3,7 +3,7 @@
 @section('content')
     <h1>Verkaufsvorgang anlegen</h1>
     <p>Kunde: <a href="{{ route('customer.details', ['customerId' => $customer->id]) }}">{{ $customer->description }}</a></p>
-    <form action="{{ route('process.sales.store', ['custId' => $customer->cust_id]) }}" method="post" novalidate>
+    <form action="{{ route('process.sales.store', ['custId' => $customer->cust_id]) }}" method="post">
         @csrf
         <div class="form-group">
             <label>Vorgangsnummer</label>
