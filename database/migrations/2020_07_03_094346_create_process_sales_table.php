@@ -15,8 +15,7 @@ class CreateSalesProcessTable extends Migration
     {
         Schema::create('process_sales', function (Blueprint $table) {
             $table->id();
-            $table->integer('process_number')->unique()
-                ->comment('Interne Vorgangsnummer ohne führende 0');
+            $table->string('process_number', 6)->unique();
             $table->foreignId('customer_id')->references('id')->on('customers')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
