@@ -125,7 +125,7 @@ class RoleController extends Controller
 
         $availablePermissions = [];
 
-        foreach (Permission::all() as $permission) {
+        foreach (Permission::orderBy('name', 'asc')->get() as $permission) {
             if (!$role->hasPermission($permission->name)) {
                 $availablePermissions[] = $permission;
             }
