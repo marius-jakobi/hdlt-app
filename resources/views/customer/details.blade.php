@@ -14,7 +14,7 @@
     <li class="nav-item">
         <a href="#addresses" class="nav-link active" id="addresses-tab" data-toggle="tab">Adressen</a>
     </li>
-    @can('view-sales-processes', App\Models\SalesProcess::class)
+    @can('view', App\Models\SalesProcess::class)
     <li class="nav-item">
         <a href="#processes" class="nav-link" id="processes-tab" data-toggle="tab">Vorgänge</a>
     </li>
@@ -84,7 +84,7 @@
         @endif
     </div>
     {{-- Processes tab --}}
-    @can('view-sales-processes', App\Models\SalesProcess::class)
+    @can('view', App\Models\SalesProcess::class)
     <div class="tab-pane fade show" id="processes">
         <h2>Verkaufsvorgänge</h2>
         @can('create-sales-process', App\Models\SalesProcess::class)

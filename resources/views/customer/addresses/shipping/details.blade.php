@@ -19,7 +19,7 @@
         <a href="#components" class="nav-link" id="component-tab" data-toggle="tab">Anlagen</a>
     </li>
     {{-- service reports tab --}}
-    @can('view-service-reports', App\Models\ServiceReport::class)
+    @can('view', App\Models\ServiceReport::class)
         <li class="nav-item">
             <a href="#service-reports" class="nav-link" id="service-reports-tab" data-toggle="tab">Service-Berichte</a>
         </li>
@@ -410,7 +410,7 @@
         @endif
     </div>
     {{-- service reports tab --}}
-    @can('view-service-reports', App\Models\ServiceReport::class)
+    @can('view', App\Models\ServiceReport::class)
         <div class="tab-pane fade" id="service-reports">
             <x-service-report-list :reports="$shippingAddress->serviceReports" />
         </div>

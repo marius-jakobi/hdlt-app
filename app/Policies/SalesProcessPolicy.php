@@ -9,7 +9,7 @@ class SalesProcessPolicy
 {
     use HandlesAuthorization;
 
-    public function viewSalesProcesses(User $user) {
+    public function view(User $user) {
         return $user->hasPermission('view-sales-processes');
     }
 }
