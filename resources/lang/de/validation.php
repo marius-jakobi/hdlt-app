@@ -188,6 +188,7 @@ return [
         'type'                  => 'Typ',
         'next_service'          => 'Nächster Service',
         'file'                  => 'Datei',
-        'cust_id'               => 'Debitor'
+        'cust_id'               => 'Debitor',
+        'process_number'        => 'Vorgangsnummer'
     ],
 ];

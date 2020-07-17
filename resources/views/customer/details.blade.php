@@ -87,6 +87,9 @@
     @can('view-sales-processes', App\Models\SalesProcess::class)
     <div class="tab-pane fade show" id="processes">
         <h2>Verkaufsvorgänge</h2>
+        @can('create-sales-process', App\Models\SalesProcess::class)
+            <a href="{{ route('process.sales.create', ['custId' => $customer->cust_id]) }}">Verkaufsvorgang anlegen</a>
+        @endcan
         @if ($customer->salesProcesses->count() > 0)
             <table class="table">
                 <thead>
