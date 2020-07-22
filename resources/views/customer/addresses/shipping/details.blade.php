@@ -412,6 +412,11 @@
     {{-- service reports tab --}}
     @can('view', App\Models\ServiceReport::class)
         <div class="tab-pane fade" id="service-reports">
+            @can('create', App\Models\ServiceReport::class)
+                <p class="mt-3">
+                    <a href="{{ route('process.sales.service-report.create', ['shippingAddressId' => $shippingAddress->id]) }}">Service-Bericht erstellen</a>
+                </p>
+            @endcan
             <x-service-report-list :reports="$shippingAddress->serviceReports" />
         </div>
     @endcan

@@ -117,8 +117,9 @@ Route::middleware('auth')->group(function () {
     Route::get('sales/process/{processNumber}', 'SalesProcessController@details')->name('process.sales.details');
     
     // Service report routes
+    Route::get('sales/service-report/create/{shippingAddressId}', 'ServiceReportController@create')->name('process.sales.service-report.create');
+    
     Route::get('sales/service-report/{reportId}', 'ServiceReportController@details')->name('process.sales.service-report.details');
-    Route::get('sales/service-report/create/{documentNumber}', 'ServiceReportController@create')->name('process.sales.service-report.create');
     
     // Order confirmations
     Route::get('sales/order-confirmation/create/{processNumber}', 'OrderConfirmationController@create')->name('process.sales.order-confirmation.create');

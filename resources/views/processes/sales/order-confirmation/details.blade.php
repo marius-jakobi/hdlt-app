@@ -16,9 +16,6 @@
     </p>
     <p>Bestellnummer (Kunde): {{ $orderConfirmation->po_number }}</p>
     <h2>Service-Berichte</h2>
-    <p>
-        <a href="{{ route('process.sales.service-report.create', ['documentNumber' => $orderConfirmation->document_number]) }}">Neuen Service-Bericht erstellen</a>
-    </p>
     @if ($orderConfirmation->serviceReports->count() > 0)
         <x-service-report-list :reports="$orderConfirmation->serviceReports" />
     @else

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\OrderConfirmation;
 use App\Models\ServiceReport;
+use App\Models\ShippingAddress;
 use Illuminate\Http\Request;
 
 class ServiceReportController extends Controller
@@ -14,13 +15,11 @@ class ServiceReportController extends Controller
         ]);
     }
 
-    public function create(string $documentNumber) {
-        $orderConfirmation = OrderConfirmation::where('document_number', $documentNumber)->firstOrFail();
-        $shippingAddresses = $orderConfirmation->salesProcess->customer->shippingAddresses;
+    public function create(string $shippingAddressId) {
+        $shippingAddress = ShippingAddress::where('id', $shippingAddressId)->firstOrFail();
 
         return view('processes.sales.service-report.create', [
-            'orderConfirmation' => $orderConfirmation,
-            'shippingAddresses' => $shippingAddresses
+            'shippingAddress' => $shippingAddress,
         ]);
     }
 }
