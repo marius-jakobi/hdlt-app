@@ -1,18 +1,9 @@
 @extends('layouts.app')
 
-@push('scripts')
-<script>
-    setInterval(() => {
-        document.getElementById('time').innerHTML = new Date().toLocaleString();
-    }, 1000);
-</script>
-@endpush
-
 @section('content')
 <div class="row">
     <div class="col-12">
         <h1>{{ $greeting }}</h1>
-        <p id="time"></p>
     </div>
 </div>
 @can('view-search-results', App\Models\User::class)
