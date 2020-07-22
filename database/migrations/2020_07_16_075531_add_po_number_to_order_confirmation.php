@@ -14,7 +14,7 @@ class AddPoNumberToOrderConfirmation extends Migration
     public function up()
     {
         Schema::table('order_confirmations', function (Blueprint $table) {
-            $table->string('po_number', 100)->after('sales_process_id');
+            $table->string('po_number', 100)->nullable()->after('sales_process_id');
         });
     }
 
