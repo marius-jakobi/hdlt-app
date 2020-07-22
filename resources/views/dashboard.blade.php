@@ -4,7 +4,6 @@
 <script>
     setInterval(() => {
         document.getElementById('time').innerHTML = new Date().toLocaleString();
-        console.log(this);
     }, 1000);
 </script>
 @endpush
