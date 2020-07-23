@@ -17,9 +17,17 @@ class ServiceReportController extends Controller
 
     public function create(string $shippingAddressId) {
         $shippingAddress = ShippingAddress::where('id', $shippingAddressId)->firstOrFail();
+        $orderConfirmations = [];
+
+        foreach($shippingAddress->customer->salesProcesses as $process) {
+            foreach($process->orderConfirmations as $orderConfirmation) {
+                $orderConfirmations[] = $orderConfirmation;
+            }
+        }
 
         return view('processes.sales.service-report.create', [
             'shippingAddress' => $shippingAddress,
+            'orderConfirmations' => $orderConfirmations
         ]);
     }
 }
