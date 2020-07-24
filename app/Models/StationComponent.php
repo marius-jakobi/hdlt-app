@@ -84,7 +84,12 @@ class StationComponent extends Model
     ];
 
     public function getNextServiceAttribute($value) {
+        if (!$value) return null;
         return \Carbon\Carbon::createFromDate($value)->format('Y-m');
+    }
+
+    public function setNextServiceAttribute($value) {
+        $this->attributes['next_service'] = $value ? "$value-01" : null;
     }
 
     /**
