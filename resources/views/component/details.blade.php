@@ -34,7 +34,12 @@
                     <select name="brand_id" class="form-control @error('brand_id') is-invalid @enderror" required autofocus>
                         <option></option>
                         @foreach($brands as $brand)
-                            <option value="{{ $brand->id }}" @if($component->brand == $brand)) selected @endif>{{ $brand->name }}</option>
+                            <option value="{{ $brand->id }}"
+                                @if($component->brand == $brand))
+                                    selected="selected"
+                                @endif>
+                                {{ $brand->name }}
+                            </option>
                         @endforeach
                     </select>
                 </div>
@@ -223,4 +228,5 @@
             </div>
         </div>
     @endcan
+</div>
 @endsection
