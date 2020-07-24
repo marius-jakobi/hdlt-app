@@ -8,7 +8,7 @@
         <h5>Anlagenkomponenten</h5>
 
         <div class="table-responsive">
-            <table class="table table-sm table-striped" style="min-width: 800px">
+            <table class="table table-sm" style="min-width: 800px">
                 <thead>
                     <tr>
                         <th>Hersteller</th>
