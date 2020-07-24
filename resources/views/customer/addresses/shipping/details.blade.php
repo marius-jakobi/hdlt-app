@@ -92,7 +92,7 @@
             <p><a href="{{ route('component.create', ['customerId' => $shippingAddress->customer->id, 'addressId' => $shippingAddress->id, 'type' => 'compressor']) }}">Kompressor hinzufügen</a></p>
         @endcan
         @if ($shippingAddress->compressors->count() > 0)
-        <table class="table">
+        <table class="table table-sm">
             <thead>
                 <tr>
                     <th>Hersteller</th>
@@ -130,7 +130,7 @@
             <p><a href="{{ route('component.create', ['customerId' => $shippingAddress->customer->id, 'addressId' => $shippingAddress->id, 'type' => 'receiver']) }}">Behälter hinzufügen</a></p>
         @endcan
         @if ($shippingAddress->receivers->count() > 0)
-        <table class="table">
+        <table class="table table-sm">
             <thead>
                 <tr>
                     <th>Hersteller</th>
@@ -169,7 +169,7 @@
             <p><a href="{{ route('component.create', ['customerId' => $shippingAddress->customer->id, 'addressId' => $shippingAddress->id, 'type' => 'ref_dryer']) }}">Kältetrockner hinzufügen</a></p>
         @endcan
         @if ($shippingAddress->ref_dryers->count() > 0)
-        <table class="table">
+        <table class="table table-sm">
             <thead>
                 <tr>
                     <th>Hersteller</th>
@@ -207,7 +207,7 @@
             <p><a href="{{ route('component.create', ['customerId' => $shippingAddress->customer->id, 'addressId' => $shippingAddress->id, 'type' => 'filter']) }}">Filter hinzufügen</a></p>
         @endcan
         @if ($shippingAddress->filters->count() > 0)
-        <table class="table">
+        <table class="table table-sm">
             <thead>
                 <tr>
                     <th>Hersteller</th>
@@ -241,7 +241,7 @@
             <p><a href="{{ route('component.create', ['customerId' => $shippingAddress->customer->id, 'addressId' => $shippingAddress->id, 'type' => 'ad_dryer']) }}">Adsorptionstrockner hinzufügen</a></p>
         @endcan
         @if ($shippingAddress->ad_dryers->count() > 0)
-        <table class="table">
+        <table class="table table-sm">
             <thead>
                 <tr>
                     <th>Hersteller</th>
@@ -277,7 +277,7 @@
             <p><a href="{{ route('component.create', ['customerId' => $shippingAddress->customer->id, 'addressId' => $shippingAddress->id, 'type' => 'adsorber']) }}">Öldampfadsorber hinzufügen</a></p>
         @endcan
         @if ($shippingAddress->adsorbers->count() > 0)
-        <table class="table">
+        <table class="table table-sm">
             <thead>
                 <tr>
                     <th>Hersteller</th>
@@ -313,7 +313,7 @@
             <p><a href="{{ route('component.create', ['customerId' => $shippingAddress->customer->id, 'addressId' => $shippingAddress->id, 'type' => 'separator']) }}">Öl-Wasser-Trenner hinzufügen</a></p>
         @endcan
         @if ($shippingAddress->separators->count() > 0)
-        <table class="table">
+        <table class="table table-sm">
             <thead>
                 <tr>
                     <th>Hersteller</th>
@@ -345,7 +345,7 @@
             <p><a href="{{ route('component.create', ['customerId' => $shippingAddress->customer->id, 'addressId' => $shippingAddress->id, 'type' => 'sensor']) }}">Sensor hinzufügen</a></p>
         @endcan
         @if ($shippingAddress->sensors->count() > 0)
-        <table class="table">
+        <table class="table table-sm">
             <thead>
                 <tr>
                     <th>Hersteller</th>
@@ -379,7 +379,7 @@
             <p><a href="{{ route('component.create', ['customerId' => $shippingAddress->customer->id, 'addressId' => $shippingAddress->id, 'type' => 'controller']) }}">Steuerung hinzufügen</a></p>
         @endcan
         @if ($shippingAddress->controllers->count() > 0)
-        <table class="table">
+        <table class="table table-sm">
             <thead>
                 <tr>
                     <th>Hersteller</th>
