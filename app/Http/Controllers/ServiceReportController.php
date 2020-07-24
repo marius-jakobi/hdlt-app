@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\OrderConfirmation;
+use App\Models\SalesProcess;
 use App\Models\ServiceReport;
 use App\Models\ShippingAddress;
 use App\Models\StationComponent;
@@ -39,5 +40,44 @@ class ServiceReportController extends Controller
             'components' => $components,
             'scopes' => DB::table('service_scopes')->orderBy('description')->get()
         ]);
+    }
+
+    public function store(Request $request, string $shippingAddressId) {
+        $input = $request->input();
+
+        $orderConfirmation = OrderConfirmation::where('document_number', $input['document_number'])->first();
+
+        if (!$orderConfirmation) {
+            return redirect()->back()
+                ->withInput()
+                ->withErrors(['document_number' => 'Diese Auftragsbestätigung existiert nicht.']);
+        }
+
+        // Get shipping address
+        $shippingAddress = ShippingAddress::findOrFail($shippingAddressId);
+        // Get sales processes for shipping address's customer
+        $salesProcesses = SalesProcess::where('customer_id', $shippingAddress->customer->id)->get();
+
+        // check if order confirmation belongs to any sales process of the parent customer
+        $hasOrderConfirmation = false;
+
+        foreach($salesProcesses as $salesProcess) {
+            foreach($salesProcess->orderConfirmations as $oc) {
+                if ($oc->document_number == $input['document_number']) {
+                    $hasOrderConfirmation = true;
+                }
+            }
+        }
+
+        if (!$hasOrderConfirmation) {
+            return redirect()->back()
+                ->withInput()
+                ->withErrors(['document_number' => 'Diese Auftragsbestätigung gehört nicht zu diesem Kunden.']);
+        }
+
+        print('<pre>');
+        var_dump($input);
+
+        
     }
 }

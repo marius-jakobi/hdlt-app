@@ -50,13 +50,6 @@ class StationComponent extends Model
     ];
 
     /**
-     * Dates
-     */
-    protected $dates = [
-        'next_service'
-    ];
-
-    /**
      * valid component types
      */
     protected static $componentTypes = [
@@ -103,6 +96,13 @@ class StationComponent extends Model
 
     public static function getComponentClassname($type) {
         return '\App\\Models\\' . static::$componentClasses[$type];
+    }
+
+    public static function getPlural($type) {
+        $plural = static::types()[$type];
+        $plural .= substr(static::types()[$type], -2) !== 'er' ? 'en' : '';
+        
+        return $plural;
     }
 
     /**

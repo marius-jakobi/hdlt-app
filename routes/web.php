@@ -118,6 +118,7 @@ Route::middleware('auth')->group(function () {
     
     // Service report routes
     Route::get('sales/service-report/create/{shippingAddressId}', 'ServiceReportController@create')->name('process.sales.service-report.create');
+    Route::post('sales/service-report/create/{shippingAddressId}', 'ServiceReportController@store')->name('process.sales.service-report.create');
     
     Route::get('sales/service-report/{reportId}', 'ServiceReportController@details')->name('process.sales.service-report.details');
     
