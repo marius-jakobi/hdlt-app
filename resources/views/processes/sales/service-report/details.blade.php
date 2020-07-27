@@ -132,6 +132,8 @@
                             <td>{{ $controller->serial }}</td>
                             <td>{{ $controller->scope }}</td>
                             <td></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                     @endforeach
                 @endif
