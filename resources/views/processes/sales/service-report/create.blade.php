@@ -117,7 +117,7 @@
 
         <div class="form-group">
             <label>Text</label>
-            <textarea name="text" class="form-control" rows="4" maxlength="1000"></textarea>
+            <textarea name="text" class="form-control" rows="4" maxlength="1000">{{ old('text') }}</textarea>
         </div>
 
         <h5>Ausführende Mitarbeiter</h5>
