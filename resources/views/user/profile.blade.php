@@ -30,11 +30,22 @@
     <div class="tab-pane fade show" id="roles">
         <h2>Meine Rollen</h2>
         @if ($user->roles->count() == 0)
-            <div class="alert bg-warning">Sie sind keinen Rollen zugeordnet und verfügen somit über keine Rechte.</div>
+            <div class="alert bg-warning">Sie sind keinen Rollen zugeordnet.</div>
         @else
             <ul>
                 @foreach ($user->roles as $role)
                     <li>{{ $role->name }}</li>
+                @endforeach
+            </ul>
+        @endif
+
+        <h2>Meine Rechte</h2>
+        @if(count($user->permissions()) == 0)
+            <div class="alert bg-warning">Sie verfügen über keine Rechte.</div>
+        @else
+            <ul>
+                @foreach($user->permissions() as $permission)
+                    <li>{{ $permission->description }} ({{ $permission->name }})</li>
                 @endforeach
             </ul>
         @endif

@@ -45,6 +45,21 @@ class User extends Authenticatable
     }
 
     /**
+     * Permission relationship
+     */
+    public function permissions() {
+        $permissions = [];
+
+        foreach ($this->roles as $role) {
+            foreach($role->permissions as $permission) {
+                $permissions[] = $permission;
+            }
+        }
+
+        return $permissions;
+    }
+
+    /**
      * Check if user has role
      */
     public function hasRole(string $roleName) {
