@@ -56,7 +56,6 @@
                                     <td>
                                         {{-- Scope selector --}}
                                         <select name="components[{{$key}}s][{{$c->id}}][scope_id]" class="form-control @if($errors->has('components.'.$key.'s.'.$c->id.'.scope_id')) is-invalid @endif">
-                                            <option>TEST</option>
                                             @foreach($scopes as $scope)
                                                 <option value="{{ $scope->id }}"
                                                     @if (old('components.'.$key.'s.'.$c->id.'.scope_id'))
