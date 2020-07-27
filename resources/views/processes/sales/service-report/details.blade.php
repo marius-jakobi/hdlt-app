@@ -145,8 +145,8 @@
                             <td>{{ $compressor->serial }}</td>
                             <td>{{ $compressor->scope }}</td>
                             <td>{{ $compressor->next_service }}</td>
-                            <td>{{ $compressor->hours_running }} h</td>
-                            <td>{{ $compressor->hours_loaded }} h</td>
+                            <td>{{ $compressor->hours_running ? $compressor->hours_running . ' h' : '---' }}</td>
+                            <td>{{ $compressor->hours_loaded ? $compressor->hours_loaded . ' h' : '---' }}</td>
                         </tr>
                     @endforeach
                 @endif
