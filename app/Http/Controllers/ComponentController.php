@@ -26,13 +26,13 @@ class ComponentController extends Controller
      * @param string $type Type of component
      * @return View
      */
-    public function create($customerId, $addressId, $type) {
+    public function create(Request $request, string $type) {
         if (!StationComponent::isValidType($type)) {
             return abort(404);
         }
 
         return view('component.create', [
-            'shippingAddress' => ShippingAddress::findOrFail($addressId),
+            'shippingAddress' => ShippingAddress::findOrFail($request->query('shippingAddressId')),
             'type' => $type,
             'caption' => StationComponent::types()[$type],
             'brands' => Brand::orderBy('name')->get(),
@@ -49,14 +49,14 @@ class ComponentController extends Controller
      * @param string $type
      * @return RedirectResponse
      */
-    public function store(Request $request, $customerId, $addressId, $type) {
+    public function store(Request $request, string $type) {
         if (!StationComponent::isValidType($type)) {
             return abort(404);
         }
 
         $validator = Validator::make($request->all(), StationComponent::getValidationRules($type));
 
-        $back = route('component.create', ['customerId' => $customerId, 'addressId' => $addressId, 'type' => $type]);
+        $back = route('component.create', ['shippingAddressId' => $request->get('shippingAddressId'), 'type' => $type]);
         
         if ($validator->fails()) {
             return redirect($back)
@@ -65,14 +65,15 @@ class ComponentController extends Controller
         }
 
         $component = $this->createComponent($type, $request->all());
-        $component->shippingAddress()->associate(ShippingAddress::find($addressId));
+        $shippingAddress = ShippingAddress::find($request->get('shippingAddressId'));
+        $component->shippingAddress()->associate($shippingAddress);
         $component->save();
 
-        return redirect(route('customer.addresses.shipping.details', ['customerId' => $customerId, 'addressId' => $addressId]) . '#components')
+        return redirect(route('customer.addresses.shipping.details', ['customerId' => $shippingAddress->customer->id, 'addressId' => $request->get('shippingAddressId')]) . '#components')
             ->with('success', 'Die Komponente wurde angelegt');
     }
 
-    public function details(int $customerId, int $addressId, string $type, int $componentId) {
+    public function details(string $type, int $componentId) {
         if (!StationComponent::isValidType($type)) {
             return abort(404);
         }
@@ -90,13 +91,13 @@ class ComponentController extends Controller
         ]);
     }
 
-    public function update(Request $request, int $customerId, int $addressId, string $type, int $componentId) {
+    public function update(Request $request, string $type, int $componentId) {
         $this->authorize('update', StationComponent::class);
 
         $validator = Validator::make($request->all(), StationComponent::getValidationRules($type));
 
         if ($validator->fails()) {
-            return redirect(route('component.details', ['customerId' => $customerId, 'addressId' => $addressId, 'type' => $type, 'componentId' => $componentId]))
+            return redirect(route('component.details', ['type' => $type, 'componentId' => $componentId]))
                 ->withErrors($validator);
         }
 
@@ -114,7 +115,7 @@ class ComponentController extends Controller
 
         $component->save();
 
-        return redirect(route('component.details', ['customerId' => $customerId, 'addressId' => $addressId, 'type' => $type, 'componentId' => $componentId]))
+        return redirect(route('component.details', ['type' => $type, 'componentId' => $componentId]))
             ->with('success', 'Die Komponente wurde aktualisiert');
     }
 

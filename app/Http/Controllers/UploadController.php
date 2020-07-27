@@ -86,10 +86,8 @@ class UploadController extends Controller
             ->with('success', 'Die Datei wurde erfolgreich hochgeladen.');
     }
 
-    public function uploadComponentFile(Request $request, int $customerId, int $addressId, string $type, int $componentId) {
+    public function uploadComponentFile(Request $request, string $type, int $componentId) {
         $back = route('component.details', [
-            'customerId' => $customerId,
-            'addressId' => $addressId,
             'type' => $type,
             'componentId' => $componentId
             ])

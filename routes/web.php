@@ -102,11 +102,11 @@ Route::middleware('auth')->group(function () {
     Route::delete('/customer/{customerId}', 'CustomerController@delete')->name('customer.delete');
 
     // Component routes
-    Route::get('/customer/{customerId}/addresses/shipping/{addressId}/{type}/add', 'ComponentController@create')->name('component.create');
-    Route::post('/customer/{customerId}/addresses/shipping/{addressId}/{type}/add', 'ComponentController@store')->name('component.store');
-    Route::post('/customer/{customerId}/addresses/shipping/{addressId}/{type}/{componentId}/upload', 'UploadController@uploadComponentFile')->name('upload.file.component');
-    Route::get('/customer/{customerId}/addresses/shipping/{addressId}/{type}/{componentId}', 'ComponentController@details')->name('component.details');
-    Route::put('/customer/{customerId}/addresses/shipping/{addressId}/{type}/{componentId}', 'ComponentController@update')->name('component.update');
+    Route::get('/component/{type}/add', 'ComponentController@create')->name('component.create');
+    Route::post('/component/{type}/add', 'ComponentController@store')->name('component.store');
+    Route::post('/component/{type}/{componentId}/upload', 'UploadController@uploadComponentFile')->name('upload.file.component');
+    Route::get('/component/{type}/{componentId}', 'ComponentController@details')->name('component.details');
+    Route::put('/component/{type}/{componentId}', 'ComponentController@update')->name('component.update');
 
     // Search routes
     Route::post('/search', 'SearchController@showResult')->name('search.result');

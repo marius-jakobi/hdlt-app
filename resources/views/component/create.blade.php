@@ -7,7 +7,7 @@
         {{ "$shippingAddress->name, $shippingAddress->street, $shippingAddress->zip $shippingAddress->city" }}
     </a>
 </p>
-<form action="{{ route('component.store', ['customerId' => $shippingAddress->customer->id, 'addressId' => $shippingAddress->id, 'type' => $type]) }}" method="post">
+<form action="{{ route('component.store', ['shippingAddressId' => $shippingAddress->id, 'type' => $type]) }}" method="post">
     @csrf
     <div class="form-group">
         <label>Hersteller</label>

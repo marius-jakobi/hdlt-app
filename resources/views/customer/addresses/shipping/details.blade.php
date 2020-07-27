@@ -89,7 +89,7 @@
         <h2>Anlagen</h2>
         <h3>Kompressoren</h3>
         @can('create', App\Models\StationComponent::class)
-            <p><a href="{{ route('component.create', ['customerId' => $shippingAddress->customer->id, 'addressId' => $shippingAddress->id, 'type' => 'compressor']) }}">Kompressor hinzufügen</a></p>
+            <p><a href="{{ route('component.create', ['shippingAddressId' => $shippingAddress->id, 'type' => 'compressor']) }}">Kompressor hinzufügen</a></p>
         @endcan
         @if ($shippingAddress->compressors->count() > 0)
         <table class="table table-sm">
@@ -102,7 +102,7 @@
                     <th>Typ</th>
                     <th>nächste Wartung</th>
                     @can('view', App\Models\StationComponent::class)
-                    <th></th>
+                        <th></th>
                     @endcan
                 </tr>
             </thead>
@@ -116,7 +116,7 @@
                     <td>{{ $compressor->getType() }}</td>
                     <td>{{ $compressor->next_service }}</td>
                     @can('view', App\Models\StationComponent::class)
-                    <td><a href="{{ route('component.details', ['customerId' => $shippingAddress->customer->id, 'addressId' => $shippingAddress->id, 'type' => 'compressor', 'componentId' => $compressor->id]) }}">Details</a></td>
+                    <td><a href="{{ route('component.details', ['type' => 'compressor', 'componentId' => $compressor->id]) }}">Details</a></td>
                     @endcan
                 </tr>
                 @endforeach
@@ -127,7 +127,7 @@
         @endif
         <h3>Behälter</h3>
         @can('create', App\Models\StationComponent::class)
-            <p><a href="{{ route('component.create', ['customerId' => $shippingAddress->customer->id, 'addressId' => $shippingAddress->id, 'type' => 'receiver']) }}">Behälter hinzufügen</a></p>
+            <p><a href="{{ route('component.create', ['shippingAddressId' => $shippingAddress->id, 'type' => 'receiver']) }}">Behälter hinzufügen</a></p>
         @endcan
         @if ($shippingAddress->receivers->count() > 0)
         <table class="table table-sm">
@@ -156,7 +156,7 @@
                     <td>{{ $receiver->getType() }}</td>
                     <td>{{ $receiver->next_service }}</td>
                     @can('view', App\Models\StationComponent::class)
-                    <td><a href="{{ route('component.details', ['customerId' => $shippingAddress->customer->id, 'addressId' => $shippingAddress->id, 'type' => 'receiver', 'componentId' => $receiver->id]) }}">Details</a></td>
+                    <td><a href="{{ route('component.details', ['type' => 'receiver', 'componentId' => $receiver->id]) }}">Details</a></td>
                     @endcan
                 </tr>
                 @endforeach
@@ -166,7 +166,7 @@
         @endif
         <h3>Kältetrockner</h3>
         @can('create', App\Models\StationComponent::class)
-            <p><a href="{{ route('component.create', ['customerId' => $shippingAddress->customer->id, 'addressId' => $shippingAddress->id, 'type' => 'ref_dryer']) }}">Kältetrockner hinzufügen</a></p>
+            <p><a href="{{ route('component.create', ['shippingAddressId' => $shippingAddress->id, 'type' => 'ref_dryer']) }}">Kältetrockner hinzufügen</a></p>
         @endcan
         @if ($shippingAddress->ref_dryers->count() > 0)
         <table class="table table-sm">
@@ -193,7 +193,7 @@
                     <td>{{ $ref_dryer->ref_amount ? $ref_dryer->ref_amount . " kg" : "" }} {{ $ref_dryer->ref_type }}</td>
                     <td>{{ $ref_dryer->next_service }}</td>
                     @can('view', App\Models\StationComponent::class)
-                    <td><a href="{{ route('component.details', ['customerId' => $shippingAddress->customer->id, 'addressId' => $shippingAddress->id, 'type' => 'ref_dryer', 'componentId' => $ref_dryer->id]) }}">Details</a></td>
+                    <td><a href="{{ route('component.details', ['type' => 'ref_dryer', 'componentId' => $ref_dryer->id]) }}">Details</a></td>
                     @endcan
                 </tr>
                 @endforeach
@@ -204,7 +204,7 @@
         @endif
         <h3>Filter</h3>
         @can('create', App\Models\StationComponent::class)
-            <p><a href="{{ route('component.create', ['customerId' => $shippingAddress->customer->id, 'addressId' => $shippingAddress->id, 'type' => 'filter']) }}">Filter hinzufügen</a></p>
+            <p><a href="{{ route('component.create', ['shippingAddressId' => $shippingAddress->id, 'type' => 'filter']) }}">Filter hinzufügen</a></p>
         @endcan
         @if ($shippingAddress->filters->count() > 0)
         <table class="table table-sm">
@@ -227,7 +227,7 @@
                     <td>{{ $filter->element }}</td>
                     <td>{{ $filter->next_service }}</td>
                     @can('view', App\Models\StationComponent::class)
-                    <td><a href="{{ route('component.details', ['customerId' => $shippingAddress->customer->id, 'addressId' => $shippingAddress->id, 'type' => 'filter', 'componentId' => $filter->id]) }}">Details</a></td>
+                    <td><a href="{{ route('component.details', ['type' => 'filter', 'componentId' => $filter->id]) }}">Details</a></td>
                     @endcan
                 </tr>
                 @endforeach
@@ -238,7 +238,7 @@
         @endif
         <h3>Adsorptionstrockner</h3>
         @can('create', App\Models\StationComponent::class)
-            <p><a href="{{ route('component.create', ['customerId' => $shippingAddress->customer->id, 'addressId' => $shippingAddress->id, 'type' => 'ad_dryer']) }}">Adsorptionstrockner hinzufügen</a></p>
+            <p><a href="{{ route('component.create', ['shippingAddressId' => $shippingAddress->id, 'type' => 'ad_dryer']) }}">Adsorptionstrockner hinzufügen</a></p>
         @endcan
         @if ($shippingAddress->ad_dryers->count() > 0)
         <table class="table table-sm">
@@ -263,7 +263,7 @@
                     <td>{{ $ad_dryer->year }}</td>
                     <td>{{ $ad_dryer->next_service }}</td>
                     @can('view', App\Models\StationComponent::class)
-                    <td><a href="{{ route('component.details', ['customerId' => $shippingAddress->customer->id, 'addressId' => $shippingAddress->id, 'type' => 'ad_dryer', 'componentId' => $ad_dryer->id]) }}">Details</a></td>
+                    <td><a href="{{ route('component.details', ['type' => 'ad_dryer', 'componentId' => $ad_dryer->id]) }}">Details</a></td>
                     @endcan
                 </tr>
                 @endforeach
@@ -274,7 +274,7 @@
         @endif
         <h3>Öldampfadsorber</h3>
         @can('create', App\Models\StationComponent::class)
-            <p><a href="{{ route('component.create', ['customerId' => $shippingAddress->customer->id, 'addressId' => $shippingAddress->id, 'type' => 'adsorber']) }}">Öldampfadsorber hinzufügen</a></p>
+            <p><a href="{{ route('component.create', ['shippingAddressId' => $shippingAddress->id, 'type' => 'adsorber']) }}">Öldampfadsorber hinzufügen</a></p>
         @endcan
         @if ($shippingAddress->adsorbers->count() > 0)
         <table class="table table-sm">
@@ -299,7 +299,7 @@
                     <td>{{ $adsorber->year }}</td>
                     <td>{{ $adsorber->next_service }}</td>
                     @can('view', App\Models\StationComponent::class)
-                    <td><a href="{{ route('component.details', ['customerId' => $shippingAddress->customer->id, 'addressId' => $shippingAddress->id, 'type' => 'adsorber', 'componentId' => $adsorber->id]) }}">Details</a></td>
+                    <td><a href="{{ route('component.details', ['type' => 'adsorber', 'componentId' => $adsorber->id]) }}">Details</a></td>
                     @endcan
                 </tr>
                 @endforeach
@@ -310,7 +310,7 @@
         @endif
         <h3>Öl-Wasser-Trenner</h3>
         @can('create', App\Models\StationComponent::class)
-            <p><a href="{{ route('component.create', ['customerId' => $shippingAddress->customer->id, 'addressId' => $shippingAddress->id, 'type' => 'separator']) }}">Öl-Wasser-Trenner hinzufügen</a></p>
+            <p><a href="{{ route('component.create', ['shippingAddressId' => $shippingAddress->id, 'type' => 'separator']) }}">Öl-Wasser-Trenner hinzufügen</a></p>
         @endcan
         @if ($shippingAddress->separators->count() > 0)
         <table class="table table-sm">
@@ -331,7 +331,7 @@
                     <td>{{ $separator->model }}</td>
                     <td>{{ $separator->next_service }}</td>
                     @can('view', App\Models\StationComponent::class)
-                    <td><a href="{{ route('component.details', ['customerId' => $shippingAddress->customer->id, 'addressId' => $shippingAddress->id, 'type' => 'separator', 'componentId' => $separator->id]) }}">Details</a></td>
+                    <td><a href="{{ route('component.details', ['type' => 'separator', 'componentId' => $separator->id]) }}">Details</a></td>
                     @endcan
                 </tr>
                 @endforeach
@@ -342,7 +342,7 @@
         @endif
         <h3>Stationssensoren</h3>
         @can('create', App\Models\StationComponent::class)
-            <p><a href="{{ route('component.create', ['customerId' => $shippingAddress->customer->id, 'addressId' => $shippingAddress->id, 'type' => 'sensor']) }}">Sensor hinzufügen</a></p>
+            <p><a href="{{ route('component.create', ['shippingAddressId' => $shippingAddress->id, 'type' => 'sensor']) }}">Sensor hinzufügen</a></p>
         @endcan
         @if ($shippingAddress->sensors->count() > 0)
         <table class="table table-sm">
@@ -365,7 +365,7 @@
                     <td>{{ $sensor->serial }}</td>
                     <td>{{ $sensor->year }}</td>
                     @can('view', App\Models\StationComponent::class)
-                    <td><a href="{{ route('component.details', ['customerId' => $shippingAddress->customer->id, 'addressId' => $shippingAddress->id, 'type' => 'sensor', 'componentId' => $sensor->id]) }}">Details</a></td>
+                    <td><a href="{{ route('component.details', ['type' => 'sensor', 'componentId' => $sensor->id]) }}">Details</a></td>
                     @endcan
                 </tr>
                 @endforeach
@@ -376,7 +376,7 @@
         @endif
         <h3>Übergeordnete Steuerungen</h3>
         @can('create', App\Models\StationComponent::class)
-            <p><a href="{{ route('component.create', ['customerId' => $shippingAddress->customer->id, 'addressId' => $shippingAddress->id, 'type' => 'controller']) }}">Steuerung hinzufügen</a></p>
+            <p><a href="{{ route('component.create', ['shippingAddressId' => $shippingAddress->id, 'type' => 'controller']) }}">Steuerung hinzufügen</a></p>
         @endcan
         @if ($shippingAddress->controllers->count() > 0)
         <table class="table table-sm">
@@ -399,7 +399,7 @@
                     <td>{{ $controller->serial }}</td>
                     <td>{{ $controller->year }}</td>
                     @can('view', App\Models\StationComponent::class)
-                    <td><a href="{{ route('component.details', ['customerId' => $shippingAddress->customer->id, 'addressId' => $shippingAddress->id, 'type' => 'controller', 'componentId' => $controller->id]) }}">Details</a></td>
+                    <td><a href="{{ route('component.details', ['type' => 'controller', 'componentId' => $controller->id]) }}">Details</a></td>
                     @endcan
                 </tr>
                 @endforeach

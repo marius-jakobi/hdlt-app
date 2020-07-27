@@ -26,7 +26,7 @@
     {{-- Base data tab --}}
     <div class="tab-pane fade show active" id="data">
         @can('update', App\Models\StationComponent::class)
-            <form action="{{ route('component.update', ['customerId' => $component->shippingAddress->customer->id, 'addressId' => $component->shippingAddress->id, 'type' => $type, 'componentId' => $component->id]) }}" method="post">
+            <form action="{{ route('component.update', ['type' => $type, 'componentId' => $component->id]) }}" method="post">
                 @method('put')
                 @csrf
                 <div class="form-group">
