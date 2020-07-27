@@ -15,6 +15,7 @@ use App\Models\Sensor;
 use App\Models\Separator;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ComponentController extends Controller
 {
@@ -87,7 +88,7 @@ class ComponentController extends Controller
             'type' => $type,
             'caption' => StationComponent::types()[$type],
             'brands' => Brand::all(),
-            'refTypes' => RefDryer::getRefTypes()
+            'refTypes' => RefDryer::getRefTypes(),
         ]);
     }
 

@@ -20,6 +20,11 @@
             <a href="#files" class="nav-link" id="files-tab" data-toggle="tab">Dateien</a>
         </li>
     @endcan
+    @can('view', App\Models\ServiceReports::class)
+        <li class="nav-item">
+            <a href="#service-reports" class="nav-link" id="service-reports-tab" data-toggle="tab">Service-Berichte</a>
+        </li>
+    @endcan
 </ul>
 
 <div class="tab-content" id="nav-tabContent">
@@ -226,6 +231,11 @@
             <div class="mt-3">
                 <x-upload-list :files="$component->uploadedFiles" />
             </div>
+        </div>
+    @endcan
+    @can('view', App\Models\ServiceReport::class)
+        <div class="tab-pane fade show" id="service-reports">
+            <x-service-report-list :reports="$component->serviceReports" />
         </div>
     @endcan
 </div>

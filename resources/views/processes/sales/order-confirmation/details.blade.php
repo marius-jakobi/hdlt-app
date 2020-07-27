@@ -16,9 +16,5 @@
     </p>
     <p>Bestellnummer (Kunde): {{ $orderConfirmation->po_number }}</p>
     <h2>Service-Berichte</h2>
-    @if ($orderConfirmation->serviceReports->count() > 0)
-        <x-service-report-list :reports="$orderConfirmation->serviceReports" />
-    @else
-    <div class="alert bg-info">Für diese Auftragsbestätigung existieren keine Service-Berichte.</div>
-    @endif
+    <x-service-report-list :reports="$orderConfirmation->serviceReports" />
 @endsection
