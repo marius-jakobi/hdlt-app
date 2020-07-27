@@ -23,10 +23,10 @@ return [
     'before'          => ':attribute muss ein Datum vor dem :date sein.',
     'before_or_equal' => ':attribute muss ein Datum vor dem :date oder gleich dem :date sein.',
     'between'         => [
-        'numeric' => ':attribute muss zwischen :min & :max liegen.',
-        'file'    => ':attribute muss zwischen :min & :max Kilobytes groß sein.',
-        'string'  => ':attribute muss zwischen :min & :max Zeichen lang sein.',
-        'array'   => ':attribute muss zwischen :min & :max Elemente haben.',
+        'numeric' => ':attribute muss zwischen :min und :max liegen.',
+        'file'    => ':attribute muss zwischen :min und :max Kilobytes groß sein.',
+        'string'  => ':attribute muss zwischen :min und :max Zeichen lang sein.',
+        'array'   => ':attribute muss zwischen :min und :max Elemente haben.',
     ],
     'boolean'        => ":attribute muss entweder 'true' oder 'false' sein.",
     'confirmed'      => ':attribute stimmt nicht mit der Bestätigung überein.',
@@ -191,6 +191,7 @@ return [
         'cust_id'               => 'Debitor',
         'process_number'        => 'Vorgangsnummer',
         'document_number'       => 'Belegnummer',
-        'po_number'             => 'Bestellnummer'
+        'po_number'             => 'Bestellnummer',
+        'intent'                => 'Einsatzzweck'
     ],
 ];
