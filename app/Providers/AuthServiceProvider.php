@@ -22,7 +22,8 @@ class AuthServiceProvider extends ServiceProvider
         \App\Models\ShippingAddress::class => \App\Policies\ShippingAddressPolicy::class,
         \App\Models\StationComponent::class => \App\Policies\StationComponentPolicy::class,
         \App\Models\UploadFile::class => \App\Policies\UploadPolicy::class,
-        \App\Models\SalesProcess::class => \App\Policies\SalesProcessPolicy::class
+        \App\Models\SalesProcess::class => \App\Policies\SalesProcessPolicy::class,
+        \App\Models\ServiceReport::class => \App\Policies\ServiceReportPolicy::class
     ];
 
     /**
