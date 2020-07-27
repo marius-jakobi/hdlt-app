@@ -9,6 +9,7 @@ use App\Models\ShippingAddress;
 use App\Models\StationComponent;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class ServiceReportController extends Controller
 {
@@ -38,6 +39,7 @@ class ServiceReportController extends Controller
             'shippingAddress' => $shippingAddress,
             'orderConfirmations' => $orderConfirmations,
             'components' => $components,
+            'technicians' => DB::table('technicians')->orderBy('name_last')->get(),
             'scopes' => DB::table('service_scopes')->orderBy('description')->get()
         ]);
     }
@@ -45,6 +47,54 @@ class ServiceReportController extends Controller
     public function store(Request $request, string $shippingAddressId) {
         $input = $request->input();
 
+        // Basic rules
+        $rules = [
+            'intent' => 'required|between:4,128',
+            'components.compressors.*.hours_running' => 'nullable|numeric',
+            'components.compressors.*.hours_loaded' => 'nullable|numeric',
+            'components.compressors.*' => [
+                function ($attribute, $value, $fail) {
+                    if ($value['hours_loaded'] > $value['hours_running']) {
+                        $fail('Die Betriebsstunden können nicht kleiner als die Laststunden sein.');
+                    }
+                }
+            ]
+        ];
+
+        // related validation messages
+        $messages = [
+            'components.compressors.*.hours_running.numeric' => 'Die Betriebsstunden müssen eine Zahl sein.',
+            'components.compressors.*.hours_loaded.numeric' => 'Die Laststunden müssen eine Zahl sein.'
+        ];
+
+        // Dynamically add validation rules and messages for components
+        foreach (array_keys($input['components']) as $type) {
+            $rules["components.$type.*.scope_id"] =  'required|exists:service_scopes,id';
+            $messages["components.$type.*.scope_id.required"] = 'Es muss ein Umfang angegeben werden.';
+            $messages["components.$type.*.scope_id.exists"] = 'Dieser Umfang ist ungültig.';
+        };
+
+        $validator = Validator::make($input, $rules, $messages);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withInput()
+                ->withErrors($validator);
+        }
+
+        foreach ($input['technicians'] as $technician_id => $work_time) {
+            if (!$work_time || $work_time <= 0) {
+                unset($input['technicians'][$technician_id]);
+            }
+        }
+
+        if (count($input['technicians']) <= 0) {
+            return redirect()->back()
+                ->withInput()
+                ->withErrors(['technician.required' => 'Es muss für mindestens einen Mitarbeiter die Arbeitszeit eingegeben werden.']);
+        }
+
+        // Get order confirmation
         $orderConfirmation = OrderConfirmation::where('document_number', $input['document_number'])->first();
 
         if (!$orderConfirmation) {
@@ -69,15 +119,67 @@ class ServiceReportController extends Controller
             }
         }
 
+        // Order confirmation does NOT belong to any customer process
         if (!$hasOrderConfirmation) {
             return redirect()->back()
                 ->withInput()
                 ->withErrors(['document_number' => 'Diese Auftragsbestätigung gehört nicht zu diesem Kunden.']);
         }
 
-        print('<pre>');
-        var_dump($input);
+        // Create new service report
+        $serviceReport = new ServiceReport([
+            'order_confirmation_id' => $orderConfirmation->id,
+            'shipping_address_id' => $shippingAddressId,
+            'intent' => $input['intent'],
+            'text' => $input['text']
+        ]);
 
-        
+        // Save service report to give it a UID
+        $serviceReport->save();
+
+        // Attach technicians to report
+        foreach($input['technicians'] as $technician_id => $work_time) {
+            // If a technician has a work time add it to the relationship
+            if ($work_time) {
+                DB::table('service_report_technicians')->insert([
+                    'service_report_id' => $serviceReport->id,
+                    'technician_id' => $technician_id,
+                    'work_time' => $work_time
+                ]);
+            }
+        }
+
+        /**
+         * Add components to report
+         * $groupKey: The key of the component group like 'compressors' or 'filters'
+         * $componentGroup: Array of components in a component group
+         */
+        foreach ($input['components'] as $groupKey => $componentGroup) {
+            /**
+             * Iterate through component group
+             * $componentId The array key contains the ID of a component
+             * $componentData The item value contains the service data like scope and hours of the component
+             */
+            foreach ($componentGroup as $componentId => $componentData) {
+                // Add basic data that is shared across all component types
+                $row = [
+                    'component_id' => $componentId,
+                    'service_report_id' => $serviceReport->id,
+                    'scope_id' => $componentData['scope_id']
+                ];
+
+                // If component is a compressor, add hours to row
+                if ($groupKey === 'compressors') {
+                    $row['hours_running'] = $componentData['hours_running'];
+                    $row['hours_loaded'] = $componentData['hours_loaded'];
+                }
+
+                // Insert row with a components service data into database tables
+                DB::table($groupKey . '_service_reports')->insert($row);
+            }
+        }
+
+        return redirect()->route('process.sales.service-report.details', ['reportId' => $serviceReport->id])
+            ->with('success', 'Der Service-Bericht wurde angelegt.');
     }
 }

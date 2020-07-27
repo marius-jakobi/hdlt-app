@@ -6,6 +6,13 @@ use Illuminate\Support\Facades\DB;
 
 class ServiceReport extends AbstractUuidModel
 {
+    protected $fillable = [
+        'order_confirmation_id',
+        'shipping_address_id',
+        'intent',
+        'text'
+    ];
+
     public function orderConfirmation() {
         return $this->belongsTo(OrderConfirmation::class, 'order_confirmation_id', 'id');
     }
