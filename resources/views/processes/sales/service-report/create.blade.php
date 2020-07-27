@@ -95,7 +95,10 @@
             <div class="col-sm-12 col-md-8">
                 <div class="form-group">
                     <label>Einsatzzweck</label>
-                    <input type="text" name="intent" class="form-control" value="{{ old('intent') }}" required minlength="4" maxlength="128" />
+                    <input type="text" name="intent" class="form-control @error('intent') is-invalid @enderror" value="{{ old('intent') }}" required minlength="4" maxlength="128" />
+                    @error('intent')
+                        <p class="text-danger">{{ $message }}</p>
+                    @enderror
                 </div>
             </div>
             <div class="col-sm-12 col-md-4">
