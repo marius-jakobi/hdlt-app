@@ -20,7 +20,7 @@
     <div id="app">
         @include('navbar')
         <main class="main-content">
-            <div class="container">
+            <div class="container-fluid">
                 @if(session('error'))
                     <div class="alert bg-danger mt-3">
                         {{ session('error') }}

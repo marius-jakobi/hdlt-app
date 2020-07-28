@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-md shadow-sm">
-    <div class="container">
+    <div class="container-fluid">
         <a class="navbar-brand" href="{{ url('/') }}">
             <img src="{{ asset('storage/logo.jpg') }}" alt="" height="35">
         </a>
