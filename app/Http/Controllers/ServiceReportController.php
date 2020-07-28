@@ -32,7 +32,7 @@ class ServiceReportController extends Controller
         $components = [];
 
         foreach (StationComponent::types() as $key => $value) {
-            $components[$key] = StationComponent::getComponentClassname($key)::all();
+            $components[$key] = StationComponent::getComponentClassname($key)::where('shipping_address_id', $shippingAddressId)->get();
         }
 
         return view('processes.sales.service-report.create', [
