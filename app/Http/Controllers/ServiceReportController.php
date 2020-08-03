@@ -31,7 +31,7 @@ class ServiceReportController extends Controller
 
         $components = [];
 
-        foreach (StationComponent::types() as $key => $value) {
+        foreach (array_keys(StationComponent::types()) as $key) {
             $components[$key] = StationComponent::getComponentClassname($key)::where('shipping_address_id', $shippingAddressId)->get();
         }
 
