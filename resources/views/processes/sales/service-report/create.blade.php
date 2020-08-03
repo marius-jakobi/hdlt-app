@@ -6,90 +6,93 @@
         @csrf
 
         <h5>Anlagenkomponenten</h5>
-
-        <div class="table-responsive">
-            <table class="table table-sm" style="min-width: 800px">
-                <thead>
-                    <tr>
-                        <th>Hersteller</th>
-                        <th>Typ</th>
-                        <th>S/N</th>
-                        <th>Element</th>
-                        <th>Stunden</th>
-                        <th>Umfang</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($components as $key => $componentList)
-                        @if (count($componentList) > 0)
-                            <tr>
-                                <td colspan="6" class="text-center bg-secondary text-white">
-                                    <strong>
-                                        {{ App\Models\StationComponent::getPlural($key) }}
-                                    </strong>
-                                </td>
-                            </tr>
-                            @foreach($componentList as $c)
+        @if($shippingAddress->countComponents() > 0)
+            <div class="table-responsive">
+                <table class="table table-sm" style="min-width: 800px">
+                    <thead>
+                        <tr>
+                            <th>Hersteller</th>
+                            <th>Typ</th>
+                            <th>S/N</th>
+                            <th>Element</th>
+                            <th>Stunden</th>
+                            <th>Umfang</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($components as $key => $componentList)
+                            @if (count($componentList) > 0)
                                 <tr>
-                                    <td>{{ $c->brand->name }}</td>
-                                    <td>{{ $c->model ?? $c->volume . ' Liter' }}</td>
-                                    <td>{{ $c->serial }}</td>
-                                    <td>{{ $c->element }}</td>
-                                    <td>
-                                        {{-- Add inputs for hours if component type is 'compressor' --}}
-                                        @if ($key === 'compressor')
-                                            <input type="number" name="components[compressors][{{$c->id}}][hours_running]" class="form-control @if($errors->has('components.compressors.'.$c->id.'.hours_running') || $errors->has('components.compressors.'.$c->id)) is-invalid @endif" placeholder="Betriebsstunden" min="0" max="999999" value="{{ old('components.compressors.' . $c->id . '.hours_running') }}">
-                                            {{-- Running hours errors --}}
-                                            @if ($errors->has('components.compressors.'.$c->id.'.hours_running'))
-                                                <span class="text-danger">{{ $errors->first('components.compressors.*.hours_running') }}</span>
-                                            @endif
-                                            <input type="number" name="components[compressors][{{$c->id}}][hours_loaded]" class="form-control @if($errors->has('components.compressors.'.$c->id.'.hours_loaded') || $errors->has('components.compressors.'.$c->id)) is-invalid @endif" placeholder="Laststunden" min="0" max="999999" value="{{ old('components.compressors.' . $c->id . '.hours_loaded') }}">
-                                            {{-- Loaded hours errors --}}
-                                            @if ($errors->has('components.compressors.'.$c->id.'.hours_running'))
-                                                <span class="text-danger">{{ $errors->first('components.compressors.*.hours_loaded') }}</span>
-                                            @endif
-                                            @if($errors->has('components.compressors.' . $c->id))
-                                                <span class="text-danger">{{ $errors->first('components.compressors.' . $c->id) }}</span>
-                                            @endif
-                                        @endif
-                                    </td>
-                                    <td>
-                                        {{-- Scope selector --}}
-                                        <select name="components[{{$key}}s][{{$c->id}}][scope_id]" class="form-control @if($errors->has('components.'.$key.'s.'.$c->id.'.scope_id')) is-invalid @endif">
-                                            @foreach($scopes as $scope)
-                                                <option value="{{ $scope->id }}"
-                                                    @if (old('components.'.$key.'s.'.$c->id.'.scope_id'))
-                                                        {{-- Select old scope if it has validation errors --}}
-                                                        @if (old('components.'.$key.'s.'.$c->id.'.scope_id') == $scope->id)
-                                                            selected="selected"
-                                                        @endif
-                                                    @else
-                                                        {{-- Preselect commonly used scope by component types --}}
-                                                        @if ($key === 'compressor' && $scope->description === 'Wartung')
-                                                            selected="selected"
-                                                        @elseif (($key === 'filter' || $key === 'separator') && $scope->description === 'Filterwechsel')
-                                                            selected="selected"
-                                                        @elseif ($key !== 'compressor' && $key !== 'filter' && $key !== 'separator' && $scope->description === 'Überprüfung')
-                                                            selected="selected"
-                                                        @endif
-                                                    @endif
-                                                    >
-                                                        {{ $scope->description }}
-                                                    </option>
-                                            @endforeach
-                                        </select>
-                                        {{-- Scope errors --}}
-                                        @if($errors->has('components.'.$key.'s.'.$c->id.'.scope_id'))
-                                            <span class="text-danger">{{ $errors->first('components.'.$key.'s.'.$c->id.'.scope_id') }}</span>
-                                        @endif
+                                    <td colspan="6" class="text-center bg-secondary text-white">
+                                        <strong>
+                                            {{ App\Models\StationComponent::getPlural($key) }}
+                                        </strong>
                                     </td>
                                 </tr>
-                            @endforeach
-                        @endif
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
+                                @foreach($componentList as $c)
+                                    <tr>
+                                        <td>{{ $c->brand->name }}</td>
+                                        <td>{{ $c->model ?? $c->volume . ' Liter' }}</td>
+                                        <td>{{ $c->serial }}</td>
+                                        <td>{{ $c->element }}</td>
+                                        <td>
+                                            {{-- Add inputs for hours if component type is 'compressor' --}}
+                                            @if ($key === 'compressor')
+                                                <input type="number" name="components[compressors][{{$c->id}}][hours_running]" class="form-control @if($errors->has('components.compressors.'.$c->id.'.hours_running') || $errors->has('components.compressors.'.$c->id)) is-invalid @endif" placeholder="Betriebsstunden" min="0" max="999999" value="{{ old('components.compressors.' . $c->id . '.hours_running') }}">
+                                                {{-- Running hours errors --}}
+                                                @if ($errors->has('components.compressors.'.$c->id.'.hours_running'))
+                                                    <span class="text-danger">{{ $errors->first('components.compressors.*.hours_running') }}</span>
+                                                @endif
+                                                <input type="number" name="components[compressors][{{$c->id}}][hours_loaded]" class="form-control @if($errors->has('components.compressors.'.$c->id.'.hours_loaded') || $errors->has('components.compressors.'.$c->id)) is-invalid @endif" placeholder="Laststunden" min="0" max="999999" value="{{ old('components.compressors.' . $c->id . '.hours_loaded') }}">
+                                                {{-- Loaded hours errors --}}
+                                                @if ($errors->has('components.compressors.'.$c->id.'.hours_running'))
+                                                    <span class="text-danger">{{ $errors->first('components.compressors.*.hours_loaded') }}</span>
+                                                @endif
+                                                @if($errors->has('components.compressors.' . $c->id))
+                                                    <span class="text-danger">{{ $errors->first('components.compressors.' . $c->id) }}</span>
+                                                @endif
+                                            @endif
+                                        </td>
+                                        <td>
+                                            {{-- Scope selector --}}
+                                            <select name="components[{{$key}}s][{{$c->id}}][scope_id]" class="form-control @if($errors->has('components.'.$key.'s.'.$c->id.'.scope_id')) is-invalid @endif">
+                                                @foreach($scopes as $scope)
+                                                    <option value="{{ $scope->id }}"
+                                                        @if (old('components.'.$key.'s.'.$c->id.'.scope_id'))
+                                                            {{-- Select old scope if it has validation errors --}}
+                                                            @if (old('components.'.$key.'s.'.$c->id.'.scope_id') == $scope->id)
+                                                                selected="selected"
+                                                            @endif
+                                                        @else
+                                                            {{-- Preselect commonly used scope by component types --}}
+                                                            @if ($key === 'compressor' && $scope->description === 'Wartung')
+                                                                selected="selected"
+                                                            @elseif (($key === 'filter' || $key === 'separator') && $scope->description === 'Filterwechsel')
+                                                                selected="selected"
+                                                            @elseif ($key !== 'compressor' && $key !== 'filter' && $key !== 'separator' && $scope->description === 'Überprüfung')
+                                                                selected="selected"
+                                                            @endif
+                                                        @endif
+                                                        >
+                                                            {{ $scope->description }}
+                                                        </option>
+                                                @endforeach
+                                            </select>
+                                            {{-- Scope errors --}}
+                                            @if($errors->has('components.'.$key.'s.'.$c->id.'.scope_id'))
+                                                <span class="text-danger">{{ $errors->first('components.'.$key.'s.'.$c->id.'.scope_id') }}</span>
+                                            @endif
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            @endif
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        @else
+            <div class="alert bg-info">Es sind keine Anlagenkomponenten mit dieser Betriebsstelle verknüpft.</div>
+        @endif
 
         <div class="row">
             <div class="col-sm-12 col-md-8">
