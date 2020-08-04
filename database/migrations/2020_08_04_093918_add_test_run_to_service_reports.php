@@ -14,7 +14,7 @@ class AddTestRunToServiceReports extends Migration
     public function up()
     {
         Schema::table('service_reports', function (Blueprint $table) {
-            $table->unsignedTinyInteger('test_run')->after('text')->default(0);
+            $table->unsignedTinyInteger('test_run')->after('text')->default(2);
         });
     }
 

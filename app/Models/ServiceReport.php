@@ -16,12 +16,12 @@ class ServiceReport extends AbstractUuidModel
     ];
 
     protected static $testRuns = [
-        'i.O.', 'n.i.O', 'nicht durchgeführt'
+        'nicht durchgeführt', 'n.i.O', 'i.O.'
     ];
 
-    const TEST_RUN_IO = 0;
+    const NO_TEST_RUN = 0;
     const TEST_RUN_NIO = 1;
-    const NO_TEST_RUN = 2;
+    const TEST_RUN_IO = 2;
 
     public function testRun() {
         return static::$testRuns[$this->test_run];
