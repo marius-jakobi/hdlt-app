@@ -145,6 +145,7 @@ class ServiceReport extends AbstractUuidModel
                 'brands.name as brand',
                 'filters.model',
                 'filters.element',
+                'filters.next_service',
                 'service_scopes.description as scope'
             ])
             ->get();
@@ -160,6 +161,7 @@ class ServiceReport extends AbstractUuidModel
                 'brands.name as brand',
                 'receivers.volume',
                 'receivers.serial',
+                'receivers.next_service',
                 'service_scopes.description as scope'
             ])
             ->get();

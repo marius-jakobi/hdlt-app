@@ -163,7 +163,7 @@
                             <td>{{ $filter->model }}</td>
                             <td>{{ $filter->element }}</td>
                             <td>{{ $filter->scope }}</td>
-                            <td></td>
+                            <td>{{ substr($filter->next_service, 0, 7) }}</td>
                             <td></td>
                             <td></td>
                         </tr>
@@ -178,7 +178,7 @@
                             <td>{{ $receiver->volume }} Liter</td>
                             <td>{{ $receiver->serial }}</td>
                             <td>{{ $receiver->scope }}</td>
-                            <td></td>
+                            <td>{{ substr($receiver->next_service, 0, 7) }}</td>
                             <td></td>
                             <td></td>
                         </tr>
