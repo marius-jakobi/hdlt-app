@@ -14,9 +14,9 @@
                             <th>Hersteller</th>
                             <th>Typ</th>
                             <th>S/N</th>
-                            <th>Element</th>
                             <th>Stunden</th>
                             <th>Umfang</th>
+                            <th>nächster Service</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -34,7 +34,6 @@
                                         <td>{{ $c->brand->name }}</td>
                                         <td>{{ $c->model ?? $c->volume . ' Liter' }}</td>
                                         <td>{{ $c->serial }}</td>
-                                        <td>{{ $c->element }}</td>
                                         <td>
                                             {{-- Add inputs for hours if component type is 'compressor' --}}
                                             @if ($key === 'compressor')
@@ -82,6 +81,18 @@
                                             @if($errors->has('components.'.$key.'s.'.$c->id.'.scope_id'))
                                                 <span class="text-danger">{{ $errors->first('components.'.$key.'s.'.$c->id.'.scope_id') }}</span>
                                             @endif
+                                        </td>
+                                        {{-- next service selector --}}
+                                        <td>
+                                            @if($c->hasNextServiceAttribute($key))
+                                                <input type="month"
+                                                    name="components[{{ $key }}s][{{ $c->id }}][next_service]"
+                                                    class="form-control"
+                                                    value="{{ $c->next_service }}" />
+                                            @endif
+                                            @error('components.'.$key.'s.'.$c->id.'.next_service')
+                                                <span class="text-danger">{{ $errors->first('components.'.$key.'s.'.$c->id.'.next_service') }}</span>
+                                            @enderror
                                         </td>
                                     </tr>
                                 @endforeach

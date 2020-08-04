@@ -96,14 +96,14 @@
             <tbody>
                 {{-- adsorbers --}}
                 @if ($report->adsorbers()->count() > 0)
-                    <tr><th colspan="7" class="text-center">Adsorber</th></tr>
+                    <tr><th colspan="7" class="text-center bg-secondary text-white">Adsorber</th></tr>
                     @foreach($report->adsorbers() as $adsorber)
                         <tr>
                             <td>{{ $adsorber->brand }}</td>
                             <td>{{ $adsorber->model }}</td>
                             <td>{{ $adsorber->serial }}</td>
                             <td>{{ $adsorber->scope }}</td>
-                            <td>{{ $adsorber->next_service }}</td>
+                            <td>{{ substr($adsorber->next_service, 0, 7) }}</td>
                             <td></td>
                             <td></td>
                         </tr>
@@ -111,14 +111,14 @@
                 @endif
                 {{-- ad dryers --}}
                 @if ($report->adDryers()->count() > 0)
-                    <tr><th colspan="7" class="text-center">Adsorptionstrockner</th></tr>
+                    <tr><th colspan="7" class="text-center bg-secondary text-white">Adsorptionstrockner</th></tr>
                     @foreach($report->adDryers() as $ad_dryer)
                         <tr>
                             <td>{{ $ad_dryer->brand }}</td>
                             <td>{{ $ad_dryer->model }}</td>
                             <td>{{ $ad_dryer->serial }}</td>
                             <td>{{ $ad_dryer->scope }}</td>
-                            <td>{{ $ad_dryer->next_service }}</td>
+                            <td>{{ substr($ad_dryer->next_service, 0, 7) }}</td>
                             <td></td>
                             <td></td>
                         </tr>
@@ -126,7 +126,7 @@
                 @endif
                 {{-- controllers --}}
                 @if ($report->controllers()->count() > 0)
-                    <tr><th colspan="7" class="text-center">Steuerungen</th></tr>
+                    <tr><th colspan="7" class="text-center bg-secondary text-white">Steuerungen</th></tr>
                     @foreach($report->controllers() as $controller)
                         <tr>
                             <td>{{ $controller->brand }}</td>
@@ -141,14 +141,15 @@
                 @endif
                 {{-- compressors --}}
                 @if ($report->compressors()->count() > 0)
-                    <tr><th colspan="7" class="text-center">Kompressoren</th></tr>
+                    <tr><th colspan="7" class="text-center bg-secondary text-white">Kompressoren</th></tr>
                     @foreach($report->compressors() as $compressor)
                         <tr>
                             <td>{{ $compressor->brand }}</td>
                             <td>{{ $compressor->model }}</td>
                             <td>{{ $compressor->serial }}</td>
                             <td>{{ $compressor->scope }}</td>
-                            <td>{{ $compressor->next_service }}</td>
+                            <td>{{ substr($compressor->next_service, 0, 7) }}
+                            </td>
                             <td>{{ $compressor->hours_running ? $compressor->hours_running . ' h' : '---' }}</td>
                             <td>{{ $compressor->hours_loaded ? $compressor->hours_loaded . ' h' : '---' }}</td>
                         </tr>
@@ -156,7 +157,7 @@
                 @endif
                 {{-- filters --}}
                 @if ($report->filters()->count() > 0)
-                    <tr><th colspan="7" class="text-center">Filter</th></tr>
+                    <tr><th colspan="7" class="text-center bg-secondary text-white">Filter</th></tr>
                     @foreach($report->filters() as $filter)
                         <tr>
                             <td>{{ $filter->brand }}</td>
@@ -171,7 +172,7 @@
                 @endif
                 {{-- receivers --}}
                 @if ($report->receivers()->count() > 0)
-                    <tr><th colspan="7" class="text-center">Behälter</th></tr>
+                    <tr><th colspan="7" class="text-center bg-secondary text-white">Behälter</th></tr>
                     @foreach($report->receivers() as $receiver)
                         <tr>
                             <td>{{ $receiver->brand }}</td>
@@ -186,14 +187,14 @@
                 @endif
                 {{-- ref dryers --}}
                 @if ($report->refDryers()->count() > 0)
-                    <tr><th colspan="7" class="text-center">Kältetrockner</th></tr>
+                    <tr><th colspan="7" class="text-center bg-secondary text-white">Kältetrockner</th></tr>
                     @foreach($report->refDryers() as $refDryer)
                         <tr>
                             <td>{{ $refDryer->brand }}</td>
                             <td>{{ $refDryer->model }}</td>
                             <td>{{ $refDryer->serial }}</td>
                             <td>{{ $refDryer->scope }}</td>
-                            <td>{{ $refDryer->next_service }}</td>
+                            <td>{{ substr($refDryer->next_service, 0, 7) }}</td>
                             <td></td>
                             <td></td>
                         </tr>
@@ -201,7 +202,7 @@
                 @endif
                 {{-- sensors --}}
                 @if ($report->sensors()->count() > 0)
-                    <tr><th colspan="7" class="text-center">Sensoren</th></tr>
+                    <tr><th colspan="7" class="text-center bg-secondary text-white">Sensoren</th></tr>
                     @foreach($report->sensors() as $sensor)
                         <tr>
                             <td>{{ $sensor->brand }}</td>
@@ -216,13 +217,13 @@
                 @endif
                 {{-- separators --}}
                 @if ($report->separators()->count() > 0)
-                    <tr><th colspan="7" class="text-center">Öl-Wasser-Trenner</th></tr>
+                    <tr><th colspan="7" class="text-center bg-secondary text-white">Öl-Wasser-Trenner</th></tr>
                     @foreach($report->separators() as $separator)
                         <tr>
                             <td>{{ $separator->brand }}</td>
                             <td>{{ $separator->model }}</td>
                             <td>{{ $separator->scope }}</td>
-                            <td>{{ $separator->next_service }}</td>
+                            <td>{{ substr($separator->next_service, 0, 7) }}</td>
                             <td></td>
                             <td></td>
                             <td></td>

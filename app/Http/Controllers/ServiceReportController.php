@@ -182,6 +182,13 @@ class ServiceReportController extends Controller
 
                 // Insert row with a components service data into database tables
                 DB::table($groupKey . '_service_reports')->insert($row);
+
+                // Update next service date
+                if (isset($componentData['next_service'])) {
+                    DB::table($groupKey)
+                        ->where('id', '=', $componentId)
+                        ->update(['next_service' => $componentData['next_service'] . '-01']);
+                }
             }
         }
 

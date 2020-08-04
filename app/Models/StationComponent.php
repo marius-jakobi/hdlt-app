@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Validation\Rule;
 
@@ -83,6 +84,16 @@ class StationComponent extends Model
 
     public function setNextServiceAttribute($value) {
         $this->attributes['next_service'] = $value ? "$value-01" : null;
+    }
+
+    public function hasNextServiceAttribute(string $componentType) {
+        return $componentType === 'adsorber' ||
+            $componentType === 'ad_dryer' ||
+            $componentType === 'compressor' ||
+            $componentType === 'filter' ||
+            $componentType === 'receiver' ||
+            $componentType === 'ref_dryer' ||
+            $componentType === 'separator';
     }
 
     /**
