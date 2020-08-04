@@ -47,7 +47,8 @@ class ShippingAddressController extends Controller
             'name' => 'required',
             'street' => 'required',
             'zip' => 'required',
-            'city' => 'required'
+            'city' => 'required',
+            'has_contract' => 'nullable|boolean',
         ]);
 
         if ($validator->fails()) {
@@ -59,6 +60,7 @@ class ShippingAddressController extends Controller
         $address->street = $request->input('street');
         $address->zip = $request->input('zip');
         $address->city = $request->input('city');
+        $address->has_contract = $request->input('has_contract') !== null;
         $address->save();
 
         return redirect($back)
@@ -91,13 +93,20 @@ class ShippingAddressController extends Controller
         $customer = Customer::findOrFail($customerId);
 
         $this->authorize('create', ShippingAddress::class);
-
-        $validator = Validator::make($request->all(), [
+        
+        $rules = [
             'name' => 'required',
             'street' => 'required',
             'zip' => 'required',
-            'city' => 'required'
-        ]);
+            'city' => 'required',
+            'has_contract' => 'nullable|boolean',
+        ];
+
+        $messages = [
+            'has_contract.*' => 'Dieser Wert ist ungültig'
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $messages);
 
         if ($validator->fails()) {
             return redirect($back)
@@ -105,16 +114,17 @@ class ShippingAddressController extends Controller
                 ->withErrors($validator);
         }
 
-        $address = new ShippingAddress([
-            'name' => $request->input('name'),
-            'street' => $request->input('street'),
-            'zip' => $request->input('zip'),
-            'city' => $request->input('city')
-        ]);
+        $shippingAddress = new ShippingAddress();
+        $shippingAddress->name = $request->input('name');
+        $shippingAddress->street = $request->input('street');
+        $shippingAddress->zip = $request->input('zip');
+        $shippingAddress->city = $request->input('city');
+        $shippingAddress->has_contract = $request->input('has_contract') !== null;
+        
 
-        $customer->shippingAddresses()->save($address);
+        $customer->shippingAddresses()->save($shippingAddress);
 
-        $address->save();
+        $shippingAddress->save();
 
         return redirect(route('customer.details', ['customerId' => $customerId]))
             ->with('success', 'Die Lieferadresse wurde angelegt');

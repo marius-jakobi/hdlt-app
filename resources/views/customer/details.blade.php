@@ -61,6 +61,7 @@
                         <th>Straße / Postfach</th>
                         <th>PLZ / Ort</th>
                         <th>Anlagen</th>
+                        <th>Wartungsvertrag</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -75,6 +76,7 @@
                             <td>{{ $shippingAddress->street }}</td>
                             <td>{{ $shippingAddress->zip . " " . $shippingAddress->city}}</td>
                             <td>{{ $shippingAddress->countComponents() }}</td>
+                            <td>{{ $shippingAddress->has_contract ? 'Ja' : '' }}</td>
                         </tr>
                     @endforeach
                 </tbody>

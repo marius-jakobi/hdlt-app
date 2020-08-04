@@ -6,7 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class ShippingAddress extends Model
 {
-    protected $fillable = ['name', 'street', 'zip', 'city'];
+    protected $fillable = ['name', 'street', 'zip', 'city', 'has_contract'];
+
+    protected $casts = [
+        'has_contract' => 'boolean'
+    ];
 
     /**
      * Relationship to customer

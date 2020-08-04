@@ -42,26 +42,26 @@
                 <div class="form-group">
                     <label>Name</label>
                     <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ $shippingAddress->name }}" autofocus>
+                    @error('name')
+                        <p class="text-danger">{{ $message }}</p>
+                    @enderror
                 </div>
-                @error('name')
-                <p class="text-danger">{{ $message }}</p>
-                @enderror
                 <div class="form-group">
                     <label>Straße</label>
                     <input type="text" name="street" class="form-control @error('street') is-invalid @enderror" value="{{ $shippingAddress->street }}">
+                    @error('street')
+                        <p class="text-danger">{{ $message }}</p>
+                    @enderror
                 </div>
-                @error('street')
-                <p class="text-danger">{{ $message }}</p>
-                @enderror
                 <div class="row">
                     <div class="col-sm-12 col-md-4">
                         <div class="form-group">
                             <label>PLZ</label>
                             <input type="text" name="zip" class="form-control @error('zip') is-invalid @enderror" value="{{ $shippingAddress->zip }}">
+                            @error('zip')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
                         </div>
-                        @error('zip')
-                        <p class="text-danger">{{ $message }}</p>
-                        @enderror
                     </div>
                     <div class="col-sm-12 col-md-8">
                         <div class="form-group">
@@ -73,7 +73,23 @@
                         @enderror
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary">Speichern</button>
+                <div class="form-check">
+                    <label class="form-check-label @error('has_contract') text-danger @enderror">
+                        <input type="checkbox"
+                            name="has_contract"
+                            class="form-check-input"
+                            value="1"
+                            @if($shippingAddress->has_contract == '1')
+                                checked="checked"
+                            @endif
+                            >
+                        Wartungsvertrag
+                    </label>
+                    @error('has_contract')
+                        <p class="text-danger">{{ $message }}</p>
+                    @enderror
+                </div>
+                <button type="submit" class="btn btn-primary mt-3">Speichern</button>
             </form>
         @endcan
         @cannot('update', App\Models\ShippingAddress::class)
