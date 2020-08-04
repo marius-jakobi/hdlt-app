@@ -172,13 +172,15 @@
                         </div>
                     </div>
                 @endif
-                <div class="form-group">
-                    <label>Nächster Service</label>
-                    <input type="month" name="next_service" class="form-control @error('next_service') is-invalid @enderror" value="{{ $component->next_service }}">
-                </div>
-                @error('next_service')
-                    <p class="text-danger">{{ $message }}</p>
-                @enderror
+                @if($component->hasNextServiceAttribute($type))
+                    <div class="form-group">
+                        <label>Nächster Service</label>
+                        <input type="month" name="next_service" class="form-control @error('next_service') is-invalid @enderror" value="{{ $component->next_service ? $component->next_service->format('Y-m') : '' }}">
+                    </div>
+                    @error('next_service')
+                        <p class="text-danger">{{ $message }}</p>
+                    @enderror
+                @endif
                 @if ($type == 'compressor')
                     <div class="form-check">
                         <input type="checkbox" name="is_oilfree" class="form-check-input" id="is_oilfree_checkbox" value="1" @if($component->is_oilfree == '1') checked @endif>
