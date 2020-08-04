@@ -120,6 +120,35 @@
             </div>
         </div>
 
+        <div class="row">
+            <div class="col-sm-12 col-md-8">
+                <div class="form-group">
+                    <label>Zusätzlich benötigte Arbeiten</label>
+                    <input type="text" name="additional_work_required" class="form-control @error('additional_work_required') is-invalid @enderror" value="{{ old('additional_work_required') }}" maxlength="255" />
+                    @error('additional_work_required')
+                        <p class="text-danger">{{ $message }}</p>
+                    @enderror
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-4">
+                <div class="form-group">
+                    <label>Probelauf</label>
+                    <select name="test_run" class="form-control @error('test_run') is-invalid @enderror" required>
+                        @foreach($testRuns as $key => $value)
+                            <option value="{{ $key }}"
+                                @if(old('test_run') == $key)
+                                    selected="selected"
+                                @endif
+                            >{{ $value }}</option>
+                        @endforeach
+                    </select>
+                    @error('test_run')
+                        <p class="text-danger">{{ $message }}</p>
+                    @enderror
+                </div>
+            </div>
+        </div>
+        
         <div class="form-group">
             <label>Text</label>
             <textarea name="text" class="form-control" rows="4" maxlength="1000">{{ old('text') }}</textarea>

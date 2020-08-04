@@ -10,8 +10,26 @@ class ServiceReport extends AbstractUuidModel
         'order_confirmation_id',
         'shipping_address_id',
         'intent',
-        'text'
+        'text',
+        'test_run',
+        'additional_required_work'
     ];
+
+    protected static $testRuns = [
+        'i.O.', 'n.i.O', 'nicht durchgeführt'
+    ];
+
+    const TEST_RUN_IO = 0;
+    const TEST_RUN_NIO = 1;
+    const NO_TEST_RUN = 2;
+
+    public function testRun() {
+        return static::$testRuns[$this->test_run];
+    }
+
+    public static function testRuns() {
+        return static::$testRuns;
+    }
 
     public function orderConfirmation() {
         return $this->belongsTo(OrderConfirmation::class, 'order_confirmation_id', 'id');

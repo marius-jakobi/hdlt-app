@@ -55,6 +55,7 @@
                     <th>Auftragsbestätigung</th>
                     <th>Bestellung</th>
                     <th>Durchführung</th>
+                    <th>Probelauf</th>
                 </tr>
             </thead>
             <tbody>
@@ -72,6 +73,7 @@
                     </td>
                     <td>{{ $report->orderConfirmation->po_number }}</td>
                     <td>{{ $report->getLocalDate() }}</td>
+                    <td>{{ $report->testRun() }}</td>
                 </tr>
             </tbody>
         </table>
@@ -236,6 +238,10 @@
     @if($report->text)
         <h5>Erläuterung</h5>
         <p>{{ $report->text }}</p>
+    @endif
+    @if($report->additional_work_required)
+        <h5>Zusätzlich benötigte Arbeiten</h5>
+        <p>{{ $report->additional_work_required }}</p>
     @endif
     <h5>Service-Techniker</h5>
     {{-- Technicians --}}

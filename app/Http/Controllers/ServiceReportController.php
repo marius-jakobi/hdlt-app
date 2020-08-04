@@ -40,7 +40,8 @@ class ServiceReportController extends Controller
             'orderConfirmations' => $orderConfirmations,
             'components' => $components,
             'technicians' => DB::table('technicians')->orderBy('name_last')->get(),
-            'scopes' => DB::table('service_scopes')->orderBy('description')->get()
+            'scopes' => DB::table('service_scopes')->orderBy('description')->get(),
+            'testRuns' => ServiceReport::testRuns()
         ]);
     }
 
@@ -50,6 +51,8 @@ class ServiceReportController extends Controller
         // Basic rules
         $rules = [
             'intent' => 'required|between:4,128',
+            'additional_work_required' => 'nullable|max:255',
+            'test_run' => 'required|numeric|between:0,' . (count(ServiceReport::testRuns()) - 1),
             'components.compressors.*.hours_running' => 'nullable|numeric',
             'components.compressors.*.hours_loaded' => 'nullable|numeric',
             'components.compressors.*' => [
@@ -64,7 +67,8 @@ class ServiceReportController extends Controller
         // related validation messages
         $messages = [
             'components.compressors.*.hours_running.numeric' => 'Die Betriebsstunden müssen eine Zahl sein.',
-            'components.compressors.*.hours_loaded.numeric' => 'Die Laststunden müssen eine Zahl sein.'
+            'components.compressors.*.hours_loaded.numeric' => 'Die Laststunden müssen eine Zahl sein.',
+            'test_run.*' => 'Dieser Wert für Probelauf ist ungültig.'
         ];
 
         // Dynamically add validation rules and messages for components
@@ -131,7 +135,9 @@ class ServiceReportController extends Controller
             'order_confirmation_id' => $orderConfirmation->id,
             'shipping_address_id' => $shippingAddressId,
             'intent' => $input['intent'],
-            'text' => $input['text']
+            'text' => $input['text'],
+            'test_run' => $input['test_run'],
+            'additional_work_required' => $input['additional_work_required'],
         ]);
 
         // Save service report to give it a UID
