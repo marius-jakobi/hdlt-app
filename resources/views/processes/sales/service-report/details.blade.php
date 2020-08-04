@@ -148,8 +148,7 @@
                             <td>{{ $compressor->model }}</td>
                             <td>{{ $compressor->serial }}</td>
                             <td>{{ $compressor->scope }}</td>
-                            <td>{{ substr($compressor->next_service, 0, 7) }}
-                            </td>
+                            <td>{{ substr($compressor->next_service, 0, 7) }}</td>
                             <td>{{ $compressor->hours_running ? $compressor->hours_running . ' h' : '---' }}</td>
                             <td>{{ $compressor->hours_loaded ? $compressor->hours_loaded . ' h' : '---' }}</td>
                         </tr>
@@ -253,6 +252,7 @@
                     <th>Name</th>
                     <th>Vorname</th>
                     <th>Arbeitszeit</th>
+                    <th>Durchführungsdatum</th>
                 </tr>
             </thead>
             <tbody>
@@ -261,10 +261,11 @@
                     <td>{{ $technician->name_last }}</td>
                     <td>{{ $technician->name_first }}</td>
                     <td>{{ $technician->pivot->work_time }} h</td>
+                    <td>{{ $technician->pivot->work_date }}</td>
                 </tr>
                 @endforeach
                 <tr>
-                    <td colspan="3">
+                    <td colspan="4">
                         <div class="text-right">Gesamtarbeitszeit: {{ $report->getTotalWorktime() }} h</div>
                     </td>
                 </tr>

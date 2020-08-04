@@ -12,7 +12,7 @@ class ServiceReport extends AbstractUuidModel
         'intent',
         'text',
         'test_run',
-        'additional_required_work'
+        'additional_work_required'
     ];
 
     protected static $testRuns = [
@@ -49,7 +49,7 @@ class ServiceReport extends AbstractUuidModel
 
     public function technicians() {
         return $this->belongsToMany(Technician::class, 'service_report_technicians', 'service_report_id', 'technician_id')
-            ->withPivot(['work_time']);
+            ->withPivot(['work_time', 'work_date']);
     }
 
     public function getLocalDate() {

@@ -28,6 +28,10 @@ class StationComponent extends Model
         'memo'
     ];
 
+    protected $dates = [
+        'next_service'
+    ];
+
     /**
      * Brand relationship
      */
@@ -77,14 +81,14 @@ class StationComponent extends Model
         'controller' => 'Controller'
     ];
 
-    public function getNextServiceAttribute($value) {
-        if (!$value) return null;
-        return \Carbon\Carbon::createFromDate($value)->format('Y-m');
-    }
+    // public function getNextServiceAttribute($value) {
+    //     if (!$value) return null;
+    //     return \Carbon\Carbon::createFromDate($value)->format('Y-m');
+    // }
 
-    public function setNextServiceAttribute($value) {
-        $this->attributes['next_service'] = $value ? "$value-01" : null;
-    }
+    // public function setNextServiceAttribute($value) {
+    //     $this->attributes['next_service'] = $value ? "$value-01" : null;
+    // }
 
     public function hasNextServiceAttribute(string $componentType) {
         return $componentType === 'adsorber' ||

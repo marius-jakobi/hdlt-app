@@ -19,6 +19,6 @@ class Technician extends Model
 
     public function serviceReports() {
         return $this->belongsToMany(ServiceReport::class, 'service_report_technicians', 'technician_id', 'service_report_id')
-            ->withPivot(['work_time']);
+            ->withPivot(['work_time', 'work_date']);
     }
 }

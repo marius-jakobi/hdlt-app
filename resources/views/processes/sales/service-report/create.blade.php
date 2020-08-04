@@ -88,7 +88,7 @@
                                                 <input type="month"
                                                     name="components[{{ $key }}s][{{ $c->id }}][next_service]"
                                                     class="form-control"
-                                                    value="{{ $c->next_service }}" />
+                                                    value="{{ $c->next_service ? $c->next_service->format('Y-m') : '' }}" />
                                             @endif
                                             @error('components.'.$key.'s.'.$c->id.'.next_service')
                                                 <span class="text-danger">{{ $errors->first('components.'.$key.'s.'.$c->id.'.next_service') }}</span>
@@ -177,6 +177,7 @@
                     <th>Name</th>
                     <th>Vorname</th>
                     <th>Zeit</th>
+                    <th>Datum</th>
                 </tr>
             </thead>
             <tbody>
@@ -184,7 +185,19 @@
                     <tr>
                         <td>{{ $technician->name_last }}</td>
                         <td>{{ $technician->name_first }}</td>
-                        <td><input type="number" name="technicians[{{ $technician->id }}]" class="form-control" value="{{ old("technicians.$technician->id") }}" min="0.25" step="0.25"></td>
+                        <td>
+                            <input type="number" 
+                                name="technicians[{{ $technician->id }}][work_time]"
+                                class="form-control"
+                                value="{{ old("technicians.$technician->id.work_time") }}"
+                                min="0.25" step="0.25" />
+                        </td>
+                        <td>
+                            <input type="date"
+                                name="technicians[{{ $technician->id }}][work_date]"
+                                class="form-control"
+                                value="{{ old("technicians.$technician->id.work_date") ?? \Carbon\Carbon::now()->format('Y-m-d')  }}" />
+                        </td>
                     </tr>
                 @endforeach
             </tbody>

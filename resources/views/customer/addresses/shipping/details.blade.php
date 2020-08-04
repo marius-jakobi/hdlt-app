@@ -114,7 +114,7 @@
                     <td>{{ $compressor->serial }}</td>
                     <td>{{ $compressor->year }}</td>
                     <td>{{ $compressor->getType() }}</td>
-                    <td>{{ $compressor->next_service }}</td>
+                    <td>{{ $compressor->next_service ? $compressor->next_service->format('m / Y') : '' }}</td>
                     @can('view', App\Models\StationComponent::class)
                     <td><a href="{{ route('component.details', ['type' => 'compressor', 'componentId' => $compressor->id]) }}">Details</a></td>
                     @endcan
@@ -154,7 +154,7 @@
                     <td>{{ $receiver->pressure }}</td>
                     <td>{{ $receiver->year }}</td>
                     <td>{{ $receiver->getType() }}</td>
-                    <td>{{ $receiver->next_service }}</td>
+                    <td>{{ $receiver->next_service ? $receiver->next_service->format('m / Y') : '' }}</td>
                     @can('view', App\Models\StationComponent::class)
                     <td><a href="{{ route('component.details', ['type' => 'receiver', 'componentId' => $receiver->id]) }}">Details</a></td>
                     @endcan
@@ -191,7 +191,7 @@
                     <td>{{ $ref_dryer->serial }}</td>
                     <td>{{ $ref_dryer->year }}</td>
                     <td>{{ $ref_dryer->ref_amount ? $ref_dryer->ref_amount . " kg" : "" }} {{ $ref_dryer->ref_type }}</td>
-                    <td>{{ $ref_dryer->next_service }}</td>
+                    <td>{{ $ref_dryer->next_service ? $ref_dryer->next_service->format('m / Y') : '' }}</td>
                     @can('view', App\Models\StationComponent::class)
                     <td><a href="{{ route('component.details', ['type' => 'ref_dryer', 'componentId' => $ref_dryer->id]) }}">Details</a></td>
                     @endcan
@@ -225,7 +225,7 @@
                     <td>{{ $filter->brand->name }}</td>
                     <td>{{ $filter->model }}</td>
                     <td>{{ $filter->element }}</td>
-                    <td>{{ $filter->next_service }}</td>
+                    <td>{{ $filter->next_service ? $filter->next_service->format('m / Y') : '' }}</td>
                     @can('view', App\Models\StationComponent::class)
                     <td><a href="{{ route('component.details', ['type' => 'filter', 'componentId' => $filter->id]) }}">Details</a></td>
                     @endcan
@@ -261,7 +261,7 @@
                     <td>{{ $ad_dryer->model }}</td>
                     <td>{{ $ad_dryer->serial }}</td>
                     <td>{{ $ad_dryer->year }}</td>
-                    <td>{{ $ad_dryer->next_service }}</td>
+                    <td>{{ $ad_dryer->next_service ? $ad_dryer->next_service->format('m / Y') : '' }}</td>
                     @can('view', App\Models\StationComponent::class)
                     <td><a href="{{ route('component.details', ['type' => 'ad_dryer', 'componentId' => $ad_dryer->id]) }}">Details</a></td>
                     @endcan
@@ -297,7 +297,7 @@
                     <td>{{ $adsorber->model }}</td>
                     <td>{{ $adsorber->serial }}</td>
                     <td>{{ $adsorber->year }}</td>
-                    <td>{{ $adsorber->next_service }}</td>
+                    <td>{{ $adsorber->next_service ? $adsorber->next_service->format('m / Y') : '' }}</td>
                     @can('view', App\Models\StationComponent::class)
                     <td><a href="{{ route('component.details', ['type' => 'adsorber', 'componentId' => $adsorber->id]) }}">Details</a></td>
                     @endcan
@@ -329,7 +329,7 @@
                 <tr>
                     <td>{{ $separator->brand->name }}</td>
                     <td>{{ $separator->model }}</td>
-                    <td>{{ $separator->next_service }}</td>
+                    <td>{{ $separator->next_service ? $separator->next_service->format('m / Y') : '' }}</td>
                     @can('view', App\Models\StationComponent::class)
                     <td><a href="{{ route('component.details', ['type' => 'separator', 'componentId' => $separator->id]) }}">Details</a></td>
                     @endcan

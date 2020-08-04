@@ -86,8 +86,8 @@ class ServiceReportController extends Controller
                 ->withErrors($validator);
         }
 
-        foreach ($input['technicians'] as $technician_id => $work_time) {
-            if (!$work_time || $work_time <= 0) {
+        foreach ($input['technicians'] as $technician_id => $technicianData) {
+            if (!$technicianData['work_time'] || intval($technicianData['work_time']) <= 0) {
                 unset($input['technicians'][$technician_id]);
             }
         }
@@ -144,13 +144,14 @@ class ServiceReportController extends Controller
         $serviceReport->save();
 
         // Attach technicians to report
-        foreach($input['technicians'] as $technician_id => $work_time) {
+        foreach($input['technicians'] as $technician_id => $technicianData) {
             // If a technician has a work time add it to the relationship
-            if ($work_time) {
+            if (intval($technicianData['work_time']) > 0) {
                 DB::table('service_report_technicians')->insert([
                     'service_report_id' => $serviceReport->id,
                     'technician_id' => $technician_id,
-                    'work_time' => $work_time
+                    'work_time' => $technicianData['work_time'],
+                    'work_date' => $technicianData['work_date'],
                 ]);
             }
         }
