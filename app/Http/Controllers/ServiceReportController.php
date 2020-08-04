@@ -39,7 +39,7 @@ class ServiceReportController extends Controller
             'shippingAddress' => $shippingAddress,
             'orderConfirmations' => $orderConfirmations,
             'components' => $components,
-            'technicians' => DB::table('technicians')->orderBy('name_last')->get(),
+            'technicians' => DB::table('technicians')->where('is_active', true)->orderBy('name_last')->get(),
             'scopes' => DB::table('service_scopes')->orderBy('description')->get(),
             'testRuns' => ServiceReport::testRuns()
         ]);
