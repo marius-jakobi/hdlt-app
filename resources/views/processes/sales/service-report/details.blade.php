@@ -5,6 +5,9 @@
     <p>Bericht-ID: {{ $report->id }}</p>
     <p class="d-none d-print-block">Druckdatum: {{ date('Y-m-d') }}</p>
     <p>Erstellt: {{ $report->created_at }}</p>
+    @if($report->salesProcess->isLegacy())
+        <div class="alert bg-warning d-print-none">Warnung: Dieser Service-Bericht wurde mit dem alten Herbst Tool erstellt.</div>
+    @endif
     {{-- Addresses --}}
     <div class="table-responsive">
         <table class="table table-bordered table-sm">
