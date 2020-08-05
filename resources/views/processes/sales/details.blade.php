@@ -2,6 +2,9 @@
 
 @section('content')
     <h1>Verkaufsvorgang {{ $process->process_number }}</h1>
+    @if($process->isLegacy())
+        <div class="alert bg-warning">Warnung: Dieser Vorgang beinhaltet alle Service-Arbeiten aus dem alten Herbst-Tool.</div>
+    @endif
     <p>
         Kunde:
         <a href="{{ route('customer.details', ['customerId' => $process->customer->id]) }}">

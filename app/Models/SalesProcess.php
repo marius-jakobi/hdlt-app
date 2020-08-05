@@ -15,4 +15,8 @@ class SalesProcess extends Process
     public function orderConfirmations() {
         return $this->hasMany(OrderConfirmation::class, 'sales_process_id', 'id');
     }
+
+    public function isLegacy() {
+        return $this->process_number === "legacy";
+    }
 }
