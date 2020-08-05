@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\OrderConfirmation;
 use App\Models\SalesProcess;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -10,8 +11,12 @@ use Illuminate\Support\Facades\Validator;
 class SalesProcessController extends Controller
 {
     public function details(string $processNumber) {
+        $process = SalesProcess::where('process_number', $processNumber)->firstOrFail();
+        $orderConfirmations = OrderConfirmation::where('sales_process_id', '=', $process->id)->orderBy('created_at', 'desc')->paginate(8);
+
         return view('processes.sales.details', [
-            'process' => SalesProcess::where('process_number', $processNumber)->firstOrFail()
+            'process' => $process,
+            'orderConfirmations' => $orderConfirmations
             ]);
     }
 

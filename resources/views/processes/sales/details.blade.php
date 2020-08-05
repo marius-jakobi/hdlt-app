@@ -21,7 +21,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($process->orderConfirmations as $orderConfirmation)
+            @foreach($orderConfirmations as $orderConfirmation)
                 <tr>
                     <td>
                         <a href="{{ route('process.sales.order-confirmation.details', ['documentNumber' => $orderConfirmation->document_number]) }}">
@@ -34,4 +34,5 @@
             @endforeach
         </tbody>
     </table>
+    {{ $orderConfirmations->links() }}
 @endsection
