@@ -24,7 +24,11 @@ class ServiceReport extends AbstractUuidModel
     const TEST_RUN_IO = 2;
 
     public function testRun() {
-        return static::$testRuns[$this->test_run];
+        if ($this->test_run) {
+            return static::$testRuns[$this->test_run];
+        } else {
+            return 'nicht angegeben';
+        }
     }
 
     public static function testRuns() {

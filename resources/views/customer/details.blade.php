@@ -110,17 +110,7 @@
                                 </a>
                             </td>
                             <td>{{ $salesProcess->created_at }}</td>
-                            <td>
-                                <ul>
-                                    @foreach($salesProcess->orderconfirmations as $orderConfirmation)
-                                        <li>
-                                            <a href="{{ route('process.sales.order-confirmation.details', ['documentNumber' => $orderConfirmation->document_number]) }}">
-                                                {{ $orderConfirmation->document_number }}
-                                            </a>
-                                        </li>
-                                    @endforeach
-                                </ul>
-                            </td>
+                            <td>{{ $salesProcess->orderConfirmations->count() }}</td>
                         </tr>
                     @endforeach
                 </tbody>
