@@ -4,7 +4,7 @@
     <h1>Service-Bericht</h1>
     <p>Bericht-ID: {{ $report->id }}</p>
     <p class="d-none d-print-block">Druckdatum: {{ date('Y-m-d') }}</p>
-
+    <p>Erstellt: {{ $report->created_at }}</p>
     {{-- Addresses --}}
     <div class="table-responsive">
         <table class="table table-bordered table-sm">
@@ -54,7 +54,6 @@
                     <th>Vorgang</th>
                     <th>Auftragsbestätigung</th>
                     <th>Bestellung</th>
-                    <th>Durchführung</th>
                     <th>Probelauf</th>
                 </tr>
             </thead>
@@ -72,7 +71,6 @@
                         </a>
                     </td>
                     <td>{{ $report->orderConfirmation->po_number }}</td>
-                    <td>{{ $report->getLocalDate() }}</td>
                     <td>{{ $report->testRun() }}</td>
                 </tr>
             </tbody>
@@ -233,16 +231,22 @@
         </table>
     </div>
 
-    <h5>Einsatzzweck</h5>
-    <p>{{ $report->intent }}</p>
+    {{-- intent --}}
+    @if($report->intent)
+        <h5>Einsatzzweck</h5>
+        <p>{{ $report->intent }}</p>
+    @endif
+    {{-- text --}}
     @if($report->text)
         <h5>Erläuterung</h5>
         <p>{{ $report->text }}</p>
     @endif
+    {{-- additional work required --}}
     @if($report->additional_work_required)
         <h5>Zusätzlich benötigte Arbeiten</h5>
         <p>{{ $report->additional_work_required }}</p>
     @endif
+    {{-- technicians --}}
     <h5>Service-Techniker</h5>
     {{-- Technicians --}}
     @if ($report->technicians->count() > 0)
