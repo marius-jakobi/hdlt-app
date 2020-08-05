@@ -432,7 +432,7 @@
                     <a href="{{ route('process.sales.service-report.create', ['shippingAddressId' => $shippingAddress->id]) }}">Service-Bericht erstellen</a>
                 </p>
             @endcan
-            <x-service-report-list :reports="$shippingAddress->serviceReports" />
+            <x-service-report-list :reports="$serviceReports" />
         </div>
     @endcan
     {{-- Files tab --}}

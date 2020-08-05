@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Customer;
+use App\Models\ServiceReport;
 use App\Models\ShippingAddress;
 use App\Models\ShippingAddressUploadFile;
 use Illuminate\Http\Request;
@@ -19,10 +20,16 @@ class ShippingAddressController extends Controller
      */
     public function details(int $customerId, int $addressId) {
         $shippingAddress = ShippingAddress::findOrFail($addressId);
+        $serviceReports = ServiceReport::where('shipping_address_id', $addressId)
+            ->orderBy('created_at', 'desc')
+            ->get();
 
         $this->authorize('view', $shippingAddress);
 
-        return view('customer.addresses.shipping.details', ['shippingAddress' => $shippingAddress]);
+        return view('customer.addresses.shipping.details', [
+            'shippingAddress' => $shippingAddress,
+            'serviceReports' => $serviceReports,
+        ]);
     }
 
     /**
