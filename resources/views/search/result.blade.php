@@ -1,19 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="row">
-    <div class="col-md-6 col-sm-12">
-        <h1>Suchergebnis</h1>
-        <p>Die Suchergebnisse werden auf 10 Einträge je Kategorie begrenzt.</p>
-    </div>
-    <div class="col-md-6 col-sm-12">
-        <form action="{{ route('search.result') }}" method="post" class="form-inline float-right">
-            @csrf
-            <input type="text" name="q" class="form-control mr-2" value="{{ $query }}" placeholder="Suche">
-            <button type="submit" class="btn btn-primary">Suchen</button>
-        </form>
-    </div>
-</div>
+<h1>Suchergebnis</h1>
+
+<p>Die Suchergebnisse werden auf 20 Einträge je Kategorie begrenzt.</p>
+
 <h2>Kunden</h2>
 <table class="table">
     <thead>

@@ -14,6 +14,15 @@
                     <li class="nav-item">
                         <a href="{{ route('dashboard') }}" class="nav-link">Dashboard</a>
                     </li>
+
+                    @can('view-search-results', App\Models\User::class)
+                        <form action="{{ route('search.result') }}" method="post" class="form-inline ml-5">
+                            @csrf
+                            <input type="text" name="q" class="form-control" placeholder="Kunde / Lieferadresse" value="{{ $q ?? '' }}">
+                            <button type="submit" class="btn btn-primary ml-2">Suchen</button>
+                        </form>
+                    @endcan
+
                 @endauth
             </ul>
 

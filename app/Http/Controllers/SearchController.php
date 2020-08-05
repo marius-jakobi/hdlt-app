@@ -16,17 +16,18 @@ class SearchController extends Controller
 
         $customers = Customer::where('cust_id', 'like', "%$query%")
             ->orWhere('description', 'like', "%$query%")
-            ->limit(10)
+            ->limit(20)
             ->get();
 
         $shippingAddresses = ShippingAddress::where('name', 'like', "%$query%")
-            ->limit(10)
+            ->limit(20)
             ->get();
 
         return view('search.result', [
             'query' => $query,
             'customers' => $customers,
-            'shippingAddresses' => $shippingAddresses
+            'shippingAddresses' => $shippingAddresses,
+            'q' => $request->input('q')
         ]);
     }
 }
