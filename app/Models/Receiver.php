@@ -16,7 +16,11 @@ class Receiver extends StationComponent
      * Helper for getting type
      */
     public function getType() {
-        return static::$types[$this->type];
+        if ($this->type) {
+            return static::$types[$this->type];
+        } else {
+            return "Behälter";
+        }
     }
 
     public static function getTypes() {

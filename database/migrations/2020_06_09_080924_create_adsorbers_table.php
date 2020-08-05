@@ -25,7 +25,7 @@ class CreateAdsorbersTable extends Migration
                 ->onDelete('cascade');
             $table->smallInteger('model');
             $table->decimal('volume', 6, 2, true)->nullable();
-            $table->string('serial');
+            $table->string('serial')->nullable();
             $table->decimal('pressure', 6, 2, true)->nullable();
             $table->year('year')->nullable();
             $table->boolean('is_active')->default(true);

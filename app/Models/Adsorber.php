@@ -9,6 +9,6 @@ class Adsorber extends StationComponent
     }
 
     public function serviceReports() {
-        return $this->belongsToMany(ServiceReport::class, 'adsorber_service_reports', 'component_id', 'service_report_id');
+        return $this->belongsToMany(ServiceReport::class, 'adsorbers_service_reports', 'component_id', 'service_report_id');
     }
 }

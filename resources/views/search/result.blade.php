@@ -50,6 +50,7 @@
             <th>Straße</th>
             <th>PLZ</th>
             <th>Ort</th>
+            <th>Anlagen</th>
             <th>gehört zu</th>
         </tr>
     </thead>
@@ -69,6 +70,7 @@
             <td>{{ $shippingAddress->street }}</td>
             <td>{{ $shippingAddress->zip }}</td>
             <td>{{ $shippingAddress->city }}</td>
+            <td>{{ $shippingAddress->countComponents() }}</td>
             <td>
                 @can('view', App\Models\Customer::class)
                 <a href="{{ route('customer.details', ['customerId' => $shippingAddress->customer->id]) }}">

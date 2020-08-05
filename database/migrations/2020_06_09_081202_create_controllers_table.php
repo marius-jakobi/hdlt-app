@@ -24,7 +24,7 @@ class CreateControllersTable extends Migration
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
             $table->smallInteger('model');
-            $table->string('serial');
+            $table->string('serial')->nullable();
             $table->year('year')->nullable();
             $table->boolean('is_active')->default(true);
             $table->text('memo');

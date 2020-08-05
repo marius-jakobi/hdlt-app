@@ -23,8 +23,8 @@ class CreateSensorsTable extends Migration
                 ->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
-            $table->smallInteger('model');
-            $table->string('serial');
+            $table->smallInteger('model')->nullable();
+            $table->string('serial')->nullable();
             $table->year('year')->nullable();
             $table->boolean('is_active')->default(true);
             $table->text('memo');

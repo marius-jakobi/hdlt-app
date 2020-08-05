@@ -23,8 +23,8 @@ class CreateReceiversTable extends Migration
                 ->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
-            $table->smallInteger('volume');
-            $table->string('serial');
+            $table->smallInteger('volume')->nullable();
+            $table->string('serial')->nullable();
             $table->decimal('pressure', 6, 2, true)->nullable();
             $table->year('year')->nullable();
             $table->enum('type', ['standing', 'lying'])->nullbable();

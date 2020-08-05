@@ -23,8 +23,8 @@ class CreateCompressorsTable extends Migration
                 ->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
-            $table->string('model');
-            $table->string('serial');
+            $table->string('model')->nullable();
+            $table->string('serial')->nullable();
             $table->decimal('pressure', 6, 2, true)->nullable();
             $table->decimal('power', 6, 2, true)->nullable();
             $table->year('year')->nullable();

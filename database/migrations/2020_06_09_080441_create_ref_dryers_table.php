@@ -23,8 +23,8 @@ class CreateRefDryersTable extends Migration
                 ->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
-            $table->string('model');
-            $table->string('serial');
+            $table->string('model')->nullable();
+            $table->string('serial')->nullable();
             $table->year('year')->nullable();
             $table->enum('ref_type', ['R134a', 'R404A', 'R407C', 'R410A', 'R452a', 'R22'])->nullable();
             $table->decimal('ref_amount', 6, 2, true)->nullable();

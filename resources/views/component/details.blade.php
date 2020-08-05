@@ -114,6 +114,7 @@
                     <div class="form-group">
                         <label>Typ</label>
                         <select name="type" class="form-control @error('type') is-invalid @enderror" required>
+                            <option></option>
                             @if ($type === 'compressor')
                                 @foreach(App\Models\Compressor::getTypes() as $key => $value)
                                 <option value="{{ $key }}" @if($component->type === $key) selected @endif>{{ $value }}</option>
@@ -187,6 +188,10 @@
                         <label class="form-check-label" for="is_oilfree_checkbox">Kompressor ist ölfrei</label>
                     </div>
                 @endif
+                <div class="form-group">
+                    <label>Memo</label>
+                    <textarea name="memo" class="form-control" rows="5">{{ $component->memo }}</textarea>
+                </div>
                 <div class="text-right">
                     <button type="submit" class="btn btn-primary mt-3">Speichern</button>
                 </div>
