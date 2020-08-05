@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Validator;
 
 class SalesProcessController extends Controller
 {
-    public function details(int $processNumber) {
+    public function details(string $processNumber) {
         return view('processes.sales.details', [
             'process' => SalesProcess::where('process_number', $processNumber)->firstOrFail()
             ]);
