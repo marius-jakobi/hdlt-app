@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
-@section('title', "Recht $permission->name")
+@section('title', "Berechtigung $permission->name")
 
 @push('scripts')
 <script src="{{ asset('js/tabs.js') }}" defer></script>
 @endpush
 
 @section('content')
-<h1>Recht "{{ $permission->name }}"</h1>
+<h1>Berechtigung "{{ $permission->name }}"</h1>
 <ul class="nav nav-tabs mb-3" id="nav-tab">
     <li class="nav-item">
         <a href="#data" class="nav-link active" id="data-tab" data-toggle="tab">Daten</a>
@@ -46,7 +46,7 @@
     </div>
     <div class="tab-pane fade" id="roles">
         <h2>Rollen</h2>
-        <p>Dieses Recht ist folgenden Rollen zugeordnet:</p>
+        <p>Diese Berechtigung ist folgenden Rollen zugeordnet:</p>
         <ul>
             @foreach($permission->roles as $role)
                 <li>
@@ -57,12 +57,12 @@
     </div>
     <div class="tab-pane fade" id="actions">
         <h2>Aktionen</h2>
-        <h3>Recht löschen</h3>
-        <p>Mit dieser Aktion wird das Recht dauerhaft und unwiderruflich gelöscht.</p>
+        <h3>Berechtigung löschen</h3>
+        <p>Mit dieser Aktion wird die Berechtigung dauerhaft und unwiderruflich gelöscht.</p>
         <form action="{{ route('permission.delete', ['id' => $permission->id]) }}" method="post">
             @csrf
             @method('delete')
-            <button type="submit" class="btn btn-danger" onclick="return confirm('Soll dieses Recht wirklich dauerhaft gelöscht werden?');">Recht löschen</button>
+            <button type="submit" class="btn btn-danger" onclick="return confirm('Soll diese Berechtigung wirklich dauerhaft gelöscht werden?');">Berechtigung löschen</button>
         </form>
     </div>
 </div>

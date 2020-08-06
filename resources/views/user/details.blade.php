@@ -108,7 +108,7 @@
                     <tr>
                         <th>Rollenname</th>
                         <th>Rollenbeschreibung</th>
-                        <th>Rechte</th>
+                        <th>Berechtigungen</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -123,7 +123,7 @@
                         <td>{{ $role->description }}</td>
                         <td>
                             @if ($role->isAdmin())
-                                <div class="alert bg-info">Diese Rolle hat <strong>alle</strong> Rechte</div>
+                                <div class="alert bg-info">Diese Rolle hat <strong>alle</strong> Berechtigungen</div>
                             @else
                                 <ul>
                                 @foreach($role->permissions as $permission)

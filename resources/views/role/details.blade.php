@@ -18,7 +18,7 @@
         <a href="#data" class="nav-link active" id="data-tab" data-toggle="tab">Daten</a>
     </li>
     <li class="nav-item">
-        <a href="#rights" class="nav-link" id="rights-tab" data-toggle="tab">Rechte</a>
+        <a href="#rights" class="nav-link" id="rights-tab" data-toggle="tab">Berechtigungen</a>
     </li>
     @if (!$role->isAdmin())
         <li class="nav-item">
@@ -57,7 +57,7 @@
         @endif
     </div>
     <div class="tab-pane fade" id="rights">
-        <h2>Rechte</h2>
+        <h2>Berechtigungen</h2>
         @if (count($availablePermissions) > 0)
             <form action="{{ route('permission.attach', ['name' => $role->name]) }}" method="post" class="form-inline">
                 @csrf
@@ -66,7 +66,7 @@
                         <option value="{{ $availablePermission->id }}">{{ $availablePermission->name }} - {{ $availablePermission->description }}</option>
                     @endforeach
                 </select>
-                <button type="submit" class="btn btn-primary">Recht hinzufügen</button>
+                <button type="submit" class="btn btn-primary">Berechtigung hinzufügen</button>
             </form>
             @if ($errors->attachPermission->any())
                 @foreach($errors->attachPermission->all() as $error)
@@ -74,10 +74,10 @@
                 @endforeach
             @endif
         @else
-            <div class="alert bg-info">Dieser Rolle können keine weiteren Rechte zugeordnet werden.</div>
+            <div class="alert bg-info">Dieser Rolle können keine weiteren Berechtigungen zugeordnet werden.</div>
         @endif
         @if ($role->permissions->count() == 0)
-            <div class="alert bg-info mt-3">Diese Rolle verfügt über keine Rechte.</div>
+            <div class="alert bg-info mt-3">Diese Rolle verfügt über keine Berechtigungen.</div>
         @else
             <table class="table mt-3">
                 <thead>
@@ -103,7 +103,7 @@
                                         @method('delete')
                                         @csrf
                                         <input type="hidden" name="permission_id" value="{{ $permission->id }}">
-                                        <button type="submit" class="btn btn-danger" onclick="return confirm('Recht wirklich entfernen?');">Recht entfernen</button>
+                                        <button type="submit" class="btn btn-danger" onclick="return confirm('Berechtigung wirklich entfernen?');">Berechtigung entfernen</button>
                                         @if ($errors->detachPermission->any())
                                             @foreach($errors->detachPermission->all() as $error)
                                                 <p class="text-danger">{{ $error }}</p>

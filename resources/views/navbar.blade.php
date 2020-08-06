@@ -55,11 +55,11 @@
                                 <a href="{{ route('user.list') }}" class="dropdown-item">Benutzerliste</a>
                                 <a href="{{ route('register') }}" class="dropdown-item" >Benutzer erstellen</a>
                                 <div class="dropdown-divider"></div>
-                                <h6 class="dropdown-header"><strong>Rollen & Rechte</strong></h6>
+                                <h6 class="dropdown-header"><strong>Rollen & Berechtigungen</strong></h6>
                                 <a href="{{ route('role.list') }}" class="dropdown-item">Rollenliste</a>
                                 <a href="{{ route('role.create') }}" class="dropdown-item">Rolle erstellen</a>
-                                <a href="{{ route('permission.list') }}" class="dropdown-item">Rechteliste</a>
-                                <a href="{{ route('permission.create') }}" class="dropdown-item">Recht erstellen</a>
+                                <a href="{{ route('permission.list') }}" class="dropdown-item">Berechtigungsliste</a>
+                                <a href="{{ route('permission.create') }}" class="dropdown-item">Berechtigung erstellen</a>
                             </div>
                         </li>
                     @endif

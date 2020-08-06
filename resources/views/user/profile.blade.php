@@ -41,9 +41,9 @@
             </ul>
         @endif
 
-        <h2>Meine Rechte</h2>
+        <h2>Meine Berechtigungen</h2>
         @if(count($user->permissions()) == 0)
-            <div class="alert bg-warning">Sie verfügen über keine Rechte.</div>
+            <div class="alert bg-warning">Sie verfügen über keine Berechtigungen.</div>
         @else
             <ul>
                 @foreach($user->permissions() as $permission)

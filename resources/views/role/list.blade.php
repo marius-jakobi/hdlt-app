@@ -10,7 +10,7 @@
         <tr>
             <th>Name</th>
             <th>Beschreibung</th>
-            <th>Rechte</th>
+            <th>Berechtigungen</th>
         </tr>
     </thead>
     <tbody>
@@ -22,10 +22,10 @@
             <td>{{ $role->description }}</td>
             <td>
                 @if ($role->isAdmin())
-                    <div class="alert bg-info font-italic">Diese Rolle hat <strong>alle</strong> Rechte.</div>
+                    <div class="alert bg-info font-italic">Diese Rolle hat <strong>alle</strong> Berechtigungen.</div>
                 @else
                     @if ($role->permissions->count() == 0)
-                        <div class="alert bg-warning font-italic">Diese Rolle hat <strong>keine </strong> Rechte.</div>
+                        <div class="alert bg-warning font-italic">Diese Rolle hat <strong>keine </strong> Berechtigungen.</div>
                     @else
                         <ul>
                             @foreach($role->permissions as $permission)

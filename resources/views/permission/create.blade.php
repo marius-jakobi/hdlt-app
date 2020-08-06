@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
-@section('title', 'Recht anlegen')
+@section('title', 'Berechtigung anlegen')
 
 @section('content')
-<h1>Recht erstellen</h1>
+<h1>Berechtigung erstellen</h1>
 <form action="{{ route('permission.create') }}" method="post">
     @csrf
     <div class="form-group">
