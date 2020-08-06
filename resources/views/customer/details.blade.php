@@ -18,7 +18,7 @@
     </li>
     @can('view', App\Models\SalesProcess::class)
     <li class="nav-item">
-        <a href="#processes" class="nav-link" id="processes-tab" data-toggle="tab">Vorgänge</a>
+        <a href="#processes" class="nav-link" id="processes-tab" data-toggle="tab">Verkaufsvorgänge</a>
     </li>
     @endcan
 </ul>
@@ -52,7 +52,7 @@
 
         <h2>Lieferadressen</h2>
         @can('create', App\Models\ShippingAddress::class)
-        <p><a href="{{ route('customer.addresses.shipping.create', ['customerId' => $customer->id]) }}">Lieferadresse hinzufügen</a></p>
+        <p><a href="{{ route('customer.addresses.shipping.create', ['customerId' => $customer->id]) }}" class="btn btn-primary">Lieferadresse hinzufügen</a></p>
         @endcan
         @if ($customer->shippingAddresses->count() > 0)
             <table class="table">
@@ -90,9 +90,8 @@
     {{-- Processes tab --}}
     @can('view', App\Models\SalesProcess::class)
     <div class="tab-pane fade show" id="processes">
-        <h2>Verkaufsvorgänge</h2>
         @can('create-sales-process', App\Models\SalesProcess::class)
-            <a href="{{ route('process.sales.create', ['custId' => $customer->cust_id]) }}">Verkaufsvorgang anlegen</a>
+            <a href="{{ route('process.sales.create', ['custId' => $customer->cust_id]) }}" class="btn btn-primary my-3">Verkaufsvorgang anlegen</a>
         @endcan
         @if ($customer->salesProcesses->count() > 0)
             <table class="table">

@@ -39,7 +39,7 @@
     <div class="tab-pane fade show active" id="components">
         <h3>Kompressoren</h3>
         @can('create', App\Models\StationComponent::class)
-            <p><a href="{{ route('component.create', ['shippingAddressId' => $shippingAddress->id, 'type' => 'compressor']) }}">Kompressor hinzufügen</a></p>
+            <p><a href="{{ route('component.create', ['shippingAddressId' => $shippingAddress->id, 'type' => 'compressor']) }}" class="btn btn-primary">Kompressor hinzufügen</a></p>
         @endcan
         @if ($shippingAddress->compressors->count() > 0)
         <table class="table table-sm">
@@ -77,7 +77,7 @@
         @endif
         <h3>Behälter</h3>
         @can('create', App\Models\StationComponent::class)
-            <p><a href="{{ route('component.create', ['shippingAddressId' => $shippingAddress->id, 'type' => 'receiver']) }}">Behälter hinzufügen</a></p>
+            <p><a href="{{ route('component.create', ['shippingAddressId' => $shippingAddress->id, 'type' => 'receiver']) }}" class="btn btn-primary">Behälter hinzufügen</a></p>
         @endcan
         @if ($shippingAddress->receivers->count() > 0)
         <table class="table table-sm">
@@ -116,7 +116,7 @@
         @endif
         <h3>Kältetrockner</h3>
         @can('create', App\Models\StationComponent::class)
-            <p><a href="{{ route('component.create', ['shippingAddressId' => $shippingAddress->id, 'type' => 'ref_dryer']) }}">Kältetrockner hinzufügen</a></p>
+            <p><a href="{{ route('component.create', ['shippingAddressId' => $shippingAddress->id, 'type' => 'ref_dryer']) }}" class="btn btn-primary">Kältetrockner hinzufügen</a></p>
         @endcan
         @if ($shippingAddress->ref_dryers->count() > 0)
         <table class="table table-sm">
@@ -154,7 +154,7 @@
         @endif
         <h3>Filter</h3>
         @can('create', App\Models\StationComponent::class)
-            <p><a href="{{ route('component.create', ['shippingAddressId' => $shippingAddress->id, 'type' => 'filter']) }}">Filter hinzufügen</a></p>
+            <p><a href="{{ route('component.create', ['shippingAddressId' => $shippingAddress->id, 'type' => 'filter']) }}" class="btn btn-primary">Filter hinzufügen</a></p>
         @endcan
         @if ($shippingAddress->filters->count() > 0)
         <table class="table table-sm">
@@ -188,7 +188,7 @@
         @endif
         <h3>Adsorptionstrockner</h3>
         @can('create', App\Models\StationComponent::class)
-            <p><a href="{{ route('component.create', ['shippingAddressId' => $shippingAddress->id, 'type' => 'ad_dryer']) }}">Adsorptionstrockner hinzufügen</a></p>
+            <p><a href="{{ route('component.create', ['shippingAddressId' => $shippingAddress->id, 'type' => 'ad_dryer']) }}" class="btn btn-primary">Adsorptionstrockner hinzufügen</a></p>
         @endcan
         @if ($shippingAddress->ad_dryers->count() > 0)
         <table class="table table-sm">
@@ -224,7 +224,7 @@
         @endif
         <h3>Öldampfadsorber</h3>
         @can('create', App\Models\StationComponent::class)
-            <p><a href="{{ route('component.create', ['shippingAddressId' => $shippingAddress->id, 'type' => 'adsorber']) }}">Öldampfadsorber hinzufügen</a></p>
+            <p><a href="{{ route('component.create', ['shippingAddressId' => $shippingAddress->id, 'type' => 'adsorber']) }}" class="btn btn-primary">Öldampfadsorber hinzufügen</a></p>
         @endcan
         @if ($shippingAddress->adsorbers->count() > 0)
         <table class="table table-sm">
@@ -260,7 +260,7 @@
         @endif
         <h3>Öl-Wasser-Trenner</h3>
         @can('create', App\Models\StationComponent::class)
-            <p><a href="{{ route('component.create', ['shippingAddressId' => $shippingAddress->id, 'type' => 'separator']) }}">Öl-Wasser-Trenner hinzufügen</a></p>
+            <p><a href="{{ route('component.create', ['shippingAddressId' => $shippingAddress->id, 'type' => 'separator']) }}" class="btn btn-primary">Öl-Wasser-Trenner hinzufügen</a></p>
         @endcan
         @if ($shippingAddress->separators->count() > 0)
         <table class="table table-sm">
@@ -292,7 +292,7 @@
         @endif
         <h3>Stationssensoren</h3>
         @can('create', App\Models\StationComponent::class)
-            <p><a href="{{ route('component.create', ['shippingAddressId' => $shippingAddress->id, 'type' => 'sensor']) }}">Sensor hinzufügen</a></p>
+            <p><a href="{{ route('component.create', ['shippingAddressId' => $shippingAddress->id, 'type' => 'sensor']) }}" class="btn btn-primary">Sensor hinzufügen</a></p>
         @endcan
         @if ($shippingAddress->sensors->count() > 0)
         <table class="table table-sm">
@@ -326,7 +326,7 @@
         @endif
         <h3>Übergeordnete Steuerungen</h3>
         @can('create', App\Models\StationComponent::class)
-            <p><a href="{{ route('component.create', ['shippingAddressId' => $shippingAddress->id, 'type' => 'controller']) }}">Steuerung hinzufügen</a></p>
+            <p><a href="{{ route('component.create', ['shippingAddressId' => $shippingAddress->id, 'type' => 'controller']) }}" class="btn btn-primary">Steuerung hinzufügen</a></p>
         @endcan
         @if ($shippingAddress->controllers->count() > 0)
         <table class="table table-sm">
@@ -431,7 +431,7 @@
         <div class="tab-pane fade" id="service-reports">
             @can('create', App\Models\ServiceReport::class)
                 <p class="mt-3">
-                    <a href="{{ route('process.sales.service-report.create', ['shippingAddressId' => $shippingAddress->id]) }}">Service-Bericht erstellen</a>
+                    <a href="{{ route('process.sales.service-report.create', ['shippingAddressId' => $shippingAddress->id]) }}" class="btn btn-primary">Service-Bericht erstellen</a>
                 </p>
             @endcan
             <x-service-report-list :reports="$serviceReports" />
