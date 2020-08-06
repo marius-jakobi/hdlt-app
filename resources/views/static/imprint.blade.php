@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', "Impressum")
+
 @section('content')
     <h1>Impressum</h1>
     <p><strong>Herbst Drucklufttechnik GmbH</strong></p>

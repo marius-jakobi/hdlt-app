@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', "Verkaufsvorgang anlegen")
+
 @section('content')
     <h1>Verkaufsvorgang anlegen</h1>
     <p>Kunde: <a href="{{ route('customer.details', ['customerId' => $customer->id]) }}">{{ $customer->description }}</a></p>

@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', "Verkaufsvorgang $process->process_number")
+
 @section('content')
     <h1>Verkaufsvorgang {{ $process->process_number }}</h1>
     @if($process->isLegacy())

@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', "Service-Bericht")
+
 @section('content')
     <h1>Service-Bericht</h1>
     <p>Bericht-ID: {{ $report->id }}</p>

@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', "Auftragsbestätigung anlegen")
+
 @section('content')
     <h1>Auftragsbestätigung anlegen</h1>
     <p>Kunde: <a href="{{ route('customer.details', ['customerId' => $salesProcess->customer->id]) }}">{{ $salesProcess->customer->description }}</a></p>

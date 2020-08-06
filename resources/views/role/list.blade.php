@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', "Rollenliste")
+
 @section('content')
 <h1>Rollen</h1>
 <p><a href="{{ route('role.create') }}" class="btn btn-primary">Rolle erstellen</a></p>

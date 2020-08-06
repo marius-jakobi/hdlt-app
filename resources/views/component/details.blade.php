@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', "$caption $component->model")
+
 @push('scripts')
 <script src="{{ asset('js/tabs.js') }}" defer></script>
 @endpush

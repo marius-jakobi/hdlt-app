@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', "Service-Bericht anlegen")
+
 @section('content')
     <h1>Service-Bericht erstellen</h1>
     <form action="{{ route('process.sales.service-report.create', ['shippingAddressId' => $shippingAddress->id]) }}" method="post">

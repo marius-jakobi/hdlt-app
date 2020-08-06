@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Kunde ' . $customer->cust_id)
+
 @push('scripts')
 <script src="{{ asset('js/tabs.js') }}" defer></script>
 @endpush

@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', "Rechte")
+
 @section('content')
 <h1>Rechte</h1>
 <p><a href="{{ route('permission.create') }}" class="btn btn-primary">Recht erstellen</a></p>

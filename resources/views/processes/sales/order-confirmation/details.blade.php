@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', "Auftragsbestätigung $orderConfirmation->document_number")
+
 @section('content')
     <h1>Auftragsbestätigung {{ $orderConfirmation->document_number }}</h1>
     <p>

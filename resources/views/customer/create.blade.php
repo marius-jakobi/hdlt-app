@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Kunden anlegen')
+
 @section('content')
     <h1>Kunden anlegen</h1>
     <form action="" method="post" novalidate>

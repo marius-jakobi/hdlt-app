@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', "$caption anlegen")
+
 @section('content')
 <h1>{{ $caption ?? 'Komponente' }} erstellen</h1>
 <p>Betriebsstelle:

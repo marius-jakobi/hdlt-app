@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Kundenliste')
+
 @section('content')
 <h1>Kundenliste</h1>
 @if ($customers->count() > 0)

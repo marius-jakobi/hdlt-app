@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', "Rolle anlegen")
+
 @section('content')
 <h1>Rolle erstellen</h1>
 <form action="{{ route('role.create') }}" method="post">

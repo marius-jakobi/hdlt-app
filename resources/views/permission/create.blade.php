@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Recht anlegen')
+
 @section('content')
 <h1>Recht erstellen</h1>
 <form action="{{ route('permission.create') }}" method="post">
