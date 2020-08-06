@@ -35,7 +35,6 @@
 </ul>
 <div class="tab-content" id="nav-tabContent">
     <div class="tab-pane fade show active" id="data">
-        <h2>Daten</h2>
         @if ($user->isAdmin())
             <p>UID: {{ $user->id }}</p>
             <p>Name: {{ $user->name_last }}, {{ $user->name_first }}</p>
@@ -80,7 +79,6 @@
     </div>
     @if (!$user->hasAdminRole())
     <div class="tab-pane fade" id="roles">
-        <h2>Rollen</h2>
         @if (count($availableRoles) > 0)
             <form action="{{ route('role.attach', ['id' => $user->id]) }}" method="post" class="form-inline">
                 @csrf
@@ -158,7 +156,6 @@
     @endif
     @if (!$user->isAdmin())
         <div class="tab-pane fade" id="actions">
-            <h2>Aktionen</h2>
             <h3>Benutzer löschen</h3>
             <p>Mit dieser Aktion wird der Benutzer dauerhaft und unwiderruflich gelöscht.</p>
             <form action="{{ route('user.delete', ['id' => $user->id]) }}" method="post">

@@ -29,7 +29,6 @@
 
 <div class="tab-content" id="nav-tabContent">
     <div class="tab-pane fade show active" id="data">
-        <h2>Daten</h2>
         <p>UID: {{ $role->id }}</p>
         @if ($role->isAdmin())
             <p>Name: {{ $role->name }}</p>
@@ -57,7 +56,6 @@
         @endif
     </div>
     <div class="tab-pane fade" id="rights">
-        <h2>Berechtigungen</h2>
         @if (count($availablePermissions) > 0)
             <form action="{{ route('permission.attach', ['name' => $role->name]) }}" method="post" class="form-inline">
                 @csrf
@@ -121,7 +119,6 @@
     </div>
     @if (!$role->isAdmin())
         <div class="tab-pane fade" id="actions">
-            <h2>Aktionen</h2>
             <h3>Rolle löschen</h3>
             <p>Mit dieser Aktion wird die Rolle dauerhaft und unwiderruflich gelöscht.</p>
             <form action="{{ route('role.delete', ['id' => $role->id]) }}" method="post">

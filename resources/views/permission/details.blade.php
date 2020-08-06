@@ -22,7 +22,6 @@
 
 <div class="tab-content" id="nav-tabContent">
     <div class="tab-pane fade show active" id="data">
-        <h2>Daten</h2>
         <p>UID: {{ $permission->id }}</p>
         <form action="{{ route('permission.update', ['id' => $permission->id]) }}" method="post">
             @method('put')
@@ -45,7 +44,6 @@
         </form>
     </div>
     <div class="tab-pane fade" id="roles">
-        <h2>Rollen</h2>
         <p>Diese Berechtigung ist folgenden Rollen zugeordnet:</p>
         <ul>
             @foreach($permission->roles as $role)
@@ -56,7 +54,6 @@
         </ul>
     </div>
     <div class="tab-pane fade" id="actions">
-        <h2>Aktionen</h2>
         <h3>Berechtigung löschen</h3>
         <p>Mit dieser Aktion wird die Berechtigung dauerhaft und unwiderruflich gelöscht.</p>
         <form action="{{ route('permission.delete', ['id' => $permission->id]) }}" method="post">

@@ -25,12 +25,10 @@
 
 <div class="tab-content" id="nav-tabContent">
     <div class="tab-pane fade show active" id="data">
-        <h2>Meine Daten</h2>
         <p>Name: {{ $user->isAdmin() ? "Administrator" : "$user->name_first $user->name_last" }}</p>
         <p>E-Mail: {{ $user->email }}</p>
     </div>
     <div class="tab-pane fade show" id="roles">
-        <h2>Meine Rollen</h2>
         @if ($user->roles->count() == 0)
             <div class="alert bg-warning">Sie sind keinen Rollen zugeordnet.</div>
         @else
@@ -41,7 +39,7 @@
             </ul>
         @endif
 
-        <h2>Meine Berechtigungen</h2>
+        <p>Berechtigungen:</p>
         @if(count($user->permissions()) == 0)
             <div class="alert bg-warning">Sie verfügen über keine Berechtigungen.</div>
         @else
@@ -54,7 +52,6 @@
     </div>
     @can('change-password', $user)
     <div class="tab-pane fade show" id="change-password">
-        <h2>Passwort ändern</h2>
         <form action="{{ route('user.password.update') }}" method="post">
             @method('put')
             @csrf
