@@ -4,7 +4,7 @@
 
 @section('content')
     <h1>Kunden anlegen</h1>
-    <form action="" method="post" novalidate>
+    <form action="" method="post">
         @csrf
         <div class="row">
             <div class="col-12">
