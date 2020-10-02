@@ -98,6 +98,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/customer/{customerId}/addresses/shipping/{addressId}/upload', 'UploadController@uploadShippingAddressFile')->name('upload.file.shipping-address');
     Route::get('/customer/{customerId}/addresses/shipping/{addressId}', 'ShippingAddressController@details')->name('customer.addresses.shipping.details');
     Route::put('/customer/{customerId}/addresses/shipping/{addressId}', 'ShippingAddressController@update')->name('customer.addresses.shipping.update');
+    Route::get('/customer/{customerId}/offer/service/create', 'ServiceOfferController@create')->name('customer.service.offer.create');
+    Route::post('/customer/{customerId}/offer/service/store', 'ServiceOfferController@store')->name('customer.service.offer.store');
     Route::get('/customer/{customerId}', 'CustomerController@details')->name('customer.details')->middleware('can:view,App\Models\Customer');
     Route::delete('/customer/{customerId}', 'CustomerController@delete')->name('customer.delete');
 

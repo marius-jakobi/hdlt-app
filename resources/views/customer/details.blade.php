@@ -16,6 +16,9 @@
     <li class="nav-item">
         <a href="#addresses" class="nav-link active" id="addresses-tab" data-toggle="tab">Adressen</a>
     </li>
+    <li class="nav-item">
+        <a href="#offers" class="nav-link" id="offers-tab" data-toggle="tab">Angebote</a>
+    </li>
     @can('view', App\Models\SalesProcess::class)
     <li class="nav-item">
         <a href="#processes" class="nav-link" id="processes-tab" data-toggle="tab">Verkaufsvorgänge</a>
@@ -86,6 +89,10 @@
         @else
             <div class="alert bg-info">Keine Lieferadressen vorhanden</div>
         @endif
+    </div>
+    {{-- Offers tab --}}
+    <div class="tab-pane fade show" id="offers">
+        <a href="{{ route('customer.service.offer.create', ['customerId' => $customer->id]) }}" class="btn btn-primary">Angebot erstellen</a>
     </div>
     {{-- Processes tab --}}
     @can('view', App\Models\SalesProcess::class)
