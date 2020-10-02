@@ -28,13 +28,13 @@
                 <div class="col-sm-12 col-md-4">
                     <div class="form-group">
                         <label>Belegnummer</label>
-                        <input type="text" class="form-control" minlength="10" maxlength="10" required/>
+                        <input type="text" class="form-control" name="offer_id" minlength="10" maxlength="10" required/>
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-4">
                     <div class="form-group">
                         <label>Wiedervorlage (KW)</label>
-                        <input type="week" class="form-control" value="{{ date('Y') . '-W' . date('W') }}" required />
+                        <input type="week" class="form-control" name="follow_up" value="{{ date('Y') . '-W' . date('W') }}" required />
                     </div>
                 </div>
             </div>
