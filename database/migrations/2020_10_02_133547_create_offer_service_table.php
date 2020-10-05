@@ -13,7 +13,7 @@ class CreateOfferServiceTable extends Migration
      */
     public function up()
     {
-        Schema::create('offer_service', function (Blueprint $table) {
+        Schema::create('service_offers', function (Blueprint $table) {
             $table->id();
             $table->foreignId('shipping_address_id')->references('id')->on('shipping_addresses')
                 ->onDelete('cascade')
@@ -34,6 +34,6 @@ class CreateOfferServiceTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('offer_service');
+        Schema::dropIfExists('service_offers');
     }
 }

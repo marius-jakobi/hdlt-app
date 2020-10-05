@@ -92,7 +92,27 @@
     </div>
     {{-- Offers tab --}}
     <div class="tab-pane fade show" id="offers">
-        <a href="{{ route('customer.service.offer.create', ['customerId' => $customer->id]) }}" class="btn btn-primary">Angebot erstellen</a>
+        <a href="{{ route('customer.service.offer.create', ['customerId' => $customer->id]) }}" class="btn btn-primary my-3">Angebot erstellen</a>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Lieferanschrift</th>
+                    <th>Belegnummer</th>
+                    <th>Wiedervorlage</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($customer->shippingAddresses as $shippingAddress)
+                    @foreach($shippingAddress->serviceOffers as $offer)
+                        <tr>
+                            <td>{{ $shippingAddress->name }}</td>
+                            <td><a href="{{ route('service.offer.details', ['id' => $offer->id]) }}">{{ $offer->offer_id }}</a></td>
+                            <td>{{ $offer->follow_up }}</td>
+                        </tr>
+                    @endforeach
+                @endforeach
+            </tbody>
+        </table>
     </div>
     {{-- Processes tab --}}
     @can('view', App\Models\SalesProcess::class)

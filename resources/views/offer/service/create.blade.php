@@ -4,19 +4,31 @@
 
 @section('content')
     <h1>Angebot erstellen</h1>
+    <form method="post" action="{{ route('customer.service.offer.store', ['customerId' => $customer->id]) }}" enctype="multipart/form-data">
     <p>{{ $customer->description }}</p>
+    <div class="form-group">
+        <label>Vertreter</label>
+        <select name="sales_agent_id" class="form-control">
+            @foreach($salesAgents as $agent)
+                <option value="{{ $agent->id }}" {{ $agent->id === $customer->sales_agent_id ? 'selected="selected"' : '' }}>
+                    {{ $agent->name_first }} {{ $agent->name_last }} ({{ $agent->id }})
+                </option>
+            @endforeach
+        </select>
+    </div>
     <div>
-        <form method="post" action="{{ route('customer.service.offer.store', ['customerId' => $customer->id]) }}" enctype="multipart/form-data">
             @csrf
             <h2>Belegdetails</h2>
             <div class="row">
                 <div class="col-sm-12 col-md-4">
                     <div class="form-group">
                         <label>Lieferanschrift auswählen</label>
-                        <select name="shippingAddress" class="form-control" required>
-                            <option value=""></option>
+                        <select name="shipping_address_id" class="form-control" required>
+                            @if($customer->shippingAddresses->count() > 1)
+                                <option value=""></option>
+                            @endif
                             @foreach($customer->shippingAddresses as $shippingAddress)
-                                <option value="{{ $shippingAddress->id }}">
+                                <option value="{{ $shippingAddress->id }}" {{ $customer->shippingAddresses->count() == 1 ? 'selected="selected"' : '' }}>
                                     {{ $shippingAddress->name }},
                                     {{ $shippingAddress->street }},
                                     {{ $shippingAddress->zip }} {{ $shippingAddress->city }}
@@ -64,6 +76,10 @@
                 <input type="file" name="files[]" multiple>
             </div>
             <button type="submit" class="btn btn-primary">Angebot anlegen und verschicken</button>
-        </form>
-    </div>
+            <p>
+                Hinweis: Die angehängten Dateien werden per Mail an den Empfänger geschickt. Du erhältst dieselbe
+                Mail unter der Adresse <strong>{{ Auth::user()->email }}</strong> in CC.
+            </p>
+        </div>
+    </form>
 @endsection
