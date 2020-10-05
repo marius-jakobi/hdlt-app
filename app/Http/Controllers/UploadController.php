@@ -27,7 +27,7 @@ class UploadController extends Controller
 
     private function storeFile(string $type, UploadedFile $file) {
         if (!in_array($type, ['shipping-address', 'component'])) {
-            throw new \Exception("\$type must be 'shipping-address' or 'component'. '$type' given");
+            throw new \Exception("type must be 'shipping-address' or 'component', '$type' given");
         }
 
         $extension = strtolower($file->getClientOriginalExtension());

@@ -89,6 +89,11 @@ Route::middleware('auth')->group(function () {
     // Permission delete
     Route::delete('/permissions/{id}', 'PermissionController@delete')->name('permission.delete')->middleware('can:delete,App\Models\Permission');
 
+    // Service offer routes
+    Route::get('/customer/{customerId}/offer/service/create', 'ServiceOfferController@create')->name('customer.service.offer.create');
+    Route::post('/customer/{customerId}/offer/service/store', 'ServiceOfferController@store')->name('customer.service.offer.store');
+    Route::get('/offer/services/{id}', 'ServiceOfferController@details')->name('service.offer.details');
+
     // Customer routes
     Route::get('/customers', 'CustomerController@list')->name('customer.list')->middleware('can:list,App\Models\Customer');
     Route::get('/customer/create', 'CustomerController@create')->name('customer.create');

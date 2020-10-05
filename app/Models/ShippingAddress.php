@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Service\ServiceOffer;
 use Illuminate\Database\Eloquent\Model;
 
 class ShippingAddress extends Model
@@ -31,6 +32,13 @@ class ShippingAddress extends Model
      */
     public function uploadedFiles() {
         return $this->hasMany('App\Models\ShippingAddressUploadFile');
+    }
+
+    /**
+     * Relationship to service offers
+     */
+    public function serviceOffers() {
+        return $this->hasMany(ServiceOffer::class, 'shipping_address_id', 'id');
     }
 
     /**

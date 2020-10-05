@@ -84,6 +84,7 @@ return [
         public_path('files/shipping-address/thumbnail') => storage_path('app/files/shipping-address/thumbnail'),
         public_path('files/component') => storage_path('app/files/component'),
         public_path('files/component/thumbnail') => storage_path('app/files/component/thumbnail'),
+        public_path('files/service-offer') => storage_path('app/files/service-offer')
     ],
 
 ];
