@@ -6,21 +6,11 @@
     <h1>Angebot erstellen</h1>
     <form method="post" action="{{ route('customer.service.offer.store', ['customerId' => $customer->id]) }}" enctype="multipart/form-data">
     <p>{{ $customer->description }}</p>
-    <div class="form-group">
-        <label>Vertreter</label>
-        <select name="sales_agent_id" class="form-control">
-            @foreach($salesAgents as $agent)
-                <option value="{{ $agent->id }}" {{ $agent->id === $customer->sales_agent_id ? 'selected="selected"' : '' }}>
-                    {{ $agent->name_first }} {{ $agent->name_last }} ({{ $agent->id }})
-                </option>
-            @endforeach
-        </select>
-    </div>
     <div>
             @csrf
             <h2>Belegdetails</h2>
             <div class="row">
-                <div class="col-sm-12 col-md-4">
+                <div class="col-sm-12 col-md-3">
                     <div class="form-group">
                         <label>Lieferanschrift auswählen</label>
                         <select name="shipping_address_id" class="form-control" required>
@@ -37,16 +27,30 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-sm-12 col-md-4">
+                <div class="col-sm-12 col-md-3">
                     <div class="form-group">
                         <label>Belegnummer</label>
                         <input type="text" class="form-control" name="offer_id" minlength="10" maxlength="10" required/>
                     </div>
                 </div>
-                <div class="col-sm-12 col-md-4">
+                <div class="col-sm-12 col-md-3">
                     <div class="form-group">
                         <label>Wiedervorlage (KW)</label>
                         <input type="week" class="form-control" name="follow_up" value="{{ date('Y') . '-W' . date('W') }}" required />
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-3">
+                    <div class="form-group">
+                        <label>Vertreter</label>
+                        <select name="sales_agent_id" class="form-control">
+                            @foreach($salesAgents as $agent)
+                                @if($agent->id)
+                                    <option value="{{ $agent->id }}" {{ $agent->id === $customer->sales_agent_id ? 'selected="selected"' : '' }}>
+                                        {{ $agent->name_first }} {{ $agent->name_last }} ({{ $agent->id }})
+                                    </option>
+                                @endif
+                            @endforeach
+                        </select>
                     </div>
                 </div>
             </div>
@@ -73,7 +77,7 @@
             </div>
             <h2>Dateien</h2>
             <div class="form-group">
-                <input type="file" name="files[]" multiple>
+                <input type="file" name="files[]" required multiple>
             </div>
             <button type="submit" class="btn btn-primary">Angebot anlegen und verschicken</button>
             <p>
