@@ -80,10 +80,6 @@
                 <input type="file" name="files[]" required multiple>
             </div>
             <button type="submit" class="btn btn-primary">Angebot anlegen und verschicken</button>
-            <p>
-                Hinweis: Die angehängten Dateien werden per Mail an den Empfänger geschickt. Du erhältst dieselbe
-                Mail unter der Adresse <strong>{{ Auth::user()->email }}</strong> in CC.
-            </p>
         </div>
     </form>
 @endsection
