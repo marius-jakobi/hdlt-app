@@ -176,10 +176,14 @@
         <table class="table table-sm">
             <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>Vorname</th>
-                    <th>Zeit</th>
-                    <th>Datum</th>
+                    <th rowspan="2">Name</th>
+                    <th rowspan="2">Vorname</th>
+                    <th colspan="2">Zeit</th>
+                    <th rowspan="2">Datum</th>
+                </tr>
+                <tr>
+                    <th>von</th>
+                    <th>bis</th>
                 </tr>
             </thead>
             <tbody>
@@ -189,9 +193,16 @@
                         <td>{{ $technician->name_first }}</td>
                         <td>
                             <input type="number" 
-                                name="technicians[{{ $technician->id }}][work_time]"
+                                name="technicians[{{ $technician->id }}][time_start]"
                                 class="form-control"
-                                value="{{ old("technicians.$technician->id.work_time") }}"
+                                value="{{ old("technicians.$technician->id.time_start") }}"
+                                min="0.25" step="0.25" />
+                        </td>
+                        <td>
+                            <input type="number" 
+                                name="technicians[{{ $technician->id }}][time_end]"
+                                class="form-control"
+                                value="{{ old("technicians.$technician->id.time_end") }}"
                                 min="0.25" step="0.25" />
                         </td>
                         <td>
