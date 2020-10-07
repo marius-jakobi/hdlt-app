@@ -224,9 +224,9 @@
                         <tr>
                             <td>{{ $separator->brand }}</td>
                             <td>{{ $separator->model }}</td>
+                            <td></td>
                             <td>{{ $separator->scope }}</td>
                             <td>{{ substr($separator->next_service, 0, 7) }}</td>
-                            <td></td>
                             <td></td>
                             <td></td>
                         </tr>
@@ -244,7 +244,7 @@
     {{-- text --}}
     @if($report->text)
         <h5>Erläuterung</h5>
-        <p>{{ $report->text }}</p>
+        <div style="white-space: pre-wrap">{{ $report->text }}</div>
     @endif
     {{-- additional work required --}}
     @if($report->additional_work_required)
