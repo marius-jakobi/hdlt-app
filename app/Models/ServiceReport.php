@@ -53,7 +53,7 @@ class ServiceReport extends AbstractUuidModel
 
     public function technicians() {
         return $this->belongsToMany(Technician::class, 'service_report_technicians', 'service_report_id', 'technician_id')
-            ->withPivot(['work_time', 'work_date']);
+            ->withPivot(['time_start', 'time_end', 'work_date']);
     }
 
     public function getLocalDate() {
@@ -64,12 +64,11 @@ class ServiceReport extends AbstractUuidModel
         $totalWorktime = 0;
         
         foreach ($this->technicians as $technician) {
-            $totalWorktime += $technician->pivot->work_time;
+            $totalWorktime += $technician->pivot->time_end - $technician->pivot->time_start;
         }
 
-        return $totalWorktime;
+        return number_format($totalWorktime, 2, ",", ".");
     }
-
 
     /**
      * Component relationships

@@ -13,6 +13,20 @@ class Technician extends Model
         'is_active' => 'boolean'
     ];
 
+    public function getTimeFromHours($value) {
+        $hours = floor($value);
+        $minutes = ($value - $hours) * 60;
+        if (intval($minutes) < 9) {
+            $minutes = "0$minutes";
+        }
+
+        return "$hours:$minutes";
+    }
+
+    public function getTotalHours($start, $end) {
+        return number_format($end - $start, 2, ",", ".");
+    }
+
     /**
      * Relationships
      */

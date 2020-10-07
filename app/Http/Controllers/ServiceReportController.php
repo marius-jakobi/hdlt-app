@@ -48,6 +48,24 @@ class ServiceReportController extends Controller
     public function store(Request $request, string $shippingAddressId) {
         $input = $request->input();
 
+        // Unset technicians that did not work on this service report
+        foreach ($input['technicians'] as $technician_id => $technicianData) {
+            $timeStart = $technicianData['time_start'];
+            $timeEnd = $technicianData['time_end'];
+
+            if ($timeStart == null && $timeEnd == null)
+            {
+                unset($input['technicians'][$technician_id]);
+            }
+        }
+
+        // Return with error if no technician is given
+        if (count($input['technicians']) <= 0) {
+            return redirect()->back()
+                ->withInput()
+                ->withErrors(['technician.required' => 'Es muss für mindestens einen Mitarbeiter die Arbeitszeit eingegeben werden.']);
+        }
+
         // Basic rules
         $rules = [
             'intent' => 'required|between:4,128',
@@ -61,6 +79,20 @@ class ServiceReportController extends Controller
                         $fail('Die Betriebsstunden können nicht kleiner als die Laststunden sein.');
                     }
                 }
+            ],
+            'technicians.*.time_start' => 'required|ends_with:00,15,30,45',
+            'technicians.*.time_end' => 'required|ends_with:00,15,30,45',
+            'technicians.*' => [
+                function ($attribute, $value, $fail) {
+                    $timeEnd = $this->timeToDecimal($value['time_end']);
+                    $timeStart = $this->timeToDecimal($value['time_start']);
+                    if (!$timeStart || !$timeEnd) {
+                        $fail('Beide Zeiten müssen angegeben werden');
+                    }
+                    if ($timeEnd <= $timeStart) {
+                        $fail('Die Endzeit muss größer als die Startzeit sein');
+                    }
+                }
             ]
         ];
 
@@ -68,7 +100,11 @@ class ServiceReportController extends Controller
         $messages = [
             'components.compressors.*.hours_running.numeric' => 'Die Betriebsstunden müssen eine Zahl sein.',
             'components.compressors.*.hours_loaded.numeric' => 'Die Laststunden müssen eine Zahl sein.',
-            'test_run.*' => 'Dieser Wert für Probelauf ist ungültig.'
+            'test_run.*' => 'Dieser Wert für Probelauf ist ungültig.',
+            'technicians.*.time_start.ends_with' => 'Es sind nur 15-Minuten-Intervalle zulässig.',
+            'technicians.*.time_end.ends_with' => 'Es sind nur 15-Minuten-Intervalle zulässig.',
+            'technicians.*.time_start.required' => 'Die Startzeit muss angegeben werden',
+            'technicians.*.time_end.required' => 'Die Endzeit muss angegeben werden.'
         ];
 
         // Dynamically add validation rules and messages for components
@@ -84,18 +120,6 @@ class ServiceReportController extends Controller
             return redirect()->back()
                 ->withInput()
                 ->withErrors($validator);
-        }
-
-        foreach ($input['technicians'] as $technician_id => $technicianData) {
-            if (!$technicianData['work_time'] || intval($technicianData['work_time']) <= 0) {
-                unset($input['technicians'][$technician_id]);
-            }
-        }
-
-        if (count($input['technicians']) <= 0) {
-            return redirect()->back()
-                ->withInput()
-                ->withErrors(['technician.required' => 'Es muss für mindestens einen Mitarbeiter die Arbeitszeit eingegeben werden.']);
         }
 
         // Get order confirmation
@@ -145,15 +169,16 @@ class ServiceReportController extends Controller
 
         // Attach technicians to report
         foreach($input['technicians'] as $technician_id => $technicianData) {
-            // If a technician has a work time add it to the relationship
-            if (intval($technicianData['work_time']) > 0) {
-                DB::table('service_report_technicians')->insert([
-                    'service_report_id' => $serviceReport->id,
-                    'technician_id' => $technician_id,
-                    'work_time' => $technicianData['work_time'],
-                    'work_date' => $technicianData['work_date'],
-                ]);
-            }
+            $timeStart = $this->timeToDecimal($technicianData['time_start']);
+            $timeEnd = $this->timeToDecimal($technicianData['time_end']);
+
+            DB::table('service_report_technicians')->insert([
+                'service_report_id' => $serviceReport->id,
+                'technician_id' => $technician_id,
+                'time_start' => $timeStart,
+                'time_end' => $timeEnd,
+                'work_date' => $technicianData['work_date'],
+            ]);
         }
 
         /**
@@ -195,5 +220,16 @@ class ServiceReportController extends Controller
 
         return redirect()->route('process.sales.service-report.details', ['reportId' => $serviceReport->id])
             ->with('success', 'Der Service-Bericht wurde angelegt.');
+    }
+
+    private function timeToDecimal($time) {
+        if (!$time) {
+            return null;
+        }
+
+        $parts = explode(":", $time);
+        $hours = intval($parts[0]);
+        $minutes = floatval($parts[1]) / 60;
+        return floatval($hours + $minutes);
     }
 }

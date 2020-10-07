@@ -176,10 +176,14 @@
         <table class="table table-sm">
             <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>Vorname</th>
-                    <th>Zeit</th>
-                    <th>Datum</th>
+                    <th rowspan="2">Name</th>
+                    <th rowspan="2">Vorname</th>
+                    <th colspan="2">Zeit</th>
+                    <th rowspan="2">Datum</th>
+                </tr>
+                <tr>
+                    <th>von</th>
+                    <th>bis</th>
                 </tr>
             </thead>
             <tbody>
@@ -188,11 +192,27 @@
                         <td>{{ $technician->name_last }}</td>
                         <td>{{ $technician->name_first }}</td>
                         <td>
-                            <input type="number" 
-                                name="technicians[{{ $technician->id }}][work_time]"
+                            <input type="time" 
+                                name="technicians[{{ $technician->id }}][time_start]"
                                 class="form-control"
-                                value="{{ old("technicians.$technician->id.work_time") }}"
-                                min="0.25" step="0.25" />
+                                value="{{ old("technicians.$technician->id.time_start") }}"
+                                step="900" />
+                                @error("technicians.$technician->id.time_start")
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
+                        </td>
+                        <td>
+                            <input type="time" 
+                                name="technicians[{{ $technician->id }}][time_end]"
+                                class="form-control"
+                                value="{{ old("technicians.$technician->id.time_end") }}"
+                                step="900" />
+                                @error("technicians.$technician->id.time_end")
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
+                                @if($errors->has("technicians.$technician->id"))
+                                    <p class="text-danger">{{ $errors->first("technicians.$technician->id") }}</p>
+                                @endif
                         </td>
                         <td>
                             <input type="date"
