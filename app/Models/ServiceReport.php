@@ -64,12 +64,11 @@ class ServiceReport extends AbstractUuidModel
         $totalWorktime = 0;
         
         foreach ($this->technicians as $technician) {
-            $totalWorktime += $technician->pivot->work_time;
+            $totalWorktime += $technician->pivot->time_end - $technician->pivot->time_start;
         }
 
-        return $totalWorktime;
+        return number_format($totalWorktime, 2, ",", ".");
     }
-
 
     /**
      * Component relationships

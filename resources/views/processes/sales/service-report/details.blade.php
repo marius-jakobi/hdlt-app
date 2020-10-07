@@ -258,10 +258,15 @@
         <table class="table table-bordered table-sm">
             <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>Vorname</th>
-                    <th>Arbeitszeit</th>
-                    <th>Durchführungsdatum</th>
+                    <th rowspan="2">Name</th>
+                    <th rowspan="2">Vorname</th>
+                    <th rowspan="2">Durchführungsdatum</th>
+                    <th colspan="3">Arbeitszeit</th>
+                </tr>
+                <tr>
+                    <th>von</th>
+                    <th>bis</th>
+                    <th>gesamt</th>
                 </tr>
             </thead>
             <tbody>
@@ -269,13 +274,15 @@
                 <tr>
                     <td>{{ $technician->name_last }}</td>
                     <td>{{ $technician->name_first }}</td>
-                    <td>{{ $technician->pivot->work_time }} h</td>
                     <td>{{ $technician->pivot->work_date }}</td>
+                    <td>{{ $technician->getTimeFromHours($technician->pivot->time_start) }} Uhr</td>
+                    <td>{{ $technician->getTimeFromHours($technician->pivot->time_end) }} Uhr</td>
+                    <td>{{ $technician->getTotalHours($technician->pivot->time_start, $technician->pivot->time_end) }} Stunden</td>
                 </tr>
                 @endforeach
                 <tr>
-                    <td colspan="4">
-                        <div class="text-right">Gesamtarbeitszeit: {{ $report->getTotalWorktime() }} h</div>
+                    <td colspan="6">
+                        <div class="text-right">Gesamtarbeitszeit: {{ $report->getTotalWorktime() }} Stunden</div>
                     </td>
                 </tr>
             </tbody>
