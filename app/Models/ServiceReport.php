@@ -53,7 +53,7 @@ class ServiceReport extends AbstractUuidModel
 
     public function technicians() {
         return $this->belongsToMany(Technician::class, 'service_report_technicians', 'service_report_id', 'technician_id')
-            ->withPivot(['work_time', 'work_date']);
+            ->withPivot(['time_start', 'time_end', 'work_date']);
     }
 
     public function getLocalDate() {
