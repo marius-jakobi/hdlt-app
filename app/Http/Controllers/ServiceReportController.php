@@ -86,12 +86,15 @@ class ServiceReportController extends Controller
                 ->withErrors($validator);
         }
 
+        // Unset technicians that did not work on this service report
         foreach ($input['technicians'] as $technician_id => $technicianData) {
-            if (!$technicianData['work_time'] || intval($technicianData['work_time']) <= 0) {
+            if ((!$technicianData['time_start'] || intval($technicianData['time_start']) <= 0) &&
+                 !$technicianData['time_end']   || intval($technicianData['time_end']    <= 0)) {
                 unset($input['technicians'][$technician_id]);
             }
         }
 
+        // Return with error if no technician is given
         if (count($input['technicians']) <= 0) {
             return redirect()->back()
                 ->withInput()
@@ -146,11 +149,12 @@ class ServiceReportController extends Controller
         // Attach technicians to report
         foreach($input['technicians'] as $technician_id => $technicianData) {
             // If a technician has a work time add it to the relationship
-            if (intval($technicianData['work_time']) > 0) {
+            if (intval($technicianData['time_end'] - $technicianData['time_start']) > 0) {
                 DB::table('service_report_technicians')->insert([
                     'service_report_id' => $serviceReport->id,
                     'technician_id' => $technician_id,
-                    'work_time' => $technicianData['work_time'],
+                    'time_start' => $technicianData['time_start'],
+                    'time_end' => $technicianData['time_end'],
                     'work_date' => $technicianData['work_date'],
                 ]);
             }
