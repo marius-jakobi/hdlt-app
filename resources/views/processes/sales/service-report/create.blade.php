@@ -192,18 +192,27 @@
                         <td>{{ $technician->name_last }}</td>
                         <td>{{ $technician->name_first }}</td>
                         <td>
-                            <input type="number" 
+                            <input type="time" 
                                 name="technicians[{{ $technician->id }}][time_start]"
                                 class="form-control"
                                 value="{{ old("technicians.$technician->id.time_start") }}"
-                                min="0.25" step="0.25" />
+                                step="900" />
+                                @error("technicians.$technician->id.time_start")
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
                         </td>
                         <td>
-                            <input type="number" 
+                            <input type="time" 
                                 name="technicians[{{ $technician->id }}][time_end]"
                                 class="form-control"
                                 value="{{ old("technicians.$technician->id.time_end") }}"
-                                min="0.25" step="0.25" />
+                                step="900" />
+                                @error("technicians.$technician->id.time_end")
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
+                                @if($errors->has("technicians.$technician->id"))
+                                    <p class="text-danger">{{ $errors->first("technicians.$technician->id") }}</p>
+                                @endif
                         </td>
                         <td>
                             <input type="date"
