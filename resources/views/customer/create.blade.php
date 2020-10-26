@@ -19,12 +19,32 @@
                     <p class="text-danger">{{ $message }}</p>
                 @enderror
             </div>
-            <div class="col-sm-12 col-md-8">
+            <div class="col-sm-12 col-md-4">
                 <div class="form-group">
-                    <label>Bezeichnung</label>
-                    <input type="text" name="description" class="form-control" required maxlength="255" value="{{ old('description') }}">
+                    <label>Vertreter</label>
+                    <select name="sales_agent_id" class="form-control" required>
+                        <option value=""></option>
+                        <option value="V1234">TEST</option>
+                        @foreach($salesAgents as $agent)
+                            <option value="{{ $agent->id }}" @if(old('sales_agent_id') === $agent->id) selected="selected" @endif>{{ $agent->id }} - {{ $agent->name_last }}, {{ $agent->name_first }}</option>
+                        @endforeach
+                    </select>
                 </div>
-                @error('description')
+                @error('sales_agent_id')
+                    <p class="text-danger">{{ $message }}</p>
+                @enderror
+            </div>
+            <div class="col-sm-12 col-md-4">
+                <div class="form-group">
+                    <label>Zahlungskonditionen</label>
+                    <select name="payterms_id" class="form-control" required>
+                        <option value="D12345">TEST</option>
+                        @foreach($payterms as $payterm)
+                            <option value="{{ $payterm->id }}" @if(old('payterms_id') == $payterm->id) selected="selected" @endif>{{ $payterm->full }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                @error('payterms_id')
                     <p class="text-danger">{{ $message }}</p>
                 @enderror
             </div>
@@ -60,6 +80,17 @@
                     <input type="text" name="city" class="form-control" required maxlength="255" value="{{ old('city') }}">
                 </div>
                 @error('city')
+                    <p class="text-danger">{{ $message }}</p>
+                @enderror
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="form-group">
+                    <label>Matchcode</label>
+                    <input type="text" name="description" class="form-control" required maxlength="255" value="{{ old('description') }}">
+                </div>
+                @error('description')
                     <p class="text-danger">{{ $message }}</p>
                 @enderror
             </div>

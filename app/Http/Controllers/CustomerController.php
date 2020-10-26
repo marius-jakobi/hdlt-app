@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\BillingAddress;
 use App\Models\Customer;
+use App\Models\Payterms;
 use App\Models\ShippingAddress;
+use App\SalesAgent;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -32,17 +34,30 @@ class CustomerController extends Controller
         return view('customer.list', ['customers' => $customers]);
     }
 
+    /**
+     * Show customer create form
+     */
     public function create() {
         $this->authorize('create', Customer::class);
 
-        return view('customer.create');
+        // Get sales agents
+        $salesAgents = SalesAgent::where('id', '!=', '')->orderBy('id')->get();
+        // Get payterms
+        $payterms = Payterms::where('id', '!=', '')->orderBy('id')->get();
+
+        return view('customer.create', [
+            'salesAgents' => $salesAgents,
+            'payterms' => $payterms
+        ]);
     }
 
     public function store(Request $request) {
         $this->authorize('create', Customer::class);
 
         $rules = [
-            'cust_id' => 'required|min:6|max:6|starts_with:D|unique:customers',
+            'cust_id' => 'required|string|size:6|starts_with:D|unique:customers',
+            'sales_agent_id' => 'required|string|size:5|starts_with:V|exists:sales_agents,id',
+            'payterms_id' => 'required|string|exists:payterms,id',
             'description' => 'required|max:255',
             'name' => 'required|max:255',
             'street' => 'required|max:255',
@@ -51,7 +66,10 @@ class CustomerController extends Controller
         ];
 
         $messages = [
-            'cust_id.starts_with' => 'Der Debitor muss mit einem "D" beginnen'
+            'cust_id.starts_with' => 'Der Debitor muss mit einem "D" beginnen.',
+            'sales_agent_id.starts_with' => 'Der Vertreter muss mit einem "V" beginnen.',
+            'sales_agent_id.required' => 'Der zuständige Vertreter muss angegeben werden.',
+            'payterms_id.required' => 'Die Zahlungskonditionen muss angegeben werden.',
         ];
 
         $validator = Validator::make($request->input(), $rules, $messages);
@@ -62,13 +80,14 @@ class CustomerController extends Controller
                 ->withErrors($validator);
         }
 
-        $customer = new Customer($request->only('cust_id', 'description'));
+        $customer = new Customer($request->only('cust_id', 'description', 'sales_agent_id', 'payterms_id'));
         $customer->save();
 
         $billingAddress = new BillingAddress($request->except('cust_id', 'description'));
         $billingAddress->customer()->associate($customer);
         $billingAddress->save();
         $shippingAddress = new ShippingAddress($request->except('cust_id', 'description'));
+        $shippingAddress->has_contract = false;
         $shippingAddress->customer()->associate($customer);
         $shippingAddress->save();
 

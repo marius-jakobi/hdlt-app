@@ -195,5 +195,7 @@ return [
         'intent'                    => 'Einsatzzweck',
         'test_run'                  => 'Probelauf',
         'additional_required_work'  => 'Zusätzlich benötigte Arbeiten',
+        'sales_agent_id'            => 'Vertreter',
+        'payterms_id'               => 'Zahlungskonditionen',
     ],
 ];

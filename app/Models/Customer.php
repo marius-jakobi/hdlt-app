@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Customer extends Model
 {
-    protected $fillable = ['cust_id', 'description'];
+    protected $fillable = ['cust_id', 'description', 'sales_agent_id', 'payterms_id'];
     
     public function billingAddress() {
         return $this->hasOne('App\Models\BillingAddress');
