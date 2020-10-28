@@ -24,7 +24,7 @@ class AddIntermediateTableForServiceReportsAndTechnicians extends Migration
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 
-            $table->float('work_time', 6, 2, true);
+            $table->float('work_time', 6, 2, true)->nullable();
 
             $table->unique(['service_report_id', 'technician_id'], 'report_technician_unique');
         });
