@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// todo https://laravel.com/docs/8.x/upgrade#automatic-controller-namespace-prefixing
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -120,13 +122,13 @@ Route::middleware('auth')->group(function () {
     Route::post('sales/process/create/{custId}', 'SalesProcessController@store')->name('process.sales.store');
     Route::get('sales/process/create/{custId}', 'SalesProcessController@create')->name('process.sales.create');
     Route::get('sales/process/{processNumber}', 'SalesProcessController@details')->name('process.sales.details');
-    
+
     // Service report routes
     Route::get('sales/service-report/create/{shippingAddressId}', 'ServiceReportController@create')->name('process.sales.service-report.create');
     Route::post('sales/service-report/create/{shippingAddressId}', 'ServiceReportController@store')->name('process.sales.service-report.create');
-    
+
     Route::get('sales/service-report/{reportId}', 'ServiceReportController@details')->name('process.sales.service-report.details');
-    
+
     // Order confirmations
     Route::get('sales/order-confirmation/create/{processNumber}', 'OrderConfirmationController@create')->name('process.sales.order-confirmation.create');
     Route::post('sales/order-confirmation/create/{processNumber}', 'OrderConfirmationController@store')->name('process.sales.order-confirmation.store');

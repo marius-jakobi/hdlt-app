@@ -222,6 +222,7 @@ class ServiceReportController extends Controller
             ->with('success', 'Der Service-Bericht wurde angelegt.');
     }
 
+    // todo Move to utility class
     private function timeToDecimal($time) {
         if (!$time) {
             return null;

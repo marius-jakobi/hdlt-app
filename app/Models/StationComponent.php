@@ -102,7 +102,7 @@ class StationComponent extends Model
 
     /**
      * Getter for types
-     * 
+     *
      * @return array
      */
     public static function types() {
@@ -116,13 +116,13 @@ class StationComponent extends Model
     public static function getPlural($type) {
         $plural = static::types()[$type];
         $plural .= substr(static::types()[$type], -2) !== 'er' ? 'en' : '';
-        
+
         return $plural;
     }
 
     /**
      * Check if type is valid
-     * 
+     *
      * @param string $type Type of component
      * @return bool Type is valid or not
      */
@@ -140,7 +140,7 @@ class StationComponent extends Model
 
     /**
      * Get validation rules array
-     * 
+     *
      * @param string $type Type of component
      * @return array Array with validation rules for given component type
      */
@@ -156,7 +156,7 @@ class StationComponent extends Model
         if ($type === 'compressor' || $type === 'receiver' || $type ==='ad_dryer' || $type === 'adsorber' || $type === 'ref_dryer') {
             $validationRules['serial'] = 'required';
             $validationRules['year'] = 'required|integer|min:1900|max:3000';
-            
+
             if ($type === 'compressor' || $type === 'receiver') {
                 $validationRules['pressure'] = 'required|numeric|min:0|max:1000';
                 $validationRules['type'] = 'required';
@@ -165,14 +165,6 @@ class StationComponent extends Model
 
         if ($type === 'filter') {
             $validationRules['element'] = 'required';
-        }
-
-        if ($type === 'ref_dryer') {
-            $validationRules['ref_type'] = [
-                'required',
-                Rule::in(RefDryer::getRefTypeNames())
-            ];
-            $validationRules['ref_amount'] = 'required|numeric|min:0|max:100';
         }
 
         return $validationRules;
