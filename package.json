@@ -7,7 +7,8 @@
         "watch-poll": "npm run watch -- --watch-poll",
         "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --disable-host-check --config=node_modules/laravel-mix/setup/webpack.config.js",
         "prod": "npm run production",
-        "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
+        "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+        "scan": "sonar-scanner.bat -D\"sonar.tests=tests/\" -D\"sonar.projectKey=hdlt-app\" -D\"sonar.sources=app/\" -D\"sonar.host.url=http://localhost:9000\" -D\"sonar.login=000a96abcedcd95f5ecedeee009a9c5ad91ee865\""
     },
     "devDependencies": {
         "axios": "^0.19",
