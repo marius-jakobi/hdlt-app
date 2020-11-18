@@ -6,17 +6,20 @@ use App\Mail\ServiceOfferCreated;
 use App\Models\Customer;
 use App\Models\Service\ServiceOffer;
 use App\Models\ServiceOfferUploadFile;
+use App\Rules\Week;
 use App\SalesAgent;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class ServiceOfferController extends Controller
 {
-    public function create(string $customerId) {
+    public function create(string $customerId)
+    {
         $customer = Customer::where('id', $customerId)->firstOrFail();
         $shippingAddresses = $customer->shippingAddresses();
 
@@ -30,12 +33,62 @@ class ServiceOfferController extends Controller
     /**
      * POST method for storing a service offer
      */
-    public function store(Request $request) {
-        /**
-         * TODO: Validate request
-         * Must contain at least one PDF document
-         */
-        
+    public function store(Request $request)
+    {
+        $rules = [
+            'shipping_address_id' => 'required|exists:shipping_addresses,id',
+            'offer_id' => 'required|regex:/^[0-9]{4}-1[0-9]{4}$/',
+            'follow_up' => [
+                'required',
+                new Week()
+            ],
+            'sales_agent_id' => 'required|exists:sales_agents,id',
+            'contact_name' => 'required|string|max:64',
+            'contact_phone' => 'required|string|max:64',
+            'contact_mail' => 'required|email|max:64',
+            'files' => [
+                'required',
+                'array',
+                'min:1',
+                // Check if at least one file is a pdf file
+                function ($attribute, $value, $fail) {
+                    // assume that array contains no pdf
+                    $hasPdf = false;
+                    foreach ($value as $file) {
+                        if ($file->getClientMimeType() === 'application/pdf') {
+                            // file is a pdf
+                            $hasPdf = true;
+                        }
+                    }
+
+                    // no pdf file found, return error
+                    if (false === $hasPdf) {
+                        $fail('Es muss mindestens ein Angebot im PDF-Format hochgeladen werden');
+                    }
+                }
+            ],
+            // validate mime types for jpeg, png and pdf
+            'files.*' => 'file|mimetypes:application/pdf,image/jpeg,image/png'
+        ];
+
+        $messages = [
+            'shipping_address_id.*' => 'Diese Lieferadresse ist ungültig',
+            'offer_id.*' => 'Die Belegnummer ist ungültig',
+            'follow_up.*' => 'Die Wiedervorlage ist ungültig',
+            'sales_agent_id.*' => 'Ungültiger Vertreter',
+            'contact_name.*' => 'Name ist ungültig (max. 64 Zeichen)',
+            'contact_phone.*' => 'Telefonnummer ist ungültig (max. 64 Zeichen)',
+            'contact_mail.*' => 'E-Mail ist ungültig',
+            'files.*' => 'Es muss mindestens eine Datei hochgeladen werden',
+            'files.*.mimetypes' => 'Es dürfen nur JPEG-, PNG- und PDF-Dateien hochgeladen werden.'
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $messages);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withInput()->withErrors($validator);
+        }
+
         $offer = new ServiceOffer($request->only([
             'shipping_address_id', 'sales_agent_id', 'offer_id', 'contact_name', 'contact_phone', 'contact_mail'
         ]));
@@ -52,7 +105,7 @@ class ServiceOfferController extends Controller
         $offer->save();
 
         // Process and save attachments
-        foreach($request->file('files') as $attachment) {
+        foreach ($request->file('files') as $attachment) {
             // store file on storage
             $file = $this->storeFile($attachment);
             // create upload file model instance
@@ -86,20 +139,12 @@ class ServiceOfferController extends Controller
     }
 
     /**
-     * GET method to view offer details
-     */
-    public function details(string $id) {
-        $offer = ServiceOffer::findOrFail($id);
-
-        return view('offer.service.details', ['offer' => $offer]);
-    }
-
-    /**
      * Helper method that stores a uploaded file to storage
-     * 
+     *
      * @return array Contains file id (actual filename on disk) and extension
      */
-    private function storeFile(UploadedFile $file) {
+    private function storeFile(UploadedFile $file)
+    {
         if (!$file->isValid()) {
             throw new \Exception('Upload was not successful');
         }
@@ -116,5 +161,15 @@ class ServiceOfferController extends Controller
             'fileId' => $fileId,
             'extension' => $extension
         ];
+    }
+
+    /**
+     * GET method to view offer details
+     */
+    public function details(string $id)
+    {
+        $offer = ServiceOffer::findOrFail($id);
+
+        return view('offer.service.details', ['offer' => $offer]);
     }
 }
