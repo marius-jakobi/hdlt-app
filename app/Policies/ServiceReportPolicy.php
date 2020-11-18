@@ -10,7 +10,7 @@ class ServiceReportPolicy
     use HandlesAuthorization;
 
     public function list(User $user) {
-        return $user->hasPermission('list-service-report');
+        return $user->hasPermission('list-service-reports');
     }
 
     public function view(User $user) {
