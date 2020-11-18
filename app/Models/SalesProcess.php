@@ -17,6 +17,6 @@ class SalesProcess extends Process
     }
 
     public function isLegacy() {
-        return $this->process_number === "legacy";
+        return $this->process_number === "000000";
     }
 }

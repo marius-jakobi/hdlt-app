@@ -5,7 +5,7 @@
                 <th>Bericht</th>
                 <th>Einsatzzweck</th>
                 <th>Verkaufsvorgang</th>
-                <th>Auftragsbestätigung</th>
+                <th>Belegnummer</th>
             </tr>
         </thead>
         <tbody>

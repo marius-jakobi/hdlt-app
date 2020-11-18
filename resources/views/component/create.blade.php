@@ -9,14 +9,14 @@
         {{ "$shippingAddress->name, $shippingAddress->street, $shippingAddress->zip $shippingAddress->city" }}
     </a>
 </p>
-<form action="{{ route('component.store', ['shippingAddressId' => $shippingAddress->id, 'type' => $type]) }}" method="post">
+<form novalidate action="{{ route('component.store', ['shippingAddressId' => $shippingAddress->id, 'type' => $type]) }}" method="post">
     @csrf
     <div class="form-group">
         <label>Hersteller</label>
         <select name="brand_id" class="form-control @error('brand_id') is-invalid @enderror" required autofocus>
             <option></option>
             @foreach($brands as $brand)
-                <option value="{{ $brand->id }}" @if(old('brand_id') == $brand->id)) selected @endif>{{ $brand->name }}</option>
+                <option value="{{ $brand->id }}" @if(old('brand_id') == $brand->id) selected="selected" @endif>{{ $brand->name }}</option>
             @endforeach
         </select>
     </div>
@@ -106,7 +106,7 @@
             <div class="col-md-6 col-sm-12">
                 <div class="form-group">
                     <label>Kältemittel (Sorte)</label>
-                    <select name="ref_type" class="form-control  @error('ref_type') is-invalid @enderror" required>
+                    <select name="ref_type" class="form-control  @error('ref_type') is-invalid @enderror">
                         <option value=""></option>
                         @foreach($refTypes as $key => $value)
                             <option value="{{ $key }}" class=" @if($value['forbidden'] === true) text-danger @endif " @if (old('ref_type') === $key) selected @endif>
@@ -124,7 +124,7 @@
                 <div class="form-group">
                     <label>Kältemittel (Menge)</label>
                     <div class="input-group">
-                        <input type="number" name="ref_amount" class="form-control  @error('ref_amount') is-invalid @enderror" value="{{ old('ref_amount') }}" min="0" max="100" step="0.01" required />
+                        <input type="number" name="ref_amount" class="form-control  @error('ref_amount') is-invalid @enderror" value="{{ old('ref_amount') }}" min="0" max="100" step="0.01" />
                         <div class="input-group-append">
                             <span class="input-group-text">Kilogramm</span>
                         </div>

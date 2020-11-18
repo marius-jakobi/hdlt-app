@@ -149,8 +149,14 @@
                     <select name="test_run" class="form-control @error('test_run') is-invalid @enderror" required>
                         @foreach($testRuns as $key => $value)
                             <option value="{{ $key }}"
-                                @if(old('test_run') == $key)
-                                    selected="selected"
+                                @if(old('test_run'))
+                                    @if(old('test_run') === $key)
+                                        selected="selected"
+                                    @endif
+                                @else
+                                    @if($key === 2)
+                                        selected="selected"
+                                    @endif
                                 @endif
                             >{{ $value }}</option>
                         @endforeach
@@ -161,7 +167,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="form-group">
             <label>Text</label>
             <textarea name="text" class="form-control" rows="4" maxlength="1000">{{ old('text') }}</textarea>
@@ -192,7 +198,7 @@
                         <td>{{ $technician->name_last }}</td>
                         <td>{{ $technician->name_first }}</td>
                         <td>
-                            <input type="time" 
+                            <input type="time"
                                 name="technicians[{{ $technician->id }}][time_start]"
                                 class="form-control"
                                 value="{{ old("technicians.$technician->id.time_start") }}"
@@ -202,7 +208,7 @@
                                 @enderror
                         </td>
                         <td>
-                            <input type="time" 
+                            <input type="time"
                                 name="technicians[{{ $technician->id }}][time_end]"
                                 class="form-control"
                                 value="{{ old("technicians.$technician->id.time_end") }}"
@@ -224,7 +230,7 @@
                 @endforeach
             </tbody>
         </table>
-        
+
         <button type="submit" class="btn btn-primary">Service-Bericht speichern</button>
     </form>
 @endsection
