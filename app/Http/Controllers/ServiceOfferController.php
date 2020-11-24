@@ -37,59 +37,7 @@ class ServiceOfferController extends Controller
      */
     public function store(Request $request)
     {
-        $rules = [
-            'shipping_address_id' => 'required|exists:shipping_addresses,id',
-            'offer_id' => 'required|regex:/^[0-9]{4}-1[0-9]{4}$/',
-            'follow_up' => [
-                'required',
-                'after:now',
-                new Week()
-            ],
-            'sales_agent_id' => 'required|exists:sales_agents,id',
-            'contact_name' => 'required|string|max:64',
-            'contact_phone' => 'required|string|max:64',
-            'contact_mail' => 'required|email|max:64',
-            'files' => [
-                'required',
-                'array',
-                'min:1',
-                // Check if at least one file is a pdf file
-                function ($attribute, $value, $fail) {
-                    // assume that array contains no pdf
-                    $hasPdf = false;
-                    foreach ($value as $file) {
-                        if ($file->getClientMimeType() === 'application/pdf') {
-                            // file is a pdf
-                            $hasPdf = true;
-                        }
-                    }
-
-                    // no pdf file found, return error
-                    if (false === $hasPdf) {
-                        $fail('Es muss mindestens ein Angebot im PDF-Format hochgeladen werden');
-                    }
-                }
-            ],
-            // validate mime types for jpeg, png and pdf
-            'files.*' => 'file|mimetypes:application/pdf,image/jpeg,image/png|max:2000'
-        ];
-
-        $messages = [
-            'shipping_address_id.*' => 'Diese Lieferadresse ist ungültig',
-            'offer_id.*' => 'Die Belegnummer ist ungültig',
-            'follow_up.required' => 'Die Wiedervorlage muss angegeben werden',
-            'follow_up.after' => 'Die Wiedervorlage muss in der Zukunft liegen',
-            'follow_up.*' => 'Die Wiedervorlage ist ungültig',
-            'sales_agent_id.*' => 'Ungültiger Vertreter',
-            'contact_name.*' => 'Name ist ungültig (max. 64 Zeichen)',
-            'contact_phone.*' => 'Telefonnummer ist ungültig (max. 64 Zeichen)',
-            'contact_mail.*' => 'E-Mail ist ungültig',
-            'files.*' => 'Es muss mindestens eine Datei hochgeladen werden',
-            'files.*.mimetypes' => 'Es dürfen nur JPEG-, PNG- und PDF-Dateien hochgeladen werden',
-            'files.*.max' => 'Eine Datei darf maximal 2 MB groß sein'
-        ];
-
-        $validator = Validator::make($request->all(), $rules, $messages);
+        $validator = Validator::make($request->all(), ServiceOffer::rules(), ServiceOffer::messages());
 
         if ($validator->fails()) {
             return redirect()->back()->withInput()->withErrors($validator);
@@ -108,8 +56,7 @@ class ServiceOfferController extends Controller
         $followUp->setISODate($parts[0], $parts[1]);
         $offer->followUps()->save(new ServiceOfferFollowUp([
             'follow_up' => $followUp,
-            'text' => 'Angebot erstellt und verschickt',
-            'created_at' => Carbon::now()
+            'text' => 'Angebot erstellt und verschickt'
         ]));
 
         // Attachment array for mail
@@ -189,16 +136,7 @@ class ServiceOfferController extends Controller
      */
     public function createFollowUp(Request $request, int $id)
     {
-        $rules = [
-            'text' => 'required|max:255',
-            'follow_up' => [
-                'required',
-                'after:now',
-                new Week()
-            ]
-        ];
-
-        $validator = Validator::make($request->input(), $rules);
+        $validator = Validator::make($request->input(), ServiceOfferFollowUp::rules());
 
         if ($validator->fails()) {
             return redirect()->back()
@@ -208,7 +146,6 @@ class ServiceOfferController extends Controller
         }
 
         $followUp = new ServiceOfferFollowUp($request->only('text', 'follow_up'));
-        $followUp->created_at = Carbon::now();
         $offer = ServiceOffer::findOrFail($id);
         $offer->followUps()->save($followUp);
 

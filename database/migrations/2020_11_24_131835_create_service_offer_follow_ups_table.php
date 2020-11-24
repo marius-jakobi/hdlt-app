@@ -20,7 +20,7 @@ class CreateServiceOfferFollowUpsTable extends Migration
                 ->onUpdate('cascade');
             $table->date('follow_up');
             $table->text('text');
-            $table->date('created_at')->default(\Carbon\Carbon::now());
+            $table->dateTime('created_at')->useCurrent();
         });
 
         Schema::table('service_offers', function (Blueprint $table) {

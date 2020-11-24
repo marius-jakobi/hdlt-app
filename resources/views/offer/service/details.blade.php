@@ -65,7 +65,7 @@
             <tbody>
             @foreach($offer->followUps as $followUp)
                 <tr>
-                    <td>{{ $followUp->created_at->format('d.m.Y') }}</td>
+                    <td>{{ $followUp->created_at->format('d.m.Y H:i:s') }}</td>
                     <td>{{ $followUp->text }}</td>
                     <td>KW {{ $followUp->follow_up->format('W/Y') }}</td>
                 </tr>
