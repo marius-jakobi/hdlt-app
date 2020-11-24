@@ -40,6 +40,7 @@ class ServiceOfferCreated extends Mailable
     {
         $email = $this->from($this->user->email)
             ->subject("Angebot {$this->offer->offer_id}")
+            ->replyTo($this->user->email)
             ->view('mail.offer.created');
 
         foreach($this->files as $file) {

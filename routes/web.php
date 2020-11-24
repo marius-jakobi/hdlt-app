@@ -13,8 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// todo https://laravel.com/docs/8.x/upgrade#automatic-controller-namespace-prefixing
-
 Route::get('/', function () {
     return view('welcome');
 });
@@ -34,14 +32,6 @@ Route::get('/register', 'Auth\RegisterController@showRegistrationForm')->name('r
 Route::post('/register', 'Auth\RegisterController@register');
 // Logout
 Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
-// Password confirmation
-// Route::get('/password/confirm', 'Auth\ConfirmPasswordController@showConfirmForm')->name('password.confirm');
-// Route::post('/password/confirm', 'Auth\ConfirmPasswordController@confirm');
-// Forgot password
-// Route::post('/password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
-// Route::get('/password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
-// Route::post('/password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
-// Route::get('/password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
 // Update user password
 Route::put('/password/update', 'UserController@updatePassword')->name('user.password.update');
 
@@ -95,6 +85,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/customer/{customerId}/offer/service/create', 'ServiceOfferController@create')->name('customer.service.offer.create');
     Route::post('/customer/{customerId}/offer/service/store', 'ServiceOfferController@store')->name('customer.service.offer.store');
     Route::get('/offer/services/{id}', 'ServiceOfferController@details')->name('service.offer.details');
+    Route::put('/offer/services/{id}/follow-up', 'ServiceOfferController@createFollowUp')->name('service.offer.create-follow-up');
 
     // Customer routes
     Route::get('/customers', 'CustomerController@list')->name('customer.list')->middleware('can:list,App\Models\Customer');

@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Mail\ServiceOfferCreated;
 use App\Models\Customer;
 use App\Models\Service\ServiceOffer;
+use App\Models\ServiceOfferFollowUp;
 use App\Models\ServiceOfferUploadFile;
 use App\Rules\Week;
-use App\SalesAgent;
+use App\Models\SalesAgent;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
@@ -40,6 +42,7 @@ class ServiceOfferController extends Controller
             'offer_id' => 'required|regex:/^[0-9]{4}-1[0-9]{4}$/',
             'follow_up' => [
                 'required',
+                'after:now',
                 new Week()
             ],
             'sales_agent_id' => 'required|exists:sales_agents,id',
@@ -68,19 +71,22 @@ class ServiceOfferController extends Controller
                 }
             ],
             // validate mime types for jpeg, png and pdf
-            'files.*' => 'file|mimetypes:application/pdf,image/jpeg,image/png'
+            'files.*' => 'file|mimetypes:application/pdf,image/jpeg,image/png|max:2000'
         ];
 
         $messages = [
             'shipping_address_id.*' => 'Diese Lieferadresse ist ungültig',
             'offer_id.*' => 'Die Belegnummer ist ungültig',
+            'follow_up.required' => 'Die Wiedervorlage muss angegeben werden',
+            'follow_up.after' => 'Die Wiedervorlage muss in der Zukunft liegen',
             'follow_up.*' => 'Die Wiedervorlage ist ungültig',
             'sales_agent_id.*' => 'Ungültiger Vertreter',
             'contact_name.*' => 'Name ist ungültig (max. 64 Zeichen)',
             'contact_phone.*' => 'Telefonnummer ist ungültig (max. 64 Zeichen)',
             'contact_mail.*' => 'E-Mail ist ungültig',
             'files.*' => 'Es muss mindestens eine Datei hochgeladen werden',
-            'files.*.mimetypes' => 'Es dürfen nur JPEG-, PNG- und PDF-Dateien hochgeladen werden.'
+            'files.*.mimetypes' => 'Es dürfen nur JPEG-, PNG- und PDF-Dateien hochgeladen werden',
+            'files.*.max' => 'Eine Datei darf maximal 2 MB groß sein'
         ];
 
         $validator = Validator::make($request->all(), $rules, $messages);
@@ -93,16 +99,21 @@ class ServiceOfferController extends Controller
             'shipping_address_id', 'sales_agent_id', 'offer_id', 'contact_name', 'contact_phone', 'contact_mail'
         ]));
 
-        // Attachment array for mail
-        $attachments = [];
+        // Save service offer to db
+        $offer->save();
 
         // Transform follow up (XXXX-WXX) to date
         $followUp = new \DateTime();
         $parts = explode('-W', $request->input('follow_up'));
         $followUp->setISODate($parts[0], $parts[1]);
-        $offer['follow_up'] = $followUp;
-        // Save service offer to db
-        $offer->save();
+        $offer->followUps()->save(new ServiceOfferFollowUp([
+            'follow_up' => $followUp,
+            'text' => 'Angebot erstellt und verschickt',
+            'created_at' => Carbon::now()
+        ]));
+
+        // Attachment array for mail
+        $attachments = [];
 
         // Process and save attachments
         foreach ($request->file('files') as $attachment) {
@@ -166,10 +177,41 @@ class ServiceOfferController extends Controller
     /**
      * GET method to view offer details
      */
-    public function details(string $id)
+    public function details(int $id)
     {
         $offer = ServiceOffer::findOrFail($id);
 
         return view('offer.service.details', ['offer' => $offer]);
+    }
+
+    /**
+     * Create a new follow up
+     */
+    public function createFollowUp(Request $request, int $id)
+    {
+        $rules = [
+            'text' => 'required|max:255',
+            'follow_up' => [
+                'required',
+                'after:now',
+                new Week()
+            ]
+        ];
+
+        $validator = Validator::make($request->input(), $rules);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withInput()
+                ->withErrors($validator)
+                ->with(['error' => 'Die eingegebenen Daten der Wiedervorlage sind ungültig.']);
+        }
+
+        $followUp = new ServiceOfferFollowUp($request->only('text', 'follow_up'));
+        $followUp->created_at = Carbon::now();
+        $offer = ServiceOffer::findOrFail($id);
+        $offer->followUps()->save($followUp);
+
+        return redirect()->back()->with('success', 'Das Angebot wurde weitergelegt.');
     }
 }

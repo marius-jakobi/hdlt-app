@@ -4,7 +4,7 @@
 
 @section('content')
     <h1>Angebot erstellen</h1>
-    <form novalidate method="post" action="{{ route('customer.service.offer.store', ['customerId' => $customer->id]) }}"
+    <form method="post" action="{{ route('customer.service.offer.store', ['customerId' => $customer->id]) }}"
           enctype="multipart/form-data">
         <p>{{ $customer->description }}</p>
         <div>
@@ -46,14 +46,17 @@
                 <div class="col-sm-12 col-md-3">
                     <div class="form-group">
                         <label>Wiedervorlage (KW)</label>
-                        <input type="week" class="form-control @error('follow_up') is-invalid @enderror"
-                               name="follow_up"
-                               @if(old('follow_up'))
-                               value="{{ old('follow_up') }}"
-                               @else
-                               value="{{ date('Y') . '-W' . date('W') }}"
-                               @endif
-                               required/>
+
+                        @if(old('follow_up'))
+                            <input type="week" class="form-control @error('follow_up') is-invalid @enderror"
+                                   name="follow_up"
+                                   value="{{ old('follow_up') }}" required/>
+                        @else
+                            <input type="week" class="form-control @error('follow_up') is-invalid @enderror"
+                                   name="follow_up"
+                                   value="{{ date('Y-\WW', strtotime('+1 week')) }}" required/>
+                        @endif
+
                     </div>
                     @error('follow_up')
                     <p class="text-danger">{{ $message }}</p>
@@ -69,13 +72,13 @@
                                     <option
                                         value="{{ $agent->id }}"
                                         @if(old('sales_agent_id'))
-                                            @if(old('sales_agent_id') == $agent->id)
-                                                selected="selected"
-                                            @endif
+                                        @if(old('sales_agent_id') == $agent->id)
+                                        selected="selected"
+                                        @endif
                                         @else
-                                            @if($agent->id === $customer->sales_agent_id)
-                                                selected="selected"
-                                            @endif
+                                        @if($agent->id === $customer->sales_agent_id)
+                                        selected="selected"
+                                        @endif
                                         @endif
                                     >
                                         {{ $agent->name_first }} {{ $agent->name_last }} ({{ $agent->id }})
@@ -94,7 +97,9 @@
                 <div class="col-sm-12 col-md-4">
                     <div class="form-group">
                         <label>Name</label>
-                        <input type="text" class="form-control @error('contact_name') is-invalid @enderror" name="contact_name" @if(old('contact_name')) value="{{ old('contact_name') }}" @endif maxlength="64" required/>
+                        <input type="text" class="form-control @error('contact_name') is-invalid @enderror"
+                               name="contact_name" @if(old('contact_name')) value="{{ old('contact_name') }}"
+                               @endif maxlength="64" required/>
                         @error('contact_name')
                         <p class="text-danger">{{ $message }}</p>
                         @enderror
@@ -103,7 +108,9 @@
                 <div class="col-sm-12 col-md-4">
                     <div class="form-group">
                         <label>Telefon</label>
-                        <input type="text" class="form-control @error('contact_phone') is-invalid @enderror" name="contact_phone" @if(old('contact_phone')) value="{{ old('contact_phone') }}" @endif maxlength="64" required/>
+                        <input type="text" class="form-control @error('contact_phone') is-invalid @enderror"
+                               name="contact_phone" @if(old('contact_phone')) value="{{ old('contact_phone') }}"
+                               @endif maxlength="64" required/>
                         @error('contact_phone')
                         <p class="text-danger">{{ $message }}</p>
                         @enderror
@@ -112,7 +119,9 @@
                 <div class="col-sm-12 col-md-4">
                     <div class="form-group">
                         <label>E-Mail</label>
-                        <input type="text" class="form-control @error('contact_mail') is-invalid @enderror" name="contact_mail" @if(old('contact_mail')) value="{{ old('contact_mail') }}" @endif maxlength="64" required/>
+                        <input type="text" class="form-control @error('contact_mail') is-invalid @enderror"
+                               name="contact_mail" @if(old('contact_mail')) value="{{ old('contact_mail') }}"
+                               @endif maxlength="64" required/>
                         @error('contact_mail')
                         <p class="text-danger">{{ $message }}</p>
                         @enderror

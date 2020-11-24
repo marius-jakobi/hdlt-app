@@ -13,16 +13,6 @@ class ServiceOffer extends Offer {
 
     protected $dates = ['follow_up'];
 
-    public function getFollowUpAttribute($value) {
-        $date = new \Carbon\Carbon($value);
-        return $date->weekOfYear . "/" . $date->year;
-    }
-
-    public function getCreatedAtAttribute($value) {
-        $date = new \DateTime($value);
-        return $date->format('d.m.Y H:m:s');
-    }
-
     public function getStatusClass() {
         switch ($this->status) {
             case ServiceOfferStatus::OPEN: {
@@ -55,10 +45,6 @@ class ServiceOffer extends Offer {
                 return "N/A";
             }
         }
-    }
-
-    public function shippingAddress() {
-        return $this->belongsTo(ShippingAddress::class, 'shipping_address_id');
     }
 
     public function files() {

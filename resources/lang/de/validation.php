@@ -197,5 +197,6 @@ return [
         'additional_required_work'  => 'Zusätzlich benötigte Arbeiten',
         'sales_agent_id'            => 'Vertreter',
         'payterms_id'               => 'Zahlungskonditionen',
+        'follow_up'                 => 'Kalenderwoche'
     ],
 ];
