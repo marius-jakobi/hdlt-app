@@ -21,7 +21,9 @@
                             @endif
                             @foreach($customer->shippingAddresses as $shippingAddress)
                                 <option
-                                    value="{{ $shippingAddress->id }}" {{ $customer->shippingAddresses->count() == 1 ? 'selected="selected"' : '' }}>
+                                    value="{{ $shippingAddress->id }}"
+                                    {{ $customer->shippingAddresses->count() == 1 || (old('shipping_address_id') == $shippingAddress->id) ? 'selected="selected"' : '' }}
+                                >
                                     {{ $shippingAddress->name }},
                                     {{ $shippingAddress->street }},
                                     {{ $shippingAddress->zip }} {{ $shippingAddress->city }}
