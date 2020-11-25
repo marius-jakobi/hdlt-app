@@ -7,9 +7,7 @@ use App\Models\Customer;
 use App\Models\Service\ServiceOffer;
 use App\Models\ServiceOfferFollowUp;
 use App\Models\ServiceOfferUploadFile;
-use App\Rules\Week;
 use App\Models\SalesAgent;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
@@ -20,6 +18,14 @@ use Illuminate\Support\Str;
 
 class ServiceOfferController extends Controller
 {
+    public function list(string $sales_agent_id) {
+        $salesAgent = SalesAgent::findOrFail($sales_agent_id); // Returns 404 when agent not found
+
+        $offers = ServiceOffer::getOpenOffersForSalesAgent($salesAgent->id);
+
+        return view('offer.service.list', ['offers' => $offers]);
+    }
+
     public function create(string $customerId)
     {
         $customer = Customer::where('id', $customerId)->firstOrFail();
@@ -136,7 +142,7 @@ class ServiceOfferController extends Controller
      */
     public function createFollowUp(Request $request, int $id)
     {
-        $validator = Validator::make($request->input(), ServiceOfferFollowUp::rules());
+        $validator = Validator::make($request->input(), ServiceOfferFollowUp::rules(), ServiceOfferFollowUp::messages());
 
         if ($validator->fails()) {
             return redirect()->back()

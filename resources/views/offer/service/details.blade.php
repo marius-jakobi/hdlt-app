@@ -16,7 +16,7 @@
         <div class="col-sm-12 col-md-4">
             <h2>Belegdetails</h2>
             <p>
-                Status: <span class="{{ $offer->getStatusClass() }}">{{ $offer->getStatus() }}</span><br/>
+                Status: {{ $offer->getStatus() }}<br/>
                 erstellt: {{ $offer->created_at }}<br/>
                 Vertreter: {{ $offer->salesAgent->id }}
             </p>
@@ -91,8 +91,7 @@
                         @method('put')
                         <div class="form-group">
                             <label>Text</label>
-                            <input type="text" class="form-control" name="text" placeholder="Text eingeben" required
-                                   maxlength="255"/>
+                            <input type="text" class="form-control" name="text" required maxlength="255" @if(old('text')) value="{{ old('text') }}" @endif />
                             @error('text')
                             <p class="text-danger">{{ $message }}</p>
                             @enderror

@@ -84,8 +84,9 @@ Route::middleware('auth')->group(function () {
     // Service offer routes
     Route::get('/customer/{customerId}/offer/service/create', 'ServiceOfferController@create')->name('customer.service.offer.create');
     Route::post('/customer/{customerId}/offer/service/store', 'ServiceOfferController@store')->name('customer.service.offer.store');
-    Route::get('/offer/services/{id}', 'ServiceOfferController@details')->name('service.offer.details');
-    Route::put('/offer/services/{id}/follow-up', 'ServiceOfferController@createFollowUp')->name('service.offer.create-follow-up');
+    Route::get('/offer/service/list/{sales_agent_id}', 'ServiceOfferController@list')->name('service.offer.list');
+    Route::get('/offer/service/{id}', 'ServiceOfferController@details')->name('service.offer.details');
+    Route::put('/offer/service/{id}/follow-up', 'ServiceOfferController@createFollowUp')->name('service.offer.create-follow-up');
 
     // Customer routes
     Route::get('/customers', 'CustomerController@list')->name('customer.list')->middleware('can:list,App\Models\Customer');

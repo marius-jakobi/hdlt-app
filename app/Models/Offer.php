@@ -13,6 +13,10 @@ class Offer extends Model {
         return $this->hasMany(ServiceOfferFollowUp::class, 'service_offer_id', 'id')->orderBy('created_at');
     }
 
+    public function recentFollowUp() {
+        return $this->followUps()->first();
+    }
+
     public function salesAgent() {
         return $this->belongsTo(SalesAgent::class, 'sales_agent_id', 'id');
     }

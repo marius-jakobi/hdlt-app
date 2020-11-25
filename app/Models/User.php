@@ -89,6 +89,10 @@ class User extends Authenticatable
         return $this->email == User::administratorEmail();
     }
 
+    public function isSalesAgent() {
+        return $this->sales_agent_id != null;
+    }
+
     public function hasAdminRole() {
         return $this->hasRole(Role::administratorRoleName());
     }

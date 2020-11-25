@@ -4,8 +4,8 @@ namespace App\Models\Service;
 
 use App\Models\Offer;
 use App\Models\ServiceOfferUploadFile;
-use App\Models\ShippingAddress;
 use App\Rules\Week;
+use Illuminate\Support\Facades\DB;
 
 class ServiceOffer extends Offer {
     protected $fillable = [
@@ -13,23 +13,6 @@ class ServiceOffer extends Offer {
     ];
 
     protected $dates = ['follow_up'];
-
-    public function getStatusClass() {
-        switch ($this->status) {
-            case ServiceOfferStatus::OPEN: {
-                return "badge badge-secondary";
-            }
-            case ServiceOfferStatus::DECLINED: {
-                return "badge badge-danger";
-            }
-            case ServiceOfferStatus::ACCEPTED: {
-                return "badge badge-success";
-            }
-            default: {
-                return "badge badge-secondary";
-            }
-        }
-    }
 
     public function getStatus() {
         switch ($this->status) {
@@ -106,6 +89,30 @@ class ServiceOffer extends Offer {
             'files.*.mimetypes' => 'Es dürfen nur JPEG-, PNG- und PDF-Dateien hochgeladen werden',
             'files.*.max' => 'Eine Datei darf maximal 2 MB groß sein'
         ];
+    }
+
+    public static function getOpenOffersForSalesAgent(string $sales_agent_id) {
+        $stmt = "
+        SELECT
+            follow_ups.follow_up,
+            service_offers.id, service_offers.sales_agent_id, service_offers.offer_id,
+            shipping_addresses.name AS shipping_address,
+            shipping_addresses.city AS city
+        FROM (
+            SELECT service_offer_id, MAX(follow_up) AS follow_up FROM service_offer_follow_ups
+            GROUP BY service_offer_id
+        ) AS follow_ups
+
+        JOIN
+            service_offers ON service_offers.id = follow_ups.service_offer_id
+        JOIN
+            shipping_addresses ON shipping_addresses.id = service_offers.shipping_address_id
+
+        WHERE
+            follow_up <= curdate() AND sales_agent_id='$sales_agent_id';
+        ";
+
+        return DB::select(DB::raw($stmt));
     }
 }
 

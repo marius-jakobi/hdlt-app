@@ -15,12 +15,18 @@ class ServiceOfferFollowUp extends Model
 
     public static function rules() {
         return [
-            'text' => 'required|max:255',
+            'text' => 'required|max:255|min:10',
             'follow_up' => [
                 'required',
                 'after:now',
                 new Week()
             ]
+        ];
+    }
+
+    public static function messages() {
+        return [
+            'follow_up.after' => 'Die Kalenderwoche muss in der Zukunft liegen'
         ];
     }
 }
