@@ -17,7 +17,8 @@ class CreateServiceReportsTable extends Migration
             $table->uuid('id')->primary();
             $table->foreignId('order_confirmation_id')->references('id')->on('order_confirmations')
                 ->onDelete('cascade')
-                ->onUpdate('cascade');
+                ->onUpdate('cascade')
+                ->nullable();
             $table->timestamps();
         });
     }
